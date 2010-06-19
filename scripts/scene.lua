@@ -1,0 +1,141 @@
+
+function edi_init_scene()
+	editor.scene = {}
+	editor.scene.camera = {}
+
+	-- create a default scene
+	editor.scene.handle = elf.CreateScene("Scene")
+	elf.SetScene(editor.scene.handle)
+
+	-- init the camear for the default scene
+	edi_init_scene_camera()
+end
+
+function edi_init_scene_camera()
+	-- set the camera move speed
+	editor.scene.camera.move_speed = 20.0
+
+	-- remove any previous cameras that reserve the ditor camera name
+	elf.RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
+
+	-- create a new camera
+	editor.scene.camera.handle = elf.CreateCamera("__EditorELF_Camera")
+
+	-- set the camera position and rotation to the first camera found in the scene
+	local cam = elf.GetCameraByIndex(editor.scene.handle, 0)
+	if elf.IsObject(cam) == true then
+		local pos = elf.GetActorPosition(cam)
+		local rot = elf.GetActorRotation(cam)
+		local fov = elf.GetCameraFov(cam)
+		local aspect = elf.GetCameraAspect(cam)
+		local clip = elf.GetCameraClip(cam)
+		if clip.x < 0.0001 then clip.x = 0.0001 end
+		if clip.y < 100.0 then clip.y = 100.0 end
+		elf.SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
+		elf.SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
+		elf.SetCameraPerspective(editor.scene.camera.handle, fov, aspect, clip.x, clip.y)
+	end
+
+	-- add the camera to the scene and set it active
+	elf.AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+	elf.SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
+end
+
+function edi_reload_scene_camera()
+	elf.AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+end
+
+function edi_remove_scene_camera()
+	elf.RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
+end
+
+function edi_load_scene(path)
+	-- check if we can load the new scene
+	new_scene = elf.CreateSceneFromFile(path)
+	if elf.IsObject(new_scene) ~= true then return false end
+
+	-- set the new scene as the current scene
+	editor.scene.handle = new_scene
+	elf.SetScene(new_scene)
+
+	-- initialize the editor camera
+	edi_init_scene_camera()
+
+	return true
+end
+
+function edi_trace_scene_selection()
+	-- don't allow picking through GUI
+	if elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == true then return nil end
+
+	-- get the ray starting position
+	local raystart = elf.GetActorPosition(editor.scene.camera.handle)
+
+	-- next we calculate the end position of the ray
+	local mouse_pos = elf.GetMousePosition()
+	local wwidth = elf.GetWindowWidth()
+	local wheight = elf.GetWindowHeight()
+	local clip = elf.GetCameraClip(editor.scene.camera.handle)
+	local fpsize = elf.GetCameraFarPlaneSize(editor.scene.camera.handle)
+
+	local rayend = elf.CreateVec3f()
+	rayend.x = mouse_pos.x/wwidth*fpsize.x-fpsize.x/2
+	rayend.y = (wheight-mouse_pos.y)/wheight*fpsize.y-fpsize.y/2
+	rayend.z = -clip.y
+
+	-- now we have the end position of the ray, but we still have to positon and orient it according to the camera
+	local orient = elf.GetActorOrientation(editor.scene.camera.handle)
+	rayend = elf.MulQuaVec3f(orient, rayend)
+	rayend = elf.AddVec3fVec3f(raystart, rayend)
+
+	-- perform raycast
+	local col = elf.GetDebugSceneRayCastResult(editor.scene.handle, raystart.x, raystart.y, raystart.z, rayend.x, rayend.y, rayend.z)
+	if elf.IsObject(col) == true then
+		return elf.GetCollisionActor(col)
+	end
+
+	return nil
+end
+
+function edi_update_scene()
+	if editor.gui.current_menu == EDI_PROPERTIES then
+		local move_speed = editor.scene.camera.move_speed
+
+		if elf.GetKeyState(elf.KEY_LSHIFT) ~= elf.UP then
+			move_speed = move_speed * 3
+		end
+
+		-- move the camera around with WSAD
+		if elf.GetKeyState(elf.KEY_W) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -move_speed) end
+		if elf.GetKeyState(elf.KEY_S) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, move_speed) end
+		if elf.GetKeyState(elf.KEY_A) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, -move_speed, 0.0, 0.0) end
+		if elf.GetKeyState(elf.KEY_D) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, move_speed, 0.0, 0.0) end
+
+		-- if right mouse button is down, rotate the camera
+		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) ~= elf.UP then
+			-- rotate the camera according to the mouse force
+			local mf = elf.GetMouseForce()
+			elf.RotateActor(editor.scene.camera.handle, 0.0, 0.0, -mf.x*20.0)
+			elf.RotateActorLocal(editor.scene.camera.handle, -mf.y*20.0, 0.0, 0.0)
+
+			-- center the mouse to allow continuous panning
+			elf.SetMousePosition(elf.GetWindowWidth()/2, elf.GetWindowHeight()/2)
+		end
+
+		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED then
+			-- get the object we clicked on
+			act = edi_trace_scene_selection()
+			-- check if we got anything
+			if act ~= nil then
+				-- deselect previously selected
+				if editor.scene.selection ~= nil then
+					elf.SetActorSelected(editor.scene.selection, false)
+				end
+				-- select object
+				editor.scene.selection = act
+				elf.SetActorSelected(editor.scene.selection, true)
+			end
+		end
+	end
+end
+
