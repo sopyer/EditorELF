@@ -1,0 +1,11 @@
+INSTALL
+
+To install EditorELF, you need the FreeMono.ttf font,
+commonly found in linux distributions in /usr/shared/fonts
+or online by googling.
+
+1) Extract EditorELF to a folder or download it from git
+2) make a folder called "fonts" to the same folder where
+   EditorELF is (init.lua should reside in this folder)
+3) Now you should be able to run EditorELF
+
