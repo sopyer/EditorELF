@@ -8,5 +8,6 @@ or online by googling.
 2) Copy a blendelf binary compatible with EditorELF (usually
    BlendELF 0.9 Beta 2 or newer) to the folder where EditorELF
    resides (to the same folder where init.lua is)
-3) Now you should be able to run EditorELF!
+3) Now you should be able to run EditorELF by launching the
+   BlendELF binary!
 
