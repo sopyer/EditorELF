@@ -5,6 +5,8 @@ function edi_init_scene()
 
 	-- create a default scene
 	editor.scene.handle = elf.CreateScene("Scene")
+	elf.SetScenePhysics(editor.scene.handle, false)
+	elf.SetSceneRunScripts(editor.scene.handle, false)
 	elf.SetScene(editor.scene.handle)
 
 	-- init the camear for the default scene
@@ -56,6 +58,8 @@ function edi_load_scene(path)
 
 	-- set the new scene as the current scene
 	editor.scene.handle = new_scene
+	elf.SetScenePhysics(new_scene, false)
+	elf.SetSceneRunScripts(new_scene, false)
 	elf.SetScene(new_scene)
 
 	-- initialize the editor camera
