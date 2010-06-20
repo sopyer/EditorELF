@@ -5,7 +5,8 @@ commonly found in linux distributions in /usr/shared/fonts
 or online by googling.
 
 1) Extract EditorELF to a folder or download it from git
-2) Make a folder called "fonts" to the same folder where
-   EditorELF is (init.lua should reside in this folder)
-3) Now you should be able to run EditorELF
+2) Copy a blendelf binary compatible with EditorELF (usually
+   BlendELF 0.9 Beta 2 or newer) to the folder where EditorELF
+   resides (to the same folder where init.lua is)
+3) Now you should be able to run EditorELF!
 
