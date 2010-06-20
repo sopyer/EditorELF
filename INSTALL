@@ -1,9 +1,5 @@
 INSTALL
 
-To install EditorELF, you need the FreeMono.ttf font,
-commonly found in linux distributions in /usr/shared/fonts
-or online by googling.
-
 1) Extract EditorELF to a folder or download it from git
 2) Copy a blendelf binary compatible with EditorELF (usually
    BlendELF 0.9 Beta 2 or newer) to the folder where EditorELF
