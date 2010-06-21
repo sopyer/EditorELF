@@ -64,6 +64,21 @@ function edi_create_slider(parent, name, x, y, path, default)
 	return slider
 end
 
+function edi_check_text_field_float(txf, min, max)
+	local val = elf.GetTextFieldText(txf)
+
+	if val == nil then val = 0 end
+	val = tonumber(val)
+	if val == nil then
+		val = 0
+	else
+		if min ~= nil and val < min then val = min end
+		if max ~= nil and val > max then val = max end
+	end
+
+	elf.SetTextFieldText(txf, tostring(val))
+end
+
 EDI_NONE = 0
 EDI_MESSAGE_BOX = 1
 EDI_FILE_DIALOG = 2
@@ -114,9 +129,13 @@ function edi_disable_current_menu()
 	editor.gui.current_menu = EDI_NONE
 end
 
+function edi_update_gui_selection()
+	edi_update_properties_selection()
+end
+
 function edi_update_gui()
 	if editor.gui.current_menu == EDI_MESSAGE_BOX then edi_update_message_box()
 	elseif editor.gui.current_menu == EDI_FILE_DIALOG then edi_update_file_dialog()
-	elseif editor.gui.current_menu == EDI_PROPERTIES then edi_update_edit_menu() end
+	elseif editor.gui.current_menu == EDI_PROPERTIES then edi_update_properties() end
 end
 

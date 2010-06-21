@@ -101,6 +101,23 @@ function edi_trace_scene_selection()
 	return nil
 end
 
+function edi_select_actor()
+	-- get the object we clicked on
+	act = edi_trace_scene_selection()
+	-- check if we got anything
+	if act ~= nil then
+		-- deselect previously selected
+		if editor.scene.selection ~= nil then
+			elf.SetActorSelected(editor.scene.selection, false)
+		end
+		-- select object
+		editor.scene.selection = act
+		elf.SetActorSelected(editor.scene.selection, true)
+
+		edi_update_gui_selection()
+	end
+end
+
 function edi_update_scene()
 	if editor.gui.current_menu == EDI_PROPERTIES then
 		local move_speed = editor.scene.camera.move_speed
@@ -127,18 +144,7 @@ function edi_update_scene()
 		end
 
 		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED then
-			-- get the object we clicked on
-			act = edi_trace_scene_selection()
-			-- check if we got anything
-			if act ~= nil then
-				-- deselect previously selected
-				if editor.scene.selection ~= nil then
-					elf.SetActorSelected(editor.scene.selection, false)
-				end
-				-- select object
-				editor.scene.selection = act
-				elf.SetActorSelected(editor.scene.selection, true)
-			end
+			edi_select_actor()
 		end
 	end
 end
