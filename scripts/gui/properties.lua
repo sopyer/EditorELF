@@ -14,7 +14,7 @@ function edi_init_properties()
 
 	elf.SetScreenTexture(editor.gui.properties.handle, elf.CreateTextureFromFile("images/properties/background.png"))
 	elf.SetGuiObjectVisible(editor.gui.properties.handle, false)
-	elf.SetGuiObjectColor(editor.gui.properties.handle, 1.0, 1.0, 1.0, 0.75)
+	elf.SetGuiObjectColor(editor.gui.properties.handle, 1.0, 1.0, 1.0, 0.85)
 	elf.SetGuiObjectPosition(editor.gui.properties.handle, elf.GetWindowWidth()-elf.GetGuiObjectSize(editor.gui.properties.handle).x, 0)
 
 	elf.AddGuiObject(editor.gui.handle, editor.gui.properties.handle)
@@ -46,6 +46,20 @@ function edi_init_properties()
 	editor.gui.properties.edit.actor.pos_lab = edi_create_label(editor.gui.properties.handle, "pos_lab", 4, 71, "Position", editor.gui.fonts.normal)
 	editor.gui.properties.edit.actor.rot_lab = edi_create_label(editor.gui.properties.handle, "rot_lab", 4, 93, "Rotation", editor.gui.fonts.normal)
 	editor.gui.properties.edit.actor.script_lab = edi_create_label(editor.gui.properties.handle, "script_lab", 4, 115, "Script", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.physics_lab = edi_create_label(editor.gui.properties.handle, "physics_lab", 4, 137, "---------- Physics ---------", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.physics_enb_lab = edi_create_label(editor.gui.properties.handle, "physics_enb_lab", 4, 159, "Enabled", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.lengths_lab = edi_create_label(editor.gui.properties.handle, "lengths_lab", 4, 181, "Lengths", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.offset_lab = edi_create_label(editor.gui.properties.handle, "offset_lab", 4, 203, "Offset", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.mass_lab = edi_create_label(editor.gui.properties.handle, "mass_lab", 4, 225, "Mass", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.lin_damp_lab = edi_create_label(editor.gui.properties.handle, "lin_damp_lab", 4, 247, "Lin Damp", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.ang_damp_lab = edi_create_label(editor.gui.properties.handle, "ang_damp_lab", 4, 269, "Ang Damp", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.lin_sleep_lab = edi_create_label(editor.gui.properties.handle, "lin_sleep_lab", 4, 291, "Lin Sleep", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.ang_sleep_lab = edi_create_label(editor.gui.properties.handle, "ang_sleep_lab", 4, 313, "Ang Sleep", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.restitu_lab = edi_create_label(editor.gui.properties.handle, "restitu_lab", 4, 335, "Restitu.", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.anis_fric_lab = edi_create_label(editor.gui.properties.handle, "anis_fric_lab", 4, 357, "Anis Fric", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.lin_fac_lab = edi_create_label(editor.gui.properties.handle, "lin_frac_lab", 4, 379, "Lin Factor", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.ang_fac_lab = edi_create_label(editor.gui.properties.handle, "ang_frac_lab", 4, 401, "Ang Factor", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.shape_lab = edi_create_label(editor.gui.properties.handle, "physics_lab", 4, 425, "Shape", editor.gui.fonts.normal)
 
 	editor.gui.properties.edit.actor.name_txf = edi_create_text_field(editor.gui.properties.handle, "name_txf", 99, 48, "images/text_field128", editor.gui.fonts.normal, "Object")
 
@@ -58,6 +72,45 @@ function edi_init_properties()
 	editor.gui.properties.edit.actor.rot_z_txf = edi_create_text_field(editor.gui.properties.handle, "rot_z_txf", 203, 92, "images/text_field48", editor.gui.fonts.normal, "0")
 
 	editor.gui.properties.edit.actor.script_txf = edi_create_text_field(editor.gui.properties.handle, "script_txf", 99, 114, "images/text_field128", editor.gui.fonts.normal, "")
+	editor.gui.properties.edit.actor.script_open = edi_create_button(editor.gui.properties.handle, "open", 231, 114, "images/mini_open")
+
+	editor.gui.properties.edit.actor.physics_enb_cb = edi_create_check_box(editor.gui.properties.handle, "physics_enb_cb", 99, 158, "images/check_box", false)
+
+	editor.gui.properties.edit.actor.lengths_x_txf = edi_create_text_field(editor.gui.properties.handle, "lengths_x_txf", 99, 180, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lengths_y_txf = edi_create_text_field(editor.gui.properties.handle, "lengths_y_txf", 151, 180, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lengths_z_txf = edi_create_text_field(editor.gui.properties.handle, "lengths_z_txf", 203, 180, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.actor.offset_x_txf = edi_create_text_field(editor.gui.properties.handle, "offset_x_txf", 99, 202, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.offset_y_txf = edi_create_text_field(editor.gui.properties.handle, "offset_y_txf", 151, 202, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.offset_z_txf = edi_create_text_field(editor.gui.properties.handle, "offset_z_txf", 203, 202, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.actor.mass_txf = edi_create_text_field(editor.gui.properties.handle, "mass_txf", 99, 224, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lin_damp_txf = edi_create_text_field(editor.gui.properties.handle, "lin_damp_txf", 99, 246, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.ang_damp_txf = edi_create_text_field(editor.gui.properties.handle, "ang_damp_txf", 99, 268, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lin_sleep_txf = edi_create_text_field(editor.gui.properties.handle, "lin_sleep_txf", 99, 290, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.ang_sleep_txf = edi_create_text_field(editor.gui.properties.handle, "ang_sleep_txf", 99, 312, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.restitu_txf = edi_create_text_field(editor.gui.properties.handle, "restitu_txf", 99, 334, "images/text_field64", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.actor.anis_fric_x_txf = edi_create_text_field(editor.gui.properties.handle, "anis_fric_x_txf", 99, 356, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.anis_fric_y_txf = edi_create_text_field(editor.gui.properties.handle, "anis_fric_y_txf", 151, 356, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.anis_fric_z_txf = edi_create_text_field(editor.gui.properties.handle, "anis_fric_z_txf", 203, 356, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.actor.lin_factor_x_txf = edi_create_text_field(editor.gui.properties.handle, "lin_factor_z_txf", 99, 378, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lin_factor_y_txf = edi_create_text_field(editor.gui.properties.handle, "lin_factor_y_txf", 151, 378, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lin_factor_z_txf = edi_create_text_field(editor.gui.properties.handle, "lin_factor_z_txf", 203, 378, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.actor.ang_factor_x_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_x_txf", 99, 400, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.ang_factor_y_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_y_txf", 151, 400, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.ang_factor_z_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_z_txf", 203, 400, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.actor.shape = elf.CreateTextList("file_list")
+	elf.SetTextListFont(editor.gui.properties.edit.actor.shape, editor.gui.fonts.normal)
+	elf.SetTextListSize(editor.gui.properties.edit.actor.shape, 3, 153)
+	elf.SetGuiObjectPosition(editor.gui.properties.edit.actor.shape, 99, 424)
+	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Box")
+	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Sphere")
+	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Triangle Mesh")
+	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape)
 
 	-- setup the post processing tab
 
