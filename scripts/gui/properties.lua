@@ -226,6 +226,60 @@ function edi_update_properties_selection()
 	edi_update_edit_selection()
 end
 
+function edi_update_actor()
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.name_txf) == elf.LOSE_FOCUS then
+		elf.SetActorName(editor.scene.selection, elf.GetTextFieldText(editor.gui.properties.edit.actor.name_txf))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_x_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.actor.pos_x_txf, nil, nil)
+		elf.SetActorPosition(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_y_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.actor.pos_y_txf, nil, nil)
+		elf.SetActorPosition(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_z_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.actor.pos_z_txf, nil, nil)
+		elf.SetActorPosition(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_x_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.actor.rot_x_txf, nil, nil)
+		elf.SetActorRotation(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_y_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.actor.rot_y_txf, nil, nil)
+		elf.SetActorRotation(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_z_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.actor.rot_z_txf, nil, nil)
+		elf.SetActorRotation(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
+	end
+end
+
 function edi_update_menu()
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.open) == elf.CLICKED then
 		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", edi_properties_menu_open)
@@ -233,9 +287,13 @@ function edi_update_menu()
 end
 
 function edi_update_edit()
+	if editor.scene.selection == nil then return end
+
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == elf.STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	end
+
+	if editor.gui.properties.edit.current_tab == EDI_EDIT_ACTOR then edi_update_actor() end
 end
 
 function edi_update_pp()
@@ -294,8 +352,6 @@ function edi_update_pp()
 end
 
 function edi_update_properties()
-	-- check tab check boxes
-
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu_cb) == elf.STATE_CHANGED then
 		edi_switch_properties_tab(EDI_PROPERTIES_MENU)
 	end

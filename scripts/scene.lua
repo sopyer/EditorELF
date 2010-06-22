@@ -16,6 +16,9 @@ end
 function edi_init_scene_camera()
 	-- set the camera move speed
 	editor.scene.camera.move_speed = 20.0
+	editor.scene.camera.irot = {}
+	editor.scene.camera.irot.x = 0
+	editor.scene.camera.irot.y = 0
 
 	-- remove any previous cameras that reserve the ditor camera name
 	elf.RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
@@ -136,8 +139,12 @@ function edi_update_scene()
 		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) ~= elf.UP then
 			-- rotate the camera according to the mouse force
 			local mf = elf.GetMouseForce()
-			elf.RotateActor(editor.scene.camera.handle, 0.0, 0.0, -mf.x*20.0)
-			elf.RotateActorLocal(editor.scene.camera.handle, -mf.y*20.0, 0.0, 0.0)
+
+			if elf.AboutZero(mf.x) ~= true then editor.scene.camera.irot.x = -mf.x*20.0 end
+			if elf.AboutZero(mf.y) ~= true then editor.scene.camera.irot.y = -mf.y*20.0 end
+
+			elf.RotateActor(editor.scene.camera.handle, 0.0, 0.0, editor.scene.camera.irot.x)
+			elf.RotateActorLocal(editor.scene.camera.handle, editor.scene.camera.irot.y, 0.0, 0.0)
 
 			-- center the mouse to allow continuous panning
 			elf.SetMousePosition(elf.GetWindowWidth()/2, elf.GetWindowHeight()/2)
@@ -147,5 +154,8 @@ function edi_update_scene()
 			edi_select_actor()
 		end
 	end
+
+	editor.scene.camera.irot.x = editor.scene.camera.irot.x*0.5
+	editor.scene.camera.irot.y = editor.scene.camera.irot.y*0.5
 end
 
