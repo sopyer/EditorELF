@@ -59,6 +59,10 @@ function edi_load_scene(path)
 	new_scene = elf.CreateSceneFromFile(path)
 	if elf.IsObject(new_scene) ~= true then return false end
 
+	-- deselect any previously selected objects
+	editor.scene.selected = nil
+	edi_update_gui_selection()
+
 	-- set the new scene as the current scene
 	editor.scene.handle = new_scene
 	elf.SetScenePhysics(new_scene, false)

@@ -1,4 +1,7 @@
 
+EDI_FILE_DIALOG_OPEN = 0
+EDI_FILE_DIALOG_SAVE = 1
+
 function edi_init_file_dialog()
 	editor.gui.file_dialog = {}
 	editor.gui.file_dialog.prev_wheel = 0
@@ -42,6 +45,17 @@ function edi_init_file_dialog()
 
 	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.open)
 
+	-- setup the save button
+	editor.gui.file_dialog.save = elf.CreateButton("save")
+
+	elf.SetButtonOffTexture(editor.gui.file_dialog.save, elf.CreateTextureFromFile("images/file_dialog/save_off.png"))
+	elf.SetButtonOverTexture(editor.gui.file_dialog.save, elf.CreateTextureFromFile("images/file_dialog/save_over.png"))
+	elf.SetButtonOnTexture(editor.gui.file_dialog.save, elf.CreateTextureFromFile("images/file_dialog/save_on.png"))
+	elf.SetGuiObjectPosition(editor.gui.file_dialog.save, 933, 22)
+	elf.SetGuiObjectVisible(editor.gui.file_dialog.save, false)
+
+	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.save)
+
 	-- setup the cancel button
 	editor.gui.file_dialog.cancel = elf.CreateButton("cancel")
 
@@ -71,7 +85,15 @@ function edi_init_file_dialog()
 	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.scroll_bar)
 end
 
-function edi_open_file_dialog(path, title, callback)
+function edi_open_file_dialog(path, title, mode, callback)
+
+	if mode == EDI_FILE_DIALOG_OPEN then
+		elf.SetGuiObjectVisible(editor.gui.file_dialog.open, true)
+		elf.SetGuiObjectVisible(editor.gui.file_dialog.save, false)
+	elseif mode == EDI_FILE_DIALOG_SAVE then
+		elf.SetGuiObjectVisible(editor.gui.file_dialog.open, false)
+		elf.SetGuiObjectVisible(editor.gui.file_dialog.save, true)
+	end
 
 	-- set the file dialog title
 	elf.SetLabelText(editor.gui.file_dialog.title, title)
@@ -195,9 +217,27 @@ function edi_update_file_dialog()
 		path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
 
 		-- check if the path is a file
-		file = io.open(path)
+		file = io.open(path, "r")
 
 		if file ~= nil then
+			if editor.gui.file_dialog.callback ~= nil then
+				editor.gui.file_dialog.callback(path)
+			end
+		end
+	end
+
+	-- check if we have to open a file
+	if elf.GetGuiObjectEvent(editor.gui.file_dialog.save) == elf.CLICKED then
+		path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+
+		-- check if the path can be opened
+		file = io.open(path, "r")
+		if file == nil then
+			file = io.open(path, "w")
+		end
+
+		if file ~= nil then
+			file:close()
 			if editor.gui.file_dialog.callback ~= nil then
 				editor.gui.file_dialog.callback(path)
 			end

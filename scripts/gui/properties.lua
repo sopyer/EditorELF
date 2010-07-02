@@ -335,7 +335,7 @@ end
 
 function edi_update_menu()
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", edi_properties_menu_open)
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_open)
 	end
 end
 
