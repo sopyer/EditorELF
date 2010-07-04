@@ -271,7 +271,7 @@ function edi_update_file_dialog()
 	end
 
 	-- check if we have to scroll
-	diff = elf.GetTextListItemCount(editor.gui.file_dialog.file_list)-
+	local diff = elf.GetTextListItemCount(editor.gui.file_dialog.file_list)-
 		elf.GetTextListRowCount(editor.gui.file_dialog.file_list)
 
 	if elf.GetGuiObjectEvent(editor.gui.file_dialog.scroll_bar) == elf.VALUE_CHANGED then
@@ -281,7 +281,7 @@ function edi_update_file_dialog()
 	end
 
 	-- scroll with the mouse wheel
-	wheel_diff = -(elf.GetMouseWheel() - editor.gui.file_dialog.prev_wheel)
+	local wheel_diff = -(elf.GetMouseWheel() - editor.gui.file_dialog.prev_wheel)
 	if wheel_diff ~= 0 then
 		offset = elf.GetTextListOffset(editor.gui.file_dialog.file_list)+wheel_diff
 		if offset < 0 then offset = 0 end

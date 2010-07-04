@@ -77,6 +77,7 @@ function edi_check_text_field_float(txf, min, max)
 	end
 
 	elf.SetTextFieldText(txf, tostring(val))
+	elf.SetTextFieldCursorPosition(txf, 0)
 end
 
 EDI_NONE = 0
