@@ -164,8 +164,19 @@ function edi_update_scene()
 			elf.SetMousePosition(elf.GetWindowWidth()/2, elf.GetWindowHeight()/2)
 		end
 
-		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED then
+		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED and
+			elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == false then
+			editor.gui.action.move = false
+			elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
 			edi_select_actor()
+		end
+
+		if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
+			editor.gui.action.move = true
+			elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+		end
+
+		if editor.gui.action_move == true and elf.GetMousebuttonState(elf.BUTTON_RIGHT) == elf.UP then
 		end
 	end
 

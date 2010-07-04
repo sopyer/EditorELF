@@ -31,6 +31,8 @@ function edi_init_properties()
 	editor.gui.properties.menu.file = edi_create_label(editor.gui.properties.handle, "file", 4, 27, "----------- File -----------", editor.gui.fonts.normal)
 	editor.gui.properties.menu.open = edi_create_button(editor.gui.properties.handle, "open", 4, 48, "images/properties/menu/open")
 	editor.gui.properties.menu.save = edi_create_button(editor.gui.properties.handle, "save", 4, 70, "images/properties/menu/save")
+	editor.gui.properties.menu.actions = edi_create_label(editor.gui.properties.handle, "actions", 4, 92, "---------- Actions ---------", editor.gui.fonts.normal)
+	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 114, "images/properties/menu/move", false)
 
 	-- setup the edit tab
 

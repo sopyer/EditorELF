@@ -88,6 +88,8 @@ EDI_PROPERTIES = 3
 function edi_init_gui()
 	editor.gui = {}
 	editor.gui.current_menu = EDI_NONE
+	editor.gui.action = {}
+	editor.gui.action.move = false
 
 	-- create the main gui
 	editor.gui.handle = elf.CreateGui()
@@ -109,7 +111,7 @@ function edi_init_gui()
 
 	elf.SetLabelFont(editor.gui.version, editor.gui.fonts.normal)
 	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2")
-	elf.SetGuiObjectPosition(editor.gui.version, elf.GetWindowWidth()-elf.GetGuiObjectSize(editor.gui.version).x-5,
+	elf.SetGuiObjectPosition(editor.gui.version, 5,
 		elf.GetWindowHeight()-elf.GetGuiObjectSize(editor.gui.version).y-2)
 
 	elf.AddGuiObject(editor.gui.handle, editor.gui.version)

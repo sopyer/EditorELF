@@ -12,10 +12,6 @@ function edi_init()
 	edi_init_scene()
 end
 
-function edi_deinit()
-	editor = nil
-end
-
 function edi_run()
 	edi_open_properties()
 
@@ -40,6 +36,10 @@ function edi_run()
 		edi_update_gui()
 		edi_update_scene()
 	end
+end
+
+function edi_deinit()
+	editor = nil
 end
 
 -- initialize and run EditorELF

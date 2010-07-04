@@ -7,3 +7,19 @@ has just started so don't except anything too fancy yet...
 
 Samuel Anjam - Lead coder
 
+
+
+INSTRUCTIONS
+
+WSAD to move the camera and HOLD RMB + MOUSE to rotate it.
+HOLD SPACE to hide the menus for taking screenshots and
+previewing the scene. F5 saves a screenshot to the editor
+folder as "screenshot.png".
+
+By default, EditorELF opens a empty scene. All of the
+functionality can be found in the property sidebar on the
+right. It contains various submenus which enable you to
+open and import scenes and files, edit various actor
+types and preview the scene with post processing effects
+enabled.
+
