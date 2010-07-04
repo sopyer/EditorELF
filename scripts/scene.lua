@@ -75,6 +75,16 @@ function edi_load_scene(path)
 	return true
 end
 
+function edi_save_scene(path)
+	edi_remove_scene_camera()
+
+	local result = elf.SaveScene(editor.scene.handle, path)
+
+	edi_reload_scene_camera()
+
+	return result
+end
+
 function edi_trace_scene_selection()
 	-- don't allow picking through GUI
 	if elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == true then return nil end

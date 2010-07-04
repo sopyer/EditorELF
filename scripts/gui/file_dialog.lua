@@ -95,6 +95,8 @@ function edi_open_file_dialog(path, title, mode, callback)
 		elf.SetGuiObjectVisible(editor.gui.file_dialog.save, true)
 	end
 
+	editor.gui.file_dialog.mode = mode
+
 	-- set the file dialog title
 	elf.SetLabelText(editor.gui.file_dialog.title, title)
 
@@ -197,13 +199,30 @@ function edi_update_file_dialog()
 	-- check if we have to try to open a new file or enter a directory
 	if elf.GetGuiObjectEvent(editor.gui.file_dialog.file_path) == elf.LOSE_FOCUS then
 		if elf.GetKeyState(elf.KEY_ENTER) == elf.PRESSED then
-			path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+			if editor.gui.file_dialog.mode == EDI_FILE_DIALOG_OPEN then
+				path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
 
-			if edi_change_file_dialog_path(path) == false then
-				-- check if the path is a file
-				file = io.open(path)
+				if edi_change_file_dialog_path(path) == false then
+					-- check if the path is a file
+					file = io.open(path)
+
+					if file ~= nil then
+						if editor.gui.file_dialog.callback ~= nil then
+							editor.gui.file_dialog.callback(path)
+						end
+					end
+				end
+			elseif editor.gui.file_dialog.mode == EDI_FILE_DIALOG_SAVE then
+				path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+
+				-- check if the path can be opened
+				file = io.open(path, "r")
+				if file == nil then
+					file = io.open(path, "w")
+				end
 
 				if file ~= nil then
+					file:close()
 					if editor.gui.file_dialog.callback ~= nil then
 						editor.gui.file_dialog.callback(path)
 					end

@@ -30,6 +30,7 @@ function edi_init_properties()
 
 	editor.gui.properties.menu.file = edi_create_label(editor.gui.properties.handle, "file", 4, 27, "----------- File -----------", editor.gui.fonts.normal)
 	editor.gui.properties.menu.open = edi_create_button(editor.gui.properties.handle, "open", 4, 48, "images/properties/menu/open")
+	editor.gui.properties.menu.save = edi_create_button(editor.gui.properties.handle, "save", 4, 70, "images/properties/menu/save")
 
 	-- setup the edit tab
 
@@ -241,16 +242,6 @@ function edi_open_properties()
 	elf.SetGuiObjectVisible(editor.gui.properties.handle, true)
 end
 
-function edi_properties_menu_open(path)
-	if string.len(path) < 1 then
-		edi_open_properties()
-	end
-
-	if edi_load_scene(path) == true then
-		edi_open_properties()
-	end
-end
-
 function edi_update_edit_selection()
 	if editor.scene.selection == nil then
 		if editor.gui.properties.curren_tab == EDI_PROPERTIES_EDIT then
@@ -345,6 +336,42 @@ end
 
 function edi_update_properties_selection()
 	edi_update_edit_selection()
+end
+
+function edi_properties_menu_open(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	if edi_load_scene(path) == true then
+		edi_open_properties()
+	end
+end
+
+function edi_properties_menu_save(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	if edi_save_scene(path) == true then
+		edi_open_properties()
+	end
+end
+
+function edi_update_menu()
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_open)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.save) == elf.CLICKED then
+		local path = elf.GetSceneFilePath(editor.scene.handle)
+		if path == nil or string.len(path) < 1 then
+			path = elf.GetCurrentDirectory()
+		end
+		edi_open_file_dialog(path, "Save PAK...", EDI_FILE_DIALOG_SAVE, edi_properties_menu_save)
+	end
 end
 
 function edi_update_actor()
@@ -599,12 +626,6 @@ function edi_update_actor()
 		if diff > 0 then
 			elf.SetTextListOffset(editor.gui.properties.edit.actor.shape, diff*(1.0-elf.GetSliderValue(editor.gui.properties.edit.actor.shape_sb)))
 		end
-	end
-end
-
-function edi_update_menu()
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_open)
 	end
 end
 
