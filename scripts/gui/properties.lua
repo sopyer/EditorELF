@@ -369,6 +369,8 @@ function edi_update_menu()
 		local path = elf.GetSceneFilePath(editor.scene.handle)
 		if path == nil or string.len(path) < 1 then
 			path = elf.GetCurrentDirectory()
+		else
+			path = edi_get_parent_folder(path)
 		end
 		edi_open_file_dialog(path, "Save PAK...", EDI_FILE_DIALOG_SAVE, edi_properties_menu_save)
 	end
