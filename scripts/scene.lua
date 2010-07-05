@@ -48,6 +48,7 @@ end
 
 function edi_reload_scene_camera()
 	elf.AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+	elf.SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
 function edi_remove_scene_camera()
@@ -166,17 +167,43 @@ function edi_update_scene()
 
 		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED and
 			elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == false then
+			if editor.gui.action.move == false then
+				edi_select_actor()
+			end
+
 			editor.gui.action.move = false
 			elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
-			edi_select_actor()
 		end
 
-		if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
-			editor.gui.action.move = true
-			elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.PRESSED then
+			if editor.gui.action.move == true then
+				elf.SetActorPosition(editor.scene.selection,
+					editor.gui.action.move_orig_pos.x,
+					editor.gui.action.move_orig_pos.y,
+					editor.gui.action.move_orig_pos.z)
+			end
+			editor.gui.action.move = false
+			elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
 		end
 
-		if editor.gui.action_move == true and elf.GetMousebuttonState(elf.BUTTON_RIGHT) == elf.UP then
+		if editor.scene.selection ~= nil and elf.IsObject(editor.scene.selection) == true then
+			if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
+				editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+				editor.gui.action.move = true
+				elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+			end
+
+			if editor.gui.action.move == true and elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.UP then
+				local pos = elf.GetActorPosition(editor.scene.selection)
+				local cam_orient = elf.GetActorOrientation(editor.scene.camera.handle)
+				local mf = elf.GetMouseForce()
+				local offset = elf.CreateVec3fFromValues(mf.x*0.1, -mf.y*0.1, 0.0)
+
+				offset = elf.MulQuaVec3f(cam_orient, offset)
+				pos = elf.AddVec3fVec3f(pos, offset)
+
+				elf.SetActorPosition(editor.scene.selection, pos.x, pos.y, pos.z)
+			end
 		end
 	end
 
