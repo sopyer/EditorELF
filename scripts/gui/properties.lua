@@ -376,6 +376,18 @@ function edi_update_menu()
 		end
 		edi_open_file_dialog(path, "Save PAK...", EDI_FILE_DIALOG_SAVE, edi_properties_menu_save)
 	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.move) == elf.STATE_CHANGED then
+		if editor.scene.selection ~= nil then
+			if  editor.gui.action.move ~= true then
+				editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+				editor.gui.action.move = true
+			end
+			elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+		else
+			elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+		end
+	end
 end
 
 function edi_update_actor()
