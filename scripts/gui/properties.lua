@@ -31,9 +31,11 @@ function edi_init_properties()
 	editor.gui.properties.menu.file = edi_create_label(editor.gui.properties.handle, "file", 4, 27, "----------- File -----------", editor.gui.fonts.normal)
 	editor.gui.properties.menu.open = edi_create_button(editor.gui.properties.handle, "open", 4, 48, "images/properties/menu/open")
 	editor.gui.properties.menu.save = edi_create_button(editor.gui.properties.handle, "save", 4, 70, "images/properties/menu/save")
-	editor.gui.properties.menu.actions = edi_create_label(editor.gui.properties.handle, "actions", 4, 92, "---------- Actions ---------", editor.gui.fonts.normal)
-	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 114, "images/properties/menu/move", false)
-	editor.gui.properties.menu.rotate = edi_create_check_box(editor.gui.properties.handle, "rotate", 4, 136, "images/properties/menu/rotate", false)
+	editor.gui.properties.menu.import_scene = edi_create_button(editor.gui.properties.handle, "import_scene", 4, 92, "images/properties/menu/import_scene")
+	editor.gui.properties.menu.actions = edi_create_label(editor.gui.properties.handle, "actions", 4, 115, "---------- Actions ---------", editor.gui.fonts.normal)
+	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 136, "images/properties/menu/move", false)
+	editor.gui.properties.menu.rotate = edi_create_check_box(editor.gui.properties.handle, "rotate", 4, 158, "images/properties/menu/rotate", false)
+	editor.gui.properties.menu.create = edi_create_label(editor.gui.properties.handle, "actions", 4, 181, "---------- Create ----------", editor.gui.fonts.normal)
 
 	-- setup the edit tab
 
@@ -363,6 +365,46 @@ function edi_properties_menu_save(path)
 	end
 end
 
+function edi_properties_menu_import_scene(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local scn = elf.CreateSceneFromFile(path)
+	if elf.IsObject(scn) == true then
+
+		print("importing scene \"" .. path .. "\"")
+		print("  cameras: " .. elf.GetSceneCameraCount(scn))
+		print("  entities: " .. elf.GetSceneEntityCount(scn))
+		print("  lights: " .. elf.GetSceneLightCount(scn))
+		print("  sprites: " .. elf.GetSceneSpriteCount(scn))
+		print("  particles: " .. elf.GetSceneParticlesCount(scn))
+
+		while elf.IsObject(elf.GetCameraByIndex(scn, 0)) do
+			local cam = elf.GetCameraByIndex(scn, 0)
+			elf.AddCameraToScene(editor.scene.handle, cam)
+		end
+		while elf.IsObject(elf.GetEntityByIndex(scn, 0)) do
+			local ent = elf.GetEntityByIndex(scn, 0)
+			elf.AddEntityToScene(editor.scene.handle, ent)
+		end
+		while elf.IsObject(elf.GetLightByIndex(scn, 0)) do
+			local lig = elf.GetLightByIndex(scn, 0)
+			elf.AddLightToScene(editor.scene.handle, lig)
+		end
+		while elf.IsObject(elf.GetSpriteByIndex(scn, 0)) do
+			local spr = elf.GetSpriteByIndex(scn, 0)
+			elf.AddSpriteToScene(editor.scene.handle, spr)
+		end
+		while elf.IsObject(elf.GetParticlesByIndex(scn, 0)) do
+			local par = elf.GetParticlesByIndex(scn, 0)
+			elf.AddParticlesToScene(editor.scene.handle, par)
+		end
+		edi_open_properties()
+	end
+end
+
 function edi_update_menu()
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.open) == elf.CLICKED then
 		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_open)
@@ -376,6 +418,10 @@ function edi_update_menu()
 			path = edi_get_parent_folder(path)
 		end
 		edi_open_file_dialog(path, "Save PAK...", EDI_FILE_DIALOG_SAVE, edi_properties_menu_save)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.import_scene) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Import Scene (.pak/.dae/.3ds/.md2/...) ...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_import_scene)
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.move) == elf.STATE_CHANGED then
