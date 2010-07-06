@@ -165,50 +165,88 @@ function edi_update_scene()
 			elf.SetMousePosition(elf.GetWindowWidth()/2, elf.GetWindowHeight()/2)
 		end
 
+		-- check if we have to select object or disable action
 		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED then
 			if elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == false and
-				editor.gui.action.move == false then
+				editor.gui.action.move == false and
+				editor.gui.action.rotate == false then
 				edi_select_actor()
 			end
 
 			if editor.gui.action.move == true then
 				editor.gui.action.move = false
 				elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+			elseif editor.gui.action.rotate == true then
+				editor.gui.action.rotate = false
+				elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 			end
 		end
 
+		-- check do we need to reset move/rotate
 		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.PRESSED then
 			if editor.gui.action.move == true then
 				elf.SetActorPosition(editor.scene.selection,
 					editor.gui.action.move_orig_pos.x,
 					editor.gui.action.move_orig_pos.y,
 					editor.gui.action.move_orig_pos.z)
+				edi_update_edit_selection()
 				editor.gui.action.move = false
 				elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+			elseif editor.gui.action.rotate == true then
+				elf.SetActorRotation(editor.scene.selection,
+					editor.gui.action.rotate_orig_rot.x,
+					editor.gui.action.rotate_orig_rot.y,
+					editor.gui.action.rotate_orig_rot.z)
+				edi_update_edit_selection()
+				editor.gui.action.rotate = false
+				elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 			end
 		end
 
+		-- check if we can operate actions on objects
 		if editor.scene.selection ~= nil then
 			if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
 				editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
 				editor.gui.action.move = true
 				elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+			elseif elf.GetKeyState(elf.KEY_R) == elf.PRESSED then
+				editor.gui.action.rotate_orig_rot = elf.GetActorRotation(editor.scene.selection)
+				editor.gui.action.rotate = true
+				elf.SetCheckBoxState(editor.gui.properties.menu.rotate, true)
 			end
 
-			if editor.gui.action.move == true and elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.UP then
-				local pos = elf.GetActorPosition(editor.scene.selection)
-				local cam_orient = elf.GetActorOrientation(editor.scene.camera.handle)
-				local cam_pos = elf.GetActorPosition(editor.scene.camera.handle)
+			if elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.UP then
+				if editor.gui.action.move == true then
+					local pos = elf.GetActorPosition(editor.scene.selection)
+					local cam_orient = elf.GetActorOrientation(editor.scene.camera.handle)
+					local cam_pos = elf.GetActorPosition(editor.scene.camera.handle)
 
-				local speed = elf.GetVec3fLength(elf.SubVec3fVec3f(pos, cam_pos))*0.001
+					local speed = elf.GetVec3fLength(elf.SubVec3fVec3f(pos, cam_pos))*0.001
 
-				local mf = elf.GetMouseForce()
-				local offset = elf.CreateVec3fFromValues(mf.x*speed, -mf.y*speed, 0.0)
+					local mf = elf.GetMouseForce()
+					local offset = elf.CreateVec3fFromValues(mf.x*speed, -mf.y*speed, 0.0)
 
-				offset = elf.MulQuaVec3f(cam_orient, offset)
-				local new_pos = elf.AddVec3fVec3f(pos, offset)
+					offset = elf.MulQuaVec3f(cam_orient, offset)
+					local new_pos = elf.AddVec3fVec3f(pos, offset)
 
-				elf.SetActorPosition(editor.scene.selection, new_pos.x, new_pos.y, new_pos.z)
+					elf.SetActorPosition(editor.scene.selection, new_pos.x, new_pos.y, new_pos.z)
+					edi_update_edit_selection()
+				elseif editor.gui.action.rotate == true then
+					local orient = elf.GetActorOrientation(editor.scene.selection)
+					local inv_orient = elf.GetQuaInverted(orient)
+					local cam_orient = elf.GetActorOrientation(editor.scene.camera.handle)
+
+					local axis = elf.CreateVec3fFromValues(0.0, 0.0, -1.0)
+					local axis = elf.MulQuaVec3f(cam_orient, axis)
+					local axis = elf.MulQuaVec3f(inv_orient, axis)
+					local mf = elf.GetMouseForce()
+
+					local offset = elf.CreateQuaFromAngleAxis(mf.y, axis.x, axis.y, axis.z)
+					local new_orient = elf.MulQuaQua(orient, offset)
+
+					elf.SetActorOrientation(editor.scene.selection, new_orient.x, new_orient.y, new_orient.z, new_orient.w)
+					edi_update_edit_selection()
+				end
 			end
 		end
 	end

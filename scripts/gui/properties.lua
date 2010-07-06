@@ -33,6 +33,7 @@ function edi_init_properties()
 	editor.gui.properties.menu.save = edi_create_button(editor.gui.properties.handle, "save", 4, 70, "images/properties/menu/save")
 	editor.gui.properties.menu.actions = edi_create_label(editor.gui.properties.handle, "actions", 4, 92, "---------- Actions ---------", editor.gui.fonts.normal)
 	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 114, "images/properties/menu/move", false)
+	editor.gui.properties.menu.rotate = edi_create_check_box(editor.gui.properties.handle, "rotate", 4, 136, "images/properties/menu/rotate", false)
 
 	-- setup the edit tab
 
@@ -379,13 +380,21 @@ function edi_update_menu()
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.move) == elf.STATE_CHANGED then
 		if editor.scene.selection ~= nil then
-			if  editor.gui.action.move ~= true then
-				editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
-				editor.gui.action.move = true
-			end
+			editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+			editor.gui.action.move = true
 			elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
 		else
 			elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.rotate) == elf.STATE_CHANGED then
+		if editor.scene.selection ~= nil then
+			editor.gui.action.rotate_orig_rot = elf.GetActorRotation(editor.scene.selection)
+			editor.gui.action.rotate = true
+			elf.SetCheckBoxState(editor.gui.properties.menu.rotate, true)
+		else
+			elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 		end
 	end
 end

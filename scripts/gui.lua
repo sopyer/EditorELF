@@ -90,6 +90,7 @@ function edi_init_gui()
 	editor.gui.current_menu = EDI_NONE
 	editor.gui.action = {}
 	editor.gui.action.move = false
+	editor.gui.action.rotate = false
 
 	-- create the main gui
 	editor.gui.handle = elf.CreateGui()
