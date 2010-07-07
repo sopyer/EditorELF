@@ -248,6 +248,12 @@ function edi_update_scene()
 					edi_update_edit_selection()
 				end
 			end
+
+			if elf.GetKeyState(elf.KEY_DEL) == elf.PRESSED and elf.IsObject(elf.GetGuiActiveTextField(editor.gui.handle)) == false then
+				elf.RemoveActorByObject(editor.scene.handle, editor.scene.selection)
+				editor.scene.selection = nil
+				edi_update_gui_selection()	
+			end
 		end
 	end
 

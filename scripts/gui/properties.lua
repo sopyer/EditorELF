@@ -36,6 +36,7 @@ function edi_init_properties()
 	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 136, "images/properties/menu/move", false)
 	editor.gui.properties.menu.rotate = edi_create_check_box(editor.gui.properties.handle, "rotate", 4, 158, "images/properties/menu/rotate", false)
 	editor.gui.properties.menu.create = edi_create_label(editor.gui.properties.handle, "actions", 4, 181, "---------- Create ----------", editor.gui.fonts.normal)
+	editor.gui.properties.menu.create_light = edi_create_button(editor.gui.properties.handle, "create_light", 4, 202, "images/properties/menu/create_light")
 
 	-- setup the edit tab
 
@@ -43,6 +44,9 @@ function edi_init_properties()
 
 	-- setup the edit tab check boxes
 	editor.gui.properties.edit.act_cb = edi_create_check_box(editor.gui.properties.handle, "act_cb", 4, 26, "images/properties/edit/act", true)
+	editor.gui.properties.edit.lig_cb = edi_create_check_box(editor.gui.properties.handle, "lig_cb", 45, 26, "images/properties/edit/lig", false)
+
+	elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 
 	-- setup the actor properties
 
@@ -130,6 +134,10 @@ function edi_init_properties()
 	elf.SetGuiObjectPosition(editor.gui.properties.edit.actor.shape_sb, 234, 424)
 	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape_sb)
 
+	-- setup the actor properties
+
+	editor.gui.properties.edit.light = {}
+
 	-- setup the post processing tab
 
 	editor.gui.properties.pp = {}
@@ -180,15 +188,39 @@ function edi_hide_edit_tab(tab)
 		elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.actor) do elf.SetGuiObjectVisible(v, false) end
 	end
+	if tab == EDI_EDIT_LIGHT then
+		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, false) end
+	end
 end
 
 function edi_show_edit_tab(tab)
 	elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
+	elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
 
 	if tab == EDI_EDIT_ACTOR then
 		elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.actor) do elf.SetGuiObjectVisible(v, true) end
+		end
+	elseif tab == EDI_EDIT_LIGHT then
+		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, true)
+		if editor.scene.selection ~= nil then
+			for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, true) end
+		end
+	end
+
+	if editor.scene.selection ~= nil then
+		if elf.GetObjectType(editor.scene.selection) == elf.CAMERA then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+		elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+		elseif elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, true)
+		elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+		elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		end
 	end
 end
@@ -207,6 +239,7 @@ function edi_hide_properties_tab(tab)
 	elseif tab == EDI_PROPERTIES_EDIT then
 		elf.SetCheckBoxState(editor.gui.properties.edit_cb, false)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.act_cb, false)
+		elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		edi_hide_edit_tab(editor.gui.properties.edit.current_tab)
 	elseif tab == EDI_PROPERTIES_PP then
 		elf.SetCheckBoxState(editor.gui.properties.pp_cb, false)
@@ -442,6 +475,11 @@ function edi_update_menu()
 		else
 			elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_light) == elf.CLICKED then
+		local lig = elf.CreateLight("Light")
+		elf.AddLightToScene(editor.scene.handle, lig)
 	end
 end
 
