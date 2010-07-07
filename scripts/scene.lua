@@ -61,7 +61,7 @@ function edi_load_scene(path)
 	if elf.IsObject(new_scene) ~= true then return false end
 
 	-- deselect any previously selected objects
-	editor.scene.selected = nil
+	editor.scene.selection = nil
 	edi_update_gui_selection()
 
 	-- set the new scene as the current scene

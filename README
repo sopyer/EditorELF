@@ -13,6 +13,7 @@ INSTRUCTIONS
 
 - Moving Camera -
 WSAD to move the camera and HOLD RMB + MOUSE to rotate it.
+HOLD SHIFT to move faster.
 
 - Chaging Resolution
 You can change the resolution from config.txt by modifying
