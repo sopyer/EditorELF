@@ -138,6 +138,44 @@ function edi_init_properties()
 
 	editor.gui.properties.edit.light = {}
 
+	editor.gui.properties.edit.light.type_lab = edi_create_label(editor.gui.properties.handle, "type_lab", 4, 49, "Type", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.color_lab = edi_create_label(editor.gui.properties.handle, "color_lab", 4, 115, "Color", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.distance_lab = edi_create_label(editor.gui.properties.handle, "distance_lab", 4, 137, "Distance", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.fade_speed_lab = edi_create_label(editor.gui.properties.handle, "fade_speed_lab", 4, 159, "Fade Speed", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.spot_cone_lab = edi_create_label(editor.gui.properties.handle, "spot_cone_lab", 4, 181, "Spot Cone", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.shadows_lab = edi_create_label(editor.gui.properties.handle, "shadows_lab", 4, 203, "Shadows", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.light_shafts_lab = edi_create_label(editor.gui.properties.handle, "light_shafts_lab", 4, 225, "------- Light Shafts -------", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.ls_enabled_lab = edi_create_label(editor.gui.properties.handle, "ls_enabled_lab", 4, 247, "Enabled", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.size_lab = edi_create_label(editor.gui.properties.handle, "size_lab", 4, 269, "Size", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.intensity_lab = edi_create_label(editor.gui.properties.handle, "intensity_lab", 4, 291, "Intensity", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.fadeoff_lab = edi_create_label(editor.gui.properties.handle, "fadeoff_lab", 4, 313, "Fadeoff", editor.gui.fonts.normal)
+
+	editor.gui.properties.edit.light.type_txl = elf.CreateTextList("type_list")
+	elf.SetTextListFont(editor.gui.properties.edit.light.type_txl, editor.gui.fonts.normal)
+	elf.SetTextListSize(editor.gui.properties.edit.light.type_txl, 3, 202)
+	elf.SetGuiObjectPosition(editor.gui.properties.edit.light.type_txl, 50, 48)
+	elf.AddTextListItem(editor.gui.properties.edit.light.type_txl, " Point")
+	elf.AddTextListItem(editor.gui.properties.edit.light.type_txl, " Sun")
+	elf.AddTextListItem(editor.gui.properties.edit.light.type_txl, " Spot")
+	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.light.type_txl)
+
+	editor.gui.properties.edit.light.color_r_txf = edi_create_text_field(editor.gui.properties.handle, "color_r_txf", 99, 114, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.light.color_g_txf = edi_create_text_field(editor.gui.properties.handle, "color_g_txf", 151, 114, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.light.color_b_txf = edi_create_text_field(editor.gui.properties.handle, "color_b_txf", 203, 114, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.light.distance_txf = edi_create_text_field(editor.gui.properties.handle, "distance_txf", 99, 136, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.light.fade_speed_txf = edi_create_text_field(editor.gui.properties.handle, "fade_speed_txf", 99, 158, "images/text_field64", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.light.inner_cone_txf = edi_create_text_field(editor.gui.properties.handle, "inner_cone_txf", 99, 180, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.light.outer_cone_txf = edi_create_text_field(editor.gui.properties.handle, "outer_cone_txf", 151, 180, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.light.shadows_cb = edi_create_check_box(editor.gui.properties.handle, "shadows_cb", 99, 202, "images/check_box", false)
+
+	editor.gui.properties.edit.light.ls_enabled_cb = edi_create_check_box(editor.gui.properties.handle, "ls_enabled_cb", 99, 246, "images/check_box", false)
+	editor.gui.properties.edit.light.size_txf = edi_create_text_field(editor.gui.properties.handle, "size_txf", 99, 268, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.light.intensity_txf = edi_create_text_field(editor.gui.properties.handle, "intensity_txf", 99, 290, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.light.fade_off_txf = edi_create_text_field(editor.gui.properties.handle, "fade_off_txf", 99, 312, "images/text_field64", editor.gui.fonts.normal, "0")
+
 	-- setup the post processing tab
 
 	editor.gui.properties.pp = {}
@@ -176,9 +214,10 @@ function edi_init_properties()
 
 	-- hide other tabs and show
 
+	edi_hide_edit_tab(EDI_EDIT_LIGHT)
 	edi_switch_edit_tab(EDI_EDIT_ACTOR)
-	edi_hide_properties_tab(EDI_PROPERTIES_EDIT)
 
+	edi_hide_properties_tab(EDI_PROPERTIES_EDIT)
 	edi_hide_properties_tab(EDI_PROPERTIES_PP)
 	edi_switch_properties_tab(EDI_PROPERTIES_MENU)
 end
@@ -258,7 +297,7 @@ function edi_show_properties_tab(tab)
 	elseif tab == EDI_PROPERTIES_EDIT then
 		elf.SetCheckBoxState(editor.gui.properties.edit_cb, true)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.act_cb, true)
-		edi_show_edit_tab(editor.gui.properties.edit.current_tab)
+		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	elseif tab == EDI_PROPERTIES_PP then
 		elf.SetCheckBoxState(editor.gui.properties.pp_cb, true)
 		for k, v in pairs(editor.gui.properties.pp) do elf.SetGuiObjectVisible(v, true) end
@@ -289,8 +328,10 @@ function edi_update_edit_selection()
 	end
 
 	if editor.gui.properties.current_tab == EDI_PROPERTIES_EDIT then
-		edi_show_edit_tab(editor.gui.properties.edit.current_tab)
+		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	end
+
+	-- update actor properties
 
 	elf.SetTextFieldText(editor.gui.properties.edit.actor.name_txf, elf.GetActorName(editor.scene.selection))
 	local pos = elf.GetActorPosition(editor.scene.selection)
@@ -743,6 +784,10 @@ function edi_update_edit()
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == elf.STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == elf.STATE_CHANGED then
+		edi_switch_edit_tab(EDI_EDIT_LIGHT)
 	end
 
 	if editor.gui.properties.edit.current_tab == EDI_EDIT_ACTOR then edi_update_actor() end
