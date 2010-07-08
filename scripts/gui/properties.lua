@@ -411,6 +411,37 @@ function edi_update_edit_selection()
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_x_txf, 0)
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_y_txf, 0)
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_z_txf, 0)
+
+	if elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
+		local color = elf.GetLightColor(editor.scene.selection)
+		elf.SetTextFieldText(editor.gui.properties.edit.light.color_r_txf, color.r)
+		elf.SetTextFieldText(editor.gui.properties.edit.light.color_g_txf, color.g)
+		elf.SetTextFieldText(editor.gui.properties.edit.light.color_b_txf, color.b)
+
+		elf.SetTextFieldText(editor.gui.properties.edit.light.distance_txf, elf.GetLightDistance(editor.scene.selection))
+		elf.SetTextFieldText(editor.gui.properties.edit.light.fade_speed_txf, elf.GetLightFadeSpeed(editor.scene.selection))
+
+		elf.SetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf, elf.GetLightCone(editor.scene.selection).x)
+		elf.SetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf, elf.GetLightCone(editor.scene.selection).y)
+
+		elf.SetCheckBoxState(editor.gui.properties.edit.light.shadows_cb, elf.GetLightShadowCaster(editor.scene.selection))
+
+		elf.SetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb, elf.IsLightShaft(editor.scene.selection))
+		elf.SetTextFieldText(editor.gui.properties.edit.light.size_txf, elf.GetLightShaftSize(editor.scene.selection))
+		elf.SetTextFieldText(editor.gui.properties.edit.light.intensity_txf, elf.GetLightShaftIntensity(editor.scene.selection))
+		elf.SetTextFieldText(editor.gui.properties.edit.light.fade_off_txf, elf.GetLightShaftFadeOff(editor.scene.selection))
+
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_r_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_g_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_b_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.distance_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_speed_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.inner_cone_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.outer_cone_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.size_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.intensity_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_off_txf, 0)
+	end
 end
 
 function edi_update_properties_selection()
