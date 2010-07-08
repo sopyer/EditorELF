@@ -144,7 +144,7 @@ function edi_init_properties()
 	editor.gui.properties.edit.light.fade_speed_lab = edi_create_label(editor.gui.properties.handle, "fade_speed_lab", 4, 159, "Fade Speed", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.spot_cone_lab = edi_create_label(editor.gui.properties.handle, "spot_cone_lab", 4, 181, "Spot Cone", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.shadows_lab = edi_create_label(editor.gui.properties.handle, "shadows_lab", 4, 203, "Shadows", editor.gui.fonts.normal)
-	editor.gui.properties.edit.light.light_shafts_lab = edi_create_label(editor.gui.properties.handle, "light_shafts_lab", 4, 225, "------- Light Shafts -------", editor.gui.fonts.normal)
+	editor.gui.properties.edit.light.light_shafts_lab = edi_create_label(editor.gui.properties.handle, "light_shafts_lab", 4, 225, "----------- Shaft ----------", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.ls_enabled_lab = edi_create_label(editor.gui.properties.handle, "ls_enabled_lab", 4, 247, "Enabled", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.size_lab = edi_create_label(editor.gui.properties.handle, "size_lab", 4, 269, "Size", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.intensity_lab = edi_create_label(editor.gui.properties.handle, "intensity_lab", 4, 291, "Intensity", editor.gui.fonts.normal)
@@ -414,6 +414,8 @@ function edi_update_edit_selection()
 
 	if elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
 		local color = elf.GetLightColor(editor.scene.selection)
+		elf.SetTextListSelection(editor.gui.properties.edit.light.type_txl, elf.GetLightType(editor.scene.selection)-1)
+
 		elf.SetTextFieldText(editor.gui.properties.edit.light.color_r_txf, color.r)
 		elf.SetTextFieldText(editor.gui.properties.edit.light.color_g_txf, color.g)
 		elf.SetTextFieldText(editor.gui.properties.edit.light.color_b_txf, color.b)
@@ -808,6 +810,133 @@ function edi_update_actor()
 			elf.SetTextListOffset(editor.gui.properties.edit.actor.shape, diff*(1.0-elf.GetSliderValue(editor.gui.properties.edit.actor.shape_sb)))
 		end
 	end
+
+	if elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
+		if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_r_txf) == elf.LOSE_FOCUS then
+			edi_check_text_field_float(editor.gui.properties.edit.light.color_r_txf, 0.0, nil)
+			elf.SetLightColor(editor.scene.selection,
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+		end
+
+		if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_g_txf) == elf.LOSE_FOCUS then
+			edi_check_text_field_float(editor.gui.properties.edit.light.color_g_txf, 0.0, nil)
+			elf.SetLightColor(editor.scene.selection,
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+		end
+
+		if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_b_txf) == elf.LOSE_FOCUS then
+			edi_check_text_field_float(editor.gui.properties.edit.light.color_b_txf, 0.0, nil)
+			elf.SetLightColor(editor.scene.selection,
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+		end
+	end
+end
+
+function edi_update_light()
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.type_txl) == elf.SELECTION_CHANGED then
+		elf.SetLightType(editor.scene.selection, elf.GetTextListSelectionIndex(editor.gui.properties.edit.light.type_txl)+1)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_r_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.color_r_txf, 0.0, nil)
+		elf.SetLightColor(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_g_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.color_g_txf, 0.0, nil)
+		elf.SetLightColor(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_b_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.color_b_txf, 0.0, nil)
+		elf.SetLightColor(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.distance_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.distance_txf, 0.0, nil)
+		elf.SetLightDistance(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.distance_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.fade_speed_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.fade_speed_txf, 0.0, nil)
+		elf.SetLightFadeSpeed(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_speed_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.inner_cone_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.inner_cone_txf, 0.0, nil)
+		elf.SetLightCone(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.outer_cone_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.outer_cone_txf, 0.0, nil)
+		elf.SetLightCone(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.shadows_cb) == elf.STATE_CHANGED then
+		elf.SetLightShadowCaster(editor.scene.selection, elf.GetCheckBoxState(editor.gui.properties.edit.light.shadows_cb))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.ls_enabled_cb) == elf.STATE_CHANGED then
+		if elf.GetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb) then
+			elf.SetLightShaft(editor.scene.selection,
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		else
+			elf.DisableLightShaft(editor.scene.selection)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.size_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.size_txf, 0.0, nil)
+		local enabled = elf.IsLightShaft(editor.scene.selection)
+		elf.SetLightShaft(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		if enabled == false then elf.DisableLightShaft(editor.scene.selection) end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.intensity_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.intensity_txf, 0.0, nil)
+		local enabled = elf.IsLightShaft(editor.scene.selection)
+		elf.SetLightShaft(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		if enabled == false then elf.DisableLightShaft(editor.scene.selection) end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.fade_off_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.light.fade_off_txf, 0.0, nil)
+		local enabled = elf.IsLightShaft(editor.scene.selection)
+		elf.SetLightShaft(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		if enabled == false then elf.DisableLightShaft(editor.scene.selection) end
+	end
 end
 
 function edi_update_edit()
@@ -821,7 +950,8 @@ function edi_update_edit()
 		edi_switch_edit_tab(EDI_EDIT_LIGHT)
 	end
 
-	if editor.gui.properties.edit.current_tab == EDI_EDIT_ACTOR then edi_update_actor() end
+	if editor.gui.properties.edit.current_tab == EDI_EDIT_ACTOR then edi_update_actor()
+	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_LIGHT then edi_update_light() end
 end
 
 function edi_update_pp()
