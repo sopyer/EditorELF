@@ -4,7 +4,8 @@ EDI_PROPERTIES_EDIT = 2
 EDI_PROPERTIES_PP = 3
 
 EDI_EDIT_ACTOR = 1
-EDI_EDIT_LIGHT = 2
+EDI_EDIT_CAMERA = 2
+EDI_EDIT_LIGHT = 3
 
 function edi_init_properties()
 	editor.gui.properties = {}
@@ -44,6 +45,7 @@ function edi_init_properties()
 
 	-- setup the edit tab check boxes
 	editor.gui.properties.edit.act_cb = edi_create_check_box(editor.gui.properties.handle, "act_cb", 4, 26, "images/properties/edit/act", true)
+	editor.gui.properties.edit.cam_cb = edi_create_check_box(editor.gui.properties.handle, "cam_cb", 45, 26, "images/properties/edit/cam", false)
 	editor.gui.properties.edit.lig_cb = edi_create_check_box(editor.gui.properties.handle, "lig_cb", 45, 26, "images/properties/edit/lig", false)
 
 	elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
@@ -134,7 +136,7 @@ function edi_init_properties()
 	elf.SetGuiObjectPosition(editor.gui.properties.edit.actor.shape_sb, 234, 424)
 	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape_sb)
 
-	-- setup the actor properties
+	-- setup the light properties
 
 	editor.gui.properties.edit.light = {}
 
@@ -176,6 +178,19 @@ function edi_init_properties()
 	editor.gui.properties.edit.light.intensity_txf = edi_create_text_field(editor.gui.properties.handle, "intensity_txf", 99, 290, "images/text_field64", editor.gui.fonts.normal, "0")
 	editor.gui.properties.edit.light.fade_off_txf = edi_create_text_field(editor.gui.properties.handle, "fade_off_txf", 99, 312, "images/text_field64", editor.gui.fonts.normal, "0")
 
+	-- setup the camera properties
+
+	editor.gui.properties.edit.camera = {}
+
+	editor.gui.properties.edit.camera.fov_lab = edi_create_label(editor.gui.properties.handle, "fov_lab", 4, 49, "Fov", editor.gui.fonts.normal)
+	editor.gui.properties.edit.camera.clip_lab = edi_create_label(editor.gui.properties.handle, "clip_lab", 4, 71, "Clip", editor.gui.fonts.normal)
+
+	editor.gui.properties.edit.camera.fov_txf = edi_create_text_field(editor.gui.properties.handle, "fov_txf", 99, 48, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.camera.clip_near_txf = edi_create_text_field(editor.gui.properties.handle, "clip_near_txf", 99, 70, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.camera.clip_far_txf = edi_create_text_field(editor.gui.properties.handle, "clip_far_txf", 151, 70, "images/text_field48", editor.gui.fonts.normal, "0")
+
+	editor.gui.properties.edit.camera.copy_but = edi_create_button(editor.gui.properties.handle, "copy_but", 4, 92, "images/properties/edit/copy_specs_to_view")
+
 	-- setup the post processing tab
 
 	editor.gui.properties.pp = {}
@@ -214,6 +229,7 @@ function edi_init_properties()
 
 	-- hide other tabs and show
 
+	edi_hide_edit_tab(EDI_EDIT_CAMERA)
 	edi_hide_edit_tab(EDI_EDIT_LIGHT)
 	edi_switch_edit_tab(EDI_EDIT_ACTOR)
 
@@ -227,6 +243,10 @@ function edi_hide_edit_tab(tab)
 		elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.actor) do elf.SetGuiObjectVisible(v, false) end
 	end
+	if tab == EDI_EDIT_CAMERA then
+		elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.camera) do elf.SetGuiObjectVisible(v, false) end
+	end
 	if tab == EDI_EDIT_LIGHT then
 		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, false) end
@@ -235,6 +255,7 @@ end
 
 function edi_show_edit_tab(tab)
 	elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
+	elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
 	elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
 
 	if tab == EDI_EDIT_ACTOR then
@@ -247,18 +268,28 @@ function edi_show_edit_tab(tab)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, true) end
 		end
+	elseif tab == EDI_EDIT_CAMERA then
+		elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, true)
+		if editor.scene.selection ~= nil then
+			for k, v in pairs(editor.gui.properties.edit.camera) do elf.SetGuiObjectVisible(v, true) end
+		end
 	end
 
 	if editor.scene.selection ~= nil then
 		if elf.GetObjectType(editor.scene.selection) == elf.CAMERA then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, true)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, true)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		end
 	end
@@ -278,6 +309,7 @@ function edi_hide_properties_tab(tab)
 	elseif tab == EDI_PROPERTIES_EDIT then
 		elf.SetCheckBoxState(editor.gui.properties.edit_cb, false)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.act_cb, false)
+		elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 		edi_hide_edit_tab(editor.gui.properties.edit.current_tab)
 	elseif tab == EDI_PROPERTIES_PP then
@@ -412,7 +444,16 @@ function edi_update_edit_selection()
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_y_txf, 0)
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_z_txf, 0)
 
-	if elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
+	if elf.GetObjectType(editor.scene.selection) == elf.CAMERA then
+		elf.SetTextFieldText(editor.gui.properties.edit.camera.fov_txf, elf.GetCameraFov(editor.scene.selection))
+		local clip = elf.GetCameraClip(editor.scene.selection)
+		elf.SetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf, clip.x)
+		elf.SetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf, clip.y)
+
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.camera.fov_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.camera.clip_near_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.camera.clip_far_txf, 0)
+	elseif elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
 		local color = elf.GetLightColor(editor.scene.selection)
 		elf.SetTextListSelection(editor.gui.properties.edit.light.type_txl, elf.GetLightType(editor.scene.selection)-1)
 
@@ -838,6 +879,42 @@ function edi_update_actor()
 	end
 end
 
+function edi_update_camera()
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.fov_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.camera.fov_txf, 0.0, 179.0)
+		elf.SetCameraPerspective(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
+			-1.0, tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.clip_near_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.camera.clip_near_txf, 0.0, nil)
+		elf.SetCameraPerspective(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
+			-1.0, tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.clip_far_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.camera.clip_far_txf, 0.0, nil)
+		elf.SetCameraPerspective(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
+			-1.0, tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.copy_but) == elf.CLICKED then
+		local pos = elf.GetActorPosition(editor.scene.selection)
+		local rot = elf.GetActorRotation(editor.scene.selection)
+		local clip = elf.GetCameraClip(editor.scene.selection)
+		elf.SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
+		elf.SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
+		elf.SetCameraPerspective(editor.scene.camera.handle,
+			elf.GetCameraFov(editor.scene.selection), -1.0, clip.x, clip.y)
+	end
+end
+
 function edi_update_light()
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.type_txl) == elf.SELECTION_CHANGED then
 		elf.SetLightType(editor.scene.selection, elf.GetTextListSelectionIndex(editor.gui.properties.edit.light.type_txl)+1)
@@ -946,11 +1023,16 @@ function edi_update_edit()
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	end
 
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.cam_cb) == elf.STATE_CHANGED then
+		edi_switch_edit_tab(EDI_EDIT_CAMERA)
+	end
+
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == elf.STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_LIGHT)
 	end
 
 	if editor.gui.properties.edit.current_tab == EDI_EDIT_ACTOR then edi_update_actor()
+	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_CAMERA then edi_update_camera()
 	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_LIGHT then edi_update_light() end
 end
 

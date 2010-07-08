@@ -111,7 +111,7 @@ function edi_init_gui()
 	editor.gui.version = elf.CreateLabel("EditorELF_version")
 
 	elf.SetLabelFont(editor.gui.version, editor.gui.fonts.normal)
-	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2")
+	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: 0")
 	elf.SetGuiObjectPosition(editor.gui.version, 5,
 		elf.GetWindowHeight()-elf.GetGuiObjectSize(editor.gui.version).y-2)
 
@@ -138,6 +138,8 @@ function edi_update_gui_selection()
 end
 
 function edi_update_gui()
+	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: " .. elf.GetFps())
+
 	if editor.gui.current_menu == EDI_MESSAGE_BOX then edi_update_message_box()
 	elseif editor.gui.current_menu == EDI_FILE_DIALOG then edi_update_file_dialog()
 	elseif editor.gui.current_menu == EDI_PROPERTIES then edi_update_properties() end
