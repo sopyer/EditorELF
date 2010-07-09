@@ -376,7 +376,7 @@ function edi_update_edit_selection()
 	elf.SetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf, tostring(rot.z))
 	local scr = elf.GetActorScript(editor.scene.selection)
 	if elf.IsObject(scr) == true then
-		elf.SetTextFieldText(editor.properties.edit.actor.script_txf, elf.GetScriptName(scsr))
+		elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, elf.GetScriptName(scr))
 	end
 
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.name_txf, 0)
@@ -601,9 +601,40 @@ function edi_update_menu()
 	end
 end
 
+function edi_properties_edit_actor_open_script(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	if string.find(path, ".lua") == nil then return end
+
+	local scr = elf.CreateScriptFromFile(path)
+	if elf.IsObject(scr) == true then
+		elf.SetActorScript(editor.scene.selection, scr)
+		edi_update_edit_selection()
+		edi_open_properties()
+	end
+end
+
 function edi_update_actor()
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.name_txf) == elf.LOSE_FOCUS then
 		elf.SetActorName(editor.scene.selection, elf.GetTextFieldText(editor.gui.properties.edit.actor.name_txf))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.script_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Script (.lua)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_actor_open_script)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.script_txf) == elf.LOSE_FOCUS then
+		if string.len(elf.GetTextFieldText(editor.gui.properties.edit.actor.script_txf)) < 1 then
+			elf.ClearActorScript(editor.scene.selection)
+		else
+			local scr = elf.GetActorScript(editor.scene.selection)
+			if elf.IsObject(scr) == true then
+				elf.SetScriptName(scr, elf.GetTextFieldText(editor.gui.properties.edit.actor.script_txf))
+			end
+		end
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_x_txf) == elf.LOSE_FOCUS then
