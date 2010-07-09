@@ -22,7 +22,7 @@ The DELETE button deletes an object.
 CTRL + D duplicates the selected object if duplication for it
 is supported.
 
-- Chaging Resolution -
+- Changing Resolution -
 You can change the resolution from config.txt by modifying
 the window_size field.
 
