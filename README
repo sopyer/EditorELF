@@ -15,7 +15,14 @@ INSTRUCTIONS
 WSAD to move the camera and HOLD RMB + MOUSE to rotate it.
 HOLD SHIFT to move faster.
 
-- Chaging Resolution
+- Deleting Objects -
+The DELETE button deletes an object.
+
+- Duplicating Objects -
+CTRL + D duplicates the selected object if duplication for it
+is supported.
+
+- Chaging Resolution -
 You can change the resolution from config.txt by modifying
 the window_size field.
 

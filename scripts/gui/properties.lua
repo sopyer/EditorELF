@@ -595,6 +595,9 @@ function edi_update_menu()
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_light) == elf.CLICKED then
 		local lig = elf.CreateLight("Light")
 		elf.AddLightToScene(editor.scene.handle, lig)
+
+		edi_select_actor(lig)
+		elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
 	end
 end
 
