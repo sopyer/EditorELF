@@ -6,6 +6,9 @@ EDI_PROPERTIES_PP = 3
 EDI_EDIT_ACTOR = 1
 EDI_EDIT_CAMERA = 2
 EDI_EDIT_LIGHT = 3
+EDI_EDIT_ENTITY = 4
+EDI_EDIT_PARTICLES = 5
+EDI_EDIT_SPRITE = 6
 
 function edi_init_properties()
 	editor.gui.properties = {}
@@ -47,6 +50,9 @@ function edi_init_properties()
 	editor.gui.properties.edit.act_cb = edi_create_check_box(editor.gui.properties.handle, "act_cb", 4, 26, "images/properties/edit/act", true)
 	editor.gui.properties.edit.cam_cb = edi_create_check_box(editor.gui.properties.handle, "cam_cb", 45, 26, "images/properties/edit/cam", false)
 	editor.gui.properties.edit.lig_cb = edi_create_check_box(editor.gui.properties.handle, "lig_cb", 45, 26, "images/properties/edit/lig", false)
+	editor.gui.properties.edit.ent_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/ent", false)
+	editor.gui.properties.edit.par_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/par", false)
+	editor.gui.properties.edit.spr_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/spr", false)
 
 	elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 
@@ -191,6 +197,18 @@ function edi_init_properties()
 
 	editor.gui.properties.edit.camera.copy_but = edi_create_button(editor.gui.properties.handle, "copy_but", 4, 92, "images/properties/edit/copy_specs_to_view")
 
+	-- setup the entity properties
+
+	editor.gui.properties.edit.entity = {}
+
+	-- setup the particles properties
+
+	editor.gui.properties.edit.particles = {}
+
+	-- setup the sprite properties
+
+	editor.gui.properties.edit.sprite = {}
+
 	-- setup the post processing tab
 
 	editor.gui.properties.pp = {}
@@ -251,27 +269,57 @@ function edi_hide_edit_tab(tab)
 		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, false) end
 	end
+	if tab == EDI_EDIT_ENTITY then
+		elf.SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.entity) do elf.SetGuiObjectVisible(v, false) end
+	end
+	if tab == EDI_EDIT_PARTICLES then
+		elf.SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.particles) do elf.SetGuiObjectVisible(v, false) end
+	end
+	if tab == EDI_EDIT_SPRITE then
+		elf.SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.sprite) do elf.SetGuiObjectVisible(v, false) end
+	end
 end
 
 function edi_show_edit_tab(tab)
 	elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
 	elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
 	elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
+	elf.SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
+	elf.SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
+	elf.SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
 
 	if tab == EDI_EDIT_ACTOR then
 		elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.actor) do elf.SetGuiObjectVisible(v, true) end
 		end
+	elseif tab == EDI_EDIT_CAMERA then
+		elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, true)
+		if editor.scene.selection ~= nil then
+			for k, v in pairs(editor.gui.properties.edit.camera) do elf.SetGuiObjectVisible(v, true) end
+		end
 	elseif tab == EDI_EDIT_LIGHT then
 		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, true) end
 		end
-	elseif tab == EDI_EDIT_CAMERA then
-		elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, true)
+	elseif tab == EDI_EDIT_ENTITY then
+		elf.SetCheckBoxState(editor.gui.properties.edit.ent_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.camera) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.entity) do elf.SetGuiObjectVisible(v, true) end
+		end
+	elseif tab == EDI_EDIT_PARTICLES then
+		elf.SetCheckBoxState(editor.gui.properties.edit.par_cb, true)
+		if editor.scene.selection ~= nil then
+			for k, v in pairs(editor.gui.properties.edit.particles) do elf.SetGuiObjectVisible(v, true) end
+		end
+	elseif tab == EDI_EDIT_SPRITE then
+		elf.SetCheckBoxState(editor.gui.properties.edit.spr_cb, true)
+		if editor.scene.selection ~= nil then
+			for k, v in pairs(editor.gui.properties.edit.sprite) do elf.SetGuiObjectVisible(v, true) end
 		end
 	end
 
@@ -279,18 +327,33 @@ function edi_show_edit_tab(tab)
 		if elf.GetObjectType(editor.scene.selection) == elf.CAMERA then
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, true)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
-		elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, true)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
+		elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, true)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, true)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
 		elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, true)
 		end
 	end
 end
@@ -311,6 +374,9 @@ function edi_hide_properties_tab(tab)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.act_cb, false)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 		elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+		elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+		elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+		elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
 		edi_hide_edit_tab(editor.gui.properties.edit.current_tab)
 	elseif tab == EDI_PROPERTIES_PP then
 		elf.SetCheckBoxState(editor.gui.properties.pp_cb, false)
@@ -484,6 +550,9 @@ function edi_update_edit_selection()
 		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.size_txf, 0)
 		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.intensity_txf, 0)
 		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_off_txf, 0)
+	elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
+	elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
+	elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
 	end
 end
 
@@ -885,32 +954,6 @@ function edi_update_actor()
 			elf.SetTextListOffset(editor.gui.properties.edit.actor.shape, diff*(1.0-elf.GetSliderValue(editor.gui.properties.edit.actor.shape_sb)))
 		end
 	end
-
-	if elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
-		if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_r_txf) == elf.LOSE_FOCUS then
-			edi_check_text_field_float(editor.gui.properties.edit.light.color_r_txf, 0.0, nil)
-			elf.SetLightColor(editor.scene.selection,
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
-		end
-
-		if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_g_txf) == elf.LOSE_FOCUS then
-			edi_check_text_field_float(editor.gui.properties.edit.light.color_g_txf, 0.0, nil)
-			elf.SetLightColor(editor.scene.selection,
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
-		end
-
-		if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_b_txf) == elf.LOSE_FOCUS then
-			edi_check_text_field_float(editor.gui.properties.edit.light.color_b_txf, 0.0, nil)
-			elf.SetLightColor(editor.scene.selection,
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
-		end
-	end
 end
 
 function edi_update_camera()
@@ -1050,24 +1093,43 @@ function edi_update_light()
 	end
 end
 
+function edi_update_entity()
+end
+
+function edi_update_particles()
+end
+
+function edi_update_sprite()
+end
+
 function edi_update_edit()
 	if editor.scene.selection == nil then return end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == elf.STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	end
-
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.cam_cb) == elf.STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_CAMERA)
 	end
-
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == elf.STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_LIGHT)
+	end
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.ent_cb) == elf.STATE_CHANGED then
+		edi_switch_edit_tab(EDI_EDIT_ENTITY)
+	end
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.par_cb) == elf.STATE_CHANGED then
+		edi_switch_edit_tab(EDI_EDIT_PARTICLES)
+	end
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.spr_cb) == elf.STATE_CHANGED then
+		edi_switch_edit_tab(EDI_EDIT_SPRITE)
 	end
 
 	if editor.gui.properties.edit.current_tab == EDI_EDIT_ACTOR then edi_update_actor()
 	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_CAMERA then edi_update_camera()
-	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_LIGHT then edi_update_light() end
+	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_LIGHT then edi_update_light()
+	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_ENTITY then edi_update_entity()
+	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_PARTICLES then edi_update_particles()
+	elseif editor.gui.properties.edit.current_tab == EDI_EDIT_SPRITE then edi_update_sprite() end
 end
 
 function edi_update_pp()
