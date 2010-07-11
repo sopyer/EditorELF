@@ -130,7 +130,7 @@ function edi_init_gui()
 	editor.gui.version = elf.CreateLabel("EditorELF_version")
 
 	elf.SetLabelFont(editor.gui.version, editor.gui.fonts.normal)
-	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: 0")
+	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: 0 Triangles : 0")
 	elf.SetGuiObjectPosition(editor.gui.version, 5,
 		elf.GetWindowHeight()-elf.GetGuiObjectSize(editor.gui.version).y-2)
 
