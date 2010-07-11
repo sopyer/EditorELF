@@ -655,7 +655,7 @@ function edi_update_edit_selection()
 
 		local ent = elf.GetParticlesEntity(editor.scene.selection)
 		if elf.IsObject(ent) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, elf.GetEntitytName(ent))
+			elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, elf.GetActorName(ent))
 		else
 			elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "")
 		end
@@ -1299,6 +1299,116 @@ function edi_update_entity()
 end
 
 function edi_update_particles()
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.max_count_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_int(editor.gui.properties.edit.particles.max_count_txf, 0, nil)
+		elf.SetParticlesMaxCount(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.max_count_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.particles.texture_txf)
+		if string.len(name) > 0 then
+			local tex = elf.GetParticlesTexture(editor.scene.selection)
+			if elf.IsObject(tex) == true then
+				elf.SetTextureName(tex, name)
+			else
+				local textures = elf.GetSceneTextures(editor.scene.handle)
+				local tex = elf.BeginList(textures)
+				while elf.IsObject(tex) == true do
+					if elf.GetTextureName(tex) == name then
+						elf.SetParticlesTexture(editor.scene.selection, tex)
+						break
+					end
+					tex = elf.NextInList(textures)
+				end
+				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, "") end
+			end
+		else
+			elf.ClearParticlesTexture(editor.scene.selection)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.model_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.particles.model_txf)
+		if string.len(name) > 0 then
+			local mdl = elf.GetParticlesModel(editor.scene.selection)
+			if elf.IsObject(mdl) == true then
+				elf.SetModelName(mdl, name)
+			else
+				local models = elf.GetSceneModels(editor.scene.handle)
+				local mdl = elf.BeginList(models)
+				while elf.IsObject(mdl) == true do
+					if elf.GetModelName(mdl) == name then
+						elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "")
+						elf.SetParticlesModel(editor.scene.selection, mdl)
+						break
+					end
+					mdl = elf.NextInList(models)
+				end
+				if elf.IsObject(mdl) == false then elf.SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "") end
+			end
+		else
+			elf.ClearParticlesModel(editor.scene.selection)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.entity_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.particles.entity_txf)
+		if string.len(name) > 0 then
+			local ent = elf.GetParticlesEntity(editor.scene.selection)
+			if elf.IsObject(ent) == true then
+				elf.SetActorName(ent, name)
+			else
+				local ent = nil
+				for i=0, elf.GetSceneEntityCount(editor.scene.handle)-1 do
+					ent = elf.GetEntityByIndex(editor.scene.handle, i)
+					if elf.GetActorName(ent) == name then
+						elf.SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "")
+						elf.SetParticlesEntity(editor.scene.selection, ent)
+						break
+					end
+				end
+				if elf.IsObject(ent) == false then elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "") end
+			end
+		else
+			elf.ClearParticlesEntity(editor.scene.selection)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_x_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.particles.gravity_x_txf, nil, nil)
+		elf.SetParticlesGravity(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_y_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.particles.gravity_z_txf, nil, nil)
+		elf.SetParticlesGravity(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_z_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.particles.gravity_z_txf, nil, nil)
+		elf.SetParticlesGravity(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.spawn_delay_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.particles.spawn_delay_txf, 0.00001, nil)
+		elf.SetParticlesSpawnDelay(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.spawn_delay_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.spawn_cb) == elf.STATE_CHANGED then
+		elf.SetParticlesSpawn(editor.scene.selection,
+			elf.GetCheckBoxState(editor.gui.properties.edit.particles.spawn_cb))
+	end
 end
 
 function edi_update_sprite()

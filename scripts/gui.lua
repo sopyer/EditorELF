@@ -80,6 +80,25 @@ function edi_check_text_field_float(txf, min, max)
 	elf.SetTextFieldCursorPosition(txf, 0)
 end
 
+function edi_check_text_field_int(txf, min, max)
+	local val = elf.GetTextFieldText(txf)
+
+	if val == nil then val = 0 end
+	val = tonumber(val)
+	if val == nil then
+		val = 0
+	else
+		val = edi_round(val)
+		if min ~= nil then min = edi_round(min) end
+		if max ~= nil then max = edi_round(max) end
+		if min ~= nil and val < min then val = min end
+		if max ~= nil and val > max then val = max end
+	end
+
+	elf.SetTextFieldText(txf, tostring(val))
+	elf.SetTextFieldCursorPosition(txf, 0)
+end
+
 EDI_NONE = 0
 EDI_MESSAGE_BOX = 1
 EDI_FILE_DIALOG = 2
