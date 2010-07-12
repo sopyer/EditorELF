@@ -90,7 +90,7 @@ function edi_init_properties()
 	editor.gui.properties.edit.actor.rot_z_txf = edi_create_text_field(editor.gui.properties.handle, "rot_z_txf", 203, 92, "images/text_field48", editor.gui.fonts.normal, "0")
 
 	editor.gui.properties.edit.actor.script_txf = edi_create_text_field(editor.gui.properties.handle, "script_txf", 99, 114, "images/text_field128", editor.gui.fonts.normal, "")
-	editor.gui.properties.edit.actor.script_open = edi_create_button(editor.gui.properties.handle, "open", 231, 114, "images/mini_open")
+	editor.gui.properties.edit.actor.script_open = edi_create_button(editor.gui.properties.handle, "script_open", 231, 114, "images/mini_open")
 
 	editor.gui.properties.edit.actor.physics_enb_cb = edi_create_check_box(editor.gui.properties.handle, "physics_enb_cb", 99, 158, "images/check_box", false)
 
@@ -232,7 +232,10 @@ function edi_init_properties()
 	editor.gui.properties.edit.particles.color_max_lab = edi_create_label(editor.gui.properties.handle, "color_max_lab", 4, 489, "Color Max", editor.gui.fonts.normal)
 
 	editor.gui.properties.edit.particles.max_count_txf = edi_create_text_field(editor.gui.properties.handle, "max_count_txf", 99, 48, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.trs_cb = edi_create_check_box(editor.gui.properties.handle, "trs_cb", 99, 70, "images/properties/edit/trs", false)
+	editor.gui.properties.edit.particles.add_cb = edi_create_check_box(editor.gui.properties.handle, "add_cb", 140, 70, "images/properties/edit/add", false)
 	editor.gui.properties.edit.particles.texture_txf = edi_create_text_field(editor.gui.properties.handle, "texture_txf", 99, 92, "images/text_field128", editor.gui.fonts.normal, "")
+	editor.gui.properties.edit.particles.texture_open = edi_create_button(editor.gui.properties.handle, "texture_open", 231, 92, "images/mini_open")
 	editor.gui.properties.edit.particles.model_txf = edi_create_text_field(editor.gui.properties.handle, "model_txf", 99, 114, "images/text_field128", editor.gui.fonts.normal, "")
 	editor.gui.properties.edit.particles.entity_txf = edi_create_text_field(editor.gui.properties.handle, "entity_txf", 99, 136, "images/text_field128", editor.gui.fonts.normal, "")
 
@@ -638,6 +641,14 @@ function edi_update_edit_selection()
 	elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
 	elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
 		elf.SetTextFieldText(editor.gui.properties.edit.particles.max_count_txf, elf.GetParticlesMaxCount(editor.scene.selection))
+
+		if elf.GetParticlesDrawMode(editor.scene.selection) == elf.TRANSPARENT then
+			elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
+			elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
+		elseif elf.GetParticlesDrawMode(editor.scene.selection) == elf.ADD then
+			elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
+			elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
+		end
 
 		local tex = elf.GetParticlesTexture(editor.scene.selection)
 		if elf.IsObject(tex) == true then
@@ -1298,11 +1309,29 @@ end
 function edi_update_entity()
 end
 
+function edi_properties_edit_particles_open_texture(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local tex = elf.CreateTextureFromFile(path)
+	if elf.IsObject(tex) == true then
+		elf.SetParticlesTexture(editor.scene.selection, tex)
+		edi_update_edit_selection()
+		edi_open_properties()
+	end
+end
+
 function edi_update_particles()
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.max_count_txf) == elf.LOSE_FOCUS then
 		edi_check_text_field_int(editor.gui.properties.edit.particles.max_count_txf, 0, nil)
 		elf.SetParticlesMaxCount(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.max_count_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Particles Texture...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_particles_open_texture)
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_txf) == elf.LOSE_FOCUS then
@@ -1326,6 +1355,18 @@ function edi_update_particles()
 		else
 			elf.ClearParticlesTexture(editor.scene.selection)
 		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.trs_cb) == elf.STATE_CHANGED then
+		elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
+		elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
+		elf.SetParticlesDrawMode(editor.scene.selection, elf.TRANSPARENT)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.add_cb) == elf.STATE_CHANGED then
+		elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
+		elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
+		elf.SetParticlesDrawMode(editor.scene.selection, elf.ADD)
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.model_txf) == elf.LOSE_FOCUS then
