@@ -280,7 +280,6 @@ function edi_init_properties()
 	editor.gui.properties.edit.entity.mat_spec_map_open = edi_create_button(editor.gui.properties.handle, "mat_diffuse_map_open", 231, 546, "images/mini_open")
 	editor.gui.properties.edit.entity.mat_light_map_open = edi_create_button(editor.gui.properties.handle, "mat_diffuse_map_open", 231, 568, "images/mini_open")
 
-
 	-- setup the particles properties
 
 	editor.gui.properties.edit.particles = {}
@@ -715,6 +714,36 @@ function edi_update_edit_selection()
 		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.intensity_txf, 0)
 		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_off_txf, 0)
 	elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
+		local mdl = elf.GetEntityModel(editor.scene.selection)
+		if elf.IsObject(mdl) == true then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.model_txf, elf.GetModelName(mdl))
+		else
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.model_txf, "")
+		end
+
+		local scale = elf.GetEntityScale(editor.scene.selection)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf, scale.x)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf, scale.y)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf, scale.z)
+
+		elf.RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
+		for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
+			local mat = elf.GetEntityMaterial(editor.scene.selection, i)
+			elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, elf.GetMaterialName(mat))
+		end
+
+		if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
+			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+		else
+			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
+		end
+
+		edi_update_edit_selection_material()
+
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.model_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_x_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_y_txf, 0)
+		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_z_txf, 0)
 	elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
 		elf.SetTextFieldText(editor.gui.properties.edit.particles.max_count_txf, elf.GetParticlesMaxCount(editor.scene.selection))
 
@@ -843,6 +872,93 @@ function edi_update_edit_selection()
 		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_a_txf, 0)
 	elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
 	end
+end
+
+function edi_update_edit_selection_material()
+	local index = elf.GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
+	if index < 0 then
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf, "")
+		elf.SetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb, false)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "")
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "")
+	else
+		local mat = elf.GetEntityMaterial(editor.scene.selection, index)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, elf.GetMaterialName(mat))
+		local col = elf.GetMaterialDiffuseColor(mat)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf, col.r)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf, col.g)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf, col.b)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf, col.a)
+		local col = elf.GetMaterialSpecularColor(mat)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf, col.r)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf, col.g)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf, col.b)
+		local col = elf.GetMaterialAmbientColor(mat)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf, col.r)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf, col.g)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf, col.b)
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf, elf.GetMaterialSpecularPower(mat))
+		elf.SetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb, elf.GetMaterialLighting(mat))
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf, elf.GetMaterialParallaxScale(mat))
+		elf.SetCheckBoxState(editor.gui.properties.edit.entity.mat_alpha_test_cb, elf.GetMaterialAlphaTest(mat))
+		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, elf.GetMaterialAlphaThreshold(mat))
+		local tex = elf.GetMaterialDiffuseMap(mat)
+		if elf.IsObject(tex) == true then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, elf.GetTextureName(tex))
+		end
+		tex = elf.GetMaterialNormalMap(mat)
+		if elf.IsObject(tex) == true then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, elf.GetTextureName(tex))
+		end
+		tex = elf.GetMaterialHeightMap(mat)
+		if elf.IsObject(tex) == true then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, elf.GetTextureName(tex))
+		end
+		tex = elf.GetMaterialSpecularMap(mat)
+		if elf.IsObject(tex) == true then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, elf.GetTextureName(tex))
+		end
+		tex = elf.GetMaterialLightMap(mat)
+		if elf.IsObject(tex) == true then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, elf.GetTextureName(tex))
+		end
+	end
+
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_name_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_r_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_g_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_b_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_a_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_r_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_g_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_b_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_r_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_g_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_b_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_spec_power_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_prlx_scale_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_map_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_normal_map_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_height_map_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_spec_map_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_light_map_txf, 0)
 end
 
 function edi_update_properties_selection()
@@ -1383,6 +1499,9 @@ function edi_update_light()
 end
 
 function edi_update_entity()
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_txl) == elf.SELECTION_CHANGED then
+		edi_update_edit_selection_material()		
+	end
 end
 
 function edi_properties_edit_particles_open_texture(path)
