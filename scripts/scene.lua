@@ -76,6 +76,15 @@ function edi_load_scene(path)
 	-- initialize the editor camera
 	edi_init_scene_camera()
 
+	local ambient = elf.GetSceneAmbientColor(editor.scene.handle)
+	elf.SetTextFieldText(editor.gui.properties.menu.ambient_r_txf, tostring(ambient.r))
+	elf.SetTextFieldText(editor.gui.properties.menu.ambient_g_txf, tostring(ambient.g))
+	elf.SetTextFieldText(editor.gui.properties.menu.ambient_b_txf, tostring(ambient.b))
+
+	elf.SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_r_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_g_txf, 0)
+	elf.SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_b_txf, 0)
+
 	return true
 end
 

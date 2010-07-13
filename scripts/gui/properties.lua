@@ -45,6 +45,9 @@ function edi_init_properties()
 	editor.gui.properties.menu.create_entity = edi_create_button(editor.gui.properties.handle, "create_entity", 4, 246, "images/properties/menu/create_entity")
 	editor.gui.properties.menu.create_particles = edi_create_button(editor.gui.properties.handle, "create_particles", 4, 268, "images/properties/menu/create_particles")
 	editor.gui.properties.menu.ambient = edi_create_label(editor.gui.properties.handle, "ambient", 4, 291, "---------- Ambient ---------", editor.gui.fonts.normal)
+	editor.gui.properties.menu.ambient_r_txf = edi_create_text_field(editor.gui.properties.handle, "ambient_r_txf", 4, 312, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.menu.ambient_g_txf = edi_create_text_field(editor.gui.properties.handle, "ambient_g_txf", 56, 312, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.menu.ambient_b_txf = edi_create_text_field(editor.gui.properties.handle, "ambient_b_txf", 108, 312, "images/text_field48", editor.gui.fonts.normal, "0")
 
 	-- setup the edit tab
 
@@ -1109,6 +1112,30 @@ function edi_update_menu()
 		elf.AddParticlesToScene(editor.scene.handle, par)
 
 		edi_select_actor(par)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.ambient_r_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.menu.ambient_r_txf, 0.0, nil)
+		elf.SetSceneAmbientColor(editor.scene.handle,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.ambient_g_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.menu.ambient_g_txf, 0.0, nil)
+		elf.SetSceneAmbientColor(editor.scene.handle,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.ambient_b_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.menu.ambient_b_txf, 0.0, nil)
+		elf.SetSceneAmbientColor(editor.scene.handle,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
 	end
 end
 
