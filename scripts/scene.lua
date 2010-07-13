@@ -144,11 +144,13 @@ function edi_update_scene()
 			move_speed = move_speed * 3
 		end
 
-		-- move the camera around with WSAD
-		if elf.GetKeyState(elf.KEY_W) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -move_speed) end
-		if elf.GetKeyState(elf.KEY_S) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, move_speed) end
-		if elf.GetKeyState(elf.KEY_A) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, -move_speed, 0.0, 0.0) end
-		if elf.GetKeyState(elf.KEY_D) ~= elf.UP and elf.GetKeyState(elf.KEY_LCTRL) == elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, move_speed, 0.0, 0.0) end
+		if elf.IsObject(elf.GetGuiActiveTextField(editor.gui.handle)) == false then
+			-- move the camera around with WSAD
+			if elf.GetKeyState(elf.KEY_W) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -move_speed) end
+			if elf.GetKeyState(elf.KEY_S) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, move_speed) end
+			if elf.GetKeyState(elf.KEY_A) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, -move_speed, 0.0, 0.0) end
+			if elf.GetKeyState(elf.KEY_D) ~= elf.UP and elf.GetKeyState(elf.KEY_LCTRL) == elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, move_speed, 0.0, 0.0) end
+		end
 
 		-- if right mouse button is down, rotate the camera
 		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) ~= elf.UP then
@@ -205,14 +207,16 @@ function edi_update_scene()
 
 		-- check if we can operate actions on objects
 		if editor.scene.selection ~= nil then
-			if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
-				editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
-				editor.gui.action.move = true
-				elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
-			elseif elf.GetKeyState(elf.KEY_R) == elf.PRESSED then
-				editor.gui.action.rotate_orig_rot = elf.GetActorRotation(editor.scene.selection)
-				editor.gui.action.rotate = true
-				elf.SetCheckBoxState(editor.gui.properties.menu.rotate, true)
+			if elf.IsObject(elf.GetGuiActiveTextField(editor.gui.handle)) == false then
+				if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
+					editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+					editor.gui.action.move = true
+					elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+				elseif elf.GetKeyState(elf.KEY_R) == elf.PRESSED then
+					editor.gui.action.rotate_orig_rot = elf.GetActorRotation(editor.scene.selection)
+					editor.gui.action.rotate = true
+					elf.SetCheckBoxState(editor.gui.properties.menu.rotate, true)
+				end
 			end
 
 			if elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.UP then

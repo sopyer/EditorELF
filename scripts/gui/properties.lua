@@ -606,6 +606,8 @@ function edi_update_edit_selection()
 	local scr = elf.GetActorScript(editor.scene.selection)
 	if elf.IsObject(scr) == true then
 		elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, elf.GetScriptName(scr))
+	else
+		elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, "")
 	end
 
 	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.name_txf, 0)
@@ -1101,13 +1103,25 @@ function edi_update_actor()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.script_txf) == elf.LOSE_FOCUS then
-		if string.len(elf.GetTextFieldText(editor.gui.properties.edit.actor.script_txf)) < 1 then
-			elf.ClearActorScript(editor.scene.selection)
-		else
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.actor.script_txf)
+		if string.len(name) > 0 then
 			local scr = elf.GetActorScript(editor.scene.selection)
 			if elf.IsObject(scr) == true then
-				elf.SetScriptName(scr, elf.GetTextFieldText(editor.gui.properties.edit.actor.script_txf))
+				elf.SetScriptName(scr, name)
+			else
+				local scripts = elf.GetSceneScripts(editor.scene.handle)
+				scr = elf.BeginList(scripts)
+				while elf.IsObject(scr) == true do
+					if elf.GetScriptName(scr) == name then
+						elf.SetActorScript(editor.scene.selection, scr)
+						break
+					end
+					scr = elf.NextInList(scripts)
+				end
+				if elf.IsObject(scr) == false then elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, "") end
 			end
+		else
+			elf.ClearActorScript(editor.scene.selection)
 		end
 	end
 
