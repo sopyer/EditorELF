@@ -11,6 +11,9 @@ function edi_init_scene()
 
 	-- init the camear for the default scene
 	edi_init_scene_camera()
+
+	elf.SetActorRotation(editor.scene.camera.handle, 90.0, 0.0, 0.0)
+	elf.SetActorPosition(editor.scene.camera.handle, 0.0, -5.0, 0.0)
 end
 
 function edi_init_scene_camera()

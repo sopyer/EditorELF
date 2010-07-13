@@ -40,7 +40,11 @@ function edi_init_properties()
 	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 136, "images/properties/menu/move", false)
 	editor.gui.properties.menu.rotate = edi_create_check_box(editor.gui.properties.handle, "rotate", 4, 158, "images/properties/menu/rotate", false)
 	editor.gui.properties.menu.create = edi_create_label(editor.gui.properties.handle, "actions", 4, 181, "---------- Create ----------", editor.gui.fonts.normal)
-	editor.gui.properties.menu.create_light = edi_create_button(editor.gui.properties.handle, "create_light", 4, 202, "images/properties/menu/create_light")
+	editor.gui.properties.menu.create_camera = edi_create_button(editor.gui.properties.handle, "create_camera", 4, 202, "images/properties/menu/create_camera")
+	editor.gui.properties.menu.create_light = edi_create_button(editor.gui.properties.handle, "create_light", 4, 224, "images/properties/menu/create_light")
+	editor.gui.properties.menu.create_entity = edi_create_button(editor.gui.properties.handle, "create_entity", 4, 246, "images/properties/menu/create_entity")
+	editor.gui.properties.menu.create_particles = edi_create_button(editor.gui.properties.handle, "create_particles", 4, 268, "images/properties/menu/create_particles")
+	editor.gui.properties.menu.ambient = edi_create_label(editor.gui.properties.handle, "ambient", 4, 291, "---------- Ambient ---------", editor.gui.fonts.normal)
 
 	-- setup the edit tab
 
@@ -1079,12 +1083,32 @@ function edi_update_menu()
 		end
 	end
 
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_camera) == elf.CLICKED then
+		local cam = elf.CreateCamera("Camera")
+		elf.AddCameraToScene(editor.scene.handle, cam)
+
+		edi_select_actor(cam)
+	end
+
 	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_light) == elf.CLICKED then
 		local lig = elf.CreateLight("Light")
 		elf.AddLightToScene(editor.scene.handle, lig)
 
 		edi_select_actor(lig)
-		elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_entity) == elf.CLICKED then
+		local ent = elf.CreateEntity("Entity")
+		elf.AddEntityToScene(editor.scene.handle, ent)
+
+		edi_select_actor(ent)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_particles) == elf.CLICKED then
+		local par = elf.CreateParticles("Particles", 25)
+		elf.AddParticlesToScene(editor.scene.handle, par)
+
+		edi_select_actor(par)
 	end
 end
 
