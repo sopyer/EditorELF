@@ -1499,8 +1499,182 @@ function edi_update_light()
 end
 
 function edi_update_entity()
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.model_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.model_txf)
+		if string.len(name) > 0 then
+			local mdl = elf.GetEntityModel(editor.scene.selection)
+			if elf.IsObject(mdl) == true then
+				elf.SetModelName(mdl, name)
+			else
+				local models = elf.GetSceneModels(editor.scene.handle)
+				local mdl = elf.BeginList(models)
+				while elf.IsObject(mdl) == true do
+					if elf.GetModelName(mdl) == name then
+						elf.SetEntityModel(editor.scene.selection, mdl)
+						break
+					end
+					mdl = elf.NextInList(models)
+				end
+				if elf.IsObject(mdl) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.model_txf, "") end
+			end
+		else
+			elf.ClearEntityModel(editor.scene.selection)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_x_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.scale_x_txf, nil, nil)
+		elf.SetEntityScale(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_y_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.scale_y_txf, nil, nil)
+		elf.SetEntityScale(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_z_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.scale_z_txf, nil, nil)
+		elf.SetEntityScale(editor.scene.selection,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
+	end
+
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_txl) == elf.SELECTION_CHANGED then
-		edi_update_edit_selection_material()		
+		edi_update_edit_selection_material()	
+	end
+
+	local index = elf.GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
+
+	if index < 0 then return end
+
+	local mat = elf.GetEntityMaterial(editor.scene.selection, index)
+	if elf.IsObject(mat) == false then return end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_name_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf)
+		if string.len(name) < 1 then
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, elf.GetMaterialName(mat))
+		else
+			elf.SetMaterialName(mat, name)
+			elf.SetTextListItem(editor.gui.properties.edit.entity.materials_txl, index, name)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_r_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_r_txf, 0.0, nil)
+		elf.SetMaterialDiffuseColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_g_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_g_txf, 0.0, nil)
+		elf.SetMaterialDiffuseColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_b_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_b_txf, 0.0, nil)
+		elf.SetMaterialDiffuseColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_a_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_a_txf, 0.0, nil)
+		elf.SetMaterialDiffuseColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_r_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_specular_r_txf, 0.0, nil)
+		elf.SetMaterialSpecularColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_g_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_specular_g_txf, 0.0, nil)
+		elf.SetMaterialSpecularColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_b_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_specular_b_txf, 0.0, nil)
+		elf.SetMaterialSpecularColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_r_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_ambient_r_txf, 0.0, nil)
+		elf.SetMaterialAmbientColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_g_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_ambient_g_txf, 0.0, nil)
+		elf.SetMaterialAmbientColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_b_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_ambient_b_txf, 0.0, nil)
+		elf.SetMaterialAmbientColor(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_power_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_spec_power_txf, 0.0, nil)
+		elf.SetMaterialSpecularPower(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_lighting_cb) == elf.STATE_CHANGED then
+		elf.SetMaterialLighting(mat, elf.GetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_prlx_scale_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_prlx_scale_txf, 0.0, nil)
+		elf.SetMaterialParallaxScale(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_alpha_test_cb) == elf.STATE_CHANGED then
+		elf.SetMaterialAlphaTest(mat, elf.GetCheckBoxState(editor.gui.properties.edit.entity.mat_alpha_test_cb))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_alpha_thrs_txf) == elf.LOSE_FOCUS then
+		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, 0.0, 1.0)
+		elf.SetMaterialAlphaThreshold(mat,
+			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf)))
 	end
 end
 
@@ -1827,7 +2001,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_r_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_r_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_r_txf, 0.0, nil)
 		elf.SetParticlesColorMin(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
@@ -1836,7 +2010,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_g_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_g_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_g_txf, 0.0, nil)
 		elf.SetParticlesColorMin(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
@@ -1845,7 +2019,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_b_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_b_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_b_txf, 0.0, nil)
 		elf.SetParticlesColorMin(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
@@ -1854,7 +2028,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_a_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_a_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_a_txf, 0.0, nil)
 		elf.SetParticlesColorMin(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
@@ -1863,7 +2037,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_r_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_r_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_r_txf, 0.0, nil)
 		elf.SetParticlesColorMax(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
@@ -1872,7 +2046,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_g_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_g_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_g_txf, 0.0, nil)
 		elf.SetParticlesColorMax(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
@@ -1881,7 +2055,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_b_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_b_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_b_txf, 0.0, nil)
 		elf.SetParticlesColorMax(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
@@ -1890,7 +2064,7 @@ function edi_update_particles()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_a_txf) == elf.LOSE_FOCUS then
-		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_a_txf, 0.0, 1.0)
+		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_a_txf, 0.0, nil)
 		elf.SetParticlesColorMax(editor.scene.selection,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
