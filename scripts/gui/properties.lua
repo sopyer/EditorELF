@@ -923,22 +923,32 @@ function edi_update_edit_selection_material()
 		local tex = elf.GetMaterialDiffuseMap(mat)
 		if elf.IsObject(tex) == true then
 			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, elf.GetTextureName(tex))
+		else
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "")
 		end
 		tex = elf.GetMaterialNormalMap(mat)
 		if elf.IsObject(tex) == true then
 			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, elf.GetTextureName(tex))
+		else
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "")
 		end
 		tex = elf.GetMaterialHeightMap(mat)
 		if elf.IsObject(tex) == true then
 			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, elf.GetTextureName(tex))
+		else
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "")
 		end
 		tex = elf.GetMaterialSpecularMap(mat)
 		if elf.IsObject(tex) == true then
 			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, elf.GetTextureName(tex))
+		else
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "")
 		end
 		tex = elf.GetMaterialLightMap(mat)
 		if elf.IsObject(tex) == true then
 			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, elf.GetTextureName(tex))
+		else
+			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "")
 		end
 	end
 
@@ -1744,6 +1754,122 @@ function edi_update_entity()
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, 0.0, 1.0)
 		elf.SetMaterialAlphaThreshold(mat,
 			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf)))
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_map_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf)
+		if string.len(name) > 0 then
+			local tex = elf.GetMaterialDiffuseMap(mat)
+			if elf.IsObject(tex) == true then
+				elf.SetTextureName(tex, name)
+			else
+				local textures = elf.GetSceneTextures(editor.scene.handle)
+				tex = elf.BeginList(textures)
+				while elf.IsObject(tex) == true do
+					if elf.GetTextureName(tex) == name then
+						elf.SetMaterialDiffuseMap(mat, tex)
+						break
+					end
+					tex = elf.NextInList(textures)
+				end
+				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "") end
+			end
+		else
+			elf.ClearMaterialDiffuseMap(mat)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_normal_map_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf)
+		if string.len(name) > 0 then
+			local tex = elf.GetMaterialNormalMap(mat)
+			if elf.IsObject(tex) == true then
+				elf.SetTextureName(tex, name)
+			else
+				local textures = elf.GetSceneTextures(editor.scene.handle)
+				tex = elf.BeginList(textures)
+				while elf.IsObject(tex) == true do
+					if elf.GetTextureName(tex) == name then
+						elf.SetMaterialNormalMap(mat, tex)
+						elf.GenerateEntityTangents(editor.scene.selection)
+						break
+					end
+					tex = elf.NextInList(textures)
+				end
+				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "") end
+			end
+		else
+			elf.ClearMaterialNormalMap(mat)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_height_map_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf)
+		if string.len(name) > 0 then
+			local tex = elf.GetMaterialHeightMap(mat)
+			if elf.IsObject(tex) == true then
+				elf.SetTextureName(tex, name)
+			else
+				local textures = elf.GetSceneTextures(editor.scene.handle)
+				tex = elf.BeginList(textures)
+				while elf.IsObject(tex) == true do
+					if elf.GetTextureName(tex) == name then
+						elf.SetMaterialHeightMap(mat, tex)
+						break
+					end
+					tex = elf.NextInList(textures)
+				end
+				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "") end
+			end
+		else
+			elf.ClearMaterialHeightMap(mat)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_map_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf)
+		if string.len(name) > 0 then
+			local tex = elf.GetMaterialSpecularMap(mat)
+			if elf.IsObject(tex) == true then
+				elf.SetTextureName(tex, name)
+			else
+				local textures = elf.GetSceneTextures(editor.scene.handle)
+				tex = elf.BeginList(textures)
+				while elf.IsObject(tex) == true do
+					if elf.GetTextureName(tex) == name then
+						elf.SetMaterialSpecularMap(mat, tex)
+						break
+					end
+					tex = elf.NextInList(textures)
+				end
+				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "") end
+			end
+		else
+			elf.ClearMaterialSpecularMap(mat)
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_light_map_txf) == elf.LOSE_FOCUS then
+		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf)
+		if string.len(name) > 0 then
+			local tex = elf.GetMaterialLightMap(mat)
+			if elf.IsObject(tex) == true then
+				elf.SetTextureName(tex, name)
+			else
+				local textures = elf.GetSceneTextures(editor.scene.handle)
+				tex = elf.BeginList(textures)
+				while elf.IsObject(tex) == true do
+					if elf.GetTextureName(tex) == name then
+						elf.SetMaterialLightMap(mat, tex)
+						break
+					end
+					tex = elf.NextInList(textures)
+				end
+				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "") end
+			end
+		else
+			elf.ClearMateriaLightMap(mat)
+		end
 	end
 end
 
