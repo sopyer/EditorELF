@@ -1525,6 +1525,21 @@ function edi_update_entity()
 				while elf.IsObject(mdl) == true do
 					if elf.GetModelName(mdl) == name then
 						elf.SetEntityModel(editor.scene.selection, mdl)
+
+						elf.RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
+						for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
+							local mat = elf.GetEntityMaterial(editor.scene.selection, i)
+							elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, elf.GetMaterialName(mat))
+						end
+
+						if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
+							elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+						else
+							elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
+						end
+
+						edi_update_edit_selection_material()
+
 						break
 					end
 					mdl = elf.NextInList(models)
@@ -1564,9 +1579,49 @@ function edi_update_entity()
 		edi_update_edit_selection_material()	
 	end
 
+	local diff = elf.GetTextListItemCount(editor.gui.properties.edit.entity.materials_txl)-
+		elf.GetTextListRowCount(editor.gui.properties.edit.entity.materials_txl)
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_sb) == elf.VALUE_CHANGED then
+		if diff > 0 then
+			elf.SetTextListOffset(editor.gui.properties.edit.entity.materials_txl,
+				diff*(1.0-elf.GetSliderValue(editor.gui.properties.edit.entity.materials_sb)))
+		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.add_material_but) == elf.CLICKED then
+		local new_mat = elf.CreateMaterial("Material")
+		elf.AddEntityMaterial(editor.scene.selection, new_mat)
+		elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, "Material")
+	end
+
 	local index = elf.GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
 
 	if index < 0 then return end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.replace_material_but) == elf.CLICKED then
+		local new_mat = elf.CreateMaterial("Material")
+		elf.SetEntityMaterial(editor.scene.selection, index, new_mat)
+		elf.SetTextListItem(editor.gui.properties.edit.entity.materials_txl, index, "Material")
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.remove_material_but) == elf.CLICKED then
+		elf.RemoveEntityMaterial(editor.scene.selection, index)
+
+		elf.RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
+		for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
+			local mat = elf.GetEntityMaterial(editor.scene.selection, i)
+			elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, elf.GetMaterialName(mat))
+		end
+
+		if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
+			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+		else
+			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
+		end
+
+		edi_update_edit_selection_material()
+	end
 
 	local mat = elf.GetEntityMaterial(editor.scene.selection, index)
 	if elf.IsObject(mat) == false then return end
