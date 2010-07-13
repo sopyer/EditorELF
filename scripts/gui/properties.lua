@@ -736,6 +736,7 @@ function edi_update_edit_selection()
 
 		if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
 			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+			editor.scene.material = elf.GetEntityMaterial(editor.scene.selection, 0)
 		else
 			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
 		end
@@ -1522,6 +1523,77 @@ function edi_update_light()
 	end
 end
 
+function edi_properties_edit_entity_open_diffuse_map(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local tex = elf.CreateTextureFromFile(path)
+	if elf.IsObject(tex) == true then
+		elf.SetMaterialDiffuseMap(editor.scene.material, tex)
+		edi_update_edit_selection_material()
+		edi_open_properties()
+	end
+end
+
+function edi_properties_edit_entity_open_normal_map(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local tex = elf.CreateTextureFromFile(path)
+	if elf.IsObject(tex) == true then
+		elf.SetMaterialNormalMap(editor.scene.material, tex)
+		elf.GenerateEntityTangents(editor.scene.selection)
+		edi_update_edit_selection_material()
+		edi_open_properties()
+	end
+end
+
+function edi_properties_edit_entity_open_height_map(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local tex = elf.CreateTextureFromFile(path)
+	if elf.IsObject(tex) == true then
+		elf.SetMaterialHeightMap(editor.scene.material, tex)
+		edi_update_edit_selection_material()
+		edi_open_properties()
+	end
+end
+
+function edi_properties_edit_entity_open_spec_map(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local tex = elf.CreateTextureFromFile(path)
+	if elf.IsObject(tex) == true then
+		elf.SetMaterialSpecularMap(editor.scene.material, tex)
+		edi_update_edit_selection_material()
+		edi_open_properties()
+	end
+end
+
+function edi_properties_edit_entity_open_light_map(path)
+	if string.len(path) < 1 then
+		edi_open_properties()
+		return
+	end
+
+	local tex = elf.CreateTextureFromFile(path)
+	if elf.IsObject(tex) == true then
+		elf.SetMaterialLightMap(editor.scene.material, tex)
+		edi_update_edit_selection_material()
+		edi_open_properties()
+	end
+end
+
 function edi_update_entity()
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.model_txf) == elf.LOSE_FOCUS then
 		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.model_txf)
@@ -1544,6 +1616,7 @@ function edi_update_entity()
 
 						if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
 							elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+							editor.scene.material = elf.GetEntityMaterial(editor.scene.selection, 0)
 						else
 							elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
 						end
@@ -1586,7 +1659,7 @@ function edi_update_entity()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_txl) == elf.SELECTION_CHANGED then
-		edi_update_edit_selection_material()	
+		edi_update_edit_selection_material()
 	end
 
 	local diff = elf.GetTextListItemCount(editor.gui.properties.edit.entity.materials_txl)-
@@ -1626,6 +1699,7 @@ function edi_update_entity()
 
 		if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
 			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+			editor.scene.material = elf.GetEntityMaterial(editor.scene.selection, 0)
 		else
 			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
 		end
@@ -1635,6 +1709,8 @@ function edi_update_entity()
 
 	local mat = elf.GetEntityMaterial(editor.scene.selection, index)
 	if elf.IsObject(mat) == false then return end
+
+	editor.scene.material = mat
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_name_txf) == elf.LOSE_FOCUS then
 		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf)
@@ -1868,8 +1944,28 @@ function edi_update_entity()
 				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "") end
 			end
 		else
-			elf.ClearMateriaLightMap(mat)
+			elf.ClearMaterialLightMap(mat)
 		end
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_map_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Diffuse Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_diffuse_map)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_normal_map_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Normal Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_normal_map)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_height_map_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Height Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_height_map)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_map_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Specular Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_spec_map)
+	end
+
+	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_light_map_open) == elf.CLICKED then
+		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Light Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_light_map)
 	end
 end
 
