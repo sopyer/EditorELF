@@ -705,7 +705,7 @@ function edi_update_edit_selection()
 		elf.SetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf, elf.GetLightCone(editor.scene.selection).x)
 		elf.SetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf, elf.GetLightCone(editor.scene.selection).y)
 
-		elf.SetCheckBoxState(editor.gui.properties.edit.light.shadows_cb, elf.GetLightShadowCaster(editor.scene.selection))
+		elf.SetCheckBoxState(editor.gui.properties.edit.light.shadows_cb, elf.GetLightShadows(editor.scene.selection))
 
 		elf.SetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb, elf.IsLightShaft(editor.scene.selection))
 		elf.SetTextFieldText(editor.gui.properties.edit.light.size_txf, elf.GetLightShaftSize(editor.scene.selection))
@@ -1529,7 +1529,7 @@ function edi_update_light()
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.shadows_cb) == elf.STATE_CHANGED then
-		elf.SetLightShadowCaster(editor.scene.selection, elf.GetCheckBoxState(editor.gui.properties.edit.light.shadows_cb))
+		elf.SetLightShadows(editor.scene.selection, elf.GetCheckBoxState(editor.gui.properties.edit.light.shadows_cb))
 	end
 
 	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.ls_enabled_cb) == elf.STATE_CHANGED then
