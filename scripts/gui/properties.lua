@@ -1612,6 +1612,7 @@ function edi_properties_edit_entity_open_height_map(path)
 	local tex = elf.CreateTextureFromFile(path)
 	if elf.IsObject(tex) == true then
 		elf.SetMaterialHeightMap(editor.scene.material, tex)
+		elf.GenerateEntityTangents(editor.scene.selection)
 		edi_update_edit_selection_material()
 		edi_open_properties()
 	end
