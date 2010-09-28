@@ -1,71 +1,71 @@
 
 function edi_create_label(parent, name, x, y, text, font)
-	local label = elf.CreateLabel(name)
+	local label = CreateLabel(name)
 
-	elf.SetLabelFont(label, font)
-	elf.SetLabelText(label, text)
-	elf.SetGuiObjectPosition(label, x, y)
+	SetLabelFont(label, font)
+	SetLabelText(label, text)
+	SetGuiObjectPosition(label, x, y)
 
-	elf.AddGuiObject(parent, label)
+	AddGuiObject(parent, label)
 
 	return label
 end
 
 function edi_create_button(parent, name, x, y, path)
-	local button = elf.CreateButton(name)
+	local button = CreateButton(name)
 
-	elf.SetButtonOffTexture(button, elf.CreateTextureFromFile(path .. "_off.png"))
-	elf.SetButtonOverTexture(button, elf.CreateTextureFromFile(path .. "_over.png"))
-	elf.SetButtonOnTexture(button, elf.CreateTextureFromFile(path .. "_on.png"))
-	elf.SetGuiObjectPosition(button, x, y)
+	SetButtonOffTexture(button, CreateTextureFromFile(path .. "_off.png"))
+	SetButtonOverTexture(button, CreateTextureFromFile(path .. "_over.png"))
+	SetButtonOnTexture(button, CreateTextureFromFile(path .. "_on.png"))
+	SetGuiObjectPosition(button, x, y)
 
-	elf.AddGuiObject(parent, button)
+	AddGuiObject(parent, button)
 
 	return button
 end
 
 function edi_create_check_box(parent, name, x, y, path, default)
-	local check_box = elf.CreateCheckBox(name)
+	local check_box = CreateCheckBox(name)
 
-	elf.SetCheckBoxOffTexture(check_box, elf.CreateTextureFromFile(path .. "_off.png"))
-	elf.SetCheckBoxOnTexture(check_box, elf.CreateTextureFromFile(path .. "_on.png"))
-	elf.SetCheckBoxState(check_box, default)
-	elf.SetGuiObjectPosition(check_box, x, y)
+	SetCheckBoxOffTexture(check_box, CreateTextureFromFile(path .. "_off.png"))
+	SetCheckBoxOnTexture(check_box, CreateTextureFromFile(path .. "_on.png"))
+	SetCheckBoxState(check_box, default)
+	SetGuiObjectPosition(check_box, x, y)
 
-	elf.AddGuiObject(parent, check_box)
+	AddGuiObject(parent, check_box)
 
 	return check_box
 end
 
 function edi_create_text_field(parent, name, x, y, path, font, default)
-	local text_field = elf.CreateTextField(name)
+	local text_field = CreateTextField(name)
 
-	elf.SetTextFieldTexture(text_field, elf.CreateTextureFromFile(path .. ".png"))
-	elf.SetTextFieldOffset(text_field, 3, 2)
-	elf.SetTextFieldFont(text_field, font)
-	elf.SetTextFieldText(text_field, default)
-	elf.SetGuiObjectPosition(text_field, x, y)
+	SetTextFieldTexture(text_field, CreateTextureFromFile(path .. ".png"))
+	SetTextFieldOffset(text_field, 3, 2)
+	SetTextFieldFont(text_field, font)
+	SetTextFieldText(text_field, default)
+	SetGuiObjectPosition(text_field, x, y)
 
-	elf.AddGuiObject(parent, text_field)
+	AddGuiObject(parent, text_field)
 
 	return text_field
 end
 
 function edi_create_slider(parent, name, x, y, path, default)
-	local slider = elf.CreateSlider(name)
+	local slider = CreateSlider(name)
 
-	elf.SetSliderBackgroundTexture(slider, elf.CreateTextureFromFile(path .. "_bg.png"))
-	elf.SetSliderSliderTexture(slider, elf.CreateTextureFromFile(path .. "_slider.png"))
-	elf.SetGuiObjectPosition(slider, x, y)
-	elf.SetSliderValue(slider, default)
+	SetSliderBackgroundTexture(slider, CreateTextureFromFile(path .. "_bg.png"))
+	SetSliderSliderTexture(slider, CreateTextureFromFile(path .. "_slider.png"))
+	SetGuiObjectPosition(slider, x, y)
+	SetSliderValue(slider, default)
 
-	elf.AddGuiObject(parent, slider)
+	AddGuiObject(parent, slider)
 
 	return slider
 end
 
 function edi_check_text_field_float(txf, min, max)
-	local val = elf.GetTextFieldText(txf)
+	local val = GetTextFieldText(txf)
 
 	if val == nil then val = 0 end
 	val = tonumber(val)
@@ -76,12 +76,12 @@ function edi_check_text_field_float(txf, min, max)
 		if max ~= nil and val > max then val = max end
 	end
 
-	elf.SetTextFieldText(txf, tostring(val))
-	elf.SetTextFieldCursorPosition(txf, 0)
+	SetTextFieldText(txf, tostring(val))
+	SetTextFieldCursorPosition(txf, 0)
 end
 
 function edi_check_text_field_int(txf, min, max)
-	local val = elf.GetTextFieldText(txf)
+	local val = GetTextFieldText(txf)
 
 	if val == nil then val = 0 end
 	val = tonumber(val)
@@ -95,8 +95,8 @@ function edi_check_text_field_int(txf, min, max)
 		if max ~= nil and val > max then val = max end
 	end
 
-	elf.SetTextFieldText(txf, tostring(val))
-	elf.SetTextFieldCursorPosition(txf, 0)
+	SetTextFieldText(txf, tostring(val))
+	SetTextFieldCursorPosition(txf, 0)
 end
 
 EDI_NONE = 0
@@ -112,8 +112,8 @@ function edi_init_gui()
 	editor.gui.action.rotate = false
 
 	-- create the main gui
-	editor.gui.handle = elf.CreateGui()
-	elf.SetGui(editor.gui.handle)
+	editor.gui.handle = CreateGui()
+	SetGui(editor.gui.handle)
 
 	dofile("scripts/gui/fonts.lua")
 	dofile("scripts/gui/message_box.lua")
@@ -127,26 +127,26 @@ function edi_init_gui()
 	edi_init_properties()
 
 	-- add a version label
-	editor.gui.version = elf.CreateLabel("EditorELF_version")
+	editor.gui.version = CreateLabel("EditorELF_version")
 
-	elf.SetLabelFont(editor.gui.version, editor.gui.fonts.normal)
-	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: 0")
-	elf.SetGuiObjectPosition(editor.gui.version, 5,
-		elf.GetWindowHeight()-elf.GetGuiObjectSize(editor.gui.version).y-2)
+	SetLabelFont(editor.gui.version, editor.gui.fonts.normal)
+	SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: 0")
+	SetGuiObjectPosition(editor.gui.version, 5,
+		GetWindowHeight()-GetGuiObjectSize(editor.gui.version).y-2)
 
-	elf.AddGuiObject(editor.gui.handle, editor.gui.version)
+	AddGuiObject(editor.gui.handle, editor.gui.version)
 end
 
 function edi_disable_current_menu()
 	if editor.gui.current_menu == EDI_MESSAGE_BOX then
-		elf.SetGuiObjectVisible(editor.gui.file_dialog.box, false)
-		elf.ReleaseFocusFromScreen(editor.gui.message_box.box)
+		SetGuiObjectVisible(editor.gui.file_dialog.box, false)
+		ReleaseFocusFromScreen(editor.gui.message_box.box)
 	elseif editor.gui.current_menu == EDI_FILE_DIALOG then
-		elf.SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
-		elf.ReleaseFocusFromScreen(editor.gui.file_dialog.dialog)
+		SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
+		ReleaseFocusFromScreen(editor.gui.file_dialog.dialog)
 	elseif editor.gui.current_menu == EDI_PROPERTIES then
-		elf.SetGuiObjectVisible(editor.gui.properties.handle, false)
-		elf.ReleaseFocusFromScreen(editor.gui.properties.handle)
+		SetGuiObjectVisible(editor.gui.properties.handle, false)
+		ReleaseFocusFromScreen(editor.gui.properties.handle)
 	end
 
 	editor.gui.current_menu = EDI_NONE
@@ -157,7 +157,7 @@ function edi_update_gui_selection()
 end
 
 function edi_update_gui()
-	elf.SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: " .. elf.GetFps())
+	SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: " .. GetFps())
 
 	if editor.gui.current_menu == EDI_MESSAGE_BOX then edi_update_message_box()
 	elseif editor.gui.current_menu == EDI_FILE_DIALOG then edi_update_file_dialog()

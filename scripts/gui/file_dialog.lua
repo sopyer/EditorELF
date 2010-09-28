@@ -7,105 +7,105 @@ function edi_init_file_dialog()
 	editor.gui.file_dialog.prev_wheel = 0
 
 	-- setup the file dialog screen
-	editor.gui.file_dialog.dialog = elf.CreateScreen("file_dialog")
+	editor.gui.file_dialog.dialog = CreateScreen("file_dialog")
 
-	elf.SetScreenTexture(editor.gui.file_dialog.dialog, elf.CreateTextureFromFile("images/file_dialog/background.png"))
-	elf.SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
-	elf.SetGuiObjectColor(editor.gui.file_dialog.dialog, 1.0, 1.0, 1.0, 0.75)
+	SetScreenTexture(editor.gui.file_dialog.dialog, CreateTextureFromFile("images/file_dialog/background.png"))
+	SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
+	SetGuiObjectColor(editor.gui.file_dialog.dialog, 1.0, 1.0, 1.0, 0.75)
 
-	elf.AddGuiObject(editor.gui.handle, editor.gui.file_dialog.dialog)
+	AddGuiObject(editor.gui.handle, editor.gui.file_dialog.dialog)
 
 	-- setup the file dialog title label
-	editor.gui.file_dialog.title = elf.CreateLabel("title")
+	editor.gui.file_dialog.title = CreateLabel("title")
 
-	elf.SetLabelFont(editor.gui.file_dialog.title, editor.gui.fonts.normal)
-	elf.SetLabelText(editor.gui.file_dialog.title, "File Dialog")
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.title, 4, 1)
+	SetLabelFont(editor.gui.file_dialog.title, editor.gui.fonts.normal)
+	SetLabelText(editor.gui.file_dialog.title, "File Dialog")
+	SetGuiObjectPosition(editor.gui.file_dialog.title, 4, 1)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.title)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.title)
 
 	-- setup the file path field
-	editor.gui.file_dialog.file_path = elf.CreateTextField("file_path")
+	editor.gui.file_dialog.file_path = CreateTextField("file_path")
 
-	elf.SetTextFieldTexture(editor.gui.file_dialog.file_path, elf.CreateTextureFromFile("images/file_dialog/file_path.png"))
-	elf.SetTextFieldFont(editor.gui.file_dialog.file_path, editor.gui.fonts.normal)
-	elf.SetTextFieldOffset(editor.gui.file_dialog.file_path, 3, 2)
-	elf.SetTextFieldText(editor.gui.file_dialog.file_path, "/")
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.file_path, 4, 22)
+	SetTextFieldTexture(editor.gui.file_dialog.file_path, CreateTextureFromFile("images/file_dialog/file_path.png"))
+	SetTextFieldFont(editor.gui.file_dialog.file_path, editor.gui.fonts.normal)
+	SetTextFieldOffset(editor.gui.file_dialog.file_path, 3, 2)
+	SetTextFieldText(editor.gui.file_dialog.file_path, "/")
+	SetGuiObjectPosition(editor.gui.file_dialog.file_path, 4, 22)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.file_path)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.file_path)
 
 	-- setup the open button
-	editor.gui.file_dialog.open = elf.CreateButton("open")
+	editor.gui.file_dialog.open = CreateButton("open")
 
-	elf.SetButtonOffTexture(editor.gui.file_dialog.open, elf.CreateTextureFromFile("images/file_dialog/open_off.png"))
-	elf.SetButtonOverTexture(editor.gui.file_dialog.open, elf.CreateTextureFromFile("images/file_dialog/open_over.png"))
-	elf.SetButtonOnTexture(editor.gui.file_dialog.open, elf.CreateTextureFromFile("images/file_dialog/open_on.png"))
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.open, 933, 22)
+	SetButtonOffTexture(editor.gui.file_dialog.open, CreateTextureFromFile("images/file_dialog/open_off.png"))
+	SetButtonOverTexture(editor.gui.file_dialog.open, CreateTextureFromFile("images/file_dialog/open_over.png"))
+	SetButtonOnTexture(editor.gui.file_dialog.open, CreateTextureFromFile("images/file_dialog/open_on.png"))
+	SetGuiObjectPosition(editor.gui.file_dialog.open, 933, 22)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.open)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.open)
 
 	-- setup the save button
-	editor.gui.file_dialog.save = elf.CreateButton("save")
+	editor.gui.file_dialog.save = CreateButton("save")
 
-	elf.SetButtonOffTexture(editor.gui.file_dialog.save, elf.CreateTextureFromFile("images/file_dialog/save_off.png"))
-	elf.SetButtonOverTexture(editor.gui.file_dialog.save, elf.CreateTextureFromFile("images/file_dialog/save_over.png"))
-	elf.SetButtonOnTexture(editor.gui.file_dialog.save, elf.CreateTextureFromFile("images/file_dialog/save_on.png"))
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.save, 933, 22)
-	elf.SetGuiObjectVisible(editor.gui.file_dialog.save, false)
+	SetButtonOffTexture(editor.gui.file_dialog.save, CreateTextureFromFile("images/file_dialog/save_off.png"))
+	SetButtonOverTexture(editor.gui.file_dialog.save, CreateTextureFromFile("images/file_dialog/save_over.png"))
+	SetButtonOnTexture(editor.gui.file_dialog.save, CreateTextureFromFile("images/file_dialog/save_on.png"))
+	SetGuiObjectPosition(editor.gui.file_dialog.save, 933, 22)
+	SetGuiObjectVisible(editor.gui.file_dialog.save, false)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.save)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.save)
 
 	-- setup the cancel button
-	editor.gui.file_dialog.cancel = elf.CreateButton("cancel")
+	editor.gui.file_dialog.cancel = CreateButton("cancel")
 
-	elf.SetButtonOffTexture(editor.gui.file_dialog.cancel, elf.CreateTextureFromFile("images/file_dialog/cancel_off.png"))
-	elf.SetButtonOverTexture(editor.gui.file_dialog.cancel, elf.CreateTextureFromFile("images/file_dialog/cancel_over.png"))
-	elf.SetButtonOnTexture(editor.gui.file_dialog.cancel, elf.CreateTextureFromFile("images/file_dialog/cancel_on.png"))
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.cancel, 4, 698)
+	SetButtonOffTexture(editor.gui.file_dialog.cancel, CreateTextureFromFile("images/file_dialog/cancel_off.png"))
+	SetButtonOverTexture(editor.gui.file_dialog.cancel, CreateTextureFromFile("images/file_dialog/cancel_over.png"))
+	SetButtonOnTexture(editor.gui.file_dialog.cancel, CreateTextureFromFile("images/file_dialog/cancel_on.png"))
+	SetGuiObjectPosition(editor.gui.file_dialog.cancel, 4, 698)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.cancel)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.cancel)
 
 	-- setup the file list
-	editor.gui.file_dialog.file_list = elf.CreateTextList("file_list")
+	editor.gui.file_dialog.file_list = CreateTextList("file_list")
 
-	elf.SetTextListFont(editor.gui.file_dialog.file_list, editor.gui.fonts.normal)
-	elf.SetTextListSize(editor.gui.file_dialog.file_list, 36, 994)
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.file_list, 4, 44)
+	SetTextListFont(editor.gui.file_dialog.file_list, editor.gui.fonts.normal)
+	SetTextListSize(editor.gui.file_dialog.file_list, 36, 994)
+	SetGuiObjectPosition(editor.gui.file_dialog.file_list, 4, 44)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.file_list)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.file_list)
 
 	-- setup the scroll bar
-	editor.gui.file_dialog.scroll_bar = elf.CreateSlider("scroll_bar")
+	editor.gui.file_dialog.scroll_bar = CreateSlider("scroll_bar")
 
-	elf.SetSliderBackgroundTexture(editor.gui.file_dialog.scroll_bar, elf.CreateTextureFromFile("images/file_dialog/scroll_bar.png"))
-	elf.SetSliderSliderTexture(editor.gui.file_dialog.scroll_bar, elf.CreateTextureFromFile("images/file_dialog/scroll_bar_slider.png"))
-	elf.SetGuiObjectPosition(editor.gui.file_dialog.scroll_bar, 1002, 44)
+	SetSliderBackgroundTexture(editor.gui.file_dialog.scroll_bar, CreateTextureFromFile("images/file_dialog/scroll_bar.png"))
+	SetSliderSliderTexture(editor.gui.file_dialog.scroll_bar, CreateTextureFromFile("images/file_dialog/scroll_bar_slider.png"))
+	SetGuiObjectPosition(editor.gui.file_dialog.scroll_bar, 1002, 44)
 
-	elf.AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.scroll_bar)
+	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.scroll_bar)
 end
 
 function edi_open_file_dialog(path, title, mode, callback)
 
 	if mode == EDI_FILE_DIALOG_OPEN then
-		elf.SetGuiObjectVisible(editor.gui.file_dialog.open, true)
-		elf.SetGuiObjectVisible(editor.gui.file_dialog.save, false)
+		SetGuiObjectVisible(editor.gui.file_dialog.open, true)
+		SetGuiObjectVisible(editor.gui.file_dialog.save, false)
 	elseif mode == EDI_FILE_DIALOG_SAVE then
-		elf.SetGuiObjectVisible(editor.gui.file_dialog.open, false)
-		elf.SetGuiObjectVisible(editor.gui.file_dialog.save, true)
+		SetGuiObjectVisible(editor.gui.file_dialog.open, false)
+		SetGuiObjectVisible(editor.gui.file_dialog.save, true)
 	end
 
 	editor.gui.file_dialog.mode = mode
 
 	-- set the file dialog title
-	elf.SetLabelText(editor.gui.file_dialog.title, title)
+	SetLabelText(editor.gui.file_dialog.title, title)
 
 	-- set the file dialog callback
 	editor.gui.file_dialog.callback = callback
 
 	-- try to open the requested directory
 	if edi_change_file_dialog_path(path) == false then
-		if elf.GetPlatform() == "windows" then path = "c:\\" else path = "/" end
+		if GetPlatform() == "windows" then path = "c:\\" else path = "/" end
 		if edi_change_file_dialog_path(path) == false then
 			return false
 		end
@@ -117,39 +117,39 @@ function edi_open_file_dialog(path, title, mode, callback)
 	editor.gui.current_menu = EDI_FILE_DIALOG
 
 	-- set the dialog on top and visible and lock the focus to it
-	elf.SetScreenToTop(editor.gui.file_dialog.dialog)
-	elf.SetGuiObjectVisible(editor.gui.file_dialog.dialog, true)
-	elf.ForceFocusToScreen(editor.gui.file_dialog.dialog)
+	SetScreenToTop(editor.gui.file_dialog.dialog)
+	SetGuiObjectVisible(editor.gui.file_dialog.dialog, true)
+	ForceFocusToScreen(editor.gui.file_dialog.dialog)
 
 	return true
 end
 
 function edi_change_file_dialog_path(path)
 	-- check if the path is a directory
-	local dir = elf.ReadDirectory(path)
+	local dir = ReadDirectory(path)
 
-	if elf.IsObject(dir) == true then
-		elf.SetTextFieldText(editor.gui.file_dialog.file_path, path)
+	if dir ~= nil then
+		SetTextFieldText(editor.gui.file_dialog.file_path, path)
 
 		editor.gui.file_dialog.current_path = path
 		editor.gui.file_dialog.dir = dir
 
 		-- list the contents of the new path to the file list
-		elf.RemoveTextListItems(editor.gui.file_dialog.file_list)
+		RemoveTextListItems(editor.gui.file_dialog.file_list)
 
-		for i=0, elf.GetDirectoryItemCount(editor.gui.file_dialog.dir)-1 do
-			item = elf.GetDirectoryItem(editor.gui.file_dialog.dir, i)
-			if elf.GetDirectoryItemType(item) == elf.DIR and i > 1 then
-				elf.AddTextListItem(editor.gui.file_dialog.file_list,
-					" " .. elf.GetDirectoryItemName(item) .. "/")
+		for i=0, GetDirectoryItemCount(editor.gui.file_dialog.dir)-1 do
+			item = GetDirectoryItem(editor.gui.file_dialog.dir, i)
+			if GetDirectoryItemType(item) == DIR and i > 1 then
+				AddTextListItem(editor.gui.file_dialog.file_list,
+					" " .. GetDirectoryItemName(item) .. "/")
 			else
-				elf.AddTextListItem(editor.gui.file_dialog.file_list,
-					" " .. elf.GetDirectoryItemName(item))
+				AddTextListItem(editor.gui.file_dialog.file_list,
+					" " .. GetDirectoryItemName(item))
 			end
 		end
 
-		elf.SetSliderValue(editor.gui.file_dialog.scroll_bar, 1.0)
-		elf.SetTextListSelection(editor.gui.file_dialog.file_list, 0)
+		SetSliderValue(editor.gui.file_dialog.scroll_bar, 1.0)
+		SetTextListSelection(editor.gui.file_dialog.file_list, 0)
 
 		return true
 	end
@@ -182,7 +182,7 @@ function edi_make_folder_path(path)
 	if string.sub(rpath, 1, 1) == "\\" then return string.reverse(rpath) end
 	if string.sub(rpath, 1, 1) == "/" then return string.reverse(rpath) end
 
-	if elf.GetPlatform() == "windows" then postfix = "\\" else postfix = "/" end
+	if GetPlatform() == "windows" then postfix = "\\" else postfix = "/" end
 
 	return string.reverse(rpath) .. postfix
 end
@@ -197,10 +197,10 @@ function edi_update_file_dialog()
 	local file = nil
 
 	-- check if we have to try to open a new file or enter a directory
-	if elf.GetGuiObjectEvent(editor.gui.file_dialog.file_path) == elf.LOSE_FOCUS then
-		if elf.GetKeyState(elf.KEY_ENTER) == elf.PRESSED then
+	if GetGuiObjectEvent(editor.gui.file_dialog.file_path) == LOSE_FOCUS then
+		if GetKeyState(KEY_ENTER) == PRESSED then
 			if editor.gui.file_dialog.mode == EDI_FILE_DIALOG_OPEN then
-				path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+				path = GetTextFieldText(editor.gui.file_dialog.file_path)
 
 				if edi_change_file_dialog_path(path) == false then
 					-- check if the path is a file
@@ -213,7 +213,7 @@ function edi_update_file_dialog()
 					end
 				end
 			elseif editor.gui.file_dialog.mode == EDI_FILE_DIALOG_SAVE then
-				path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+				path = GetTextFieldText(editor.gui.file_dialog.file_path)
 
 				-- check if the path can be opened
 				file = io.open(path, "r")
@@ -232,8 +232,8 @@ function edi_update_file_dialog()
 	end
 
 	-- check if we have to open a file
-	if elf.GetGuiObjectEvent(editor.gui.file_dialog.open) == elf.CLICKED then
-		path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+	if GetGuiObjectEvent(editor.gui.file_dialog.open) == CLICKED then
+		path = GetTextFieldText(editor.gui.file_dialog.file_path)
 
 		-- check if the path is a file
 		file = io.open(path, "r")
@@ -246,8 +246,8 @@ function edi_update_file_dialog()
 	end
 
 	-- check if we have to open a file
-	if elf.GetGuiObjectEvent(editor.gui.file_dialog.save) == elf.CLICKED then
-		path = elf.GetTextFieldText(editor.gui.file_dialog.file_path)
+	if GetGuiObjectEvent(editor.gui.file_dialog.save) == CLICKED then
+		path = GetTextFieldText(editor.gui.file_dialog.file_path)
 
 		-- check if the path can be opened
 		file = io.open(path, "r")
@@ -264,52 +264,52 @@ function edi_update_file_dialog()
 	end
 
 	-- check if we have to cancel the file dialog
-	if elf.GetGuiObjectEvent(editor.gui.file_dialog.cancel) == elf.CLICKED then
+	if GetGuiObjectEvent(editor.gui.file_dialog.cancel) == CLICKED then
 		if editor.gui.file_dialog.callback ~= nil then
 			editor.gui.file_dialog.callback("")
 		end
 	end
 
 	-- see if we have to enter a new folder or just update the file path
-	if elf.GetGuiObjectEvent(editor.gui.file_dialog.file_list) == elf.SELECTION_CHANGED then
-		item = elf.GetDirectoryItem(editor.gui.file_dialog.dir, elf.GetTextListSelectionIndex(editor.gui.file_dialog.file_list))
-		if elf.IsObject(item) == true then
-			if elf.GetDirectoryItemType(item) == elf.DIR then
-				if elf.GetDirectoryItemName(item) == "." then
-				elseif elf.GetDirectoryItemName(item) == ".." then
+	if GetGuiObjectEvent(editor.gui.file_dialog.file_list) == SELECTION_CHANGED then
+		item = GetDirectoryItem(editor.gui.file_dialog.dir, GetTextListSelectionIndex(editor.gui.file_dialog.file_list))
+		if item ~= nil then
+			if GetDirectoryItemType(item) == DIR then
+				if GetDirectoryItemName(item) == "." then
+				elseif GetDirectoryItemName(item) == ".." then
 					edi_change_file_dialog_path(edi_get_parent_folder(editor.gui.file_dialog.current_path))
 				else
-					path = edi_make_folder_path(editor.gui.file_dialog.current_path) .. string.sub(elf.GetDirectoryItemName(item), 1)
+					path = edi_make_folder_path(editor.gui.file_dialog.current_path) .. string.sub(GetDirectoryItemName(item), 1)
 					edi_change_file_dialog_path(path)
 				end
 			else
-				path = edi_make_folder_path(editor.gui.file_dialog.current_path) .. string.sub(elf.GetDirectoryItemName(item), 1)
-				elf.SetTextFieldText(editor.gui.file_dialog.file_path, path)
+				path = edi_make_folder_path(editor.gui.file_dialog.current_path) .. string.sub(GetDirectoryItemName(item), 1)
+				SetTextFieldText(editor.gui.file_dialog.file_path, path)
 			end
 		end
 	end
 
 	-- check if we have to scroll
-	local diff = elf.GetTextListItemCount(editor.gui.file_dialog.file_list)-
-		elf.GetTextListRowCount(editor.gui.file_dialog.file_list)
+	local diff = GetTextListItemCount(editor.gui.file_dialog.file_list)-
+		GetTextListRowCount(editor.gui.file_dialog.file_list)
 
-	if elf.GetGuiObjectEvent(editor.gui.file_dialog.scroll_bar) == elf.VALUE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.file_dialog.scroll_bar) == VALUE_CHANGED then
 		if diff > 0 then
-			elf.SetTextListOffset(editor.gui.file_dialog.file_list, diff*(1.0-elf.GetSliderValue(editor.gui.file_dialog.scroll_bar)))
+			SetTextListOffset(editor.gui.file_dialog.file_list, diff*(1.0-GetSliderValue(editor.gui.file_dialog.scroll_bar)))
 		end
 	end
 
 	-- scroll with the mouse wheel
-	local wheel_diff = -(elf.GetMouseWheel() - editor.gui.file_dialog.prev_wheel)
+	local wheel_diff = -(GetMouseWheel() - editor.gui.file_dialog.prev_wheel)
 	if wheel_diff ~= 0 then
-		offset = elf.GetTextListOffset(editor.gui.file_dialog.file_list)+wheel_diff
+		offset = GetTextListOffset(editor.gui.file_dialog.file_list)+wheel_diff
 		if offset < 0 then offset = 0 end
 		if offset > diff then offset = diff end
-		elf.SetTextListOffset(editor.gui.file_dialog.file_list, offset)
+		SetTextListOffset(editor.gui.file_dialog.file_list, offset)
 
-		elf.SetSliderValue(editor.gui.file_dialog.scroll_bar, 1.0-(offset/diff))
+		SetSliderValue(editor.gui.file_dialog.scroll_bar, 1.0-(offset/diff))
 	end
 
-	editor.gui.file_dialog.prev_wheel = elf.GetMouseWheel()
+	editor.gui.file_dialog.prev_wheel = GetMouseWheel()
 end
 

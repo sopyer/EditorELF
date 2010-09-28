@@ -14,14 +14,14 @@ function edi_init_properties()
 	editor.gui.properties = {}
 
 	-- setup the file dialog screen
-	editor.gui.properties.handle = elf.CreateScreen("edit_menu")
+	editor.gui.properties.handle = CreateScreen("edit_menu")
 
-	elf.SetScreenTexture(editor.gui.properties.handle, elf.CreateTextureFromFile("images/properties/background.png"))
-	elf.SetGuiObjectVisible(editor.gui.properties.handle, false)
-	elf.SetGuiObjectColor(editor.gui.properties.handle, 1.0, 1.0, 1.0, 0.85)
-	elf.SetGuiObjectPosition(editor.gui.properties.handle, elf.GetWindowWidth()-elf.GetGuiObjectSize(editor.gui.properties.handle).x, 0)
+	SetScreenTexture(editor.gui.properties.handle, CreateTextureFromFile("images/properties/background.png"))
+	SetGuiObjectVisible(editor.gui.properties.handle, false)
+	SetGuiObjectColor(editor.gui.properties.handle, 1.0, 1.0, 1.0, 0.85)
+	SetGuiObjectPosition(editor.gui.properties.handle, GetWindowWidth()-GetGuiObjectSize(editor.gui.properties.handle).x, 0)
 
-	elf.AddGuiObject(editor.gui.handle, editor.gui.properties.handle)
+	AddGuiObject(editor.gui.handle, editor.gui.properties.handle)
 
 	-- setup the properties tab check boxes
 	editor.gui.properties.menu_cb = edi_create_check_box(editor.gui.properties.handle, "menu_cb", 4, 4, "images/properties/menu", true)
@@ -61,7 +61,7 @@ function edi_init_properties()
 	editor.gui.properties.edit.par_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/par", false)
 	editor.gui.properties.edit.spr_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/spr", false)
 
-	elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+	SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
 
 	-- setup the actor properties
 
@@ -128,26 +128,26 @@ function edi_init_properties()
 	editor.gui.properties.edit.actor.ang_factor_y_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_y_txf", 151, 400, "images/text_field48", editor.gui.fonts.normal, "0")
 	editor.gui.properties.edit.actor.ang_factor_z_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_z_txf", 203, 400, "images/text_field48", editor.gui.fonts.normal, "0")
 
-	editor.gui.properties.edit.actor.shape = elf.CreateTextList("file_list")
-	elf.SetTextListFont(editor.gui.properties.edit.actor.shape, editor.gui.fonts.normal)
-	elf.SetTextListSize(editor.gui.properties.edit.actor.shape, 4, 153)
-	elf.SetGuiObjectPosition(editor.gui.properties.edit.actor.shape, 77, 424)
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Box")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Sphere")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Triangle Mesh")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Capsule X")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Capsule Y")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Capsule Z")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone X")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone Y")
-	elf.AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone Z")
-	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape)
+	editor.gui.properties.edit.actor.shape = CreateTextList("file_list")
+	SetTextListFont(editor.gui.properties.edit.actor.shape, editor.gui.fonts.normal)
+	SetTextListSize(editor.gui.properties.edit.actor.shape, 4, 153)
+	SetGuiObjectPosition(editor.gui.properties.edit.actor.shape, 77, 424)
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Box")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Sphere")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Triangle Mesh")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Capsule X")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Capsule Y")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Capsule Z")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone X")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone Y")
+	AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone Z")
+	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape)
 
-	editor.gui.properties.edit.actor.shape_sb = elf.CreateSlider("scroll_bar")
-	elf.SetSliderBackgroundTexture(editor.gui.properties.edit.actor.shape_sb, elf.CreateTextureFromFile("images/properties/edit/shape_scroll_bar.png"))
-	elf.SetSliderSliderTexture(editor.gui.properties.edit.actor.shape_sb, elf.CreateTextureFromFile("images/properties/edit/shape_scroll_bar_slider.png"))
-	elf.SetGuiObjectPosition(editor.gui.properties.edit.actor.shape_sb, 234, 424)
-	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape_sb)
+	editor.gui.properties.edit.actor.shape_sb = CreateSlider("scroll_bar")
+	SetSliderBackgroundTexture(editor.gui.properties.edit.actor.shape_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar.png"))
+	SetSliderSliderTexture(editor.gui.properties.edit.actor.shape_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar_slider.png"))
+	SetGuiObjectPosition(editor.gui.properties.edit.actor.shape_sb, 234, 424)
+	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape_sb)
 
 	-- setup the light properties
 
@@ -165,14 +165,14 @@ function edi_init_properties()
 	editor.gui.properties.edit.light.intensity_lab = edi_create_label(editor.gui.properties.handle, "intensity_lab", 4, 291, "Intensity", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.fadeoff_lab = edi_create_label(editor.gui.properties.handle, "fadeoff_lab", 4, 313, "Fadeoff", editor.gui.fonts.normal)
 
-	editor.gui.properties.edit.light.type_txl = elf.CreateTextList("type_list")
-	elf.SetTextListFont(editor.gui.properties.edit.light.type_txl, editor.gui.fonts.normal)
-	elf.SetTextListSize(editor.gui.properties.edit.light.type_txl, 3, 202)
-	elf.SetGuiObjectPosition(editor.gui.properties.edit.light.type_txl, 50, 48)
-	elf.AddTextListItem(editor.gui.properties.edit.light.type_txl, " Point")
-	elf.AddTextListItem(editor.gui.properties.edit.light.type_txl, " Sun")
-	elf.AddTextListItem(editor.gui.properties.edit.light.type_txl, " Spot")
-	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.light.type_txl)
+	editor.gui.properties.edit.light.type_txl = CreateTextList("type_list")
+	SetTextListFont(editor.gui.properties.edit.light.type_txl, editor.gui.fonts.normal)
+	SetTextListSize(editor.gui.properties.edit.light.type_txl, 3, 202)
+	SetGuiObjectPosition(editor.gui.properties.edit.light.type_txl, 50, 48)
+	AddTextListItem(editor.gui.properties.edit.light.type_txl, " Point")
+	AddTextListItem(editor.gui.properties.edit.light.type_txl, " Sun")
+	AddTextListItem(editor.gui.properties.edit.light.type_txl, " Spot")
+	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.light.type_txl)
 
 	editor.gui.properties.edit.light.color_r_txf = edi_create_text_field(editor.gui.properties.handle, "color_r_txf", 99, 114, "images/text_field48", editor.gui.fonts.normal, "0")
 	editor.gui.properties.edit.light.color_g_txf = edi_create_text_field(editor.gui.properties.handle, "color_g_txf", 151, 114, "images/text_field48", editor.gui.fonts.normal, "0")
@@ -236,21 +236,21 @@ function edi_init_properties()
 	editor.gui.properties.edit.entity.replace_material_but = edi_create_button(editor.gui.properties.handle, "replace_material_but", 4, 136, "images/properties/edit/replace_material")
 	editor.gui.properties.edit.entity.remove_material_but = edi_create_button(editor.gui.properties.handle, "remove_material_but", 4, 158, "images/properties/edit/remove_material")
 
-	editor.gui.properties.edit.entity.materials_txl = elf.CreateTextList("materials_txl")
-	elf.SetTextListFont(editor.gui.properties.edit.entity.materials_txl, editor.gui.fonts.normal)
-	elf.SetTextListSize(editor.gui.properties.edit.entity.materials_txl, 4, 226)
-	elf.SetGuiObjectPosition(editor.gui.properties.edit.entity.materials_txl, 4, 180)
-	elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 1")
-	elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 2")
-	elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 3")
-	elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 4")
-	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.entity.materials_txl)
+	editor.gui.properties.edit.entity.materials_txl = CreateTextList("materials_txl")
+	SetTextListFont(editor.gui.properties.edit.entity.materials_txl, editor.gui.fonts.normal)
+	SetTextListSize(editor.gui.properties.edit.entity.materials_txl, 4, 226)
+	SetGuiObjectPosition(editor.gui.properties.edit.entity.materials_txl, 4, 180)
+	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 1")
+	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 2")
+	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 3")
+	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 4")
+	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.entity.materials_txl)
 
-	editor.gui.properties.edit.entity.materials_sb = elf.CreateSlider("scroll_bar")
-	elf.SetSliderBackgroundTexture(editor.gui.properties.edit.entity.materials_sb, elf.CreateTextureFromFile("images/properties/edit/shape_scroll_bar.png"))
-	elf.SetSliderSliderTexture(editor.gui.properties.edit.entity.materials_sb, elf.CreateTextureFromFile("images/properties/edit/shape_scroll_bar_slider.png"))
-	elf.SetGuiObjectPosition(editor.gui.properties.edit.entity.materials_sb, 230, 180)
-	elf.AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.entity.materials_sb)
+	editor.gui.properties.edit.entity.materials_sb = CreateSlider("scroll_bar")
+	SetSliderBackgroundTexture(editor.gui.properties.edit.entity.materials_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar.png"))
+	SetSliderSliderTexture(editor.gui.properties.edit.entity.materials_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar_slider.png"))
+	SetGuiObjectPosition(editor.gui.properties.edit.entity.materials_sb, 230, 180)
+	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.entity.materials_sb)
 
 	editor.gui.properties.edit.entity.mat_name_txf = edi_create_text_field(editor.gui.properties.handle, "mat_name_txf", 99, 260, "images/text_field128", editor.gui.fonts.normal, "")
 
@@ -428,102 +428,102 @@ end
 
 function edi_hide_edit_tab(tab)
 	if tab == EDI_EDIT_ACTOR then
-		elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
-		for k, v in pairs(editor.gui.properties.edit.actor) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.actor) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_CAMERA then
-		elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
-		for k, v in pairs(editor.gui.properties.edit.camera) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.camera) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_LIGHT then
-		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
-		for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.light) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_ENTITY then
-		elf.SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
-		for k, v in pairs(editor.gui.properties.edit.entity) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.entity) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_PARTICLES then
-		elf.SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
-		for k, v in pairs(editor.gui.properties.edit.particles) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.particles) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_SPRITE then
-		elf.SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
-		for k, v in pairs(editor.gui.properties.edit.sprite) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
+		for k, v in pairs(editor.gui.properties.edit.sprite) do SetGuiObjectVisible(v, false) end
 	end
 end
 
 function edi_show_edit_tab(tab)
-	elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
 
 	if tab == EDI_EDIT_ACTOR then
-		elf.SetCheckBoxState(editor.gui.properties.edit.act_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.act_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.actor) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.actor) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_CAMERA then
-		elf.SetCheckBoxState(editor.gui.properties.edit.cam_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.cam_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.camera) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.camera) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_LIGHT then
-		elf.SetCheckBoxState(editor.gui.properties.edit.lig_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.lig_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.light) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.light) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_ENTITY then
-		elf.SetCheckBoxState(editor.gui.properties.edit.ent_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.ent_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.entity) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.entity) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_PARTICLES then
-		elf.SetCheckBoxState(editor.gui.properties.edit.par_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.par_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.particles) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.particles) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_SPRITE then
-		elf.SetCheckBoxState(editor.gui.properties.edit.spr_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.spr_cb, true)
 		if editor.scene.selection ~= nil then
-			for k, v in pairs(editor.gui.properties.edit.sprite) do elf.SetGuiObjectVisible(v, true) end
+			for k, v in pairs(editor.gui.properties.edit.sprite) do SetGuiObjectVisible(v, true) end
 		end
 	end
 
 	if editor.scene.selection ~= nil then
-		if elf.GetObjectType(editor.scene.selection) == elf.CAMERA then
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, true)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
-		elseif elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, true)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
-		elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, true)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
-		elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, true)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
-		elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
-			elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, true)
+		if GetObjectType(editor.scene.selection) == CAMERA then
+			SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, true)
+			SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
+		elseif GetObjectType(editor.scene.selection) == LIGHT then
+			SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, true)
+			SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
+		elseif GetObjectType(editor.scene.selection) == ENTITY then
+			SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, true)
+			SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
+		elseif GetObjectType(editor.scene.selection) == PARTICLES then
+			SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.par_cb, true)
+			SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
+		elseif GetObjectType(editor.scene.selection) == SPRITE then
+			SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+			SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, true)
 		end
 	end
 end
@@ -537,38 +537,38 @@ end
 
 function edi_hide_properties_tab(tab)
 	if tab == EDI_PROPERTIES_MENU then
-		elf.SetCheckBoxState(editor.gui.properties.menu_cb, false)
-		for k, v in pairs(editor.gui.properties.menu) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.menu_cb, false)
+		for k, v in pairs(editor.gui.properties.menu) do SetGuiObjectVisible(v, false) end
 	elseif tab == EDI_PROPERTIES_EDIT then
-		elf.SetCheckBoxState(editor.gui.properties.edit_cb, false)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.act_cb, false)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
+		SetCheckBoxState(editor.gui.properties.edit_cb, false)
+		SetGuiObjectVisible(editor.gui.properties.edit.act_cb, false)
+		SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
+		SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+		SetGuiObjectVisible(editor.gui.properties.edit.ent_cb, false)
+		SetGuiObjectVisible(editor.gui.properties.edit.par_cb, false)
+		SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
 		edi_hide_edit_tab(editor.gui.properties.edit.current_tab)
 	elseif tab == EDI_PROPERTIES_PP then
-		elf.SetCheckBoxState(editor.gui.properties.pp_cb, false)
-		for k, v in pairs(editor.gui.properties.pp) do elf.SetGuiObjectVisible(v, false) end
+		SetCheckBoxState(editor.gui.properties.pp_cb, false)
+		for k, v in pairs(editor.gui.properties.pp) do SetGuiObjectVisible(v, false) end
 	end
 end
 
 function edi_show_properties_tab(tab)
-	elf.SetCheckBoxState(editor.gui.properties.menu_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.edit_cb, false)
-	elf.SetCheckBoxState(editor.gui.properties.pp_cb, false)
+	SetCheckBoxState(editor.gui.properties.menu_cb, false)
+	SetCheckBoxState(editor.gui.properties.edit_cb, false)
+	SetCheckBoxState(editor.gui.properties.pp_cb, false)
 
 	if tab == EDI_PROPERTIES_MENU then
-		elf.SetCheckBoxState(editor.gui.properties.menu_cb, true)
-		for k, v in pairs(editor.gui.properties.menu) do elf.SetGuiObjectVisible(v, true) end
+		SetCheckBoxState(editor.gui.properties.menu_cb, true)
+		for k, v in pairs(editor.gui.properties.menu) do SetGuiObjectVisible(v, true) end
 	elseif tab == EDI_PROPERTIES_EDIT then
-		elf.SetCheckBoxState(editor.gui.properties.edit_cb, true)
-		elf.SetGuiObjectVisible(editor.gui.properties.edit.act_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit_cb, true)
+		SetGuiObjectVisible(editor.gui.properties.edit.act_cb, true)
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	elseif tab == EDI_PROPERTIES_PP then
-		elf.SetCheckBoxState(editor.gui.properties.pp_cb, true)
-		for k, v in pairs(editor.gui.properties.pp) do elf.SetGuiObjectVisible(v, true) end
+		SetCheckBoxState(editor.gui.properties.pp_cb, true)
+		for k, v in pairs(editor.gui.properties.pp) do SetGuiObjectVisible(v, true) end
 	end
 end
 
@@ -584,7 +584,7 @@ function edi_open_properties()
 
 	editor.gui.current_menu = EDI_PROPERTIES
 
-	elf.SetGuiObjectVisible(editor.gui.properties.handle, true)
+	SetGuiObjectVisible(editor.gui.properties.handle, true)
 end
 
 function edi_update_edit_selection()
@@ -601,384 +601,384 @@ function edi_update_edit_selection()
 
 	-- update actor properties
 
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.name_txf, elf.GetActorName(editor.scene.selection))
-	local pos = elf.GetActorPosition(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf, tostring(pos.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf, tostring(pos.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf, tostring(pos.z))
-	local rot = elf.GetActorRotation(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf, tostring(rot.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf, tostring(rot.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf, tostring(rot.z))
-	local scr = elf.GetActorScript(editor.scene.selection)
-	if elf.IsObject(scr) == true then
-		elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, elf.GetScriptName(scr))
+	SetTextFieldText(editor.gui.properties.edit.actor.name_txf, GetActorName(editor.scene.selection))
+	local pos = GetActorPosition(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf, tostring(pos.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf, tostring(pos.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf, tostring(pos.z))
+	local rot = GetActorRotation(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf, tostring(rot.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf, tostring(rot.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf, tostring(rot.z))
+	local scr = GetActorScript(editor.scene.selection)
+	if scr ~= nil then
+		SetTextFieldText(editor.gui.properties.edit.actor.script_txf, GetScriptName(scr))
 	else
-		elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.actor.script_txf, "")
 	end
 
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.name_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.pos_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.pos_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.pos_z_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.rot_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.rot_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.rot_z_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.script_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.name_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.pos_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.pos_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.pos_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.rot_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.rot_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.rot_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.script_txf, 0)
 
-	if elf.IsActorPhysics(editor.scene.selection) == true then
-		elf.SetCheckBoxState(editor.gui.properties.edit.actor.physics_enb_cb, true)
+	if IsActorPhysics(editor.scene.selection) == true then
+		SetCheckBoxState(editor.gui.properties.edit.actor.physics_enb_cb, true)
 	else
-		elf.SetCheckBoxState(editor.gui.properties.edit.actor.physics_enb_cb, false)
+		SetCheckBoxState(editor.gui.properties.edit.actor.physics_enb_cb, false)
 	end
 
-	local lengths = elf.GetActorBoundingLengths(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf, tostring(lengths.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf, tostring(lengths.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf, tostring(lengths.z))
-	local offset = elf.GetActorBoundingOffset(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf, tostring(offset.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf, tostring(offset.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf, tostring(offset.z))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.mass_txf, tostring(elf.GetActorMass(editor.scene.selection)))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lin_damp_txf, tostring(elf.GetActorLinearDamping(editor.scene.selection)))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.ang_damp_txf, tostring(elf.GetActorAngularDamping(editor.scene.selection)))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lin_sleep_txf, tostring(elf.GetActorLinearSleepThreshold(editor.scene.selection)))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.ang_sleep_txf, tostring(elf.GetActorAngularSleepThreshold(editor.scene.selection)))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.restitu_txf, tostring(elf.GetActorRestitution(editor.scene.selection)))
-	local anis_fric = elf.GetActorAnisotropicFriction(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf, tostring(anis_fric.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf, tostring(anis_fric.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf, tostring(anis_fric.z))
-	local lin_factor = elf.GetActorLinearFactor(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf, tostring(lin_factor.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf, tostring(lin_factor.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf, tostring(lin_factor.z))
-	local ang_factor = elf.GetActorAngularFactor(editor.scene.selection)
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf, tostring(ang_factor.x))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf, tostring(ang_factor.y))
-	elf.SetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf, tostring(ang_factor.z))
-	elf.SetTextListSelection(editor.gui.properties.edit.actor.shape, elf.GetActorShape(editor.scene.selection)-1)
+	local lengths = GetActorBoundingLengths(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf, tostring(lengths.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf, tostring(lengths.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf, tostring(lengths.z))
+	local offset = GetActorBoundingOffset(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf, tostring(offset.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf, tostring(offset.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf, tostring(offset.z))
+	SetTextFieldText(editor.gui.properties.edit.actor.mass_txf, tostring(GetActorMass(editor.scene.selection)))
+	SetTextFieldText(editor.gui.properties.edit.actor.lin_damp_txf, tostring(GetActorLinearDamping(editor.scene.selection)))
+	SetTextFieldText(editor.gui.properties.edit.actor.ang_damp_txf, tostring(GetActorAngularDamping(editor.scene.selection)))
+	SetTextFieldText(editor.gui.properties.edit.actor.lin_sleep_txf, tostring(GetActorLinearSleepThreshold(editor.scene.selection)))
+	SetTextFieldText(editor.gui.properties.edit.actor.ang_sleep_txf, tostring(GetActorAngularSleepThreshold(editor.scene.selection)))
+	SetTextFieldText(editor.gui.properties.edit.actor.restitu_txf, tostring(GetActorRestitution(editor.scene.selection)))
+	local anis_fric = GetActorAnisotropicFriction(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf, tostring(anis_fric.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf, tostring(anis_fric.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf, tostring(anis_fric.z))
+	local lin_factor = GetActorLinearFactor(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf, tostring(lin_factor.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf, tostring(lin_factor.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf, tostring(lin_factor.z))
+	local ang_factor = GetActorAngularFactor(editor.scene.selection)
+	SetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf, tostring(ang_factor.x))
+	SetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf, tostring(ang_factor.y))
+	SetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf, tostring(ang_factor.z))
+	SetTextListSelection(editor.gui.properties.edit.actor.shape, GetActorShape(editor.scene.selection)-1)
 
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lengths_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lengths_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lengths_z_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.offset_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.offset_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.offset_z_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.mass_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_damp_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_damp_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_sleep_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_sleep_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.restitu_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.anis_fric_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.anis_fric_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.anis_fric_z_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_factor_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_factor_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_factor_z_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_x_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_y_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lengths_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lengths_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lengths_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.offset_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.offset_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.offset_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.mass_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_damp_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_damp_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_sleep_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_sleep_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.restitu_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.anis_fric_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.anis_fric_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.anis_fric_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_factor_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_factor_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.lin_factor_z_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_x_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_y_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.actor.ang_factor_z_txf, 0)
 
-	if elf.GetObjectType(editor.scene.selection) == elf.CAMERA then
-		elf.SetTextFieldText(editor.gui.properties.edit.camera.fov_txf, elf.GetCameraFov(editor.scene.selection))
-		local clip = elf.GetCameraClip(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf, clip.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf, clip.y)
+	if GetObjectType(editor.scene.selection) == CAMERA then
+		SetTextFieldText(editor.gui.properties.edit.camera.fov_txf, GetCameraFov(editor.scene.selection))
+		local clip = GetCameraClip(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf, clip.x)
+		SetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf, clip.y)
 
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.camera.fov_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.camera.clip_near_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.camera.clip_far_txf, 0)
-	elseif elf.GetObjectType(editor.scene.selection) == elf.LIGHT then
-		local color = elf.GetLightColor(editor.scene.selection)
-		elf.SetTextListSelection(editor.gui.properties.edit.light.type_txl, elf.GetLightType(editor.scene.selection)-1)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.camera.fov_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.camera.clip_near_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.camera.clip_far_txf, 0)
+	elseif GetObjectType(editor.scene.selection) == LIGHT then
+		local color = GetLightColor(editor.scene.selection)
+		SetTextListSelection(editor.gui.properties.edit.light.type_txl, GetLightType(editor.scene.selection)-1)
 
-		elf.SetTextFieldText(editor.gui.properties.edit.light.color_r_txf, color.r)
-		elf.SetTextFieldText(editor.gui.properties.edit.light.color_g_txf, color.g)
-		elf.SetTextFieldText(editor.gui.properties.edit.light.color_b_txf, color.b)
+		SetTextFieldText(editor.gui.properties.edit.light.color_r_txf, color.r)
+		SetTextFieldText(editor.gui.properties.edit.light.color_g_txf, color.g)
+		SetTextFieldText(editor.gui.properties.edit.light.color_b_txf, color.b)
 
-		elf.SetTextFieldText(editor.gui.properties.edit.light.distance_txf, elf.GetLightDistance(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.light.fade_speed_txf, elf.GetLightFadeSpeed(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.light.distance_txf, GetLightDistance(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.light.fade_speed_txf, GetLightFadeSpeed(editor.scene.selection))
 
-		elf.SetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf, elf.GetLightCone(editor.scene.selection).x)
-		elf.SetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf, elf.GetLightCone(editor.scene.selection).y)
+		SetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf, GetLightCone(editor.scene.selection).x)
+		SetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf, GetLightCone(editor.scene.selection).y)
 
-		elf.SetCheckBoxState(editor.gui.properties.edit.light.shadows_cb, elf.GetLightShadows(editor.scene.selection))
+		SetCheckBoxState(editor.gui.properties.edit.light.shadows_cb, GetLightShadows(editor.scene.selection))
 
-		elf.SetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb, elf.IsLightShaft(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.light.size_txf, elf.GetLightShaftSize(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.light.intensity_txf, elf.GetLightShaftIntensity(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.light.fade_off_txf, elf.GetLightShaftFadeOff(editor.scene.selection))
+		SetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb, IsLightShaft(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.light.size_txf, GetLightShaftSize(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.light.intensity_txf, GetLightShaftIntensity(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.light.fade_off_txf, GetLightShaftFadeOff(editor.scene.selection))
 
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_r_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_g_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_b_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.distance_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_speed_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.inner_cone_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.outer_cone_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.size_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.intensity_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_off_txf, 0)
-	elseif elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
-		local mdl = elf.GetEntityModel(editor.scene.selection)
-		if elf.IsObject(mdl) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.model_txf, elf.GetModelName(mdl))
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_r_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_g_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.color_b_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.distance_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_speed_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.inner_cone_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.outer_cone_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.size_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.intensity_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.light.fade_off_txf, 0)
+	elseif GetObjectType(editor.scene.selection) == ENTITY then
+		local mdl = GetEntityModel(editor.scene.selection)
+		if mdl ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.entity.model_txf, GetModelName(mdl))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.model_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.entity.model_txf, "")
 		end
 
-		local scale = elf.GetEntityScale(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf, scale.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf, scale.y)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf, scale.z)
+		local scale = GetEntityScale(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf, scale.x)
+		SetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf, scale.y)
+		SetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf, scale.z)
 
-		elf.RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
-		for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
-			local mat = elf.GetEntityMaterial(editor.scene.selection, i)
-			elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, elf.GetMaterialName(mat))
+		RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
+		for i=0, GetEntityMaterialCount(editor.scene.selection)-1 do
+			local mat = GetEntityMaterial(editor.scene.selection, i)
+			AddTextListItem(editor.gui.properties.edit.entity.materials_txl, GetMaterialName(mat))
 		end
 
-		if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
-			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
-			editor.scene.material = elf.GetEntityMaterial(editor.scene.selection, 0)
+		if GetEntityMaterialCount(editor.scene.selection) > 0 then
+			SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+			editor.scene.material = GetEntityMaterial(editor.scene.selection, 0)
 		else
-			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
+			SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
 		end
 
 		edi_update_edit_selection_material()
 
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.model_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_x_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_y_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_z_txf, 0)
-	elseif elf.GetObjectType(editor.scene.selection) == elf.PARTICLES then
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.max_count_txf, elf.GetParticlesMaxCount(editor.scene.selection))
+		SetTextFieldCursorPosition(editor.gui.properties.edit.entity.model_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_x_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_y_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_z_txf, 0)
+	elseif GetObjectType(editor.scene.selection) == PARTICLES then
+		SetTextFieldText(editor.gui.properties.edit.particles.max_count_txf, GetParticlesMaxCount(editor.scene.selection))
 
-		if elf.GetParticlesDrawMode(editor.scene.selection) == elf.TRANSPARENT then
-			elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
-			elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
-		elseif elf.GetParticlesDrawMode(editor.scene.selection) == elf.ADD then
-			elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
-			elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
+		if GetParticlesDrawMode(editor.scene.selection) == TRANSPARENT then
+			SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
+			SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
+		elseif GetParticlesDrawMode(editor.scene.selection) == ADD then
+			SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
+			SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
 		end
 
-		local tex = elf.GetParticlesTexture(editor.scene.selection)
-		if elf.IsObject(tex) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, elf.GetTextureName(tex))
+		local tex = GetParticlesTexture(editor.scene.selection)
+		if tex ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, GetTextureName(tex))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, "")
 		end
 
-		local mdl = elf.GetParticlesModel(editor.scene.selection)
-		if elf.IsObject(mdl) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.model_txf, elf.GetModelName(mdl))
+		local mdl = GetParticlesModel(editor.scene.selection)
+		if mdl ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.particles.model_txf, GetModelName(mdl))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "")
 		end
 
-		local ent = elf.GetParticlesEntity(editor.scene.selection)
-		if elf.IsObject(ent) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, elf.GetActorName(ent))
+		local ent = GetParticlesEntity(editor.scene.selection)
+		if ent ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, GetActorName(ent))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "")
 		end
 
-		local gravity = elf.GetParticlesGravity(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf, gravity.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf, gravity.y)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf, gravity.z)
+		local gravity = GetParticlesGravity(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf, gravity.x)
+		SetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf, gravity.y)
+		SetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf, gravity.z)
 
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.spawn_delay_txf, elf.GetParticlesSpawnDelay(editor.scene.selection))
-		elf.SetCheckBoxState(editor.gui.properties.edit.particles.spawn_cb, elf.GetParticlesSpawn(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.spawn_delay_txf, GetParticlesSpawnDelay(editor.scene.selection))
+		SetCheckBoxState(editor.gui.properties.edit.particles.spawn_cb, GetParticlesSpawn(editor.scene.selection))
 
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.size_min_txf, elf.GetParticlesSizeMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.size_max_txf, elf.GetParticlesSizeMax(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.size_grow_min_txf, elf.GetParticlesSizeGrowthMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.size_grow_max_txf, elf.GetParticlesSizeGrowthMax(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.size_min_txf, GetParticlesSizeMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.size_max_txf, GetParticlesSizeMax(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.size_grow_min_txf, GetParticlesSizeGrowthMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.size_grow_max_txf, GetParticlesSizeGrowthMax(editor.scene.selection))
 
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.rotation_min_txf, elf.GetParticlesRotationMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.rotation_max_txf, elf.GetParticlesRotationMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.rot_grow_min_txf, elf.GetParticlesRotationGrowthMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.rot_grow_max_txf, elf.GetParticlesRotationGrowthMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.life_span_min_txf, elf.GetParticlesLifeSpanMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.life_span_max_txf, elf.GetParticlesLifeSpanMax(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.fade_speed_min_txf, elf.GetParticlesFadeSpeedMin(editor.scene.selection))
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.fade_speed_max_txf, elf.GetParticlesFadeSpeedMax(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.rotation_min_txf, GetParticlesRotationMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.rotation_max_txf, GetParticlesRotationMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.rot_grow_min_txf, GetParticlesRotationGrowthMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.rot_grow_max_txf, GetParticlesRotationGrowthMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.life_span_min_txf, GetParticlesLifeSpanMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.life_span_max_txf, GetParticlesLifeSpanMax(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.fade_speed_min_txf, GetParticlesFadeSpeedMin(editor.scene.selection))
+		SetTextFieldText(editor.gui.properties.edit.particles.fade_speed_max_txf, GetParticlesFadeSpeedMax(editor.scene.selection))
 
-		local pos = elf.GetParticlesPositionMin(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf, pos.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf, pos.y)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf, pos.z)
+		local pos = GetParticlesPositionMin(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf, pos.x)
+		SetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf, pos.y)
+		SetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf, pos.z)
 
-		local pos = elf.GetParticlesPositionMax(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf, pos.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf, pos.y)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf, pos.z)
+		local pos = GetParticlesPositionMax(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf, pos.x)
+		SetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf, pos.y)
+		SetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf, pos.z)
 
-		local vel = elf.GetParticlesVelocityMin(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf, vel.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf, vel.y)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf, vel.z)
+		local vel = GetParticlesVelocityMin(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf, vel.x)
+		SetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf, vel.y)
+		SetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf, vel.z)
 
-		local vel = elf.GetParticlesVelocityMax(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf, vel.x)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf, vel.y)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf, vel.z)
+		local vel = GetParticlesVelocityMax(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf, vel.x)
+		SetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf, vel.y)
+		SetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf, vel.z)
 
-		local color = elf.GetParticlesColorMin(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf, color.r)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf, color.g)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf, color.b)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf, color.a)
+		local color = GetParticlesColorMin(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf, color.r)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf, color.g)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf, color.b)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf, color.a)
 
-		local color = elf.GetParticlesColorMax(editor.scene.selection)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf, color.r)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf, color.g)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf, color.b)
-		elf.SetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf, color.a)
+		local color = GetParticlesColorMax(editor.scene.selection)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf, color.r)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf, color.g)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf, color.b)
+		SetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf, color.a)
 
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.max_count_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.texture_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.model_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.entity_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.gravity_x_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.gravity_y_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.gravity_z_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.spawn_delay_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_min_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_max_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_grow_min_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_grow_max_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rotation_min_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rotation_max_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rot_grow_min_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rot_grow_max_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.life_span_min_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.life_span_max_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.fade_speed_min_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.fade_speed_max_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_min_x_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_min_y_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_min_z_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_max_x_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_max_y_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_max_z_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_min_x_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_min_y_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_min_z_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_max_x_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_max_y_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_max_z_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_r_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_g_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_b_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_a_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_r_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_g_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_b_txf, 0)
-		elf.SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_a_txf, 0)
-	elseif elf.GetObjectType(editor.scene.selection) == elf.SPRITE then
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.max_count_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.texture_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.model_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.entity_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.gravity_x_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.gravity_y_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.gravity_z_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.spawn_delay_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_min_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_max_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_grow_min_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.size_grow_max_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rotation_min_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rotation_max_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rot_grow_min_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.rot_grow_max_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.life_span_min_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.life_span_max_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.fade_speed_min_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.fade_speed_max_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_min_x_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_min_y_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_min_z_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_max_x_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_max_y_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.pos_max_z_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_min_x_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_min_y_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_min_z_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_max_x_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_max_y_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.vel_max_z_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_r_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_g_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_b_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_min_a_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_r_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_g_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_b_txf, 0)
+		SetTextFieldCursorPosition(editor.gui.properties.edit.particles.color_max_a_txf, 0)
+	elseif GetObjectType(editor.scene.selection) == SPRITE then
 	end
 end
 
 function edi_update_edit_selection_material()
-	local index = elf.GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
+	local index = GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
 	if index < 0 then
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf, "")
-		elf.SetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb, false)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "")
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf, "")
+		SetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb, false)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "")
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "")
 	else
-		local mat = elf.GetEntityMaterial(editor.scene.selection, index)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, elf.GetMaterialName(mat))
-		local col = elf.GetMaterialDiffuseColor(mat)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf, col.r)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf, col.g)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf, col.b)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf, col.a)
-		local col = elf.GetMaterialSpecularColor(mat)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf, col.r)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf, col.g)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf, col.b)
-		local col = elf.GetMaterialAmbientColor(mat)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf, col.r)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf, col.g)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf, col.b)
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf, elf.GetMaterialSpecularPower(mat))
-		elf.SetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb, elf.GetMaterialLighting(mat))
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf, elf.GetMaterialParallaxScale(mat))
-		elf.SetCheckBoxState(editor.gui.properties.edit.entity.mat_alpha_test_cb, elf.GetMaterialAlphaTest(mat))
-		elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, elf.GetMaterialAlphaThreshold(mat))
-		local tex = elf.GetMaterialDiffuseMap(mat)
-		if elf.IsObject(tex) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, elf.GetTextureName(tex))
+		local mat = GetEntityMaterial(editor.scene.selection, index)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, GetMaterialName(mat))
+		local col = GetMaterialDiffuseColor(mat)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf, col.r)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf, col.g)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf, col.b)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf, col.a)
+		local col = GetMaterialSpecularColor(mat)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf, col.r)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf, col.g)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf, col.b)
+		local col = GetMaterialAmbientColor(mat)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf, col.r)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf, col.g)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf, col.b)
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf, GetMaterialSpecularPower(mat))
+		SetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb, GetMaterialLighting(mat))
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf, GetMaterialParallaxScale(mat))
+		SetCheckBoxState(editor.gui.properties.edit.entity.mat_alpha_test_cb, GetMaterialAlphaTest(mat))
+		SetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, GetMaterialAlphaThreshold(mat))
+		local tex = GetMaterialDiffuseMap(mat)
+		if tex ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, GetTextureName(tex))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "")
 		end
-		tex = elf.GetMaterialNormalMap(mat)
-		if elf.IsObject(tex) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, elf.GetTextureName(tex))
+		tex = GetMaterialNormalMap(mat)
+		if tex ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, GetTextureName(tex))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "")
 		end
-		tex = elf.GetMaterialHeightMap(mat)
-		if elf.IsObject(tex) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, elf.GetTextureName(tex))
+		tex = GetMaterialHeightMap(mat)
+		if tex ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, GetTextureName(tex))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "")
 		end
-		tex = elf.GetMaterialSpecularMap(mat)
-		if elf.IsObject(tex) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, elf.GetTextureName(tex))
+		tex = GetMaterialSpecularMap(mat)
+		if tex ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, GetTextureName(tex))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "")
 		end
-		tex = elf.GetMaterialLightMap(mat)
-		if elf.IsObject(tex) == true then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, elf.GetTextureName(tex))
+		tex = GetMaterialLightMap(mat)
+		if tex ~= nil then
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, GetTextureName(tex))
 		else
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "")
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "")
 		end
 	end
 
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_name_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_r_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_g_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_b_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_a_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_r_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_g_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_b_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_r_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_g_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_b_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_spec_power_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_prlx_scale_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_map_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_normal_map_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_height_map_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_spec_map_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_light_map_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_name_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_r_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_g_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_b_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_a_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_r_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_g_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_specular_b_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_r_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_g_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_ambient_b_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_spec_power_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_prlx_scale_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_diffuse_map_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_normal_map_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_height_map_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_spec_map_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.edit.entity.mat_light_map_txf, 0)
 end
 
 function edi_update_properties_selection()
@@ -1013,129 +1013,129 @@ function edi_properties_menu_import_scene(path)
 		return
 	end
 
-	local scn = elf.CreateSceneFromFile(path)
-	if elf.IsObject(scn) == true then
+	local scn = CreateSceneFromFile(path)
+	if scn ~= nil then
 
 		print("importing scene \"" .. path .. "\"")
-		print("  cameras: " .. elf.GetSceneCameraCount(scn))
-		print("  entities: " .. elf.GetSceneEntityCount(scn))
-		print("  lights: " .. elf.GetSceneLightCount(scn))
-		print("  sprites: " .. elf.GetSceneSpriteCount(scn))
-		print("  particles: " .. elf.GetSceneParticlesCount(scn))
+		print("  cameras: " .. GetSceneCameraCount(scn))
+		print("  entities: " .. GetSceneEntityCount(scn))
+		print("  lights: " .. GetSceneLightCount(scn))
+		print("  sprites: " .. GetSceneSpriteCount(scn))
+		print("  particles: " .. GetSceneParticlesCount(scn))
 
-		while elf.IsObject(elf.GetCameraByIndex(scn, 0)) do
-			local cam = elf.GetCameraByIndex(scn, 0)
-			elf.AddCameraToScene(editor.scene.handle, cam)
+		while GetCameraByIndex(scn, 0) ~= nil do
+			local cam = GetCameraByIndex(scn, 0)
+			AddCameraToScene(editor.scene.handle, cam)
 		end
-		while elf.IsObject(elf.GetEntityByIndex(scn, 0)) do
-			local ent = elf.GetEntityByIndex(scn, 0)
-			elf.AddEntityToScene(editor.scene.handle, ent)
+		while GetEntityByIndex(scn, 0) ~= nil do
+			local ent = GetEntityByIndex(scn, 0)
+			AddEntityToScene(editor.scene.handle, ent)
 		end
-		while elf.IsObject(elf.GetLightByIndex(scn, 0)) do
-			local lig = elf.GetLightByIndex(scn, 0)
-			elf.AddLightToScene(editor.scene.handle, lig)
+		while GetLightByIndex(scn, 0) ~= nil do
+			local lig = GetLightByIndex(scn, 0)
+			AddLightToScene(editor.scene.handle, lig)
 		end
-		while elf.IsObject(elf.GetSpriteByIndex(scn, 0)) do
-			local spr = elf.GetSpriteByIndex(scn, 0)
-			elf.AddSpriteToScene(editor.scene.handle, spr)
+		while GetSpriteByIndex(scn, 0) ~= nil do
+			local spr = GetSpriteByIndex(scn, 0)
+			AddSpriteToScene(editor.scene.handle, spr)
 		end
-		while elf.IsObject(elf.GetParticlesByIndex(scn, 0)) do
-			local par = elf.GetParticlesByIndex(scn, 0)
-			elf.AddParticlesToScene(editor.scene.handle, par)
+		while GetParticlesByIndex(scn, 0) ~= nil do
+			local par = GetParticlesByIndex(scn, 0)
+			AddParticlesToScene(editor.scene.handle, par)
 		end
 		edi_open_properties()
 	end
 end
 
 function edi_update_menu()
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open PAK...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_open)
+	if GetGuiObjectEvent(editor.gui.properties.menu.open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open PAK...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_open)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.save) == elf.CLICKED then
-		local path = elf.GetSceneFilePath(editor.scene.handle)
+	if GetGuiObjectEvent(editor.gui.properties.menu.save) == CLICKED then
+		local path = GetSceneFilePath(editor.scene.handle)
 		if path == nil or string.len(path) < 1 then
-			path = elf.GetCurrentDirectory()
+			path = GetCurrentDirectory()
 		else
 			path = edi_get_parent_folder(path)
 		end
 		edi_open_file_dialog(path, "Save PAK...", EDI_FILE_DIALOG_SAVE, edi_properties_menu_save)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.import_scene) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Import Scene (.pak/.dae/.3ds/.md2/...) ...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_import_scene)
+	if GetGuiObjectEvent(editor.gui.properties.menu.import_scene) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Import Scene (.pak/.dae/.3ds/.md2/...) ...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_import_scene)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.move) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.menu.move) == STATE_CHANGED then
 		if editor.scene.selection ~= nil then
-			editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+			editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
 			editor.gui.action.move = true
-			elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+			SetCheckBoxState(editor.gui.properties.menu.move, true)
 		else
-			elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+			SetCheckBoxState(editor.gui.properties.menu.move, false)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.rotate) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.menu.rotate) == STATE_CHANGED then
 		if editor.scene.selection ~= nil then
-			editor.gui.action.rotate_orig_rot = elf.GetActorRotation(editor.scene.selection)
+			editor.gui.action.rotate_orig_rot = GetActorRotation(editor.scene.selection)
 			editor.gui.action.rotate = true
-			elf.SetCheckBoxState(editor.gui.properties.menu.rotate, true)
+			SetCheckBoxState(editor.gui.properties.menu.rotate, true)
 		else
-			elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
+			SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_camera) == elf.CLICKED then
-		local cam = elf.CreateCamera("Camera")
-		elf.AddCameraToScene(editor.scene.handle, cam)
+	if GetGuiObjectEvent(editor.gui.properties.menu.create_camera) == CLICKED then
+		local cam = CreateCamera("Camera")
+		AddCameraToScene(editor.scene.handle, cam)
 
 		edi_select_actor(cam)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_light) == elf.CLICKED then
-		local lig = elf.CreateLight("Light")
-		elf.AddLightToScene(editor.scene.handle, lig)
+	if GetGuiObjectEvent(editor.gui.properties.menu.create_light) == CLICKED then
+		local lig = CreateLight("Light")
+		AddLightToScene(editor.scene.handle, lig)
 
 		edi_select_actor(lig)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_entity) == elf.CLICKED then
-		local ent = elf.CreateEntity("Entity")
-		elf.AddEntityToScene(editor.scene.handle, ent)
+	if GetGuiObjectEvent(editor.gui.properties.menu.create_entity) == CLICKED then
+		local ent = CreateEntity("Entity")
+		AddEntityToScene(editor.scene.handle, ent)
 
 		edi_select_actor(ent)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.create_particles) == elf.CLICKED then
-		local par = elf.CreateParticles("Particles", 25)
-		elf.AddParticlesToScene(editor.scene.handle, par)
+	if GetGuiObjectEvent(editor.gui.properties.menu.create_particles) == CLICKED then
+		local par = CreateParticles("Particles", 25)
+		AddParticlesToScene(editor.scene.handle, par)
 
 		edi_select_actor(par)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.ambient_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.menu.ambient_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.menu.ambient_r_txf, 0.0, nil)
-		elf.SetSceneAmbientColor(editor.scene.handle,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
+		SetSceneAmbientColor(editor.scene.handle,
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.ambient_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.menu.ambient_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.menu.ambient_g_txf, 0.0, nil)
-		elf.SetSceneAmbientColor(editor.scene.handle,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
+		SetSceneAmbientColor(editor.scene.handle,
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu.ambient_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.menu.ambient_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.menu.ambient_b_txf, 0.0, nil)
-		elf.SetSceneAmbientColor(editor.scene.handle,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
+		SetSceneAmbientColor(editor.scene.handle,
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.menu.ambient_b_txf)), 1.0)
 	end
 end
 
@@ -1147,430 +1147,430 @@ function edi_properties_edit_actor_open_script(path)
 
 	if string.find(path, ".lua") == nil then return end
 
-	local scr = elf.CreateScriptFromFile(path)
-	if elf.IsObject(scr) == true then
-		elf.SetActorScript(editor.scene.selection, scr)
+	local scr = CreateScriptFromFile(path)
+	if scr ~= nil then
+		SetActorScript(editor.scene.selection, scr)
 		edi_update_edit_selection()
 		edi_open_properties()
 	end
 end
 
 function edi_update_actor()
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.name_txf) == elf.LOSE_FOCUS then
-		elf.SetActorName(editor.scene.selection, elf.GetTextFieldText(editor.gui.properties.edit.actor.name_txf))
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.name_txf) == LOSE_FOCUS then
+		SetActorName(editor.scene.selection, GetTextFieldText(editor.gui.properties.edit.actor.name_txf))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.script_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Script (.lua)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_actor_open_script)
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.script_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Script (.lua)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_actor_open_script)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.script_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.actor.script_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.script_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.actor.script_txf)
 		if string.len(name) > 0 then
-			local scr = elf.GetActorScript(editor.scene.selection)
-			if elf.IsObject(scr) == true then
-				elf.SetScriptName(scr, name)
+			local scr = GetActorScript(editor.scene.selection)
+			if scr ~= nil then
+				SetScriptName(scr, name)
 			else
-				local scripts = elf.GetSceneScripts(editor.scene.handle)
-				scr = elf.BeginList(scripts)
-				while elf.IsObject(scr) == true do
-					if elf.GetScriptName(scr) == name then
-						elf.SetActorScript(editor.scene.selection, scr)
+				local scripts = GetSceneScripts(editor.scene.handle)
+				scr = BeginList(scripts)
+				while scr ~= nil do
+					if GetScriptName(scr) == name then
+						SetActorScript(editor.scene.selection, scr)
 						break
 					end
-					scr = elf.NextInList(scripts)
+					scr = NextInList(scripts)
 				end
-				if elf.IsObject(scr) == false then elf.SetTextFieldText(editor.gui.properties.edit.actor.script_txf, "") end
+				if scr ~= nil then SetTextFieldText(editor.gui.properties.edit.actor.script_txf, "") end
 			end
 		else
-			elf.ClearActorScript(editor.scene.selection)
+			ClearActorScript(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.pos_x_txf, nil, nil)
-		elf.SetActorPosition(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
+		SetActorPosition(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.pos_y_txf, nil, nil)
-		elf.SetActorPosition(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
+		SetActorPosition(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.pos_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.pos_z_txf, nil, nil)
-		elf.SetActorPosition(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
+		SetActorPosition(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.pos_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.rot_x_txf, nil, nil)
-		elf.SetActorRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
+		SetActorRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.rot_y_txf, nil, nil)
-		elf.SetActorRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
+		SetActorRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.rot_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.rot_z_txf, nil, nil)
-		elf.SetActorRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
+		SetActorRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.rot_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.physics_enb_cb) == elf.STATE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.edit.actor.physics_enb_cb) == true then
-			local shape = elf.GetActorShape(editor.scene.selection)
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.physics_enb_cb) == STATE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.edit.actor.physics_enb_cb) == true then
+			local shape = GetActorShape(editor.scene.selection)
 			if shape == 0 then
-				elf.SetTextListSelection(editor.gui.properties.edit.actor.shape, 0)
+				SetTextListSelection(editor.gui.properties.edit.actor.shape, 0)
 				shape = 1
 			end
-			elf.SetActorPhysics(editor.scene.selection, shape, elf.GetActorMass(editor.scene.selection))
+			SetActorPhysics(editor.scene.selection, shape, GetActorMass(editor.scene.selection))
 		else
-			elf.DisableActorPhysics(editor.scene.selection)
+			DisableActorPhysics(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lengths_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lengths_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lengths_x_txf, 0.0, nil)
-		elf.SetActorBoundingLengths(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf)))
+		SetActorBoundingLengths(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lengths_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lengths_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lengths_y_txf, 0.0, nil)
-		elf.SetActorBoundingLengths(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf)))
+		SetActorBoundingLengths(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lengths_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lengths_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lengths_z_txf, 0.0, nil)
-		elf.SetActorBoundingLengths(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf)))
+		SetActorBoundingLengths(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lengths_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.offset_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.offset_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.offset_x_txf, 0.0, nil)
-		elf.SetActorBoundingOffset(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf)))
+		SetActorBoundingOffset(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.offset_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.offset_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.offset_y_txf, 0.0, nil)
-		elf.SetActorBoundingOffset(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf)))
+		SetActorBoundingOffset(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.offset_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.offset_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.offset_z_txf, 0.0, nil)
-		elf.SetActorBoundingOffset(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf)))
+		SetActorBoundingOffset(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.offset_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.mass_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.mass_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.mass_txf, 0.0, nil)
-		local physics = elf.IsActorPhysics(editor.scene.selection)
-		local shape = elf.GetActorShape(editor.scene.selection)
+		local physics = IsActorPhysics(editor.scene.selection)
+		local shape = GetActorShape(editor.scene.selection)
 		if shape == 0 then
-			elf.SetTextListSelection(editor.gui.properties.edit.actor.shape, 0)
+			SetTextListSelection(editor.gui.properties.edit.actor.shape, 0)
 			shape = 1
 		end
-		elf.SetActorPhysics(editor.scene.selection, shape,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.mass_txf)))
-		if physics == false then elf.DisableActorPhysics(editor.scene.selection) end
+		SetActorPhysics(editor.scene.selection, shape,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.mass_txf)))
+		if physics == false then DisableActorPhysics(editor.scene.selection) end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_damp_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_damp_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lin_damp_txf, 0.0, nil)
-		elf.SetActorDamping(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_damp_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_damp_txf)))
+		SetActorDamping(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_damp_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_damp_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_damp_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_damp_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.ang_damp_txf, 0.0, nil)
-		elf.SetActorDamping(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_damp_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_damp_txf)))
+		SetActorDamping(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_damp_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_damp_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_sleep_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_sleep_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lin_sleep_txf, 0.0, nil)
-		elf.SetActorSleepThresholds(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_sleep_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_sleep_txf)))
+		SetActorSleepThresholds(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_sleep_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_sleep_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_sleep_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_sleep_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.ang_sleep_txf, 0.0, nil)
-		elf.SetActorSleepThresholds(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_sleep_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_sleep_txf)))
+		SetActorSleepThresholds(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_sleep_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_sleep_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.restitu_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.restitu_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.restitu_txf, 0.0, nil)
-		elf.SetActorRestitution(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.restitu_txf)))
+		SetActorRestitution(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.restitu_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.anis_fric_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.anis_fric_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.anis_fric_x_txf, 0.0, nil)
-		elf.SetActorAnisotropicFriction(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf)))
+		SetActorAnisotropicFriction(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.anis_fric_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.anis_fric_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.anis_fric_y_txf, 0.0, nil)
-		elf.SetActorAnisotropicFriction(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf)))
+		SetActorAnisotropicFriction(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.anis_fric_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.anis_fric_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.anis_fric_z_txf, 0.0, nil)
-		elf.SetActorAnisotropicFriction(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf)))
+		SetActorAnisotropicFriction(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.anis_fric_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_factor_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_factor_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lin_factor_x_txf, 0.0, nil)
-		elf.SetActorLinearFactor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf)))
+		SetActorLinearFactor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_factor_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_factor_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lin_factor_y_txf, 0.0, nil)
-		elf.SetActorLinearFactor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf)))
+		SetActorLinearFactor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_factor_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.lin_factor_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.lin_factor_z_txf, 0.0, nil)
-		elf.SetActorLinearFactor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf)))
+		SetActorLinearFactor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.lin_factor_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_factor_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_factor_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.ang_factor_x_txf, 0.0, nil)
-		elf.SetActorAngularFactor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf)))
+		SetActorAngularFactor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_factor_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_factor_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.ang_factor_y_txf, 0.0, nil)
-		elf.SetActorAngularFactor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf)))
+		SetActorAngularFactor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_factor_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.ang_factor_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.actor.ang_factor_z_txf, 0.0, nil)
-		elf.SetActorAngularFactor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf)))
+		SetActorAngularFactor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.ang_factor_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.shape) == elf.SELECTION_CHANGED then
-		local physics = elf.IsActorPhysics(editor.scene.selection)
-		local shape = elf.GetTextListSelectionIndex(editor.gui.properties.edit.actor.shape)+1
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.shape) == SELECTION_CHANGED then
+		local physics = IsActorPhysics(editor.scene.selection)
+		local shape = GetTextListSelectionIndex(editor.gui.properties.edit.actor.shape)+1
 		if shape == 0 then
-			elf.SetTextListSelection(editor.gui.properties.edit.actor.shape, 0)
+			SetTextListSelection(editor.gui.properties.edit.actor.shape, 0)
 			shape = 1
 		end
-		elf.SetActorPhysics(editor.scene.selection, shape,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.actor.mass_txf)))
-		if physics == false then elf.DisableActorPhysics(editor.scene.selection) end
+		SetActorPhysics(editor.scene.selection, shape,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.actor.mass_txf)))
+		if physics == false then DisableActorPhysics(editor.scene.selection) end
 	end
 
-	local diff = elf.GetTextListItemCount(editor.gui.properties.edit.actor.shape)-
-		elf.GetTextListRowCount(editor.gui.properties.edit.actor.shape)
+	local diff = GetTextListItemCount(editor.gui.properties.edit.actor.shape)-
+		GetTextListRowCount(editor.gui.properties.edit.actor.shape)
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.actor.shape_sb) == elf.VALUE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.actor.shape_sb) == VALUE_CHANGED then
 		if diff > 0 then
-			elf.SetTextListOffset(editor.gui.properties.edit.actor.shape, diff*(1.0-elf.GetSliderValue(editor.gui.properties.edit.actor.shape_sb)))
+			SetTextListOffset(editor.gui.properties.edit.actor.shape, diff*(1.0-GetSliderValue(editor.gui.properties.edit.actor.shape_sb)))
 		end
 	end
 end
 
 function edi_update_camera()
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.fov_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.camera.fov_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.camera.fov_txf, 0.0, 179.0)
-		elf.SetCameraPerspective(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
-			-1.0, tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
+		SetCameraPerspective(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
+			-1.0, tonumber(GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.clip_near_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.camera.clip_near_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.camera.clip_near_txf, 0.0, nil)
-		elf.SetCameraPerspective(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
-			-1.0, tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
+		SetCameraPerspective(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
+			-1.0, tonumber(GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.clip_far_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.camera.clip_far_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.camera.clip_far_txf, 0.0, nil)
-		elf.SetCameraPerspective(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
-			-1.0, tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
+		SetCameraPerspective(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.camera.fov_txf)),
+			-1.0, tonumber(GetTextFieldText(editor.gui.properties.edit.camera.clip_near_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.camera.clip_far_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.camera.copy_but) == elf.CLICKED then
-		local pos = elf.GetActorPosition(editor.scene.selection)
-		local rot = elf.GetActorRotation(editor.scene.selection)
-		local clip = elf.GetCameraClip(editor.scene.selection)
-		elf.SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
-		elf.SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
-		elf.SetCameraPerspective(editor.scene.camera.handle,
-			elf.GetCameraFov(editor.scene.selection), -1.0, clip.x, clip.y)
+	if GetGuiObjectEvent(editor.gui.properties.edit.camera.copy_but) == CLICKED then
+		local pos = GetActorPosition(editor.scene.selection)
+		local rot = GetActorRotation(editor.scene.selection)
+		local clip = GetCameraClip(editor.scene.selection)
+		SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
+		SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
+		SetCameraPerspective(editor.scene.camera.handle,
+			GetCameraFov(editor.scene.selection), -1.0, clip.x, clip.y)
 	end
 end
 
 function edi_update_light()
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.type_txl) == elf.SELECTION_CHANGED then
-		elf.SetLightType(editor.scene.selection, elf.GetTextListSelectionIndex(editor.gui.properties.edit.light.type_txl)+1)
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.type_txl) == SELECTION_CHANGED then
+		SetLightType(editor.scene.selection, GetTextListSelectionIndex(editor.gui.properties.edit.light.type_txl)+1)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.color_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.color_r_txf, 0.0, nil)
-		elf.SetLightColor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+		SetLightColor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.color_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.color_g_txf, 0.0, nil)
-		elf.SetLightColor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+		SetLightColor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.color_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.color_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.color_b_txf, 0.0, nil)
-		elf.SetLightColor(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
+		SetLightColor(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.color_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.distance_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.distance_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.distance_txf, 0.0, nil)
-		elf.SetLightDistance(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.distance_txf)))
+		SetLightDistance(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.distance_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.fade_speed_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.fade_speed_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.fade_speed_txf, 0.0, nil)
-		elf.SetLightFadeSpeed(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_speed_txf)))
+		SetLightFadeSpeed(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.fade_speed_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.inner_cone_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.inner_cone_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.inner_cone_txf, 0.0, nil)
-		elf.SetLightCone(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf)))
+		SetLightCone(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.outer_cone_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.outer_cone_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.outer_cone_txf, 0.0, nil)
-		elf.SetLightCone(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf)))
+		SetLightCone(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.inner_cone_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.outer_cone_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.shadows_cb) == elf.STATE_CHANGED then
-		elf.SetLightShadows(editor.scene.selection, elf.GetCheckBoxState(editor.gui.properties.edit.light.shadows_cb))
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.shadows_cb) == STATE_CHANGED then
+		SetLightShadows(editor.scene.selection, GetCheckBoxState(editor.gui.properties.edit.light.shadows_cb))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.ls_enabled_cb) == elf.STATE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb) then
-			elf.SetLightShaft(editor.scene.selection,
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.ls_enabled_cb) == STATE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.edit.light.ls_enabled_cb) then
+			SetLightShaft(editor.scene.selection,
+				tonumber(GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+				tonumber(GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+				tonumber(GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
 		else
-			elf.DisableLightShaft(editor.scene.selection)
+			DisableLightShaft(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.size_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.size_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.size_txf, 0.0, nil)
-		local enabled = elf.IsLightShaft(editor.scene.selection)
-		elf.SetLightShaft(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
-		if enabled == false then elf.DisableLightShaft(editor.scene.selection) end
+		local enabled = IsLightShaft(editor.scene.selection)
+		SetLightShaft(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		if enabled == false then DisableLightShaft(editor.scene.selection) end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.intensity_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.intensity_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.intensity_txf, 0.0, nil)
-		local enabled = elf.IsLightShaft(editor.scene.selection)
-		elf.SetLightShaft(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
-		if enabled == false then elf.DisableLightShaft(editor.scene.selection) end
+		local enabled = IsLightShaft(editor.scene.selection)
+		SetLightShaft(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		if enabled == false then DisableLightShaft(editor.scene.selection) end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.light.fade_off_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.light.fade_off_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.light.fade_off_txf, 0.0, nil)
-		local enabled = elf.IsLightShaft(editor.scene.selection)
-		elf.SetLightShaft(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
-		if enabled == false then elf.DisableLightShaft(editor.scene.selection) end
+		local enabled = IsLightShaft(editor.scene.selection)
+		SetLightShaft(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.size_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.intensity_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.light.fade_off_txf)))
+		if enabled == false then DisableLightShaft(editor.scene.selection) end
 	end
 end
 
@@ -1580,9 +1580,9 @@ function edi_properties_edit_entity_open_diffuse_map(path)
 		return
 	end
 
-	local tex = elf.CreateTextureFromFile(path)
-	if elf.IsObject(tex) == true then
-		elf.SetMaterialDiffuseMap(editor.scene.material, tex)
+	local tex = CreateTextureFromFile(path)
+	if tex ~= nil then
+		SetMaterialDiffuseMap(editor.scene.material, tex)
 		edi_update_edit_selection_material()
 		edi_open_properties()
 	end
@@ -1594,10 +1594,10 @@ function edi_properties_edit_entity_open_normal_map(path)
 		return
 	end
 
-	local tex = elf.CreateTextureFromFile(path)
-	if elf.IsObject(tex) == true then
-		elf.SetMaterialNormalMap(editor.scene.material, tex)
-		elf.GenerateEntityTangents(editor.scene.selection)
+	local tex = CreateTextureFromFile(path)
+	if tex ~= nil then
+		SetMaterialNormalMap(editor.scene.material, tex)
+		GenerateEntityTangents(editor.scene.selection)
 		edi_update_edit_selection_material()
 		edi_open_properties()
 	end
@@ -1609,10 +1609,10 @@ function edi_properties_edit_entity_open_height_map(path)
 		return
 	end
 
-	local tex = elf.CreateTextureFromFile(path)
-	if elf.IsObject(tex) == true then
-		elf.SetMaterialHeightMap(editor.scene.material, tex)
-		elf.GenerateEntityTangents(editor.scene.selection)
+	local tex = CreateTextureFromFile(path)
+	if tex ~= nil then
+		SetMaterialHeightMap(editor.scene.material, tex)
+		GenerateEntityTangents(editor.scene.selection)
 		edi_update_edit_selection_material()
 		edi_open_properties()
 	end
@@ -1624,9 +1624,9 @@ function edi_properties_edit_entity_open_spec_map(path)
 		return
 	end
 
-	local tex = elf.CreateTextureFromFile(path)
-	if elf.IsObject(tex) == true then
-		elf.SetMaterialSpecularMap(editor.scene.material, tex)
+	local tex = CreateTextureFromFile(path)
+	if tex ~= nil then
+		SetMaterialSpecularMap(editor.scene.material, tex)
 		edi_update_edit_selection_material()
 		edi_open_properties()
 	end
@@ -1638,386 +1638,386 @@ function edi_properties_edit_entity_open_light_map(path)
 		return
 	end
 
-	local tex = elf.CreateTextureFromFile(path)
-	if elf.IsObject(tex) == true then
-		elf.SetMaterialLightMap(editor.scene.material, tex)
+	local tex = CreateTextureFromFile(path)
+	if tex ~= nil then
+		SetMaterialLightMap(editor.scene.material, tex)
 		edi_update_edit_selection_material()
 		edi_open_properties()
 	end
 end
 
 function edi_update_entity()
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.model_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.model_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.model_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.model_txf)
 		if string.len(name) > 0 then
-			local mdl = elf.GetEntityModel(editor.scene.selection)
-			if elf.IsObject(mdl) == true then
-				elf.SetModelName(mdl, name)
+			local mdl = GetEntityModel(editor.scene.selection)
+			if mdl ~= nil then
+				SetModelName(mdl, name)
 			else
-				local models = elf.GetSceneModels(editor.scene.handle)
-				local mdl = elf.BeginList(models)
-				while elf.IsObject(mdl) == true do
-					if elf.GetModelName(mdl) == name then
-						elf.SetEntityModel(editor.scene.selection, mdl)
+				local models = GetSceneModels(editor.scene.handle)
+				local mdl = BeginList(models)
+				while mdl ~= nil do
+					if GetModelName(mdl) == name then
+						SetEntityModel(editor.scene.selection, mdl)
 
-						elf.RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
-						for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
-							local mat = elf.GetEntityMaterial(editor.scene.selection, i)
-							elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, elf.GetMaterialName(mat))
+						RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
+						for i=0, GetEntityMaterialCount(editor.scene.selection)-1 do
+							local mat = GetEntityMaterial(editor.scene.selection, i)
+							AddTextListItem(editor.gui.properties.edit.entity.materials_txl, GetMaterialName(mat))
 						end
 
-						if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
-							elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
-							editor.scene.material = elf.GetEntityMaterial(editor.scene.selection, 0)
+						if GetEntityMaterialCount(editor.scene.selection) > 0 then
+							SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+							editor.scene.material = GetEntityMaterial(editor.scene.selection, 0)
 						else
-							elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
+							SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
 						end
 
 						edi_update_edit_selection_material()
 
 						break
 					end
-					mdl = elf.NextInList(models)
+					mdl = NextInList(models)
 				end
-				if elf.IsObject(mdl) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.model_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.entity.model_txf, "") end
 			end
 		else
-			elf.ClearEntityModel(editor.scene.selection)
+			ClearEntityModel(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.scale_x_txf, nil, nil)
-		elf.SetEntityScale(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
+		SetEntityScale(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.scale_y_txf, nil, nil)
-		elf.SetEntityScale(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
+		SetEntityScale(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.scale_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.scale_z_txf, nil, nil)
-		elf.SetEntityScale(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
+		SetEntityScale(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.scale_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_txl) == elf.SELECTION_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_txl) == SELECTION_CHANGED then
 		edi_update_edit_selection_material()
 	end
 
-	local diff = elf.GetTextListItemCount(editor.gui.properties.edit.entity.materials_txl)-
-		elf.GetTextListRowCount(editor.gui.properties.edit.entity.materials_txl)
+	local diff = GetTextListItemCount(editor.gui.properties.edit.entity.materials_txl)-
+		GetTextListRowCount(editor.gui.properties.edit.entity.materials_txl)
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_sb) == elf.VALUE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.materials_sb) == VALUE_CHANGED then
 		if diff > 0 then
-			elf.SetTextListOffset(editor.gui.properties.edit.entity.materials_txl,
-				diff*(1.0-elf.GetSliderValue(editor.gui.properties.edit.entity.materials_sb)))
+			SetTextListOffset(editor.gui.properties.edit.entity.materials_txl,
+				diff*(1.0-GetSliderValue(editor.gui.properties.edit.entity.materials_sb)))
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.add_material_but) == elf.CLICKED then
-		local new_mat = elf.CreateMaterial("Material")
-		elf.AddEntityMaterial(editor.scene.selection, new_mat)
-		elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, "Material")
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.add_material_but) == CLICKED then
+		local new_mat = CreateMaterial("Material")
+		AddEntityMaterial(editor.scene.selection, new_mat)
+		AddTextListItem(editor.gui.properties.edit.entity.materials_txl, "Material")
 	end
 
-	local index = elf.GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
+	local index = GetTextListSelectionIndex(editor.gui.properties.edit.entity.materials_txl)
 
 	if index < 0 then return end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.replace_material_but) == elf.CLICKED then
-		local new_mat = elf.CreateMaterial("Material")
-		elf.SetEntityMaterial(editor.scene.selection, index, new_mat)
-		elf.SetTextListItem(editor.gui.properties.edit.entity.materials_txl, index, "Material")
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.replace_material_but) == CLICKED then
+		local new_mat = CreateMaterial("Material")
+		SetEntityMaterial(editor.scene.selection, index, new_mat)
+		SetTextListItem(editor.gui.properties.edit.entity.materials_txl, index, "Material")
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.remove_material_but) == elf.CLICKED then
-		elf.RemoveEntityMaterial(editor.scene.selection, index)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.remove_material_but) == CLICKED then
+		RemoveEntityMaterial(editor.scene.selection, index)
 
-		elf.RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
-		for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
-			local mat = elf.GetEntityMaterial(editor.scene.selection, i)
-			elf.AddTextListItem(editor.gui.properties.edit.entity.materials_txl, elf.GetMaterialName(mat))
+		RemoveTextListItems(editor.gui.properties.edit.entity.materials_txl)
+		for i=0, GetEntityMaterialCount(editor.scene.selection)-1 do
+			local mat = GetEntityMaterial(editor.scene.selection, i)
+			AddTextListItem(editor.gui.properties.edit.entity.materials_txl, GetMaterialName(mat))
 		end
 
-		if elf.GetEntityMaterialCount(editor.scene.selection) > 0 then
-			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
-			editor.scene.material = elf.GetEntityMaterial(editor.scene.selection, 0)
+		if GetEntityMaterialCount(editor.scene.selection) > 0 then
+			SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, 0)
+			editor.scene.material = GetEntityMaterial(editor.scene.selection, 0)
 		else
-			elf.SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
+			SetTextListSelection(editor.gui.properties.edit.entity.materials_txl, -1)
 		end
 
 		edi_update_edit_selection_material()
 	end
 
-	local mat = elf.GetEntityMaterial(editor.scene.selection, index)
-	if elf.IsObject(mat) == false then return end
+	local mat = GetEntityMaterial(editor.scene.selection, index)
+	if mat == nil then return end
 
 	editor.scene.material = mat
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_name_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_name_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf)
 		if string.len(name) < 1 then
-			elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, elf.GetMaterialName(mat))
+			SetTextFieldText(editor.gui.properties.edit.entity.mat_name_txf, GetMaterialName(mat))
 		else
-			elf.SetMaterialName(mat, name)
-			elf.SetTextListItem(editor.gui.properties.edit.entity.materials_txl, index, name)
+			SetMaterialName(mat, name)
+			SetTextListItem(editor.gui.properties.edit.entity.materials_txl, index, name)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_r_txf, 0.0, nil)
-		elf.SetMaterialDiffuseColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+		SetMaterialDiffuseColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_g_txf, 0.0, nil)
-		elf.SetMaterialDiffuseColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+		SetMaterialDiffuseColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_b_txf, 0.0, nil)
-		elf.SetMaterialDiffuseColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+		SetMaterialDiffuseColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_a_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_a_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_diffuse_a_txf, 0.0, nil)
-		elf.SetMaterialDiffuseColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
+		SetMaterialDiffuseColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_specular_r_txf, 0.0, nil)
-		elf.SetMaterialSpecularColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
+		SetMaterialSpecularColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_specular_g_txf, 0.0, nil)
-		elf.SetMaterialSpecularColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
+		SetMaterialSpecularColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_specular_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_specular_b_txf, 0.0, nil)
-		elf.SetMaterialSpecularColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
+		SetMaterialSpecularColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_specular_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_ambient_r_txf, 0.0, nil)
-		elf.SetMaterialAmbientColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
+		SetMaterialAmbientColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_ambient_g_txf, 0.0, nil)
-		elf.SetMaterialAmbientColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
+		SetMaterialAmbientColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_ambient_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_ambient_b_txf, 0.0, nil)
-		elf.SetMaterialAmbientColor(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
+		SetMaterialAmbientColor(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_ambient_b_txf)), 1.0)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_power_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_power_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_spec_power_txf, 0.0, nil)
-		elf.SetMaterialSpecularPower(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf)))
+		SetMaterialSpecularPower(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_spec_power_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_lighting_cb) == elf.STATE_CHANGED then
-		elf.SetMaterialLighting(mat, elf.GetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb))
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_lighting_cb) == STATE_CHANGED then
+		SetMaterialLighting(mat, GetCheckBoxState(editor.gui.properties.edit.entity.mat_lighting_cb))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_prlx_scale_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_prlx_scale_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_prlx_scale_txf, 0.0, nil)
-		elf.SetMaterialParallaxScale(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf)))
+		SetMaterialParallaxScale(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_prlx_scale_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_alpha_test_cb) == elf.STATE_CHANGED then
-		elf.SetMaterialAlphaTest(mat, elf.GetCheckBoxState(editor.gui.properties.edit.entity.mat_alpha_test_cb))
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_alpha_test_cb) == STATE_CHANGED then
+		SetMaterialAlphaTest(mat, GetCheckBoxState(editor.gui.properties.edit.entity.mat_alpha_test_cb))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_alpha_thrs_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_alpha_thrs_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.entity.mat_alpha_thrs_txf, 0.0, 1.0)
-		elf.SetMaterialAlphaThreshold(mat,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf)))
+		SetMaterialAlphaThreshold(mat,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.entity.mat_alpha_thrs_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_map_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_map_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf)
 		if string.len(name) > 0 then
-			local tex = elf.GetMaterialDiffuseMap(mat)
-			if elf.IsObject(tex) == true then
-				elf.SetTextureName(tex, name)
+			local tex = GetMaterialDiffuseMap(mat)
+			if tex ~= nil then
+				SetTextureName(tex, name)
 			else
-				local textures = elf.GetSceneTextures(editor.scene.handle)
-				tex = elf.BeginList(textures)
-				while elf.IsObject(tex) == true do
-					if elf.GetTextureName(tex) == name then
-						elf.SetMaterialDiffuseMap(mat, tex)
+				local textures = GetSceneTextures(editor.scene.handle)
+				tex = BeginList(textures)
+				while tex ~= nil do
+					if GetTextureName(tex) == name then
+						SetMaterialDiffuseMap(mat, tex)
 						break
 					end
-					tex = elf.NextInList(textures)
+					tex = NextInList(textures)
 				end
-				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.entity.mat_diffuse_map_txf, "") end
 			end
 		else
-			elf.ClearMaterialDiffuseMap(mat)
+			ClearMaterialDiffuseMap(mat)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_normal_map_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_normal_map_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf)
 		if string.len(name) > 0 then
-			local tex = elf.GetMaterialNormalMap(mat)
-			if elf.IsObject(tex) == true then
-				elf.SetTextureName(tex, name)
+			local tex = GetMaterialNormalMap(mat)
+			if tex ~= nil then
+				SetTextureName(tex, name)
 			else
-				local textures = elf.GetSceneTextures(editor.scene.handle)
-				tex = elf.BeginList(textures)
-				while elf.IsObject(tex) == true do
-					if elf.GetTextureName(tex) == name then
-						elf.SetMaterialNormalMap(mat, tex)
-						elf.GenerateEntityTangents(editor.scene.selection)
+				local textures = GetSceneTextures(editor.scene.handle)
+				tex = BeginList(textures)
+				while tex ~= nil do
+					if GetTextureName(tex) == name then
+						SetMaterialNormalMap(mat, tex)
+						GenerateEntityTangents(editor.scene.selection)
 						break
 					end
-					tex = elf.NextInList(textures)
+					tex = NextInList(textures)
 				end
-				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.entity.mat_normal_map_txf, "") end
 			end
 		else
-			elf.ClearMaterialNormalMap(mat)
+			ClearMaterialNormalMap(mat)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_height_map_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_height_map_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf)
 		if string.len(name) > 0 then
-			local tex = elf.GetMaterialHeightMap(mat)
-			if elf.IsObject(tex) == true then
-				elf.SetTextureName(tex, name)
+			local tex = GetMaterialHeightMap(mat)
+			if tex ~= nil then
+				SetTextureName(tex, name)
 			else
-				local textures = elf.GetSceneTextures(editor.scene.handle)
-				tex = elf.BeginList(textures)
-				while elf.IsObject(tex) == true do
-					if elf.GetTextureName(tex) == name then
-						elf.SetMaterialHeightMap(mat, tex)
+				local textures = GetSceneTextures(editor.scene.handle)
+				tex = BeginList(textures)
+				while tex ~= nil do
+					if GetTextureName(tex) == name then
+						SetMaterialHeightMap(mat, tex)
 						break
 					end
-					tex = elf.NextInList(textures)
+					tex = NextInList(textures)
 				end
-				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.entity.mat_height_map_txf, "") end
 			end
 		else
-			elf.ClearMaterialHeightMap(mat)
+			ClearMaterialHeightMap(mat)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_map_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_map_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf)
 		if string.len(name) > 0 then
-			local tex = elf.GetMaterialSpecularMap(mat)
-			if elf.IsObject(tex) == true then
-				elf.SetTextureName(tex, name)
+			local tex = GetMaterialSpecularMap(mat)
+			if tex ~= nil then
+				SetTextureName(tex, name)
 			else
-				local textures = elf.GetSceneTextures(editor.scene.handle)
-				tex = elf.BeginList(textures)
-				while elf.IsObject(tex) == true do
-					if elf.GetTextureName(tex) == name then
-						elf.SetMaterialSpecularMap(mat, tex)
+				local textures = GetSceneTextures(editor.scene.handle)
+				tex = BeginList(textures)
+				while tex ~= nil do
+					if GetTextureName(tex) == name then
+						SetMaterialSpecularMap(mat, tex)
 						break
 					end
-					tex = elf.NextInList(textures)
+					tex = NextInList(textures)
 				end
-				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.entity.mat_spec_map_txf, "") end
 			end
 		else
-			elf.ClearMaterialSpecularMap(mat)
+			ClearMaterialSpecularMap(mat)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_light_map_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_light_map_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf)
 		if string.len(name) > 0 then
-			local tex = elf.GetMaterialLightMap(mat)
-			if elf.IsObject(tex) == true then
-				elf.SetTextureName(tex, name)
+			local tex = GetMaterialLightMap(mat)
+			if tex ~= nil then
+				SetTextureName(tex, name)
 			else
-				local textures = elf.GetSceneTextures(editor.scene.handle)
-				tex = elf.BeginList(textures)
-				while elf.IsObject(tex) == true do
-					if elf.GetTextureName(tex) == name then
-						elf.SetMaterialLightMap(mat, tex)
+				local textures = GetSceneTextures(editor.scene.handle)
+				tex = BeginList(textures)
+				while tex ~= nil do
+					if GetTextureName(tex) == name then
+						SetMaterialLightMap(mat, tex)
 						break
 					end
-					tex = elf.NextInList(textures)
+					tex = NextInList(textures)
 				end
-				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.entity.mat_light_map_txf, "") end
 			end
 		else
-			elf.ClearMaterialLightMap(mat)
+			ClearMaterialLightMap(mat)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_map_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Diffuse Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_diffuse_map)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_diffuse_map_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Diffuse Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_diffuse_map)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_normal_map_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Normal Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_normal_map)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_normal_map_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Normal Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_normal_map)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_height_map_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Height Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_height_map)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_height_map_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Height Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_height_map)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_map_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Specular Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_spec_map)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_spec_map_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Specular Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_spec_map)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_light_map_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Light Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_light_map)
+	if GetGuiObjectEvent(editor.gui.properties.edit.entity.mat_light_map_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Light Map (.jpg/.png/.tga/etc)...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_entity_open_light_map)
 	end
 end
 
@@ -2027,392 +2027,392 @@ function edi_properties_edit_particles_open_texture(path)
 		return
 	end
 
-	local tex = elf.CreateTextureFromFile(path)
-	if elf.IsObject(tex) == true then
-		elf.SetParticlesTexture(editor.scene.selection, tex)
+	local tex = CreateTextureFromFile(path)
+	if tex ~= nil then
+		SetParticlesTexture(editor.scene.selection, tex)
 		edi_update_edit_selection()
 		edi_open_properties()
 	end
 end
 
 function edi_update_particles()
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.max_count_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.max_count_txf) == LOSE_FOCUS then
 		edi_check_text_field_int(editor.gui.properties.edit.particles.max_count_txf, 0, nil)
-		elf.SetParticlesMaxCount(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.max_count_txf)))
+		SetParticlesMaxCount(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.max_count_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_open) == elf.CLICKED then
-		edi_open_file_dialog(elf.GetCurrentDirectory(), "Open Particles Texture...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_particles_open_texture)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_open) == CLICKED then
+		edi_open_file_dialog(GetCurrentDirectory(), "Open Particles Texture...", EDI_FILE_DIALOG_OPEN, edi_properties_edit_particles_open_texture)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.particles.texture_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.texture_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.particles.texture_txf)
 		if string.len(name) > 0 then
-			local tex = elf.GetParticlesTexture(editor.scene.selection)
-			if elf.IsObject(tex) == true then
-				elf.SetTextureName(tex, name)
+			local tex = GetParticlesTexture(editor.scene.selection)
+			if tex ~= nil then
+				SetTextureName(tex, name)
 			else
-				local textures = elf.GetSceneTextures(editor.scene.handle)
-				local tex = elf.BeginList(textures)
-				while elf.IsObject(tex) == true do
-					if elf.GetTextureName(tex) == name then
-						elf.SetParticlesTexture(editor.scene.selection, tex)
+				local textures = GetSceneTextures(editor.scene.handle)
+				local tex = BeginList(textures)
+				while tex ~= nil do
+					if GetTextureName(tex) == name then
+						SetParticlesTexture(editor.scene.selection, tex)
 						break
 					end
-					tex = elf.NextInList(textures)
+					tex = NextInList(textures)
 				end
-				if elf.IsObject(tex) == false then elf.SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, "") end
+				if tex == nil then SetTextFieldText(editor.gui.properties.edit.particles.texture_txf, "") end
 			end
 		else
-			elf.ClearParticlesTexture(editor.scene.selection)
+			ClearParticlesTexture(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.trs_cb) == elf.STATE_CHANGED then
-		elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
-		elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
-		elf.SetParticlesDrawMode(editor.scene.selection, elf.TRANSPARENT)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.trs_cb) == STATE_CHANGED then
+		SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
+		SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
+		SetParticlesDrawMode(editor.scene.selection, TRANSPARENT)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.add_cb) == elf.STATE_CHANGED then
-		elf.SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
-		elf.SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
-		elf.SetParticlesDrawMode(editor.scene.selection, elf.ADD)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.add_cb) == STATE_CHANGED then
+		SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
+		SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
+		SetParticlesDrawMode(editor.scene.selection, ADD)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.model_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.particles.model_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.model_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.particles.model_txf)
 		if string.len(name) > 0 then
-			local mdl = elf.GetParticlesModel(editor.scene.selection)
-			if elf.IsObject(mdl) == true then
-				elf.SetModelName(mdl, name)
+			local mdl = GetParticlesModel(editor.scene.selection)
+			if mdl ~= nil  then
+				SetModelName(mdl, name)
 			else
-				local models = elf.GetSceneModels(editor.scene.handle)
-				local mdl = elf.BeginList(models)
-				while elf.IsObject(mdl) == true do
-					if elf.GetModelName(mdl) == name then
-						elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "")
-						elf.SetParticlesModel(editor.scene.selection, mdl)
+				local models = GetSceneModels(editor.scene.handle)
+				local mdl = BeginList(models)
+				while mdl ~= nil do
+					if GetModelName(mdl) == name then
+						SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "")
+						SetParticlesModel(editor.scene.selection, mdl)
 						break
 					end
-					mdl = elf.NextInList(models)
+					mdl = NextInList(models)
 				end
-				if elf.IsObject(mdl) == false then elf.SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "") end
+				if mdl == nil then SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "") end
 			end
 		else
-			elf.ClearParticlesModel(editor.scene.selection)
+			ClearParticlesModel(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.entity_txf) == elf.LOSE_FOCUS then
-		local name = elf.GetTextFieldText(editor.gui.properties.edit.particles.entity_txf)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.entity_txf) == LOSE_FOCUS then
+		local name = GetTextFieldText(editor.gui.properties.edit.particles.entity_txf)
 		if string.len(name) > 0 then
-			local ent = elf.GetParticlesEntity(editor.scene.selection)
-			if elf.IsObject(ent) == true then
-				elf.SetActorName(ent, name)
+			local ent = GetParticlesEntity(editor.scene.selection)
+			if ent ~= nil then
+				SetActorName(ent, name)
 			else
 				local ent = nil
-				for i=0, elf.GetSceneEntityCount(editor.scene.handle)-1 do
-					ent = elf.GetEntityByIndex(editor.scene.handle, i)
-					if elf.GetActorName(ent) == name then
-						elf.SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "")
-						elf.SetParticlesEntity(editor.scene.selection, ent)
+				for i=0, GetSceneEntityCount(editor.scene.handle)-1 do
+					ent = GetEntityByIndex(editor.scene.handle, i)
+					if GetActorName(ent) == name then
+						SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "")
+						SetParticlesEntity(editor.scene.selection, ent)
 						break
 					end
 				end
-				if elf.IsObject(ent) == false then elf.SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "") end
+				if ent == nil then SetTextFieldText(editor.gui.properties.edit.particles.entity_txf, "") end
 			end
 		else
-			elf.ClearParticlesEntity(editor.scene.selection)
+			ClearParticlesEntity(editor.scene.selection)
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.gravity_x_txf, nil, nil)
-		elf.SetParticlesGravity(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
+		SetParticlesGravity(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.gravity_z_txf, nil, nil)
-		elf.SetParticlesGravity(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
+		SetParticlesGravity(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.gravity_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.gravity_z_txf, nil, nil)
-		elf.SetParticlesGravity(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
+		SetParticlesGravity(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.gravity_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.spawn_delay_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.spawn_delay_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.spawn_delay_txf, 0.00001, nil)
-		elf.SetParticlesSpawnDelay(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.spawn_delay_txf)))
+		SetParticlesSpawnDelay(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.spawn_delay_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.spawn_cb) == elf.STATE_CHANGED then
-		elf.SetParticlesSpawn(editor.scene.selection,
-			elf.GetCheckBoxState(editor.gui.properties.edit.particles.spawn_cb))
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.spawn_cb) == STATE_CHANGED then
+		SetParticlesSpawn(editor.scene.selection,
+			GetCheckBoxState(editor.gui.properties.edit.particles.spawn_cb))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.size_min_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.size_min_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.size_min_txf, 0.0, nil)
-		elf.SetParticlesSize(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_max_txf)))
+		SetParticlesSize(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.size_max_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.size_max_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.size_max_txf, 0.0, nil)
-		elf.SetParticlesSize(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_max_txf)))
+		SetParticlesSize(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.size_grow_min_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.size_grow_min_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.size_grow_min_txf, nil, nil)
-		elf.SetParticlesSizeGrowth(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_grow_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_grow_max_txf)))
+		SetParticlesSizeGrowth(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_grow_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_grow_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.size_grow_max_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.size_grow_max_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.size_grow_max_txf, nil, nil)
-		elf.SetParticlesSizeGrowth(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_grow_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.size_grow_max_txf)))
+		SetParticlesSizeGrowth(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_grow_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.size_grow_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.rotation_min_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.rotation_min_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.rotation_min_txf, 0.0, nil)
-		elf.SetParticlesRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rotation_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rotation_max_txf)))
+		SetParticlesRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rotation_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rotation_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.rotation_max_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.rotation_max_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.rotation_max_txf, 0.0, nil)
-		elf.SetParticlesRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rotation_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rotation_max_txf)))
+		SetParticlesRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rotation_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rotation_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.rot_grow_min_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.rot_grow_min_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.rot_grow_min_txf, nil, nil)
-		elf.SetParticlesRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_max_txf)))
+		SetParticlesRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.rot_grow_max_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.rot_grow_max_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.rot_grow_max_txf, nil, nil)
-		elf.SetParticlesRotation(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_max_txf)))
+		SetParticlesRotation(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.rot_grow_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.life_span_min_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.life_span_min_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.life_span_min_txf, 0.0, nil)
-		elf.SetParticlesLifeSpan(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.life_span_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.life_span_max_txf)))
+		SetParticlesLifeSpan(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.life_span_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.life_span_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.life_span_max_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.life_span_max_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.life_span_max_txf, 0.0, nil)
-		elf.SetParticlesLifeSpan(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.life_span_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.life_span_max_txf)))
+		SetParticlesLifeSpan(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.life_span_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.life_span_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.fade_speed_min_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.fade_speed_min_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.fade_speed_min_txf, 0.0, nil)
-		elf.SetParticlesFadeSpeed(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_max_txf)))
+		SetParticlesFadeSpeed(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.fade_speed_max_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.fade_speed_max_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.fade_speed_max_txf, 0.0, nil)
-		elf.SetParticlesFadeSpeed(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_min_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_max_txf)))
+		SetParticlesFadeSpeed(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_min_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.fade_speed_max_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_min_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_min_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.pos_min_x_txf, nil, nil)
-		elf.SetParticlesPositionMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf)))
+		SetParticlesPositionMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_min_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_min_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.pos_min_y_txf, nil, nil)
-		elf.SetParticlesPositionMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf)))
+		SetParticlesPositionMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_min_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_min_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.pos_min_z_txf, nil, nil)
-		elf.SetParticlesPositionMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf)))
+		SetParticlesPositionMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_min_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_max_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_max_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.pos_max_x_txf, nil, nil)
-		elf.SetParticlesPositionMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf)))
+		SetParticlesPositionMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_max_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_max_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.pos_max_y_txf, nil, nil)
-		elf.SetParticlesPositionMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf)))
+		SetParticlesPositionMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_max_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.pos_max_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.pos_max_z_txf, nil, nil)
-		elf.SetParticlesPositionMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf)))
+		SetParticlesPositionMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.pos_max_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_min_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_min_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.vel_min_x_txf, nil, nil)
-		elf.SetParticlesVelocityMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf)))
+		SetParticlesVelocityMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_min_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_min_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.vel_min_y_txf, nil, nil)
-		elf.SetParticlesVelocityMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf)))
+		SetParticlesVelocityMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_min_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_min_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.vel_min_z_txf, nil, nil)
-		elf.SetParticlesVelocityMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf)))
+		SetParticlesVelocityMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_min_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_max_x_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_max_x_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.vel_max_x_txf, nil, nil)
-		elf.SetParticlesVelocityMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf)))
+		SetParticlesVelocityMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_max_y_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_max_y_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.vel_max_y_txf, nil, nil)
-		elf.SetParticlesVelocityMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf)))
+		SetParticlesVelocityMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_max_z_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.vel_max_z_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.vel_max_z_txf, nil, nil)
-		elf.SetParticlesVelocityMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf)))
+		SetParticlesVelocityMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_x_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_y_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.vel_max_z_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_r_txf, 0.0, nil)
-		elf.SetParticlesColorMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
+		SetParticlesColorMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_g_txf, 0.0, nil)
-		elf.SetParticlesColorMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
+		SetParticlesColorMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_b_txf, 0.0, nil)
-		elf.SetParticlesColorMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
+		SetParticlesColorMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_a_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_min_a_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_min_a_txf, 0.0, nil)
-		elf.SetParticlesColorMin(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
+		SetParticlesColorMin(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_min_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_r_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_r_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_r_txf, 0.0, nil)
-		elf.SetParticlesColorMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
+		SetParticlesColorMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_g_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_g_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_g_txf, 0.0, nil)
-		elf.SetParticlesColorMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
+		SetParticlesColorMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_b_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_b_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_b_txf, 0.0, nil)
-		elf.SetParticlesColorMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
+		SetParticlesColorMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_a_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.color_max_a_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.edit.particles.color_max_a_txf, 0.0, nil)
-		elf.SetParticlesColorMax(editor.scene.selection,
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
-			tonumber(elf.GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
+		SetParticlesColorMax(editor.scene.selection,
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_r_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_g_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_b_txf)),
+			tonumber(GetTextFieldText(editor.gui.properties.edit.particles.color_max_a_txf)))
 	end
 end
 
@@ -2422,22 +2422,22 @@ end
 function edi_update_edit()
 	if editor.scene.selection == nil then return end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	end
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.cam_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.cam_cb) == STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_CAMERA)
 	end
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_LIGHT)
 	end
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.ent_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.ent_cb) == STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_ENTITY)
 	end
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.par_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.par_cb) == STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_PARTICLES)
 	end
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit.spr_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.spr_cb) == STATE_CHANGED then
 		edi_switch_edit_tab(EDI_EDIT_SPRITE)
 	end
 
@@ -2450,70 +2450,70 @@ function edi_update_edit()
 end
 
 function edi_update_pp()
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.bloom_cb) == elf.STATE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.pp.bloom_cb) == true then
-			elf.SetBloom(elf.GetSliderValue(editor.gui.properties.pp.bloom_str_sli))
+	if GetGuiObjectEvent(editor.gui.properties.pp.bloom_cb) == STATE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.pp.bloom_cb) == true then
+			SetBloom(GetSliderValue(editor.gui.properties.pp.bloom_str_sli))
 		else
-			elf.DisableBloom()
+			DisableBloom()
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.bloom_str_sli) == elf.VALUE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.pp.bloom_cb) == true then
-			elf.SetBloom(elf.GetSliderValue(editor.gui.properties.pp.bloom_str_sli))
+	if GetGuiObjectEvent(editor.gui.properties.pp.bloom_str_sli) == VALUE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.pp.bloom_cb) == true then
+			SetBloom(GetSliderValue(editor.gui.properties.pp.bloom_str_sli))
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.dof_enb_cb) == elf.STATE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.pp.dof_enb_cb) == true then
-			elf.SetDof(tonumber(elf.GetTextFieldText(editor.gui.properties.pp.dof_foc_rng_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.pp.dof_foc_dst_txf)))
+	if GetGuiObjectEvent(editor.gui.properties.pp.dof_enb_cb) == STATE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.pp.dof_enb_cb) == true then
+			SetDof(tonumber(GetTextFieldText(editor.gui.properties.pp.dof_foc_rng_txf)),
+				tonumber(GetTextFieldText(editor.gui.properties.pp.dof_foc_dst_txf)))
 		else
-			elf.DisableDof()
+			DisableDof()
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.dof_foc_rng_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.pp.dof_foc_rng_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.pp.dof_foc_rng_txf, 0, nil)
-		if elf.GetCheckBoxState(editor.gui.properties.pp.dof_enb_cb) == true then
-			elf.SetDof(tonumber(elf.GetTextFieldText(editor.gui.properties.pp.dof_foc_rng_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.pp.dof_foc_dst_txf)))
+		if GetCheckBoxState(editor.gui.properties.pp.dof_enb_cb) == true then
+			SetDof(tonumber(GetTextFieldText(editor.gui.properties.pp.dof_foc_rng_txf)),
+				tonumber(GetTextFieldText(editor.gui.properties.pp.dof_foc_dst_txf)))
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.dof_foc_dst_txf) == elf.LOSE_FOCUS then
+	if GetGuiObjectEvent(editor.gui.properties.pp.dof_foc_dst_txf) == LOSE_FOCUS then
 		edi_check_text_field_float(editor.gui.properties.pp.dof_foc_dst_txf, 0, nil)
-		if elf.GetCheckBoxState(editor.gui.properties.pp.dof_enb_cb) == true then
-			elf.SetDof(tonumber(elf.GetTextFieldText(editor.gui.properties.pp.dof_foc_rng_txf)),
-				tonumber(elf.GetTextFieldText(editor.gui.properties.pp.dof_foc_dst_txf)))
+		if GetCheckBoxState(editor.gui.properties.pp.dof_enb_cb) == true then
+			SetDof(tonumber(GetTextFieldText(editor.gui.properties.pp.dof_foc_rng_txf)),
+				tonumber(GetTextFieldText(editor.gui.properties.pp.dof_foc_dst_txf)))
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.lsh_enb_cb) == elf.STATE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.pp.lsh_enb_cb) == true then
-			elf.SetLightShafts(elf.GetSliderValue(editor.gui.properties.pp.lsh_str_sli))
+	if GetGuiObjectEvent(editor.gui.properties.pp.lsh_enb_cb) == STATE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.pp.lsh_enb_cb) == true then
+			SetLightShafts(GetSliderValue(editor.gui.properties.pp.lsh_str_sli))
 		else
-			elf.DisableLightShafts()
+			DisableLightShafts()
 		end
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp.lsh_str_sli) == elf.VALUE_CHANGED then
-		if elf.GetCheckBoxState(editor.gui.properties.pp.lsh_enb_cb) == true then
-			elf.SetLightShafts(elf.GetSliderValue(editor.gui.properties.pp.lsh_str_sli))
+	if GetGuiObjectEvent(editor.gui.properties.pp.lsh_str_sli) == VALUE_CHANGED then
+		if GetCheckBoxState(editor.gui.properties.pp.lsh_enb_cb) == true then
+			SetLightShafts(GetSliderValue(editor.gui.properties.pp.lsh_str_sli))
 		end
 	end
 end
 
 function edi_update_properties()
-	if elf.GetGuiObjectEvent(editor.gui.properties.menu_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.menu_cb) == STATE_CHANGED then
 		edi_switch_properties_tab(EDI_PROPERTIES_MENU)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.edit_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit_cb) == STATE_CHANGED then
 		edi_switch_properties_tab(EDI_PROPERTIES_EDIT)
 	end
 
-	if elf.GetGuiObjectEvent(editor.gui.properties.pp_cb) == elf.STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.pp_cb) == STATE_CHANGED then
 		edi_switch_properties_tab(EDI_PROPERTIES_PP)
 	end
 

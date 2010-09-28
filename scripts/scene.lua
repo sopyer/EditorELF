@@ -4,16 +4,16 @@ function edi_init_scene()
 	editor.scene.camera = {}
 
 	-- create a default scene
-	editor.scene.handle = elf.CreateScene("Scene")
-	elf.SetScenePhysics(editor.scene.handle, false)
-	elf.SetSceneRunScripts(editor.scene.handle, false)
-	elf.SetScene(editor.scene.handle)
+	editor.scene.handle = CreateScene("Scene")
+	SetScenePhysics(editor.scene.handle, false)
+	SetSceneRunScripts(editor.scene.handle, false)
+	SetScene(editor.scene.handle)
 
 	-- init the camear for the default scene
 	edi_init_scene_camera()
 
-	elf.SetActorRotation(editor.scene.camera.handle, 90.0, 0.0, 0.0)
-	elf.SetActorPosition(editor.scene.camera.handle, 0.0, -5.0, 0.0)
+	SetActorRotation(editor.scene.camera.handle, 90.0, 0.0, 0.0)
+	SetActorPosition(editor.scene.camera.handle, 0.0, -5.0, 0.0)
 end
 
 function edi_init_scene_camera()
@@ -24,44 +24,44 @@ function edi_init_scene_camera()
 	editor.scene.camera.irot.y = 0
 
 	-- remove any previous cameras that reserve the ditor camera name
-	elf.RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
+	RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
 
 	-- create a new camera
-	editor.scene.camera.handle = elf.CreateCamera("__EditorELF_Camera")
+	editor.scene.camera.handle = CreateCamera("__EditorELF_Camera")
 
 	-- set the camera position and rotation to the first camera found in the scene
-	local cam = elf.GetCameraByIndex(editor.scene.handle, 0)
-	if elf.IsObject(cam) == true then
-		local pos = elf.GetActorPosition(cam)
-		local rot = elf.GetActorRotation(cam)
-		local fov = elf.GetCameraFov(cam)
-		local aspect = elf.GetCameraAspect(cam)
-		local clip = elf.GetCameraClip(cam)
+	local cam = GetCameraByIndex(editor.scene.handle, 0)
+	if cam ~= nil then
+		local pos = GetActorPosition(cam)
+		local rot = GetActorRotation(cam)
+		local fov = GetCameraFov(cam)
+		local aspect = GetCameraAspect(cam)
+		local clip = GetCameraClip(cam)
 		if clip.x < 0.0001 then clip.x = 0.0001 end
 		if clip.y < 100.0 then clip.y = 100.0 end
-		elf.SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
-		elf.SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
-		elf.SetCameraPerspective(editor.scene.camera.handle, fov, aspect, clip.x, clip.y)
+		SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
+		SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
+		SetCameraPerspective(editor.scene.camera.handle, fov, aspect, clip.x, clip.y)
 	end
 
 	-- add the camera to the scene and set it active
-	elf.AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
-	elf.SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
+	AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+	SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
 function edi_reload_scene_camera()
-	elf.AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
-	elf.SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
+	AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+	SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
 function edi_remove_scene_camera()
-	elf.RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
+	RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
 end
 
 function edi_load_scene(path)
 	-- check if we can load the new scene
-	new_scene = elf.CreateSceneFromFile(path)
-	if elf.IsObject(new_scene) ~= true then return false end
+	new_scene = CreateSceneFromFile(path)
+	if new_scene == nil then return false end
 
 	-- deselect any previously selected objects
 	editor.scene.selection = nil
@@ -69,21 +69,21 @@ function edi_load_scene(path)
 
 	-- set the new scene as the current scene
 	editor.scene.handle = new_scene
-	elf.SetScenePhysics(new_scene, false)
-	elf.SetSceneRunScripts(new_scene, false)
-	elf.SetScene(new_scene)
+	SetScenePhysics(new_scene, false)
+	SetSceneRunScripts(new_scene, false)
+	SetScene(new_scene)
 
 	-- initialize the editor camera
 	edi_init_scene_camera()
 
-	local ambient = elf.GetSceneAmbientColor(editor.scene.handle)
-	elf.SetTextFieldText(editor.gui.properties.menu.ambient_r_txf, tostring(ambient.r))
-	elf.SetTextFieldText(editor.gui.properties.menu.ambient_g_txf, tostring(ambient.g))
-	elf.SetTextFieldText(editor.gui.properties.menu.ambient_b_txf, tostring(ambient.b))
+	local ambient = GetSceneAmbientColor(editor.scene.handle)
+	SetTextFieldText(editor.gui.properties.menu.ambient_r_txf, tostring(ambient.r))
+	SetTextFieldText(editor.gui.properties.menu.ambient_g_txf, tostring(ambient.g))
+	SetTextFieldText(editor.gui.properties.menu.ambient_b_txf, tostring(ambient.b))
 
-	elf.SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_r_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_g_txf, 0)
-	elf.SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_b_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_r_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_g_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_b_txf, 0)
 
 	return true
 end
@@ -91,7 +91,7 @@ end
 function edi_save_scene(path)
 	edi_remove_scene_camera()
 
-	local result = elf.SaveScene(editor.scene.handle, path)
+	local result = SaveScene(editor.scene.handle, path)
 
 	edi_reload_scene_camera()
 
@@ -100,32 +100,32 @@ end
 
 function edi_trace_scene_selection()
 	-- don't allow picking through GUI
-	if elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == true then return nil end
+	if GetGuiTrace(editor.gui.handle) ~= nil then return nil end
 
 	-- get the ray starting position
-	local raystart = elf.GetActorPosition(editor.scene.camera.handle)
+	local raystart = GetActorPosition(editor.scene.camera.handle)
 
 	-- next we calculate the end position of the ray
-	local mouse_pos = elf.GetMousePosition()
-	local wwidth = elf.GetWindowWidth()
-	local wheight = elf.GetWindowHeight()
-	local clip = elf.GetCameraClip(editor.scene.camera.handle)
-	local fpsize = elf.GetCameraFarPlaneSize(editor.scene.camera.handle)
+	local mouse_pos = GetMousePosition()
+	local wwidth = GetWindowWidth()
+	local wheight = GetWindowHeight()
+	local clip = GetCameraClip(editor.scene.camera.handle)
+	local fpsize = GetCameraFarPlaneSize(editor.scene.camera.handle)
 
-	local rayend = elf.CreateVec3f()
+	local rayend = CreateVec3f()
 	rayend.x = mouse_pos.x/wwidth*fpsize.x-fpsize.x/2
 	rayend.y = (wheight-mouse_pos.y)/wheight*fpsize.y-fpsize.y/2
 	rayend.z = -clip.y
 
 	-- now we have the end position of the ray, but we still have to positon and orient it according to the camera
-	local orient = elf.GetActorOrientation(editor.scene.camera.handle)
-	rayend = elf.MulQuaVec3f(orient, rayend)
-	rayend = elf.AddVec3fVec3f(raystart, rayend)
+	local orient = GetActorOrientation(editor.scene.camera.handle)
+	rayend = MulQuaVec3f(orient, rayend)
+	rayend = AddVec3fVec3f(raystart, rayend)
 
 	-- perform raycast
-	local col = elf.GetDebugSceneRayCastResult(editor.scene.handle, raystart.x, raystart.y, raystart.z, rayend.x, rayend.y, rayend.z)
-	if elf.IsObject(col) == true then
-		return elf.GetCollisionActor(col)
+	local col = GetDebugSceneRayCastResult(editor.scene.handle, raystart.x, raystart.y, raystart.z, rayend.x, rayend.y, rayend.z)
+	if col ~= nil then
+		return GetCollisionActor(col)
 	end
 
 	return nil
@@ -138,11 +138,11 @@ function edi_select_actor(act)
 	if act ~= nil then
 		-- deselect previously selected
 		if editor.scene.selection ~= nil then
-			elf.SetActorSelected(editor.scene.selection, false)
+			SetActorSelected(editor.scene.selection, false)
 		end
 		-- select object
 		editor.scene.selection = act
-		elf.SetActorSelected(editor.scene.selection, true)
+		SetActorSelected(editor.scene.selection, true)
 
 		edi_update_gui_selection()
 	end
@@ -152,36 +152,36 @@ function edi_update_scene()
 	if editor.gui.current_menu == EDI_PROPERTIES then
 		local move_speed = editor.scene.camera.move_speed
 
-		if elf.GetKeyState(elf.KEY_LSHIFT) ~= elf.UP then
+		if GetKeyState(KEY_LSHIFT) ~= UP then
 			move_speed = move_speed * 3
 		end
 
-		if elf.IsObject(elf.GetGuiActiveTextField(editor.gui.handle)) == false then
+		if GetGuiActiveTextField(editor.gui.handle) == nil then
 			-- move the camera around with WSAD
-			if elf.GetKeyState(elf.KEY_W) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -move_speed) end
-			if elf.GetKeyState(elf.KEY_S) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, move_speed) end
-			if elf.GetKeyState(elf.KEY_A) ~= elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, -move_speed, 0.0, 0.0) end
-			if elf.GetKeyState(elf.KEY_D) ~= elf.UP and elf.GetKeyState(elf.KEY_LCTRL) == elf.UP then elf.MoveActorLocal(editor.scene.camera.handle, move_speed, 0.0, 0.0) end
+			if GetKeyState(KEY_W) ~= UP then MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -move_speed) end
+			if GetKeyState(KEY_S) ~= UP then MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, move_speed) end
+			if GetKeyState(KEY_A) ~= UP then MoveActorLocal(editor.scene.camera.handle, -move_speed, 0.0, 0.0) end
+			if GetKeyState(KEY_D) ~= UP and GetKeyState(KEY_LCTRL) == UP then MoveActorLocal(editor.scene.camera.handle, move_speed, 0.0, 0.0) end
 		end
 
 		-- if right mouse button is down, rotate the camera
-		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) ~= elf.UP then
+		if GetMouseButtonState(BUTTON_RIGHT) ~= UP then
 			-- rotate the camera according to the mouse force
-			local mf = elf.GetMouseForce()
+			local mf = GetMouseForce()
 
-			if elf.AboutZero(mf.x) ~= true then editor.scene.camera.irot.x = -mf.x*20.0 end
-			if elf.AboutZero(mf.y) ~= true then editor.scene.camera.irot.y = -mf.y*20.0 end
+			if AboutZero(mf.x) ~= true then editor.scene.camera.irot.x = -mf.x*20.0 end
+			if AboutZero(mf.y) ~= true then editor.scene.camera.irot.y = -mf.y*20.0 end
 
-			elf.RotateActor(editor.scene.camera.handle, 0.0, 0.0, editor.scene.camera.irot.x)
-			elf.RotateActorLocal(editor.scene.camera.handle, editor.scene.camera.irot.y, 0.0, 0.0)
+			RotateActor(editor.scene.camera.handle, 0.0, 0.0, editor.scene.camera.irot.x)
+			RotateActorLocal(editor.scene.camera.handle, editor.scene.camera.irot.y, 0.0, 0.0)
 
 			-- center the mouse to allow continuous panning
-			elf.SetMousePosition(elf.GetWindowWidth()/2, elf.GetWindowHeight()/2)
+			SetMousePosition(GetWindowWidth()/2, GetWindowHeight()/2)
 		end
 
 		-- check if we have to select object or disable action
-		if elf.GetMouseButtonState(elf.BUTTON_LEFT) == elf.PRESSED then
-			if elf.IsObject(elf.GetGuiTrace(editor.gui.handle)) == false and
+		if GetMouseButtonState(BUTTON_LEFT) == PRESSED then
+			if GetGuiTrace(editor.gui.handle) == nil and
 				editor.gui.action.move == false and
 				editor.gui.action.rotate == false then
 				edi_select_actor(nil)
@@ -189,141 +189,141 @@ function edi_update_scene()
 
 			if editor.gui.action.move == true then
 				editor.gui.action.move = false
-				elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+				SetCheckBoxState(editor.gui.properties.menu.move, false)
 			elseif editor.gui.action.rotate == true then
 				editor.gui.action.rotate = false
-				elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
+				SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 			end
 		end
 
 		-- check do we need to reset move/rotate
-		if elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.PRESSED then
+		if GetMouseButtonState(BUTTON_RIGHT) == PRESSED then
 			if editor.gui.action.move == true then
-				elf.SetActorPosition(editor.scene.selection,
+				SetActorPosition(editor.scene.selection,
 					editor.gui.action.move_orig_pos.x,
 					editor.gui.action.move_orig_pos.y,
 					editor.gui.action.move_orig_pos.z)
 				edi_update_edit_selection()
 				editor.gui.action.move = false
-				elf.SetCheckBoxState(editor.gui.properties.menu.move, false)
+				SetCheckBoxState(editor.gui.properties.menu.move, false)
 			elseif editor.gui.action.rotate == true then
-				elf.SetActorRotation(editor.scene.selection,
+				SetActorRotation(editor.scene.selection,
 					editor.gui.action.rotate_orig_rot.x,
 					editor.gui.action.rotate_orig_rot.y,
 					editor.gui.action.rotate_orig_rot.z)
 				edi_update_edit_selection()
 				editor.gui.action.rotate = false
-				elf.SetCheckBoxState(editor.gui.properties.menu.rotate, false)
+				SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 			end
 		end
 
 		-- check if we can operate actions on objects
 		if editor.scene.selection ~= nil then
-			if elf.IsObject(elf.GetGuiActiveTextField(editor.gui.handle)) == false then
-				if elf.GetKeyState(elf.KEY_G) == elf.PRESSED then
-					editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+			if GetGuiActiveTextField(editor.gui.handle) == nil then
+				if GetKeyState(KEY_G) == PRESSED then
+					editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
 					editor.gui.action.move = true
-					elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
-				elseif elf.GetKeyState(elf.KEY_R) == elf.PRESSED then
-					editor.gui.action.rotate_orig_rot = elf.GetActorRotation(editor.scene.selection)
+					SetCheckBoxState(editor.gui.properties.menu.move, true)
+				elseif GetKeyState(KEY_R) == PRESSED then
+					editor.gui.action.rotate_orig_rot = GetActorRotation(editor.scene.selection)
 					editor.gui.action.rotate = true
-					elf.SetCheckBoxState(editor.gui.properties.menu.rotate, true)
+					SetCheckBoxState(editor.gui.properties.menu.rotate, true)
 				end
 			end
 
-			if elf.GetMouseButtonState(elf.BUTTON_RIGHT) == elf.UP then
+			if GetMouseButtonState(BUTTON_RIGHT) == UP then
 				if editor.gui.action.move == true then
-					local pos = elf.GetActorPosition(editor.scene.selection)
-					local cam_orient = elf.GetActorOrientation(editor.scene.camera.handle)
-					local cam_pos = elf.GetActorPosition(editor.scene.camera.handle)
+					local pos = GetActorPosition(editor.scene.selection)
+					local cam_orient = GetActorOrientation(editor.scene.camera.handle)
+					local cam_pos = GetActorPosition(editor.scene.camera.handle)
 
-					local speed = elf.GetVec3fLength(elf.SubVec3fVec3f(pos, cam_pos))*0.001
+					local speed = GetVec3fLength(SubVec3fVec3f(pos, cam_pos))*0.001
 
-					local mf = elf.GetMouseForce()
-					local offset = elf.CreateVec3fFromValues(mf.x*speed, -mf.y*speed, 0.0)
+					local mf = GetMouseForce()
+					local offset = CreateVec3fFromValues(mf.x*speed, -mf.y*speed, 0.0)
 
-					offset = elf.MulQuaVec3f(cam_orient, offset)
-					local new_pos = elf.AddVec3fVec3f(pos, offset)
+					offset = MulQuaVec3f(cam_orient, offset)
+					local new_pos = AddVec3fVec3f(pos, offset)
 
-					elf.SetActorPosition(editor.scene.selection, new_pos.x, new_pos.y, new_pos.z)
+					SetActorPosition(editor.scene.selection, new_pos.x, new_pos.y, new_pos.z)
 					edi_update_edit_selection()
 				elseif editor.gui.action.rotate == true then
-					local orient = elf.GetActorOrientation(editor.scene.selection)
-					local inv_orient = elf.GetQuaInverted(orient)
-					local cam_orient = elf.GetActorOrientation(editor.scene.camera.handle)
+					local orient = GetActorOrientation(editor.scene.selection)
+					local inv_orient = GetQuaInverted(orient)
+					local cam_orient = GetActorOrientation(editor.scene.camera.handle)
 
-					local axis = elf.CreateVec3fFromValues(0.0, 0.0, -1.0)
-					local axis = elf.MulQuaVec3f(cam_orient, axis)
-					local axis = elf.MulQuaVec3f(inv_orient, axis)
-					local mf = elf.GetMouseForce()
+					local axis = CreateVec3fFromValues(0.0, 0.0, -1.0)
+					local axis = MulQuaVec3f(cam_orient, axis)
+					local axis = MulQuaVec3f(inv_orient, axis)
+					local mf = GetMouseForce()
 
-					local offset = elf.CreateQuaFromAngleAxis(mf.y, axis.x, axis.y, axis.z)
-					local new_orient = elf.MulQuaQua(orient, offset)
+					local offset = CreateQuaFromAngleAxis(mf.y, axis.x, axis.y, axis.z)
+					local new_orient = MulQuaQua(orient, offset)
 
-					elf.SetActorOrientation(editor.scene.selection, new_orient.x, new_orient.y, new_orient.z, new_orient.w)
+					SetActorOrientation(editor.scene.selection, new_orient.x, new_orient.y, new_orient.z, new_orient.w)
 					edi_update_edit_selection()
 				end
 			end
 
-			if elf.GetKeyState(elf.KEY_DEL) == elf.PRESSED and elf.IsObject(elf.GetGuiActiveTextField(editor.gui.handle)) == false then
-				elf.RemoveActorByObject(editor.scene.handle, editor.scene.selection)
+			if GetKeyState(KEY_DEL) == PRESSED and GetGuiActiveTextField(editor.gui.handle) == nil then
+				RemoveActorByObject(editor.scene.handle, editor.scene.selection)
 				editor.scene.selection = nil
 				edi_update_gui_selection()	
 			end
 
-			if elf.GetKeyState(elf.KEY_LCTRL) == elf.DOWN and elf.GetKeyState(elf.KEY_D) == elf.PRESSED then
+			if GetKeyState(KEY_LCTRL) == DOWN and GetKeyState(KEY_D) == PRESSED then
 				local act = nil
-				if elf.GetObjectType(editor.scene.selection) == elf.ENTITY then
-					act = elf.CreateEntity("Entity")
+				if GetObjectType(editor.scene.selection) == ENTITY then
+					act = CreateEntity("Entity")
 
-					local mdl = elf.GetEntityModel(editor.scene.selection)
-					if elf.IsObject(mdl) == true then
-						elf.SetEntityModel(act, mdl)
+					local mdl = GetEntityModel(editor.scene.selection)
+					if mdl ~= nil then
+						SetEntityModel(act, mdl)
 					end
 
-					for i=0, elf.GetEntityMaterialCount(editor.scene.selection)-1 do
-						local mat = elf.GetEntityMaterial(editor.scene.selection, i)
-						elf.SetEntityMaterial(act, i, mat)
+					for i=0, GetEntityMaterialCount(editor.scene.selection)-1 do
+						local mat = GetEntityMaterial(editor.scene.selection, i)
+						SetEntityMaterial(act, i, mat)
 					end
 
-					local lengths = elf.GetActorBoundingLengths(editor.scene.selection)
-					local offset = elf.GetActorBoundingOffset(editor.scene.selection)
-					local anis_fric = elf.GetActorAnisotropicFriction(editor.scene.selection)
-					local lin_factor = elf.GetActorLinearFactor(editor.scene.selection)
-					local ang_factor = elf.GetActorAngularFactor(editor.scene.selection)
+					local lengths = GetActorBoundingLengths(editor.scene.selection)
+					local offset = GetActorBoundingOffset(editor.scene.selection)
+					local anis_fric = GetActorAnisotropicFriction(editor.scene.selection)
+					local lin_factor = GetActorLinearFactor(editor.scene.selection)
+					local ang_factor = GetActorAngularFactor(editor.scene.selection)
 
-					elf.SetActorBoundingLengths(act, lengths.x, lengths.y, lengths.z)
-					elf.SetActorBoundingOffset(act, offset.x, offset.y, offset.z)
-					elf.SetActorDamping(act, elf.GetActorLinearDamping(editor.scene.selection),
-						elf.GetActorAngularDamping(editor.scene.selection))
-					elf.SetActorSleepThresholds(act, elf.GetActorLinearSleepThreshold(editor.scene.selection),
-						elf.GetActorAngularSleepThreshold(editor.scene.selection))
-					elf.SetActorRestitution(act, elf.GetActorRestitution(editor.scene.selection))
-					elf.SetActorAnisotropicFriction(act, anis_fric.x, anis_fric.y, anis_fric.z)
-					elf.SetActorLinearFactor(act, ang_factor.x, ang_factor.y, ang_factor.z)
-					elf.SetActorAngularFactor(act, ang_factor.x, ang_factor.y, ang_factor.z)
+					SetActorBoundingLengths(act, lengths.x, lengths.y, lengths.z)
+					SetActorBoundingOffset(act, offset.x, offset.y, offset.z)
+					SetActorDamping(act, GetActorLinearDamping(editor.scene.selection),
+						GetActorAngularDamping(editor.scene.selection))
+					SetActorSleepThresholds(act, GetActorLinearSleepThreshold(editor.scene.selection),
+						GetActorAngularSleepThreshold(editor.scene.selection))
+					SetActorRestitution(act, GetActorRestitution(editor.scene.selection))
+					SetActorAnisotropicFriction(act, anis_fric.x, anis_fric.y, anis_fric.z)
+					SetActorLinearFactor(act, ang_factor.x, ang_factor.y, ang_factor.z)
+					SetActorAngularFactor(act, ang_factor.x, ang_factor.y, ang_factor.z)
 
-					local physics = elf.IsActorPhysics(editor.scene.selection)
-					if elf.GetActorShape(editor.scene.selection) > 0 then
-						elf.SetActorPhysics(act, elf.GetActorShape(editor.scene.selection),
-							elf.GetActorMass(editor.scene.selection))
+					local physics = IsActorPhysics(editor.scene.selection)
+					if GetActorShape(editor.scene.selection) > 0 then
+						SetActorPhysics(act, GetActorShape(editor.scene.selection),
+							GetActorMass(editor.scene.selection))
 					end
-					if physics == false then elf.DisableActorPhysics(act) end
+					if physics == false then DisableActorPhysics(act) end
 
-					elf.AddEntityToScene(editor.scene.handle, act)
+					AddEntityToScene(editor.scene.handle, act)
 				end
 
 				if act ~= nil then
-					local pos = elf.GetActorPosition(editor.scene.selection)
-					local rot = elf.GetActorRotation(editor.scene.selection)
-					elf.SetActorPosition(act, pos.x, pos.y, pos.z)
-					elf.SetActorRotation(act, rot.x, rot.y, rot.z)
+					local pos = GetActorPosition(editor.scene.selection)
+					local rot = GetActorRotation(editor.scene.selection)
+					SetActorPosition(act, pos.x, pos.y, pos.z)
+					SetActorRotation(act, rot.x, rot.y, rot.z)
 
 					edi_select_actor(act)
 
-					editor.gui.action.move_orig_pos = elf.GetActorPosition(editor.scene.selection)
+					editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
 					editor.gui.action.move = true
-					elf.SetCheckBoxState(editor.gui.properties.menu.move, true)
+					SetCheckBoxState(editor.gui.properties.menu.move, true)
 				end
 			end
 		end
