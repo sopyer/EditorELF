@@ -112,7 +112,7 @@ function edi_trace_scene_selection()
 	local clip = GetCameraClip(editor.scene.camera.handle)
 	local fpsize = GetCameraFarPlaneSize(editor.scene.camera.handle)
 
-	local rayend = CreateVec3f()
+	local rayend = CreateVec3f(0.0, 0.0, 0.0)
 	rayend.x = mouse_pos.x/wwidth*fpsize.x-fpsize.x/2
 	rayend.y = (wheight-mouse_pos.y)/wheight*fpsize.y-fpsize.y/2
 	rayend.z = -clip.y
@@ -240,7 +240,7 @@ function edi_update_scene()
 					local speed = GetVec3fLength(SubVec3fVec3f(pos, cam_pos))*0.001
 
 					local mf = GetMouseForce()
-					local offset = CreateVec3fFromValues(mf.x*speed, -mf.y*speed, 0.0)
+					local offset = CreateVec3f(mf.x*speed, -mf.y*speed, 0.0)
 
 					offset = MulQuaVec3f(cam_orient, offset)
 					local new_pos = AddVec3fVec3f(pos, offset)
@@ -252,7 +252,7 @@ function edi_update_scene()
 					local inv_orient = GetQuaInverted(orient)
 					local cam_orient = GetActorOrientation(editor.scene.camera.handle)
 
-					local axis = CreateVec3fFromValues(0.0, 0.0, -1.0)
+					local axis = CreateVec3f(0.0, 0.0, -1.0)
 					local axis = MulQuaVec3f(cam_orient, axis)
 					local axis = MulQuaVec3f(inv_orient, axis)
 					local mf = GetMouseForce()
