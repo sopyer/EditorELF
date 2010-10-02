@@ -119,7 +119,7 @@ function edi_open_file_dialog(path, title, mode, callback)
 	-- set the dialog on top and visible and lock the focus to it
 	SetScreenToTop(editor.gui.file_dialog.dialog)
 	SetGuiObjectVisible(editor.gui.file_dialog.dialog, true)
-	ForceFocusToScreen(editor.gui.file_dialog.dialog)
+	ForceScreenFocus(editor.gui.file_dialog.dialog)
 
 	return true
 end

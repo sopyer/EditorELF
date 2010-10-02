@@ -24,13 +24,13 @@ function edi_init_scene_camera()
 	editor.scene.camera.irot.y = 0
 
 	-- remove any previous cameras that reserve the ditor camera name
-	RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
+	RemoveSceneCamera(editor.scene.handle, "__EditorELF_Camera")
 
 	-- create a new camera
 	editor.scene.camera.handle = CreateCamera("__EditorELF_Camera")
 
 	-- set the camera position and rotation to the first camera found in the scene
-	local cam = GetCameraByIndex(editor.scene.handle, 0)
+	local cam = GetSceneCameraByIndex(editor.scene.handle, 0)
 	if cam ~= nil then
 		local pos = GetActorPosition(cam)
 		local rot = GetActorRotation(cam)
@@ -45,17 +45,17 @@ function edi_init_scene_camera()
 	end
 
 	-- add the camera to the scene and set it active
-	AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+	AddSceneCamera(editor.scene.handle, editor.scene.camera.handle)
 	SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
 function edi_reload_scene_camera()
-	AddCameraToScene(editor.scene.handle, editor.scene.camera.handle)
+	AddSceneCamera(editor.scene.handle, editor.scene.camera.handle)
 	SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
 function edi_remove_scene_camera()
-	RemoveCameraByName(editor.scene.handle, "__EditorELF_Camera")
+	RemoveSceneCamera(editor.scene.handle, "__EditorELF_Camera")
 end
 
 function edi_load_scene(path)
@@ -266,7 +266,7 @@ function edi_update_scene()
 			end
 
 			if GetKeyState(KEY_DEL) == PRESSED and GetGuiActiveTextField(editor.gui.handle) == nil then
-				RemoveActorByObject(editor.scene.handle, editor.scene.selection)
+				RemoveSceneActorByObject(editor.scene.handle, editor.scene.selection)
 				editor.scene.selection = nil
 				edi_update_gui_selection()	
 			end
@@ -310,7 +310,7 @@ function edi_update_scene()
 					end
 					if physics == false then DisableActorPhysics(act) end
 
-					AddEntityToScene(editor.scene.handle, act)
+					AddSceneEntity(editor.scene.handle, act)
 				end
 
 				if act ~= nil then

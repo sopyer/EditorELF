@@ -1023,25 +1023,25 @@ function edi_properties_menu_import_scene(path)
 		print("  sprites: " .. GetSceneSpriteCount(scn))
 		print("  particles: " .. GetSceneParticlesCount(scn))
 
-		while GetCameraByIndex(scn, 0) ~= nil do
-			local cam = GetCameraByIndex(scn, 0)
-			AddCameraToScene(editor.scene.handle, cam)
+		while GetSceneCameraByIndex(scn, 0) ~= nil do
+			local cam = GetSceneCameraByIndex(scn, 0)
+			AddSceneCamera(editor.scene.handle, cam)
 		end
-		while GetEntityByIndex(scn, 0) ~= nil do
-			local ent = GetEntityByIndex(scn, 0)
-			AddEntityToScene(editor.scene.handle, ent)
+		while GetSceneEntityByIndex(scn, 0) ~= nil do
+			local ent = GetSceneEntityByIndex(scn, 0)
+			AddSceneEntity(editor.scene.handle, ent)
 		end
-		while GetLightByIndex(scn, 0) ~= nil do
-			local lig = GetLightByIndex(scn, 0)
-			AddLightToScene(editor.scene.handle, lig)
+		while GetSceneLightByIndex(scn, 0) ~= nil do
+			local lig = GetSceneLightByIndex(scn, 0)
+			AddSceneLight(editor.scene.handle, lig)
 		end
-		while GetSpriteByIndex(scn, 0) ~= nil do
-			local spr = GetSpriteByIndex(scn, 0)
-			AddSpriteToScene(editor.scene.handle, spr)
+		while GetSceneSpriteByIndex(scn, 0) ~= nil do
+			local spr = GetSceneSpriteByIndex(scn, 0)
+			AddSceneSprite(editor.scene.handle, spr)
 		end
-		while GetParticlesByIndex(scn, 0) ~= nil do
-			local par = GetParticlesByIndex(scn, 0)
-			AddParticlesToScene(editor.scene.handle, par)
+		while GetSceneParticlesByIndex(scn, 0) ~= nil do
+			local par = GetSceneParticlesByIndex(scn, 0)
+			AddSceneParticles(editor.scene.handle, par)
 		end
 		edi_open_properties()
 	end
@@ -1088,28 +1088,28 @@ function edi_update_menu()
 
 	if GetGuiObjectEvent(editor.gui.properties.menu.create_camera) == CLICKED then
 		local cam = CreateCamera("Camera")
-		AddCameraToScene(editor.scene.handle, cam)
+		AddSceneCamera(editor.scene.handle, cam)
 
 		edi_select_actor(cam)
 	end
 
 	if GetGuiObjectEvent(editor.gui.properties.menu.create_light) == CLICKED then
 		local lig = CreateLight("Light")
-		AddLightToScene(editor.scene.handle, lig)
+		AddSceneLight(editor.scene.handle, lig)
 
 		edi_select_actor(lig)
 	end
 
 	if GetGuiObjectEvent(editor.gui.properties.menu.create_entity) == CLICKED then
 		local ent = CreateEntity("Entity")
-		AddEntityToScene(editor.scene.handle, ent)
+		AddSceneEntity(editor.scene.handle, ent)
 
 		edi_select_actor(ent)
 	end
 
 	if GetGuiObjectEvent(editor.gui.properties.menu.create_particles) == CLICKED then
 		local par = CreateParticles("Particles", 25)
-		AddParticlesToScene(editor.scene.handle, par)
+		AddSceneParticles(editor.scene.handle, par)
 
 		edi_select_actor(par)
 	end
@@ -2114,7 +2114,7 @@ function edi_update_particles()
 			else
 				local ent = nil
 				for i=0, GetSceneEntityCount(editor.scene.handle)-1 do
-					ent = GetEntityByIndex(editor.scene.handle, i)
+					ent = GetSceneEntityByIndex(editor.scene.handle, i)
 					if GetActorName(ent) == name then
 						SetTextFieldText(editor.gui.properties.edit.particles.model_txf, "")
 						SetParticlesEntity(editor.scene.selection, ent)
