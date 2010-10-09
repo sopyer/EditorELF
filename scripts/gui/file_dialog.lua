@@ -7,82 +7,18 @@ function edi_init_file_dialog()
 	editor.gui.file_dialog.prev_wheel = 0
 
 	-- setup the file dialog screen
-	editor.gui.file_dialog.dialog = CreateScreen("file_dialog")
-
-	SetScreenTexture(editor.gui.file_dialog.dialog, CreateTextureFromFile("images/file_dialog/background.png"))
-	SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
+	editor.gui.file_dialog.dialog = CreateScreen(editor.gui.handle, "file_dialog", 0, 0, 1024, 720)
 	SetGuiObjectColor(editor.gui.file_dialog.dialog, 1.0, 1.0, 1.0, 0.75)
 
-	AddGuiObject(editor.gui.handle, editor.gui.file_dialog.dialog)
+	editor.gui.file_dialog.file_path = CreateTextField(editor.gui.file_dialog.dialog, "file_path", 4, 4, 925, "/")
+	editor.gui.file_dialog.open = CreateButton(editor.gui.file_dialog.dialog, "open", 933, 4, 87, 18, "Open")
+	editor.gui.file_dialog.save = CreateButton(editor.gui.file_dialog.dialog, "save", 933, 4, 87, 18, "Save")
+	editor.gui.file_dialog.cancel = CreateButton(editor.gui.file_dialog.dialog, "cancel", 4, 698, 87, 18, "Cancel")
+	editor.gui.file_dialog.file_list = CreateTextList(editor.gui.file_dialog.dialog, "file_list", 4, 26, 44, 994)
+	editor.gui.file_dialog.scroll_bar = CreateSlider(editor.gui.file_dialog.dialog, "scroll_bar", 1006, 30, 0, 654, 1.0)
 
-	-- setup the file dialog title label
-	editor.gui.file_dialog.title = CreateLabel("title")
-
-	SetLabelFont(editor.gui.file_dialog.title, editor.gui.fonts.normal)
-	SetLabelText(editor.gui.file_dialog.title, "File Dialog")
-	SetGuiObjectPosition(editor.gui.file_dialog.title, 4, 1)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.title)
-
-	-- setup the file path field
-	editor.gui.file_dialog.file_path = CreateTextField("file_path")
-
-	SetTextFieldTexture(editor.gui.file_dialog.file_path, CreateTextureFromFile("images/file_dialog/file_path.png"))
-	SetTextFieldFont(editor.gui.file_dialog.file_path, editor.gui.fonts.normal)
-	SetTextFieldOffset(editor.gui.file_dialog.file_path, 3, 2)
-	SetTextFieldText(editor.gui.file_dialog.file_path, "/")
-	SetGuiObjectPosition(editor.gui.file_dialog.file_path, 4, 22)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.file_path)
-
-	-- setup the open button
-	editor.gui.file_dialog.open = CreateButton("open")
-
-	SetButtonOffTexture(editor.gui.file_dialog.open, CreateTextureFromFile("images/file_dialog/open_off.png"))
-	SetButtonOverTexture(editor.gui.file_dialog.open, CreateTextureFromFile("images/file_dialog/open_over.png"))
-	SetButtonOnTexture(editor.gui.file_dialog.open, CreateTextureFromFile("images/file_dialog/open_on.png"))
-	SetGuiObjectPosition(editor.gui.file_dialog.open, 933, 22)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.open)
-
-	-- setup the save button
-	editor.gui.file_dialog.save = CreateButton("save")
-
-	SetButtonOffTexture(editor.gui.file_dialog.save, CreateTextureFromFile("images/file_dialog/save_off.png"))
-	SetButtonOverTexture(editor.gui.file_dialog.save, CreateTextureFromFile("images/file_dialog/save_over.png"))
-	SetButtonOnTexture(editor.gui.file_dialog.save, CreateTextureFromFile("images/file_dialog/save_on.png"))
-	SetGuiObjectPosition(editor.gui.file_dialog.save, 933, 22)
+	SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
 	SetGuiObjectVisible(editor.gui.file_dialog.save, false)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.save)
-
-	-- setup the cancel button
-	editor.gui.file_dialog.cancel = CreateButton("cancel")
-
-	SetButtonOffTexture(editor.gui.file_dialog.cancel, CreateTextureFromFile("images/file_dialog/cancel_off.png"))
-	SetButtonOverTexture(editor.gui.file_dialog.cancel, CreateTextureFromFile("images/file_dialog/cancel_over.png"))
-	SetButtonOnTexture(editor.gui.file_dialog.cancel, CreateTextureFromFile("images/file_dialog/cancel_on.png"))
-	SetGuiObjectPosition(editor.gui.file_dialog.cancel, 4, 698)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.cancel)
-
-	-- setup the file list
-	editor.gui.file_dialog.file_list = CreateTextList("file_list")
-
-	SetTextListFont(editor.gui.file_dialog.file_list, editor.gui.fonts.normal)
-	SetTextListSize(editor.gui.file_dialog.file_list, 36, 994)
-	SetGuiObjectPosition(editor.gui.file_dialog.file_list, 4, 44)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.file_list)
-
-	-- setup the scroll bar
-	editor.gui.file_dialog.scroll_bar = CreateSlider("scroll_bar")
-
-	SetSliderBackgroundTexture(editor.gui.file_dialog.scroll_bar, CreateTextureFromFile("images/file_dialog/scroll_bar.png"))
-	SetSliderSliderTexture(editor.gui.file_dialog.scroll_bar, CreateTextureFromFile("images/file_dialog/scroll_bar_slider.png"))
-	SetGuiObjectPosition(editor.gui.file_dialog.scroll_bar, 1002, 44)
-
-	AddGuiObject(editor.gui.file_dialog.dialog, editor.gui.file_dialog.scroll_bar)
 end
 
 function edi_open_file_dialog(path, title, mode, callback)
@@ -96,9 +32,6 @@ function edi_open_file_dialog(path, title, mode, callback)
 	end
 
 	editor.gui.file_dialog.mode = mode
-
-	-- set the file dialog title
-	SetLabelText(editor.gui.file_dialog.title, title)
 
 	-- set the file dialog callback
 	editor.gui.file_dialog.callback = callback

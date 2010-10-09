@@ -189,10 +189,8 @@ function edi_update_scene()
 
 			if editor.gui.action.move == true then
 				editor.gui.action.move = false
-				SetCheckBoxState(editor.gui.properties.menu.move, false)
 			elseif editor.gui.action.rotate == true then
 				editor.gui.action.rotate = false
-				SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 			end
 		end
 
@@ -223,11 +221,9 @@ function edi_update_scene()
 				if GetKeyState(KEY_G) == PRESSED then
 					editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
 					editor.gui.action.move = true
-					SetCheckBoxState(editor.gui.properties.menu.move, true)
 				elseif GetKeyState(KEY_R) == PRESSED then
 					editor.gui.action.rotate_orig_rot = GetActorRotation(editor.scene.selection)
 					editor.gui.action.rotate = true
-					SetCheckBoxState(editor.gui.properties.menu.rotate, true)
 				end
 			end
 

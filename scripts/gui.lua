@@ -1,8 +1,7 @@
 
 function edi_create_label(parent, name, x, y, text, font)
-	local label = CreateLabel(name)
+	local label = CreateLabel(parent, name, x, y, text)
 
-	SetLabelFont(label, font)
 	SetLabelText(label, text)
 	SetGuiObjectPosition(label, x, y)
 
@@ -12,7 +11,7 @@ function edi_create_label(parent, name, x, y, text, font)
 end
 
 function edi_create_button(parent, name, x, y, path)
-	local button = CreateButton(name)
+	local button = CreateButton(parent, name, x, y, 100, 18, "Default")
 
 	SetButtonOffTexture(button, CreateTextureFromFile(path .. "_off.png"))
 	SetButtonOverTexture(button, CreateTextureFromFile(path .. "_over.png"))
@@ -25,7 +24,7 @@ function edi_create_button(parent, name, x, y, path)
 end
 
 function edi_create_check_box(parent, name, x, y, path, default)
-	local check_box = CreateCheckBox(name)
+	local check_box = CreateCheckBox(parent, name, x, y)
 
 	SetCheckBoxOffTexture(check_box, CreateTextureFromFile(path .. "_off.png"))
 	SetCheckBoxOnTexture(check_box, CreateTextureFromFile(path .. "_on.png"))
@@ -38,11 +37,10 @@ function edi_create_check_box(parent, name, x, y, path, default)
 end
 
 function edi_create_text_field(parent, name, x, y, path, font, default)
-	local text_field = CreateTextField(name)
+	local text_field = CreateTextField(parent, name, x, y, 100, default)
 
 	SetTextFieldTexture(text_field, CreateTextureFromFile(path .. ".png"))
 	SetTextFieldOffset(text_field, 3, 2)
-	SetTextFieldFont(text_field, font)
 	SetTextFieldText(text_field, default)
 	SetGuiObjectPosition(text_field, x, y)
 
@@ -52,7 +50,7 @@ function edi_create_text_field(parent, name, x, y, path, font, default)
 end
 
 function edi_create_slider(parent, name, x, y, path, default)
-	local slider = CreateSlider(name)
+	local slider = CreateSlider(parent, name, x, y, 0, 10, 1.0)
 
 	SetSliderBackgroundTexture(slider, CreateTextureFromFile(path .. "_bg.png"))
 	SetSliderSliderTexture(slider, CreateTextureFromFile(path .. "_slider.png"))
@@ -127,12 +125,8 @@ function edi_init_gui()
 	edi_init_properties()
 
 	-- add a version label
-	editor.gui.version = CreateLabel("EditorELF_version")
-
-	SetLabelFont(editor.gui.version, editor.gui.fonts.normal)
-	SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: 0")
-	SetGuiObjectPosition(editor.gui.version, 5,
-		GetWindowHeight()-GetGuiObjectSize(editor.gui.version).y-2)
+	editor.gui.version = CreateLabel(editor.gui.handle, "EditorELF_version", 0, 0, "EDitorELF 0.9 Beta 3, FPS: 0")
+	SetGuiObjectPosition(editor.gui.version, 5, GetWindowHeight()-GetGuiObjectSize(editor.gui.version).y-2)
 
 	AddGuiObject(editor.gui.handle, editor.gui.version)
 end
@@ -140,13 +134,13 @@ end
 function edi_disable_current_menu()
 	if editor.gui.current_menu == EDI_MESSAGE_BOX then
 		SetGuiObjectVisible(editor.gui.file_dialog.box, false)
-		ReleaseFocusFromScreen(editor.gui.message_box.box)
+		ReleaseScreenFocus(editor.gui.message_box.box)
 	elseif editor.gui.current_menu == EDI_FILE_DIALOG then
 		SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
-		ReleaseFocusFromScreen(editor.gui.file_dialog.dialog)
+		ReleaseScreenFocus(editor.gui.file_dialog.dialog)
 	elseif editor.gui.current_menu == EDI_PROPERTIES then
 		SetGuiObjectVisible(editor.gui.properties.handle, false)
-		ReleaseFocusFromScreen(editor.gui.properties.handle)
+		ReleaseScreenFocus(editor.gui.properties.handle)
 	end
 
 	editor.gui.current_menu = EDI_NONE

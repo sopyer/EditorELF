@@ -14,40 +14,36 @@ function edi_init_properties()
 	editor.gui.properties = {}
 
 	-- setup the file dialog screen
-	editor.gui.properties.handle = CreateScreen("edit_menu")
-
-	SetScreenTexture(editor.gui.properties.handle, CreateTextureFromFile("images/properties/background.png"))
-	SetGuiObjectVisible(editor.gui.properties.handle, false)
-	SetGuiObjectColor(editor.gui.properties.handle, 1.0, 1.0, 1.0, 0.85)
-	SetGuiObjectPosition(editor.gui.properties.handle, GetWindowWidth()-GetGuiObjectSize(editor.gui.properties.handle).x, 0)
-
-	AddGuiObject(editor.gui.handle, editor.gui.properties.handle)
+	editor.gui.properties.handle = CreateScreen(editor.gui.handle, "edit_menu", GetWindowWidth()-256, 0, 256, 720)
+	SetGuiObjectColor(editor.gui.properties.handle, 1.0, 1.0, 1.0, 0.75)
 
 	-- setup the properties tab check boxes
-	editor.gui.properties.menu_cb = edi_create_check_box(editor.gui.properties.handle, "menu_cb", 4, 4, "images/properties/menu", true)
-	editor.gui.properties.edit_cb = edi_create_check_box(editor.gui.properties.handle, "edit_cb", 55, 4, "images/properties/edit", false)
-	editor.gui.properties.pp_cb = edi_create_check_box(editor.gui.properties.handle, "pp_cb", 106, 4, "images/properties/pp", false)
+	editor.gui.properties.menu_cb = CreateButton(editor.gui.properties.handle, "menu_cb", 4, 4, 82, 18, "Menu")
+	editor.gui.properties.edit_cb = CreateButton(editor.gui.properties.handle, "edit_cb", 86, 4, 82, 18, "Edit")
+	editor.gui.properties.pp_cb = CreateButton(editor.gui.properties.handle, "pp_cb", 168, 4, 82, 18, "PP")
 
 	-- setup the menu tab
 
 	editor.gui.properties.menu = {}
 
-	editor.gui.properties.menu.file = edi_create_label(editor.gui.properties.handle, "file", 4, 27, "----------- File -----------", editor.gui.fonts.normal)
-	editor.gui.properties.menu.open = edi_create_button(editor.gui.properties.handle, "open", 4, 48, "images/properties/menu/open")
-	editor.gui.properties.menu.save = edi_create_button(editor.gui.properties.handle, "save", 4, 70, "images/properties/menu/save")
-	editor.gui.properties.menu.import_scene = edi_create_button(editor.gui.properties.handle, "import_scene", 4, 92, "images/properties/menu/import_scene")
-	editor.gui.properties.menu.actions = edi_create_label(editor.gui.properties.handle, "actions", 4, 115, "---------- Actions ---------", editor.gui.fonts.normal)
-	editor.gui.properties.menu.move = edi_create_check_box(editor.gui.properties.handle, "move", 4, 136, "images/properties/menu/move", false)
-	editor.gui.properties.menu.rotate = edi_create_check_box(editor.gui.properties.handle, "rotate", 4, 158, "images/properties/menu/rotate", false)
-	editor.gui.properties.menu.create = edi_create_label(editor.gui.properties.handle, "actions", 4, 181, "---------- Create ----------", editor.gui.fonts.normal)
-	editor.gui.properties.menu.create_camera = edi_create_button(editor.gui.properties.handle, "create_camera", 4, 202, "images/properties/menu/create_camera")
-	editor.gui.properties.menu.create_light = edi_create_button(editor.gui.properties.handle, "create_light", 4, 224, "images/properties/menu/create_light")
-	editor.gui.properties.menu.create_entity = edi_create_button(editor.gui.properties.handle, "create_entity", 4, 246, "images/properties/menu/create_entity")
-	editor.gui.properties.menu.create_particles = edi_create_button(editor.gui.properties.handle, "create_particles", 4, 268, "images/properties/menu/create_particles")
-	editor.gui.properties.menu.ambient = edi_create_label(editor.gui.properties.handle, "ambient", 4, 291, "---------- Ambient ---------", editor.gui.fonts.normal)
-	editor.gui.properties.menu.ambient_r_txf = edi_create_text_field(editor.gui.properties.handle, "ambient_r_txf", 4, 312, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.menu.ambient_g_txf = edi_create_text_field(editor.gui.properties.handle, "ambient_g_txf", 56, 312, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.menu.ambient_b_txf = edi_create_text_field(editor.gui.properties.handle, "ambient_b_txf", 108, 312, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.menu.open = CreateButton(editor.gui.properties.handle, "open", 4, 30, 248, 18, "Open...")
+	editor.gui.properties.menu.save = CreateButton(editor.gui.properties.handle, "save", 4, 50, 248, 18, "Save...")
+	editor.gui.properties.menu.import_scene = CreateButton(editor.gui.properties.handle, "import_scene", 4, 70, 248, 18, "Import Scene...")
+	editor.gui.properties.menu.create_camera = CreateButton(editor.gui.properties.handle, "create_camera", 4, 108, 248, 18, "Create Camera")
+	editor.gui.properties.menu.create_light = CreateButton(editor.gui.properties.handle, "create_light", 4, 128, 248, 18, "Create Light")
+	editor.gui.properties.menu.create_entity = CreateButton(editor.gui.properties.handle, "create_entity", 4, 148, 248, 18, "Create Entity")
+	editor.gui.properties.menu.create_particles = CreateButton(editor.gui.properties.handle, "create_particles", 4, 168, 248, 18, "Create Particles")
+	editor.gui.properties.menu.ambient = CreateLabel(editor.gui.properties.handle, "ambient", 4, 196, "Ambient")
+	editor.gui.properties.menu.ambient_r = CreateLabel(editor.gui.properties.handle, "ambient", 4, 215, "R")
+	editor.gui.properties.menu.ambient_g = CreateLabel(editor.gui.properties.handle, "ambient", 78, 215, "G")
+	editor.gui.properties.menu.ambient_b = CreateLabel(editor.gui.properties.handle, "ambient", 155, 215, "B")
+	SetGuiObjectColor(editor.gui.properties.menu.ambient, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.menu.ambient_r, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.menu.ambient_g, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.menu.ambient_b, 1.0, 1.0, 1.0, 0.6)
+	editor.gui.properties.menu.ambient_r_txf = CreateTextField(editor.gui.properties.handle, "ambient_r_txf", 18, 210, 56, "0")
+	editor.gui.properties.menu.ambient_g_txf = CreateTextField(editor.gui.properties.handle, "ambient_g_txf", 94, 210, 56, "0")
+	editor.gui.properties.menu.ambient_b_txf = CreateTextField(editor.gui.properties.handle, "ambient_b_txf", 169, 210, 56, "0")
 
 	-- setup the edit tab
 
@@ -128,10 +124,7 @@ function edi_init_properties()
 	editor.gui.properties.edit.actor.ang_factor_y_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_y_txf", 151, 400, "images/text_field48", editor.gui.fonts.normal, "0")
 	editor.gui.properties.edit.actor.ang_factor_z_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_z_txf", 203, 400, "images/text_field48", editor.gui.fonts.normal, "0")
 
-	editor.gui.properties.edit.actor.shape = CreateTextList("file_list")
-	SetTextListFont(editor.gui.properties.edit.actor.shape, editor.gui.fonts.normal)
-	SetTextListSize(editor.gui.properties.edit.actor.shape, 4, 153)
-	SetGuiObjectPosition(editor.gui.properties.edit.actor.shape, 77, 424)
+	editor.gui.properties.edit.actor.shape = CreateTextList(editor.gui.properties.handle, "file_list", 77, 424, 4, 153)
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Box")
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Sphere")
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Triangle Mesh")
@@ -143,11 +136,7 @@ function edi_init_properties()
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone Z")
 	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape)
 
-	editor.gui.properties.edit.actor.shape_sb = CreateSlider("scroll_bar")
-	SetSliderBackgroundTexture(editor.gui.properties.edit.actor.shape_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar.png"))
-	SetSliderSliderTexture(editor.gui.properties.edit.actor.shape_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar_slider.png"))
-	SetGuiObjectPosition(editor.gui.properties.edit.actor.shape_sb, 234, 424)
-	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape_sb)
+	editor.gui.properties.edit.actor.shape_sb = CreateSlider(editor.gui.properties.handle, "scroll_bar", 234, 424, 0, 72, 1.0)
 
 	-- setup the light properties
 
@@ -165,14 +154,10 @@ function edi_init_properties()
 	editor.gui.properties.edit.light.intensity_lab = edi_create_label(editor.gui.properties.handle, "intensity_lab", 4, 291, "Intensity", editor.gui.fonts.normal)
 	editor.gui.properties.edit.light.fadeoff_lab = edi_create_label(editor.gui.properties.handle, "fadeoff_lab", 4, 313, "Fadeoff", editor.gui.fonts.normal)
 
-	editor.gui.properties.edit.light.type_txl = CreateTextList("type_list")
-	SetTextListFont(editor.gui.properties.edit.light.type_txl, editor.gui.fonts.normal)
-	SetTextListSize(editor.gui.properties.edit.light.type_txl, 3, 202)
-	SetGuiObjectPosition(editor.gui.properties.edit.light.type_txl, 50, 48)
+	editor.gui.properties.edit.light.type_txl = CreateTextList(editor.gui.properties.handle, "type_list", 50, 48, 3, 202)
 	AddTextListItem(editor.gui.properties.edit.light.type_txl, " Point")
 	AddTextListItem(editor.gui.properties.edit.light.type_txl, " Sun")
 	AddTextListItem(editor.gui.properties.edit.light.type_txl, " Spot")
-	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.light.type_txl)
 
 	editor.gui.properties.edit.light.color_r_txf = edi_create_text_field(editor.gui.properties.handle, "color_r_txf", 99, 114, "images/text_field48", editor.gui.fonts.normal, "0")
 	editor.gui.properties.edit.light.color_g_txf = edi_create_text_field(editor.gui.properties.handle, "color_g_txf", 151, 114, "images/text_field48", editor.gui.fonts.normal, "0")
@@ -236,21 +221,13 @@ function edi_init_properties()
 	editor.gui.properties.edit.entity.replace_material_but = edi_create_button(editor.gui.properties.handle, "replace_material_but", 4, 136, "images/properties/edit/replace_material")
 	editor.gui.properties.edit.entity.remove_material_but = edi_create_button(editor.gui.properties.handle, "remove_material_but", 4, 158, "images/properties/edit/remove_material")
 
-	editor.gui.properties.edit.entity.materials_txl = CreateTextList("materials_txl")
-	SetTextListFont(editor.gui.properties.edit.entity.materials_txl, editor.gui.fonts.normal)
-	SetTextListSize(editor.gui.properties.edit.entity.materials_txl, 4, 226)
-	SetGuiObjectPosition(editor.gui.properties.edit.entity.materials_txl, 4, 180)
+	editor.gui.properties.edit.entity.materials_txl = CreateTextList(editor.gui.properties.handle, "materials_txl", 4, 180, 4, 226)
 	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 1")
 	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 2")
 	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 3")
 	AddTextListItem(editor.gui.properties.edit.entity.materials_txl, " Empty 4")
-	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.entity.materials_txl)
 
-	editor.gui.properties.edit.entity.materials_sb = CreateSlider("scroll_bar")
-	SetSliderBackgroundTexture(editor.gui.properties.edit.entity.materials_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar.png"))
-	SetSliderSliderTexture(editor.gui.properties.edit.entity.materials_sb, CreateTextureFromFile("images/properties/edit/shape_scroll_bar_slider.png"))
-	SetGuiObjectPosition(editor.gui.properties.edit.entity.materials_sb, 230, 180)
-	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.entity.materials_sb)
+	editor.gui.properties.edit.entity.materials_sb = CreateSlider(editor.gui.properties.handle, "scroll_bar", 230, 180, 0, 72, 1.0)
 
 	editor.gui.properties.edit.entity.mat_name_txf = edi_create_text_field(editor.gui.properties.handle, "mat_name_txf", 99, 260, "images/text_field128", editor.gui.fonts.normal, "")
 
@@ -537,10 +514,8 @@ end
 
 function edi_hide_properties_tab(tab)
 	if tab == EDI_PROPERTIES_MENU then
-		SetCheckBoxState(editor.gui.properties.menu_cb, false)
 		for k, v in pairs(editor.gui.properties.menu) do SetGuiObjectVisible(v, false) end
 	elseif tab == EDI_PROPERTIES_EDIT then
-		SetCheckBoxState(editor.gui.properties.edit_cb, false)
 		SetGuiObjectVisible(editor.gui.properties.edit.act_cb, false)
 		SetGuiObjectVisible(editor.gui.properties.edit.cam_cb, false)
 		SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
@@ -549,25 +524,17 @@ function edi_hide_properties_tab(tab)
 		SetGuiObjectVisible(editor.gui.properties.edit.spr_cb, false)
 		edi_hide_edit_tab(editor.gui.properties.edit.current_tab)
 	elseif tab == EDI_PROPERTIES_PP then
-		SetCheckBoxState(editor.gui.properties.pp_cb, false)
 		for k, v in pairs(editor.gui.properties.pp) do SetGuiObjectVisible(v, false) end
 	end
 end
 
 function edi_show_properties_tab(tab)
-	SetCheckBoxState(editor.gui.properties.menu_cb, false)
-	SetCheckBoxState(editor.gui.properties.edit_cb, false)
-	SetCheckBoxState(editor.gui.properties.pp_cb, false)
-
 	if tab == EDI_PROPERTIES_MENU then
-		SetCheckBoxState(editor.gui.properties.menu_cb, true)
 		for k, v in pairs(editor.gui.properties.menu) do SetGuiObjectVisible(v, true) end
 	elseif tab == EDI_PROPERTIES_EDIT then
-		SetCheckBoxState(editor.gui.properties.edit_cb, true)
 		SetGuiObjectVisible(editor.gui.properties.edit.act_cb, true)
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	elseif tab == EDI_PROPERTIES_PP then
-		SetCheckBoxState(editor.gui.properties.pp_cb, true)
 		for k, v in pairs(editor.gui.properties.pp) do SetGuiObjectVisible(v, true) end
 	end
 end
@@ -1064,26 +1031,6 @@ function edi_update_menu()
 
 	if GetGuiObjectEvent(editor.gui.properties.menu.import_scene) == CLICKED then
 		edi_open_file_dialog(GetCurrentDirectory(), "Import Scene (.pak/.dae/.3ds/.md2/...) ...", EDI_FILE_DIALOG_OPEN, edi_properties_menu_import_scene)
-	end
-
-	if GetGuiObjectEvent(editor.gui.properties.menu.move) == STATE_CHANGED then
-		if editor.scene.selection ~= nil then
-			editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
-			editor.gui.action.move = true
-			SetCheckBoxState(editor.gui.properties.menu.move, true)
-		else
-			SetCheckBoxState(editor.gui.properties.menu.move, false)
-		end
-	end
-
-	if GetGuiObjectEvent(editor.gui.properties.menu.rotate) == STATE_CHANGED then
-		if editor.scene.selection ~= nil then
-			editor.gui.action.rotate_orig_rot = GetActorRotation(editor.scene.selection)
-			editor.gui.action.rotate = true
-			SetCheckBoxState(editor.gui.properties.menu.rotate, true)
-		else
-			SetCheckBoxState(editor.gui.properties.menu.rotate, false)
-		end
 	end
 
 	if GetGuiObjectEvent(editor.gui.properties.menu.create_camera) == CLICKED then
@@ -2505,15 +2452,15 @@ function edi_update_pp()
 end
 
 function edi_update_properties()
-	if GetGuiObjectEvent(editor.gui.properties.menu_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.menu_cb) == CLICKED then
 		edi_switch_properties_tab(EDI_PROPERTIES_MENU)
 	end
 
-	if GetGuiObjectEvent(editor.gui.properties.edit_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit_cb) == CLICKED then
 		edi_switch_properties_tab(EDI_PROPERTIES_EDIT)
 	end
 
-	if GetGuiObjectEvent(editor.gui.properties.pp_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.pp_cb) == CLICKED then
 		edi_switch_properties_tab(EDI_PROPERTIES_PP)
 	end
 
