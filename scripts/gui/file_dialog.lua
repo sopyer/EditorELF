@@ -7,15 +7,15 @@ function edi_init_file_dialog()
 	editor.gui.file_dialog.prev_wheel = 0
 
 	-- setup the file dialog screen
-	editor.gui.file_dialog.dialog = CreateScreen(editor.gui.handle, "file_dialog", 0, 0, 1024, 720)
+	editor.gui.file_dialog.dialog = CreateScreen(editor.gui.handle, "file_dialog", 0, 0, GetWindowWidth(), GetWindowHeight())
 	SetGuiObjectColor(editor.gui.file_dialog.dialog, 1.0, 1.0, 1.0, 0.75)
 
-	editor.gui.file_dialog.file_path = CreateTextField(editor.gui.file_dialog.dialog, "file_path", 4, 4, 925, "/")
-	editor.gui.file_dialog.open = CreateButton(editor.gui.file_dialog.dialog, "open", 933, 4, 87, 18, "Open")
-	editor.gui.file_dialog.save = CreateButton(editor.gui.file_dialog.dialog, "save", 933, 4, 87, 18, "Save")
-	editor.gui.file_dialog.cancel = CreateButton(editor.gui.file_dialog.dialog, "cancel", 4, 698, 87, 18, "Cancel")
-	editor.gui.file_dialog.file_list = CreateTextList(editor.gui.file_dialog.dialog, "file_list", 4, 26, 44, 1006)
-	editor.gui.file_dialog.scroll_bar = CreateSlider(editor.gui.file_dialog.dialog, "scroll_bar", 1014, 30, 0, 654, 1.0)
+	editor.gui.file_dialog.file_path = CreateTextField(editor.gui.file_dialog.dialog, "file_path", 4, 4, GetWindowWidth()-101, "/")
+	editor.gui.file_dialog.open = CreateButton(editor.gui.file_dialog.dialog, "open", GetWindowWidth()-91, 4, 87, 18, "Open")
+	editor.gui.file_dialog.save = CreateButton(editor.gui.file_dialog.dialog, "save", GetWindowWidth()-91, 4, 87, 18, "Save")
+	editor.gui.file_dialog.cancel = CreateButton(editor.gui.file_dialog.dialog, "cancel", 4, GetWindowHeight()-22, 87, 18, "Cancel")
+	editor.gui.file_dialog.file_list = CreateTextList(editor.gui.file_dialog.dialog, "file_list", 4, 26, 44, GetWindowWidth()-18)
+	editor.gui.file_dialog.scroll_bar = CreateSlider(editor.gui.file_dialog.dialog, "scroll_bar", GetWindowWidth()-10, 30, 0, GetWindowHeight()-66, 1.0)
 
 	SetGuiObjectVisible(editor.gui.file_dialog.dialog, false)
 	SetGuiObjectVisible(editor.gui.file_dialog.save, false)

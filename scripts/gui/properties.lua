@@ -384,35 +384,36 @@ function edi_init_properties()
 
 	-- setup the bloom settings
 
-	editor.gui.properties.pp.bloom = edi_create_label(editor.gui.properties.handle, "bloom", 4, 27, "----------- Bloom ----------", editor.gui.fonts.normal)
-	editor.gui.properties.pp.bloom_enb = edi_create_label(editor.gui.properties.handle, "bloom_enb", 4, 49, "Enabled", editor.gui.fonts.normal)
-	editor.gui.properties.pp.bloom_str = edi_create_label(editor.gui.properties.handle, "bloom_thr", 4, 71, "Threshold", editor.gui.fonts.normal)
+	editor.gui.properties.pp.bloom_enb = CreateLabel(editor.gui.properties.handle, "bloom_enb", 4, 32, "Bloom")
+	editor.gui.properties.pp.bloom_str = CreateLabel(editor.gui.properties.handle, "bloom_thr", 4, 52, "Threshold")
+	editor.gui.properties.pp.bloom_cb = CreateCheckBox(editor.gui.properties.handle, "bloom_cb", 100, 30)
+	editor.gui.properties.pp.bloom_str_sli = CreateSlider(editor.gui.properties.handle, "bloom_str_sli", 100, 55, 148, 0, 0.5)
 
-	editor.gui.properties.pp.bloom_cb = edi_create_check_box(editor.gui.properties.handle, "bloom_cb", 100, 48, "images/check_box", false)
-
-	editor.gui.properties.pp.bloom_str_sli = edi_create_slider(editor.gui.properties.handle, "bloom_str_sli", 100, 70, "images/slider128", 0.5)
+	SetGuiObjectColor(editor.gui.properties.pp.bloom_enb, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.pp.bloom_str, 1.0, 1.0, 1.0, 0.6)
 
 	-- setup the DOF settings
 
-	editor.gui.properties.pp.dof = edi_create_label(editor.gui.properties.handle, "dof", 4, 93, "------------ DOF -----------", editor.gui.fonts.normal)
-	editor.gui.properties.pp.dof_enb = edi_create_label(editor.gui.properties.handle, "dof_enb", 4, 115, "Enabled", editor.gui.fonts.normal)
-	editor.gui.properties.pp.dof_foc_rng = edi_create_label(editor.gui.properties.handle, "dof_foc_rng", 4, 137, "Focal Range", editor.gui.fonts.normal)
-	editor.gui.properties.pp.dof_foc_dst = edi_create_label(editor.gui.properties.handle, "dof_foc_dst", 4, 159, "Focal Distance", editor.gui.fonts.normal)
+	editor.gui.properties.pp.dof_enb = CreateLabel(editor.gui.properties.handle, "dof_enb", 4, 85, "Dof")
+	editor.gui.properties.pp.dof_foc_rng = CreateLabel(editor.gui.properties.handle, "dof_foc_rng", 4, 107, "Focal Range")
+	editor.gui.properties.pp.dof_foc_dst = CreateLabel(editor.gui.properties.handle, "dof_foc_dst", 4, 129, "Focal Dist")
+	editor.gui.properties.pp.dof_enb_cb = CreateCheckBox(editor.gui.properties.handle, "dof_enb_cb", 100, 83)
+	editor.gui.properties.pp.dof_foc_rng_txf = CreateTextField(editor.gui.properties.handle, "dof_foc_rng_txf", 100, 102, 148, "7.5")
+	editor.gui.properties.pp.dof_foc_dst_txf = CreateTextField(editor.gui.properties.handle, "dof_foc_dst_txf", 100, 124, 148, "15")
 
-	editor.gui.properties.pp.dof_enb_cb = edi_create_check_box(editor.gui.properties.handle, "dof_enb_cb", 140, 114, "images/check_box", false)
-
-	editor.gui.properties.pp.dof_foc_rng_txf = edi_create_text_field(editor.gui.properties.handle, "dof_foc_rng_txf", 140, 136, "images/text_field64", editor.gui.fonts.normal, "7.5")
-	editor.gui.properties.pp.dof_foc_dst_txf = edi_create_text_field(editor.gui.properties.handle, "dof_foc_dst_txf", 140, 158, "images/text_field64", editor.gui.fonts.normal, "15")
+	SetGuiObjectColor(editor.gui.properties.pp.dof_enb, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.pp.dof_foc_rng, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.pp.dof_foc_dst, 1.0, 1.0, 1.0, 0.6)
 
 	-- setup the light shaft settings
 
-	editor.gui.properties.pp.lsh = edi_create_label(editor.gui.properties.handle, "lsh", 4, 180, "------- Light Shafts -------", editor.gui.fonts.normal)
-	editor.gui.properties.pp.lsh_enb = edi_create_label(editor.gui.properties.handle, "lsh_enb", 4, 203, "Enabled", editor.gui.fonts.normal)
-	editor.gui.properties.pp.lsh_str = edi_create_label(editor.gui.properties.handle, "lsh_str", 4, 225, "Strength", editor.gui.fonts.normal)
+	editor.gui.properties.pp.lsh_enb = CreateLabel(editor.gui.properties.handle, "lsh_enb", 4, 163, "Light Shafts")
+	editor.gui.properties.pp.lsh_str = CreateLabel(editor.gui.properties.handle, "lsh_str", 4, 185, "Strength")
+	editor.gui.properties.pp.lsh_enb_cb = CreateCheckBox(editor.gui.properties.handle, "lsh_enb_cb", 100, 161)
+	editor.gui.properties.pp.lsh_str_sli = CreateSlider(editor.gui.properties.handle, "lsh_str_sli", 100, 188, 148, 0, 1.0)
 
-	editor.gui.properties.pp.lsh_enb_cb = edi_create_check_box(editor.gui.properties.handle, "lsh_enb_cb", 100, 202, "images/check_box", false)
-
-	editor.gui.properties.pp.lsh_str_sli = edi_create_slider(editor.gui.properties.handle, "lsh_str_sli", 100, 224, "images/slider128", 1.0)
+	SetGuiObjectColor(editor.gui.properties.pp.lsh_enb, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.pp.lsh_str, 1.0, 1.0, 1.0, 0.6)
 
 	-- hide other tabs and show
 
