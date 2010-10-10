@@ -42,6 +42,8 @@ function edi_init_scene_camera()
 		SetActorPosition(editor.scene.camera.handle, pos.x, pos.y, pos.z)
 		SetActorRotation(editor.scene.camera.handle, rot.x, rot.y, rot.z)
 		SetCameraPerspective(editor.scene.camera.handle, fov, aspect, clip.x, clip.y)
+	else
+		SetCameraPerspective(editor.scene.camera.handle, 35.0, GetWindowWidth()/GetWindowHeight(), 1.0, 250.0)
 	end
 
 	-- add the camera to the scene and set it active
@@ -203,7 +205,6 @@ function edi_update_scene()
 					editor.gui.action.move_orig_pos.z)
 				edi_update_edit_selection()
 				editor.gui.action.move = false
-				SetCheckBoxState(editor.gui.properties.menu.move, false)
 			elseif editor.gui.action.rotate == true then
 				SetActorRotation(editor.scene.selection,
 					editor.gui.action.rotate_orig_rot.x,
