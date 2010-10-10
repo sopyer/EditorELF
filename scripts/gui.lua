@@ -151,7 +151,7 @@ function edi_update_gui_selection()
 end
 
 function edi_update_gui()
-	SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 2, FPS: " .. GetFps())
+	SetLabelText(editor.gui.version, "EditorELF 0.9 Beta 3, FPS: " .. GetFps())
 
 	if editor.gui.current_menu == EDI_MESSAGE_BOX then edi_update_message_box()
 	elseif editor.gui.current_menu == EDI_FILE_DIALOG then edi_update_file_dialog()
