@@ -50,81 +50,96 @@ function edi_init_properties()
 	editor.gui.properties.edit = {}
 
 	-- setup the edit tab check boxes
-	editor.gui.properties.edit.act_cb = edi_create_check_box(editor.gui.properties.handle, "act_cb", 4, 26, "images/properties/edit/act", true)
-	editor.gui.properties.edit.cam_cb = edi_create_check_box(editor.gui.properties.handle, "cam_cb", 45, 26, "images/properties/edit/cam", false)
-	editor.gui.properties.edit.lig_cb = edi_create_check_box(editor.gui.properties.handle, "lig_cb", 45, 26, "images/properties/edit/lig", false)
-	editor.gui.properties.edit.ent_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/ent", false)
-	editor.gui.properties.edit.par_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/par", false)
-	editor.gui.properties.edit.spr_cb = edi_create_check_box(editor.gui.properties.handle, "ent_cb", 45, 26, "images/properties/edit/spr", false)
-
-	SetGuiObjectVisible(editor.gui.properties.edit.lig_cb, false)
+	editor.gui.properties.edit.act_cb = CreateButton(editor.gui.properties.handle, "act_cb", 4, 26, 124, 18, "Actor")
+	editor.gui.properties.edit.cam_cb = CreateButton(editor.gui.properties.handle, "cam_cb", 128, 26, 124, 18, "Camera")
+	editor.gui.properties.edit.lig_cb = CreateButton(editor.gui.properties.handle, "lig_cb", 128, 26, 124, 18, "Light")
+	editor.gui.properties.edit.ent_cb = CreateButton(editor.gui.properties.handle, "ent_cb", 128, 26, 124, 18, "Entity")
+	editor.gui.properties.edit.par_cb = CreateButton(editor.gui.properties.handle, "ent_cb", 128, 26, 124, 18, "Particles")
+	editor.gui.properties.edit.spr_cb = CreateButton(editor.gui.properties.handle, "ent_cb", 128, 26, 124, 18, "Sprite")
 
 	-- setup the actor properties
 
 	editor.gui.properties.edit.actor = {}
 
-	editor.gui.properties.edit.actor.name_lab = edi_create_label(editor.gui.properties.handle, "name_lab", 4, 49, "Name", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.pos_lab = edi_create_label(editor.gui.properties.handle, "pos_lab", 4, 71, "Position", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.rot_lab = edi_create_label(editor.gui.properties.handle, "rot_lab", 4, 93, "Rotation", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.script_lab = edi_create_label(editor.gui.properties.handle, "script_lab", 4, 115, "Script", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.physics_lab = edi_create_label(editor.gui.properties.handle, "physics_lab", 4, 137, "---------- Physics ---------", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.physics_enb_lab = edi_create_label(editor.gui.properties.handle, "physics_enb_lab", 4, 159, "Enabled", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.lengths_lab = edi_create_label(editor.gui.properties.handle, "lengths_lab", 4, 181, "Lengths", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.offset_lab = edi_create_label(editor.gui.properties.handle, "offset_lab", 4, 203, "Offset", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.mass_lab = edi_create_label(editor.gui.properties.handle, "mass_lab", 4, 225, "Mass", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.lin_damp_lab = edi_create_label(editor.gui.properties.handle, "lin_damp_lab", 4, 247, "Lin Damp", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.ang_damp_lab = edi_create_label(editor.gui.properties.handle, "ang_damp_lab", 4, 269, "Ang Damp", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.lin_sleep_lab = edi_create_label(editor.gui.properties.handle, "lin_sleep_lab", 4, 291, "Lin Sleep", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.ang_sleep_lab = edi_create_label(editor.gui.properties.handle, "ang_sleep_lab", 4, 313, "Ang Sleep", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.restitu_lab = edi_create_label(editor.gui.properties.handle, "restitu_lab", 4, 335, "Restitu.", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.anis_fric_lab = edi_create_label(editor.gui.properties.handle, "anis_fric_lab", 4, 357, "Anis Fric", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.lin_fac_lab = edi_create_label(editor.gui.properties.handle, "lin_frac_lab", 4, 379, "Lin Factor", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.ang_fac_lab = edi_create_label(editor.gui.properties.handle, "ang_frac_lab", 4, 401, "Ang Factor", editor.gui.fonts.normal)
-	editor.gui.properties.edit.actor.shape_lab = edi_create_label(editor.gui.properties.handle, "physics_lab", 4, 425, "Shape", editor.gui.fonts.normal)
+	editor.gui.properties.edit.actor.name_lab = CreateLabel(editor.gui.properties.handle, "name_lab", 4, 54, "Name")
+	editor.gui.properties.edit.actor.pos_lab = CreateLabel(editor.gui.properties.handle, "pos_lab", 4, 75, "Position")
+	editor.gui.properties.edit.actor.rot_lab = CreateLabel(editor.gui.properties.handle, "rot_lab", 4, 97, "Rotation")
+	editor.gui.properties.edit.actor.script_lab = CreateLabel(editor.gui.properties.handle, "script_lab", 4, 118, "Script")
+	editor.gui.properties.edit.actor.physics_enb_lab = CreateLabel(editor.gui.properties.handle, "physics_enb_lab", 4, 162, "Physics")
+	editor.gui.properties.edit.actor.lengths_lab = CreateLabel(editor.gui.properties.handle, "lengths_lab", 4, 184, "Lengths")
+	editor.gui.properties.edit.actor.offset_lab = CreateLabel(editor.gui.properties.handle, "offset_lab", 4, 206, "Offset")
+	editor.gui.properties.edit.actor.mass_lab = CreateLabel(editor.gui.properties.handle, "mass_lab", 4, 228, "Mass")
+	editor.gui.properties.edit.actor.lin_damp_lab = CreateLabel(editor.gui.properties.handle, "lin_damp_lab", 4, 250, "Lin Damp")
+	editor.gui.properties.edit.actor.ang_damp_lab = CreateLabel(editor.gui.properties.handle, "ang_damp_lab", 4, 272, "Ang Damp")
+	editor.gui.properties.edit.actor.lin_sleep_lab = CreateLabel(editor.gui.properties.handle, "lin_sleep_lab", 4, 294, "Lin Sleep")
+	editor.gui.properties.edit.actor.ang_sleep_lab = CreateLabel(editor.gui.properties.handle, "ang_sleep_lab", 4, 316, "Ang Sleep")
+	editor.gui.properties.edit.actor.restitu_lab = CreateLabel(editor.gui.properties.handle, "restitu_lab", 4, 337, "Restitu.")
+	editor.gui.properties.edit.actor.anis_fric_lab = CreateLabel(editor.gui.properties.handle, "anis_fric_lab", 4, 360, "Anis Fric")
+	editor.gui.properties.edit.actor.lin_fac_lab = CreateLabel(editor.gui.properties.handle, "lin_frac_lab", 4, 382, "Lin Factor")
+	editor.gui.properties.edit.actor.ang_fac_lab = CreateLabel(editor.gui.properties.handle, "ang_frac_lab", 4, 404, "Ang Factor")
+	editor.gui.properties.edit.actor.shape_lab = CreateLabel(editor.gui.properties.handle, "physics_lab", 4, 428, "Shape")
 
-	editor.gui.properties.edit.actor.name_txf = edi_create_text_field(editor.gui.properties.handle, "name_txf", 99, 48, "images/text_field128", editor.gui.fonts.normal, "Object")
+	SetGuiObjectColor(editor.gui.properties.edit.actor.name_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.pos_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.rot_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.script_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.physics_enb_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.lengths_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.offset_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.mass_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.lin_damp_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.ang_damp_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.lin_sleep_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.ang_sleep_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.restitu_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.anis_fric_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.lin_fac_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.ang_fac_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.actor.shape_lab, 1.0, 1.0, 1.0, 0.6)
 
-	editor.gui.properties.edit.actor.pos_x_txf = edi_create_text_field(editor.gui.properties.handle, "pos_x_txf", 99, 70, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.pos_y_txf = edi_create_text_field(editor.gui.properties.handle, "pos_y_txf", 151, 70, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.pos_z_txf = edi_create_text_field(editor.gui.properties.handle, "pos_z_txf", 203, 70, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.name_txf = CreateTextField(editor.gui.properties.handle, "name_txf", 80, 48, 168, "Object")
 
-	editor.gui.properties.edit.actor.rot_x_txf = edi_create_text_field(editor.gui.properties.handle, "rot_x_txf", 99, 92, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.rot_y_txf = edi_create_text_field(editor.gui.properties.handle, "rot_y_txf", 151, 92, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.rot_z_txf = edi_create_text_field(editor.gui.properties.handle, "rot_z_txf", 203, 92, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.pos_x_txf = CreateTextField(editor.gui.properties.handle, "pos_x_txf", 80, 70, 53, "0")
+	editor.gui.properties.edit.actor.pos_y_txf = CreateTextField(editor.gui.properties.handle, "pos_y_txf", 137, 70, 53, "0")
+	editor.gui.properties.edit.actor.pos_z_txf = CreateTextField(editor.gui.properties.handle, "pos_z_txf", 194, 70, 53, "0")
 
-	editor.gui.properties.edit.actor.script_txf = edi_create_text_field(editor.gui.properties.handle, "script_txf", 99, 114, "images/text_field128", editor.gui.fonts.normal, "")
-	editor.gui.properties.edit.actor.script_open = edi_create_button(editor.gui.properties.handle, "script_open", 231, 114, "images/mini_open")
+	editor.gui.properties.edit.actor.rot_x_txf = CreateTextField(editor.gui.properties.handle, "rot_x_txf", 80, 92, 53, "0")
+	editor.gui.properties.edit.actor.rot_y_txf = CreateTextField(editor.gui.properties.handle, "rot_y_txf", 137, 92, 53, "0")
+	editor.gui.properties.edit.actor.rot_z_txf = CreateTextField(editor.gui.properties.handle, "rot_z_txf", 194, 92, 53, "0")
 
-	editor.gui.properties.edit.actor.physics_enb_cb = edi_create_check_box(editor.gui.properties.handle, "physics_enb_cb", 99, 158, "images/check_box", false)
+	editor.gui.properties.edit.actor.script_txf = CreateTextField(editor.gui.properties.handle, "script_txf", 80, 114, 147, "")
+	editor.gui.properties.edit.actor.script_open = CreateButton(editor.gui.properties.handle, "script_open", 231, 114, 18, 18, "...")
 
-	editor.gui.properties.edit.actor.lengths_x_txf = edi_create_text_field(editor.gui.properties.handle, "lengths_x_txf", 99, 180, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.lengths_y_txf = edi_create_text_field(editor.gui.properties.handle, "lengths_y_txf", 151, 180, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.lengths_z_txf = edi_create_text_field(editor.gui.properties.handle, "lengths_z_txf", 203, 180, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.physics_enb_cb = CreateCheckBox(editor.gui.properties.handle, "physics_enb_cb", 80, 160)
 
-	editor.gui.properties.edit.actor.offset_x_txf = edi_create_text_field(editor.gui.properties.handle, "offset_x_txf", 99, 202, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.offset_y_txf = edi_create_text_field(editor.gui.properties.handle, "offset_y_txf", 151, 202, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.offset_z_txf = edi_create_text_field(editor.gui.properties.handle, "offset_z_txf", 203, 202, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lengths_x_txf = CreateTextField(editor.gui.properties.handle, "lengths_x_txf", 80, 180, 53, "0")
+	editor.gui.properties.edit.actor.lengths_y_txf = CreateTextField(editor.gui.properties.handle, "lengths_y_txf", 137, 180, 53, "0")
+	editor.gui.properties.edit.actor.lengths_z_txf = CreateTextField(editor.gui.properties.handle, "lengths_z_txf", 194, 180, 53, "0")
 
-	editor.gui.properties.edit.actor.mass_txf = edi_create_text_field(editor.gui.properties.handle, "mass_txf", 99, 224, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.lin_damp_txf = edi_create_text_field(editor.gui.properties.handle, "lin_damp_txf", 99, 246, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.ang_damp_txf = edi_create_text_field(editor.gui.properties.handle, "ang_damp_txf", 99, 268, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.lin_sleep_txf = edi_create_text_field(editor.gui.properties.handle, "lin_sleep_txf", 99, 290, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.ang_sleep_txf = edi_create_text_field(editor.gui.properties.handle, "ang_sleep_txf", 99, 312, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.restitu_txf = edi_create_text_field(editor.gui.properties.handle, "restitu_txf", 99, 334, "images/text_field64", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.offset_x_txf = CreateTextField(editor.gui.properties.handle, "offset_x_txf", 80, 202, 53, "0")
+	editor.gui.properties.edit.actor.offset_y_txf = CreateTextField(editor.gui.properties.handle, "offset_y_txf", 137, 202, 53, "0")
+	editor.gui.properties.edit.actor.offset_z_txf = CreateTextField(editor.gui.properties.handle, "offset_z_txf", 194, 202, 53, "0")
 
-	editor.gui.properties.edit.actor.anis_fric_x_txf = edi_create_text_field(editor.gui.properties.handle, "anis_fric_x_txf", 99, 356, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.anis_fric_y_txf = edi_create_text_field(editor.gui.properties.handle, "anis_fric_y_txf", 151, 356, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.anis_fric_z_txf = edi_create_text_field(editor.gui.properties.handle, "anis_fric_z_txf", 203, 356, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.mass_txf = CreateTextField(editor.gui.properties.handle, "mass_txf", 80, 224, 168, "0")
+	editor.gui.properties.edit.actor.lin_damp_txf = CreateTextField(editor.gui.properties.handle, "lin_damp_txf", 80, 246, 168, "0")
+	editor.gui.properties.edit.actor.ang_damp_txf = CreateTextField(editor.gui.properties.handle, "ang_damp_txf", 80, 268, 168, "0")
+	editor.gui.properties.edit.actor.lin_sleep_txf = CreateTextField(editor.gui.properties.handle, "lin_sleep_txf", 80, 290, 168, "0")
+	editor.gui.properties.edit.actor.ang_sleep_txf = CreateTextField(editor.gui.properties.handle, "ang_sleep_txf", 80, 312, 168, "0")
+	editor.gui.properties.edit.actor.restitu_txf = CreateTextField(editor.gui.properties.handle, "restitu_txf", 80, 334, 168, "0")
 
-	editor.gui.properties.edit.actor.lin_factor_x_txf = edi_create_text_field(editor.gui.properties.handle, "lin_factor_z_txf", 99, 378, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.lin_factor_y_txf = edi_create_text_field(editor.gui.properties.handle, "lin_factor_y_txf", 151, 378, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.lin_factor_z_txf = edi_create_text_field(editor.gui.properties.handle, "lin_factor_z_txf", 203, 378, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.anis_fric_x_txf = CreateTextField(editor.gui.properties.handle, "anis_fric_x_txf", 80, 356, 53, "0")
+	editor.gui.properties.edit.actor.anis_fric_y_txf = CreateTextField(editor.gui.properties.handle, "anis_fric_y_txf", 137, 356, 53, "0")
+	editor.gui.properties.edit.actor.anis_fric_z_txf = CreateTextField(editor.gui.properties.handle, "anis_fric_z_txf", 194, 356, 53, "0")
 
-	editor.gui.properties.edit.actor.ang_factor_x_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_x_txf", 99, 400, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.ang_factor_y_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_y_txf", 151, 400, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.actor.ang_factor_z_txf = edi_create_text_field(editor.gui.properties.handle, "ang_factor_z_txf", 203, 400, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.actor.lin_factor_x_txf = CreateTextField(editor.gui.properties.handle, "lin_factor_z_txf", 80, 378, 53, "0")
+	editor.gui.properties.edit.actor.lin_factor_y_txf = CreateTextField(editor.gui.properties.handle, "lin_factor_y_txf", 137, 378, 53, "0")
+	editor.gui.properties.edit.actor.lin_factor_z_txf = CreateTextField(editor.gui.properties.handle, "lin_factor_z_txf", 194, 378, 53, "0")
 
-	editor.gui.properties.edit.actor.shape = CreateTextList(editor.gui.properties.handle, "file_list", 77, 424, 4, 153)
+	editor.gui.properties.edit.actor.ang_factor_x_txf = CreateTextField(editor.gui.properties.handle, "ang_factor_x_txf", 80, 400, 53, "0")
+	editor.gui.properties.edit.actor.ang_factor_y_txf = CreateTextField(editor.gui.properties.handle, "ang_factor_y_txf", 137, 400, 53, "0")
+	editor.gui.properties.edit.actor.ang_factor_z_txf = CreateTextField(editor.gui.properties.handle, "ang_factor_z_txf", 194, 400, 53, "0")
+
+	editor.gui.properties.edit.actor.shape = CreateTextList(editor.gui.properties.handle, "file_list", 77, 424, 4, 157)
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Box")
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Sphere")
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Triangle Mesh")
@@ -136,7 +151,7 @@ function edi_init_properties()
 	AddTextListItem(editor.gui.properties.edit.actor.shape, " Cone Z")
 	AddGuiObject(editor.gui.properties.handle, editor.gui.properties.edit.actor.shape)
 
-	editor.gui.properties.edit.actor.shape_sb = CreateSlider(editor.gui.properties.handle, "scroll_bar", 234, 424, 0, 72, 1.0)
+	editor.gui.properties.edit.actor.shape_sb = CreateSlider(editor.gui.properties.handle, "scroll_bar", 238, 428, 0, 54, 1.0)
 
 	-- setup the light properties
 
@@ -405,66 +420,47 @@ end
 
 function edi_hide_edit_tab(tab)
 	if tab == EDI_EDIT_ACTOR then
-		SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.actor) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_CAMERA then
-		SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.camera) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_LIGHT then
-		SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.light) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_ENTITY then
-		SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.entity) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_PARTICLES then
-		SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.particles) do SetGuiObjectVisible(v, false) end
 	end
 	if tab == EDI_EDIT_SPRITE then
-		SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
 		for k, v in pairs(editor.gui.properties.edit.sprite) do SetGuiObjectVisible(v, false) end
 	end
 end
 
 function edi_show_edit_tab(tab)
-	SetCheckBoxState(editor.gui.properties.edit.act_cb, false)
-	SetCheckBoxState(editor.gui.properties.edit.cam_cb, false)
-	SetCheckBoxState(editor.gui.properties.edit.lig_cb, false)
-	SetCheckBoxState(editor.gui.properties.edit.ent_cb, false)
-	SetCheckBoxState(editor.gui.properties.edit.par_cb, false)
-	SetCheckBoxState(editor.gui.properties.edit.spr_cb, false)
-
 	if tab == EDI_EDIT_ACTOR then
-		SetCheckBoxState(editor.gui.properties.edit.act_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.actor) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_CAMERA then
-		SetCheckBoxState(editor.gui.properties.edit.cam_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.camera) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_LIGHT then
-		SetCheckBoxState(editor.gui.properties.edit.lig_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.light) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_ENTITY then
-		SetCheckBoxState(editor.gui.properties.edit.ent_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.entity) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_PARTICLES then
-		SetCheckBoxState(editor.gui.properties.edit.par_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.particles) do SetGuiObjectVisible(v, true) end
 		end
 	elseif tab == EDI_EDIT_SPRITE then
-		SetCheckBoxState(editor.gui.properties.edit.spr_cb, true)
 		if editor.scene.selection ~= nil then
 			for k, v in pairs(editor.gui.properties.edit.sprite) do SetGuiObjectVisible(v, true) end
 		end
@@ -2369,22 +2365,22 @@ end
 function edi_update_edit()
 	if editor.scene.selection == nil then return end
 
-	if GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.act_cb) == CLICKED then
 		edi_switch_edit_tab(EDI_EDIT_ACTOR)
 	end
-	if GetGuiObjectEvent(editor.gui.properties.edit.cam_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.cam_cb) == CLICKED then
 		edi_switch_edit_tab(EDI_EDIT_CAMERA)
 	end
-	if GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.lig_cb) == CLICKED then
 		edi_switch_edit_tab(EDI_EDIT_LIGHT)
 	end
-	if GetGuiObjectEvent(editor.gui.properties.edit.ent_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.ent_cb) == CLICKED then
 		edi_switch_edit_tab(EDI_EDIT_ENTITY)
 	end
-	if GetGuiObjectEvent(editor.gui.properties.edit.par_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.par_cb) == CLICKED then
 		edi_switch_edit_tab(EDI_EDIT_PARTICLES)
 	end
-	if GetGuiObjectEvent(editor.gui.properties.edit.spr_cb) == STATE_CHANGED then
+	if GetGuiObjectEvent(editor.gui.properties.edit.spr_cb) == CLICKED then
 		edi_switch_edit_tab(EDI_EDIT_SPRITE)
 	end
 

@@ -211,7 +211,6 @@ function edi_update_scene()
 					editor.gui.action.rotate_orig_rot.z)
 				edi_update_edit_selection()
 				editor.gui.action.rotate = false
-				SetCheckBoxState(editor.gui.properties.menu.rotate, false)
 			end
 		end
 
