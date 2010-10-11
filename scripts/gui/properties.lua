@@ -110,7 +110,7 @@ function edi_init_properties()
 	editor.gui.properties.edit.actor.script_txf = CreateTextField(editor.gui.properties.handle, "script_txf", 80, 114, 147, "")
 	editor.gui.properties.edit.actor.script_open = CreateButton(editor.gui.properties.handle, "script_open", 231, 114, 18, 18, "...")
 
-	editor.gui.properties.edit.actor.physics_enb_cb = CreateCheckBox(editor.gui.properties.handle, "physics_enb_cb", 80, 160)
+	editor.gui.properties.edit.actor.physics_enb_cb = CreateCheckBox(editor.gui.properties.handle, "physics_enb_cb", 80, 160, false)
 
 	editor.gui.properties.edit.actor.lengths_x_txf = CreateTextField(editor.gui.properties.handle, "lengths_x_txf", 80, 180, 53, "0")
 	editor.gui.properties.edit.actor.lengths_y_txf = CreateTextField(editor.gui.properties.handle, "lengths_y_txf", 137, 180, 53, "0")
@@ -194,9 +194,9 @@ function edi_init_properties()
 	editor.gui.properties.edit.light.inner_cone_txf = CreateTextField(editor.gui.properties.handle, "inner_cone_txf", 80, 163, 82, "0")
 	editor.gui.properties.edit.light.outer_cone_txf = CreateTextField(editor.gui.properties.handle, "outer_cone_txf", 166, 163, 82, "0")
 
-	editor.gui.properties.edit.light.shadows_cb = CreateCheckBox(editor.gui.properties.handle, "shadows_cb", 80, 187)
+	editor.gui.properties.edit.light.shadows_cb = CreateCheckBox(editor.gui.properties.handle, "shadows_cb", 80, 187, false)
 
-	editor.gui.properties.edit.light.ls_enabled_cb = CreateCheckBox(editor.gui.properties.handle, "ls_enabled_cb", 80, 224)
+	editor.gui.properties.edit.light.ls_enabled_cb = CreateCheckBox(editor.gui.properties.handle, "ls_enabled_cb", 80, 224, false)
 	editor.gui.properties.edit.light.size_txf = CreateTextField(editor.gui.properties.handle, "size_txf", 80, 244, 168, "0")
 	editor.gui.properties.edit.light.intensity_txf = CreateTextField(editor.gui.properties.handle, "intensity_txf", 80, 266, 168, "0")
 	editor.gui.properties.edit.light.fade_off_txf = CreateTextField(editor.gui.properties.handle, "fade_off_txf", 80, 288, 168, "0")
@@ -288,10 +288,10 @@ function edi_init_properties()
 
 	editor.gui.properties.edit.entity.mat_spec_power_txf = CreateTextField(editor.gui.properties.handle, "mat_spec_power_txf", 80, 370, 168, "0")
 
-	editor.gui.properties.edit.entity.mat_lighting_cb = CreateCheckBox(editor.gui.properties.handle, "mat_lighting_cb", 80, 395)
+	editor.gui.properties.edit.entity.mat_lighting_cb = CreateCheckBox(editor.gui.properties.handle, "mat_lighting_cb", 80, 395, false)
 
 	editor.gui.properties.edit.entity.mat_prlx_scale_txf = CreateTextField(editor.gui.properties.handle, "mat_prlx_scale_txf", 80, 414, 168, "0")
-	editor.gui.properties.edit.entity.mat_alpha_test_cb = CreateCheckBox(editor.gui.properties.handle, "mat_alpha_test_cb", 80, 439)
+	editor.gui.properties.edit.entity.mat_alpha_test_cb = CreateCheckBox(editor.gui.properties.handle, "mat_alpha_test_cb", 80, 439, false)
 	editor.gui.properties.edit.entity.mat_alpha_thrs_txf = CreateTextField(editor.gui.properties.handle, "mat_alpha_thrs_txf", 80, 458, 168, "0")
 
 	editor.gui.properties.edit.entity.mat_diffuse_map_txf = CreateTextField(editor.gui.properties.handle, "mat_diffuse_map_txf", 80, 480, 147, "")
@@ -403,7 +403,7 @@ function edi_init_properties()
 
 	editor.gui.properties.pp.bloom_enb = CreateLabel(editor.gui.properties.handle, "bloom_enb", 4, 32, "Bloom")
 	editor.gui.properties.pp.bloom_str = CreateLabel(editor.gui.properties.handle, "bloom_thr", 4, 52, "Threshold")
-	editor.gui.properties.pp.bloom_cb = CreateCheckBox(editor.gui.properties.handle, "bloom_cb", 100, 30)
+	editor.gui.properties.pp.bloom_cb = CreateCheckBox(editor.gui.properties.handle, "bloom_cb", 100, 30, false)
 	editor.gui.properties.pp.bloom_str_sli = CreateSlider(editor.gui.properties.handle, "bloom_str_sli", 100, 55, 148, 0, 0.5)
 
 	SetGuiObjectColor(editor.gui.properties.pp.bloom_enb, 1.0, 1.0, 1.0, 0.6)
@@ -414,7 +414,7 @@ function edi_init_properties()
 	editor.gui.properties.pp.dof_enb = CreateLabel(editor.gui.properties.handle, "dof_enb", 4, 85, "Dof")
 	editor.gui.properties.pp.dof_foc_rng = CreateLabel(editor.gui.properties.handle, "dof_foc_rng", 4, 107, "Focal Range")
 	editor.gui.properties.pp.dof_foc_dst = CreateLabel(editor.gui.properties.handle, "dof_foc_dst", 4, 129, "Focal Dist")
-	editor.gui.properties.pp.dof_enb_cb = CreateCheckBox(editor.gui.properties.handle, "dof_enb_cb", 100, 83)
+	editor.gui.properties.pp.dof_enb_cb = CreateCheckBox(editor.gui.properties.handle, "dof_enb_cb", 100, 83, false)
 	editor.gui.properties.pp.dof_foc_rng_txf = CreateTextField(editor.gui.properties.handle, "dof_foc_rng_txf", 100, 102, 148, "7.5")
 	editor.gui.properties.pp.dof_foc_dst_txf = CreateTextField(editor.gui.properties.handle, "dof_foc_dst_txf", 100, 124, 148, "15")
 
@@ -426,7 +426,7 @@ function edi_init_properties()
 
 	editor.gui.properties.pp.lsh_enb = CreateLabel(editor.gui.properties.handle, "lsh_enb", 4, 163, "Light Shafts")
 	editor.gui.properties.pp.lsh_str = CreateLabel(editor.gui.properties.handle, "lsh_str", 4, 185, "Strength")
-	editor.gui.properties.pp.lsh_enb_cb = CreateCheckBox(editor.gui.properties.handle, "lsh_enb_cb", 100, 161)
+	editor.gui.properties.pp.lsh_enb_cb = CreateCheckBox(editor.gui.properties.handle, "lsh_enb_cb", 100, 161, false)
 	editor.gui.properties.pp.lsh_str_sli = CreateSlider(editor.gui.properties.handle, "lsh_str_sli", 100, 188, 148, 0, 1.0)
 
 	SetGuiObjectColor(editor.gui.properties.pp.lsh_enb, 1.0, 1.0, 1.0, 0.6)

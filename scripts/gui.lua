@@ -24,7 +24,7 @@ function edi_create_button(parent, name, x, y, path)
 end
 
 function edi_create_check_box(parent, name, x, y, path, default)
-	local check_box = CreateCheckBox(parent, name, x, y)
+	local check_box = CreateCheckBox(parent, name, x, y, default)
 
 	SetCheckBoxOffTexture(check_box, CreateTextureFromFile(path .. "_off.png"))
 	SetCheckBoxOnTexture(check_box, CreateTextureFromFile(path .. "_on.png"))
