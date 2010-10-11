@@ -310,86 +310,108 @@ function edi_init_properties()
 
 	editor.gui.properties.edit.particles = {}
 
-	editor.gui.properties.edit.particles.max_count_lab = edi_create_label(editor.gui.properties.handle, "max_count_lab", 4, 49, "Max Count", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.draw_mode_lab = edi_create_label(editor.gui.properties.handle, "draw_mode_lab", 4, 71, "Draw Mode", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.texture_lab = edi_create_label(editor.gui.properties.handle, "texture_lab", 4, 93, "Texture", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.model_lab = edi_create_label(editor.gui.properties.handle, "model_lab", 4, 115, "Model", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.entity_lab = edi_create_label(editor.gui.properties.handle, "entity_lab", 4, 137, "Entity", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.gravity_lab = edi_create_label(editor.gui.properties.handle, "gravity_lab", 4, 159, "Gravity", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.spawn_delay_lab = edi_create_label(editor.gui.properties.handle, "spawn_delay_lab", 4, 181, "Spn Delay", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.spawn_lab = edi_create_label(editor.gui.properties.handle, "spawn_lab", 4, 203, "Spawn", editor.gui.fonts.normal)
+	editor.gui.properties.edit.particles.max_count_lab = CreateLabel(editor.gui.properties.handle, "max_count_lab", 4, 52, "Max Count")
+	editor.gui.properties.edit.particles.draw_mode_lab = CreateLabel(editor.gui.properties.handle, "draw_mode_lab", 4, 74, "Draw Mode")
+	editor.gui.properties.edit.particles.texture_lab = CreateLabel(editor.gui.properties.handle, "texture_lab", 4, 96, "Texture")
+	editor.gui.properties.edit.particles.model_lab = CreateLabel(editor.gui.properties.handle, "model_lab", 4, 118, "Model")
+	editor.gui.properties.edit.particles.entity_lab = CreateLabel(editor.gui.properties.handle, "entity_lab", 4, 140, "Entity")
+	editor.gui.properties.edit.particles.gravity_lab = CreateLabel(editor.gui.properties.handle, "gravity_lab", 4, 162, "Gravity")
+	editor.gui.properties.edit.particles.spawn_delay_lab = CreateLabel(editor.gui.properties.handle, "spawn_delay_lab", 4, 184, "Spn Delay")
+	editor.gui.properties.edit.particles.spawn_lab = CreateLabel(editor.gui.properties.handle, "spawn_lab", 4, 206, "Spawn")
 
-	editor.gui.properties.edit.particles.size_lab = edi_create_label(editor.gui.properties.handle, "size_lab", 4, 225, "Size", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.size_grow_lab = edi_create_label(editor.gui.properties.handle, "size_grow_lab", 4, 247, "Size Grow", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.rotation_lab = edi_create_label(editor.gui.properties.handle, "rotation_lab", 4, 269, "Rotation", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.rot_grow_lab = edi_create_label(editor.gui.properties.handle, "rot_grow_lab", 4, 291, "Rot. Grow", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.life_span_lab = edi_create_label(editor.gui.properties.handle, "life_span_lab", 4, 313, "Life Span", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.fade_speed_lab = edi_create_label(editor.gui.properties.handle, "fade_speed_lab", 4, 335, "Fade Speed", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.pos_min_lab = edi_create_label(editor.gui.properties.handle, "pos_min_lab", 4, 357, "Pos. Min", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.pos_max_lab = edi_create_label(editor.gui.properties.handle, "pos_max_lab", 4, 379, "Pos. Max", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.vel_min_lab = edi_create_label(editor.gui.properties.handle, "vel_min_lab", 4, 401, "Vel. Min", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.vel_max_lab = edi_create_label(editor.gui.properties.handle, "vel_max_lab", 4, 423, "Vel. Max", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.color_min_lab = edi_create_label(editor.gui.properties.handle, "color_min_lab", 4, 445, "Color Min", editor.gui.fonts.normal)
-	editor.gui.properties.edit.particles.color_max_lab = edi_create_label(editor.gui.properties.handle, "color_max_lab", 4, 489, "Color Max", editor.gui.fonts.normal)
+	editor.gui.properties.edit.particles.size_lab = CreateLabel(editor.gui.properties.handle, "size_lab", 4, 228, "Size")
+	editor.gui.properties.edit.particles.size_grow_lab = CreateLabel(editor.gui.properties.handle, "size_grow_lab", 4, 250, "Size Grow")
+	editor.gui.properties.edit.particles.rotation_lab = CreateLabel(editor.gui.properties.handle, "rotation_lab", 4, 272, "Rotation")
+	editor.gui.properties.edit.particles.rot_grow_lab = CreateLabel(editor.gui.properties.handle, "rot_grow_lab", 4, 294, "Rot. Grow")
+	editor.gui.properties.edit.particles.life_span_lab = CreateLabel(editor.gui.properties.handle, "life_span_lab", 4, 316, "Life Span")
+	editor.gui.properties.edit.particles.fade_speed_lab = CreateLabel(editor.gui.properties.handle, "fade_speed_lab", 4, 338, "Fade Speed")
+	editor.gui.properties.edit.particles.pos_min_lab = CreateLabel(editor.gui.properties.handle, "pos_min_lab", 4, 360, "Pos. Min")
+	editor.gui.properties.edit.particles.pos_max_lab = CreateLabel(editor.gui.properties.handle, "pos_max_lab", 4, 382, "Pos. Max")
+	editor.gui.properties.edit.particles.vel_min_lab = CreateLabel(editor.gui.properties.handle, "vel_min_lab", 4, 404, "Vel. Min")
+	editor.gui.properties.edit.particles.vel_max_lab = CreateLabel(editor.gui.properties.handle, "vel_max_lab", 4, 426, "Vel. Max")
+	editor.gui.properties.edit.particles.color_min_lab = CreateLabel(editor.gui.properties.handle, "color_min_lab", 4, 448, "Color Min")
+	editor.gui.properties.edit.particles.color_max_lab = CreateLabel(editor.gui.properties.handle, "color_max_lab", 4, 492, "Color Max")
 
-	editor.gui.properties.edit.particles.max_count_txf = edi_create_text_field(editor.gui.properties.handle, "max_count_txf", 99, 48, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.trs_cb = edi_create_check_box(editor.gui.properties.handle, "trs_cb", 99, 70, "images/properties/edit/trs", false)
-	editor.gui.properties.edit.particles.add_cb = edi_create_check_box(editor.gui.properties.handle, "add_cb", 140, 70, "images/properties/edit/add", false)
-	editor.gui.properties.edit.particles.texture_txf = edi_create_text_field(editor.gui.properties.handle, "texture_txf", 99, 92, "images/text_field128", editor.gui.fonts.normal, "")
-	editor.gui.properties.edit.particles.texture_open = edi_create_button(editor.gui.properties.handle, "texture_open", 231, 92, "images/mini_open")
-	editor.gui.properties.edit.particles.model_txf = edi_create_text_field(editor.gui.properties.handle, "model_txf", 99, 114, "images/text_field128", editor.gui.fonts.normal, "")
-	editor.gui.properties.edit.particles.entity_txf = edi_create_text_field(editor.gui.properties.handle, "entity_txf", 99, 136, "images/text_field128", editor.gui.fonts.normal, "")
+	SetGuiObjectColor(editor.gui.properties.edit.particles.max_count_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.draw_mode_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.texture_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.model_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.entity_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.gravity_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.spawn_delay_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.spawn_lab, 1.0, 1.0, 1.0, 0.6)
 
-	editor.gui.properties.edit.particles.gravity_x_txf = edi_create_text_field(editor.gui.properties.handle, "gravity_x_txf", 99, 158, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.gravity_y_txf = edi_create_text_field(editor.gui.properties.handle, "gravity_y_txf", 151, 158, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.gravity_z_txf = edi_create_text_field(editor.gui.properties.handle, "gravity_z_txf", 203, 158, "images/text_field48", editor.gui.fonts.normal, "0")
+	SetGuiObjectColor(editor.gui.properties.edit.particles.size_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.size_grow_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.rotation_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.rot_grow_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.life_span_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.fade_speed_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.pos_min_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.pos_max_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.vel_min_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.vel_max_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.color_min_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.particles.color_max_lab, 1.0, 1.0, 1.0, 0.6)
 
-	editor.gui.properties.edit.particles.spawn_delay_txf = edi_create_text_field(editor.gui.properties.handle, "spawn_delay_txf", 99, 180, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.spawn_cb = edi_create_check_box(editor.gui.properties.handle, "spawn_cb", 99, 202, "images/check_box", false)
+	editor.gui.properties.edit.particles.max_count_txf = CreateTextField(editor.gui.properties.handle, "max_count_txf", 80, 48, 168, "0")
+	editor.gui.properties.edit.particles.trs_cb = CreateButton(editor.gui.properties.handle, "trs_cb", 80, 70, 82, 18, "Transparent")
+	editor.gui.properties.edit.particles.add_cb = CreateButton(editor.gui.properties.handle, "add_cb", 166, 70, 82, 18, "Additive")
+	editor.gui.properties.edit.particles.texture_txf = CreateTextField(editor.gui.properties.handle, "texture_txf", 80, 92, 147, "")
+	editor.gui.properties.edit.particles.texture_open = CreateButton(editor.gui.properties.handle, "texture_open", 231, 92, 18, 18, "...")
+	editor.gui.properties.edit.particles.model_txf = CreateTextField(editor.gui.properties.handle, "model_txf", 80, 114, 168, "")
+	editor.gui.properties.edit.particles.entity_txf = CreateTextField(editor.gui.properties.handle, "entity_txf", 80, 136, 168, "")
 
-	editor.gui.properties.edit.particles.size_min_txf = edi_create_text_field(editor.gui.properties.handle, "size_min_txf", 99, 224, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.size_max_txf = edi_create_text_field(editor.gui.properties.handle, "size_max_txf", 151, 224, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.gravity_x_txf = CreateTextField(editor.gui.properties.handle, "gravity_x_txf", 80, 158, 53, "0")
+	editor.gui.properties.edit.particles.gravity_y_txf = CreateTextField(editor.gui.properties.handle, "gravity_y_txf", 137, 158, 53, "0")
+	editor.gui.properties.edit.particles.gravity_z_txf = CreateTextField(editor.gui.properties.handle, "gravity_z_txf", 194, 158, 53, "0")
 
-	editor.gui.properties.edit.particles.size_grow_min_txf = edi_create_text_field(editor.gui.properties.handle, "size_grow_min_txf", 99, 246, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.size_grow_max_txf = edi_create_text_field(editor.gui.properties.handle, "size_grow_max_txf", 151, 246, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.spawn_delay_txf = CreateTextField(editor.gui.properties.handle, "spawn_delay_txf", 80, 180, 168, "0")
+	editor.gui.properties.edit.particles.spawn_cb = CreateCheckBox(editor.gui.properties.handle, "spawn_cb", 80, 205, false)
 
-	editor.gui.properties.edit.particles.rotation_min_txf = edi_create_text_field(editor.gui.properties.handle, "rotation_min_txf", 99, 268, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.rotation_max_txf = edi_create_text_field(editor.gui.properties.handle, "rotation_max_txf", 151, 268, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.size_min_txf = CreateTextField(editor.gui.properties.handle, "size_min_txf", 80, 224, 82, "0")
+	editor.gui.properties.edit.particles.size_max_txf = CreateTextField(editor.gui.properties.handle, "size_max_txf", 166, 224, 82, "0")
 
-	editor.gui.properties.edit.particles.rot_grow_min_txf = edi_create_text_field(editor.gui.properties.handle, "rot_grow_min_txf", 99, 290, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.rot_grow_max_txf = edi_create_text_field(editor.gui.properties.handle, "rot_grow_max_txf", 151, 290, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.size_grow_min_txf = CreateTextField(editor.gui.properties.handle, "size_grow_min_txf", 80, 246, 82, "0")
+	editor.gui.properties.edit.particles.size_grow_max_txf = CreateTextField(editor.gui.properties.handle, "size_grow_max_txf", 166, 246, 82, "0")
 
-	editor.gui.properties.edit.particles.life_span_min_txf = edi_create_text_field(editor.gui.properties.handle, "life_span_min_txf", 99, 312, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.life_span_max_txf = edi_create_text_field(editor.gui.properties.handle, "life_span_max_txf", 151, 312, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.rotation_min_txf = CreateTextField(editor.gui.properties.handle, "rotation_min_txf", 80, 268, 82, "0")
+	editor.gui.properties.edit.particles.rotation_max_txf = CreateTextField(editor.gui.properties.handle, "rotation_max_txf", 166, 268, 82, "0")
 
-	editor.gui.properties.edit.particles.fade_speed_min_txf = edi_create_text_field(editor.gui.properties.handle, "fade_speed_min_txf", 99, 334, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.fade_speed_max_txf = edi_create_text_field(editor.gui.properties.handle, "fade_speed_max_txf", 151, 334, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.rot_grow_min_txf = CreateTextField(editor.gui.properties.handle, "rot_grow_min_txf", 80, 290, 82, "0")
+	editor.gui.properties.edit.particles.rot_grow_max_txf = CreateTextField(editor.gui.properties.handle, "rot_grow_max_txf", 166, 290, 82, "0")
 
-	editor.gui.properties.edit.particles.pos_min_x_txf = edi_create_text_field(editor.gui.properties.handle, "pos_min_txf", 99, 356, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.pos_min_y_txf = edi_create_text_field(editor.gui.properties.handle, "pos_min_txf", 151, 356, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.pos_min_z_txf = edi_create_text_field(editor.gui.properties.handle, "pos_min_txf", 203, 356, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.life_span_min_txf = CreateTextField(editor.gui.properties.handle, "life_span_min_txf", 80, 312, 82, "0")
+	editor.gui.properties.edit.particles.life_span_max_txf = CreateTextField(editor.gui.properties.handle, "life_span_max_txf", 166, 312, 82, "0")
 
-	editor.gui.properties.edit.particles.pos_max_x_txf = edi_create_text_field(editor.gui.properties.handle, "pos_max_txf", 99, 378, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.pos_max_y_txf = edi_create_text_field(editor.gui.properties.handle, "pos_max_txf", 151, 378, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.pos_max_z_txf = edi_create_text_field(editor.gui.properties.handle, "pos_max_txf", 203, 378, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.fade_speed_min_txf = CreateTextField(editor.gui.properties.handle, "fade_speed_min_txf", 80, 334, 82, "0")
+	editor.gui.properties.edit.particles.fade_speed_max_txf = CreateTextField(editor.gui.properties.handle, "fade_speed_max_txf", 166, 334, 82, "0")
 
-	editor.gui.properties.edit.particles.vel_min_x_txf = edi_create_text_field(editor.gui.properties.handle, "vel_min_txf", 99, 400, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.vel_min_y_txf = edi_create_text_field(editor.gui.properties.handle, "vel_min_txf", 151, 400, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.vel_min_z_txf = edi_create_text_field(editor.gui.properties.handle, "vel_min_txf", 203, 400, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.pos_min_x_txf = CreateTextField(editor.gui.properties.handle, "pos_min_txf", 80, 356, 53, "0")
+	editor.gui.properties.edit.particles.pos_min_y_txf = CreateTextField(editor.gui.properties.handle, "pos_min_txf", 137, 356, 53, "0")
+	editor.gui.properties.edit.particles.pos_min_z_txf = CreateTextField(editor.gui.properties.handle, "pos_min_txf", 194, 356, 53, "0")
 
-	editor.gui.properties.edit.particles.vel_max_x_txf = edi_create_text_field(editor.gui.properties.handle, "vel_max_txf", 99, 422, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.vel_max_y_txf = edi_create_text_field(editor.gui.properties.handle, "vel_max_txf", 151, 422, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.vel_max_z_txf = edi_create_text_field(editor.gui.properties.handle, "vel_max_txf", 203, 422, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.pos_max_x_txf = CreateTextField(editor.gui.properties.handle, "pos_max_txf", 80, 378, 53, "0")
+	editor.gui.properties.edit.particles.pos_max_y_txf = CreateTextField(editor.gui.properties.handle, "pos_max_txf", 137, 378, 53, "0")
+	editor.gui.properties.edit.particles.pos_max_z_txf = CreateTextField(editor.gui.properties.handle, "pos_max_txf", 194, 378, 53, "0")
 
-	editor.gui.properties.edit.particles.color_min_r_txf = edi_create_text_field(editor.gui.properties.handle, "color_min_r_txf", 4, 466, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.color_min_g_txf = edi_create_text_field(editor.gui.properties.handle, "color_min_g_txf", 56, 466, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.color_min_b_txf = edi_create_text_field(editor.gui.properties.handle, "color_min_b_txf", 108, 466, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.color_min_a_txf = edi_create_text_field(editor.gui.properties.handle, "color_min_a_txf", 160, 466, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.vel_min_x_txf = CreateTextField(editor.gui.properties.handle, "vel_min_txf", 80, 400, 53, "0")
+	editor.gui.properties.edit.particles.vel_min_y_txf = CreateTextField(editor.gui.properties.handle, "vel_min_txf", 137, 400, 53, "0")
+	editor.gui.properties.edit.particles.vel_min_z_txf = CreateTextField(editor.gui.properties.handle, "vel_min_txf", 194, 400, 53, "0")
 
-	editor.gui.properties.edit.particles.color_max_r_txf = edi_create_text_field(editor.gui.properties.handle, "color_max_r_txf", 4, 510, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.color_max_g_txf = edi_create_text_field(editor.gui.properties.handle, "color_max_g_txf", 56, 510, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.color_max_b_txf = edi_create_text_field(editor.gui.properties.handle, "color_max_b_txf", 108, 510, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.particles.color_max_a_txf = edi_create_text_field(editor.gui.properties.handle, "color_max_a_txf", 160, 510, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.particles.vel_max_x_txf = CreateTextField(editor.gui.properties.handle, "vel_max_txf", 80, 422, 53, "0")
+	editor.gui.properties.edit.particles.vel_max_y_txf = CreateTextField(editor.gui.properties.handle, "vel_max_txf", 137, 422, 53, "0")
+	editor.gui.properties.edit.particles.vel_max_z_txf = CreateTextField(editor.gui.properties.handle, "vel_max_txf", 194, 422, 53, "0")
+
+	editor.gui.properties.edit.particles.color_min_r_txf = CreateTextField(editor.gui.properties.handle, "color_min_r_txf", 4, 466, 58, "0")
+	editor.gui.properties.edit.particles.color_min_g_txf = CreateTextField(editor.gui.properties.handle, "color_min_g_txf", 66, 466, 58, "0")
+	editor.gui.properties.edit.particles.color_min_b_txf = CreateTextField(editor.gui.properties.handle, "color_min_b_txf", 128, 466, 58, "0")
+	editor.gui.properties.edit.particles.color_min_a_txf = CreateTextField(editor.gui.properties.handle, "color_min_a_txf", 190, 466, 58, "0")
+
+	editor.gui.properties.edit.particles.color_max_r_txf = CreateTextField(editor.gui.properties.handle, "color_max_r_txf", 4, 510, 58, "0")
+	editor.gui.properties.edit.particles.color_max_g_txf = CreateTextField(editor.gui.properties.handle, "color_max_g_txf", 66, 510, 58, "0")
+	editor.gui.properties.edit.particles.color_max_b_txf = CreateTextField(editor.gui.properties.handle, "color_max_b_txf", 128, 510, 58, "0")
+	editor.gui.properties.edit.particles.color_max_a_txf = CreateTextField(editor.gui.properties.handle, "color_max_a_txf", 190, 510, 58, "0")
 
 	-- setup the sprite properties
 
@@ -747,14 +769,6 @@ function edi_update_edit_selection()
 		SetTextFieldCursorPosition(editor.gui.properties.edit.entity.scale_z_txf, 0)
 	elseif GetObjectType(editor.scene.selection) == PARTICLES then
 		SetTextFieldText(editor.gui.properties.edit.particles.max_count_txf, GetParticlesMaxCount(editor.scene.selection))
-
-		if GetParticlesDrawMode(editor.scene.selection) == TRANSPARENT then
-			SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
-			SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
-		elseif GetParticlesDrawMode(editor.scene.selection) == ADD then
-			SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
-			SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
-		end
 
 		local tex = GetParticlesTexture(editor.scene.selection)
 		if tex ~= nil then
@@ -2040,15 +2054,11 @@ function edi_update_particles()
 		end
 	end
 
-	if GetGuiObjectEvent(editor.gui.properties.edit.particles.trs_cb) == STATE_CHANGED then
-		SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, true)
-		SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, false)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.trs_cb) == CLICKED then
 		SetParticlesDrawMode(editor.scene.selection, TRANSPARENT)
 	end
 
-	if GetGuiObjectEvent(editor.gui.properties.edit.particles.add_cb) == STATE_CHANGED then
-		SetCheckBoxState(editor.gui.properties.edit.particles.trs_cb, false)
-		SetCheckBoxState(editor.gui.properties.edit.particles.add_cb, true)
+	if GetGuiObjectEvent(editor.gui.properties.edit.particles.add_cb) == CLICKED then
 		SetParticlesDrawMode(editor.scene.selection, ADD)
 	end
 
