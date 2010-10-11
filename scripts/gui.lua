@@ -1,67 +1,4 @@
 
-function edi_create_label(parent, name, x, y, text, font)
-	local label = CreateLabel(parent, name, x, y, text)
-
-	SetLabelText(label, text)
-	SetGuiObjectPosition(label, x, y)
-
-	AddGuiObject(parent, label)
-
-	return label
-end
-
-function edi_create_button(parent, name, x, y, path)
-	local button = CreateButton(parent, name, x, y, 100, 18, "Default")
-
-	SetButtonOffTexture(button, CreateTextureFromFile(path .. "_off.png"))
-	SetButtonOverTexture(button, CreateTextureFromFile(path .. "_over.png"))
-	SetButtonOnTexture(button, CreateTextureFromFile(path .. "_on.png"))
-	SetGuiObjectPosition(button, x, y)
-
-	AddGuiObject(parent, button)
-
-	return button
-end
-
-function edi_create_check_box(parent, name, x, y, path, default)
-	local check_box = CreateCheckBox(parent, name, x, y, default)
-
-	SetCheckBoxOffTexture(check_box, CreateTextureFromFile(path .. "_off.png"))
-	SetCheckBoxOnTexture(check_box, CreateTextureFromFile(path .. "_on.png"))
-	SetCheckBoxState(check_box, default)
-	SetGuiObjectPosition(check_box, x, y)
-
-	AddGuiObject(parent, check_box)
-
-	return check_box
-end
-
-function edi_create_text_field(parent, name, x, y, path, font, default)
-	local text_field = CreateTextField(parent, name, x, y, 100, default)
-
-	SetTextFieldTexture(text_field, CreateTextureFromFile(path .. ".png"))
-	SetTextFieldOffset(text_field, 3, 2)
-	SetTextFieldText(text_field, default)
-	SetGuiObjectPosition(text_field, x, y)
-
-	AddGuiObject(parent, text_field)
-
-	return text_field
-end
-
-function edi_create_slider(parent, name, x, y, path, default)
-	local slider = CreateSlider(parent, name, x, y, 0, 10, 1.0)
-
-	SetSliderBackgroundTexture(slider, CreateTextureFromFile(path .. "_bg.png"))
-	SetSliderSliderTexture(slider, CreateTextureFromFile(path .. "_slider.png"))
-	SetGuiObjectPosition(slider, x, y)
-	SetSliderValue(slider, default)
-
-	AddGuiObject(parent, slider)
-
-	return slider
-end
-
 function edi_check_text_field_float(txf, min, max)
 	local val = GetTextFieldText(txf)
 
@@ -127,8 +64,7 @@ function edi_init_gui()
 	-- add a version label
 	editor.gui.version = CreateLabel(editor.gui.handle, "EditorELF_version", 0, 0, "EDitorELF 0.9 Beta 3, FPS: 0")
 	SetGuiObjectPosition(editor.gui.version, 5, GetWindowHeight()-GetGuiObjectSize(editor.gui.version).y-2)
-
-	AddGuiObject(editor.gui.handle, editor.gui.version)
+	SetGuiObjectColor(editor.gui.version, 1.0, 1.0, 1.0, 0.6)
 end
 
 function edi_disable_current_menu()
