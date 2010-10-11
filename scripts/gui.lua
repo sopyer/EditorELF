@@ -56,7 +56,6 @@ function edi_init_gui()
 	dofile("scripts/gui/properties.lua")
 
 	-- initialize gui resources and dialogs
-	edi_init_fonts()
 	edi_init_message_box()
 	edi_init_file_dialog()
 	edi_init_properties()
