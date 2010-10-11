@@ -205,14 +205,17 @@ function edi_init_properties()
 
 	editor.gui.properties.edit.camera = {}
 
-	editor.gui.properties.edit.camera.fov_lab = edi_create_label(editor.gui.properties.handle, "fov_lab", 4, 49, "Fov", editor.gui.fonts.normal)
-	editor.gui.properties.edit.camera.clip_lab = edi_create_label(editor.gui.properties.handle, "clip_lab", 4, 71, "Clip", editor.gui.fonts.normal)
+	editor.gui.properties.edit.camera.fov_lab = CreateLabel(editor.gui.properties.handle, "fov_lab", 4, 52, "Fov")
+	editor.gui.properties.edit.camera.clip_lab = CreateLabel(editor.gui.properties.handle, "clip_lab", 4, 74, "Clip")
 
-	editor.gui.properties.edit.camera.fov_txf = edi_create_text_field(editor.gui.properties.handle, "fov_txf", 99, 48, "images/text_field64", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.camera.clip_near_txf = edi_create_text_field(editor.gui.properties.handle, "clip_near_txf", 99, 70, "images/text_field48", editor.gui.fonts.normal, "0")
-	editor.gui.properties.edit.camera.clip_far_txf = edi_create_text_field(editor.gui.properties.handle, "clip_far_txf", 151, 70, "images/text_field48", editor.gui.fonts.normal, "0")
+	editor.gui.properties.edit.camera.fov_txf = CreateTextField(editor.gui.properties.handle, "fov_txf", 80, 48, 168, "0")
+	editor.gui.properties.edit.camera.clip_near_txf = CreateTextField(editor.gui.properties.handle, "clip_near_txf", 80, 70, 83, "0")
+	editor.gui.properties.edit.camera.clip_far_txf = CreateTextField(editor.gui.properties.handle, "clip_far_txf", 166, 70, 83, "0")
 
-	editor.gui.properties.edit.camera.copy_but = edi_create_button(editor.gui.properties.handle, "copy_but", 4, 92, "images/properties/edit/copy_specs_to_view")
+	editor.gui.properties.edit.camera.copy_but = CreateButton(editor.gui.properties.handle, "copy_but", 4, 92, 248, 18, "Copy To View")
+
+	SetGuiObjectColor(editor.gui.properties.edit.camera.fov_lab, 1.0, 1.0, 1.0, 0.6)
+	SetGuiObjectColor(editor.gui.properties.edit.camera.clip_lab, 1.0, 1.0, 1.0, 0.6)
 
 	-- setup the entity properties
 
