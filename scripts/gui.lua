@@ -50,7 +50,6 @@ function edi_init_gui()
 	editor.gui.handle = CreateGui()
 	SetGui(editor.gui.handle)
 
-	dofile("scripts/gui/fonts.lua")
 	dofile("scripts/gui/message_box.lua")
 	dofile("scripts/gui/file_dialog.lua")
 	dofile("scripts/gui/properties.lua")

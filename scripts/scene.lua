@@ -319,7 +319,6 @@ function edi_update_scene()
 
 					editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
 					editor.gui.action.move = true
-					SetCheckBoxState(editor.gui.properties.menu.move, true)
 				end
 			end
 		end
