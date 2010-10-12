@@ -1,5 +1,5 @@
 
-function edi_init()
+function ediInit()
 	editor = {}
 	editor.scene = {}
 
@@ -9,12 +9,12 @@ function edi_init()
 	dofile("scripts/scene.lua")
 	dofile("scripts/util.lua")
 
-	edi_init_gui()
-	edi_init_scene()
+	ediInitGui()
+	ediInitScene()
 end
 
-function edi_run()
-	edi_open_properties()
+function ediRun()
+	ediOpenProperties()
 
 	while Run() == true do
 		if GetKeyState(KEY_ESC) == PRESSED then Quit() end
@@ -34,18 +34,18 @@ function edi_run()
 			SetGuiObjectVisible(editor.gui.handle, false)
 		end
 
-		edi_update_scene()
-		edi_update_gui()
+		ediUpdateScene()
+		ediUpdateGui()
 	end
 end
 
-function edi_deinit()
+function ediDeinit()
 	editor = nil
 end
 
 -- initialize and run EditorELF
 
-edi_init()
-edi_run()
-edi_deinit()
+ediInit()
+ediRun()
+ediDeinit()
 

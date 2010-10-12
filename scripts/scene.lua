@@ -1,5 +1,5 @@
 
-function edi_init_scene()
+function ediInitScene()
 	editor.scene = {}
 	editor.scene.camera = {}
 
@@ -10,24 +10,24 @@ function edi_init_scene()
 	SetScene(editor.scene.handle)
 
 	-- init the camear for the default scene
-	edi_init_scene_camera()
+	ediInitSceneCamera()
 
 	SetActorRotation(editor.scene.camera.handle, 90.0, 0.0, 0.0)
 	SetActorPosition(editor.scene.camera.handle, 0.0, -5.0, 0.0)
 end
 
-function edi_init_scene_camera()
+function ediInitSceneCamera()
 	-- set the camera move speed
-	editor.scene.camera.move_speed = 20.0
+	editor.scene.camera.moveSpeed = 20.0
 	editor.scene.camera.irot = {}
 	editor.scene.camera.irot.x = 0
 	editor.scene.camera.irot.y = 0
 
 	-- remove any previous cameras that reserve the ditor camera name
-	RemoveSceneCamera(editor.scene.handle, "__EditorELF_Camera")
+	RemoveSceneCamera(editor.scene.handle, "_EditorELF_Camera")
 
 	-- create a new camera
-	editor.scene.camera.handle = CreateCamera("__EditorELF_Camera")
+	editor.scene.camera.handle = CreateCamera("_EditorELF_Camera")
 
 	-- set the camera position and rotation to the first camera found in the scene
 	local cam = GetSceneCameraByIndex(editor.scene.handle, 0)
@@ -51,56 +51,56 @@ function edi_init_scene_camera()
 	SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
-function edi_reload_scene_camera()
+function ediReloadSceneCamera()
 	AddSceneCamera(editor.scene.handle, editor.scene.camera.handle)
 	SetSceneActiveCamera(editor.scene.handle, editor.scene.camera.handle)
 end
 
-function edi_remove_scene_camera()
-	RemoveSceneCamera(editor.scene.handle, "__EditorELF_Camera")
+function ediRemoveSceneCamera()
+	RemoveSceneCamera(editor.scene.handle, "_EditorELF_Camera")
 end
 
-function edi_load_scene(path)
+function ediLoadScene(path)
 	-- check if we can load the new scene
-	new_scene = CreateSceneFromFile(path)
-	if new_scene == nil then return false end
+	newScene = CreateSceneFromFile(path)
+	if newScene == nil then return false end
 
 	-- deselect any previously selected objects
 	editor.scene.selection = nil
-	edi_update_gui_selection()
+	ediUpdateGuiSelection()
 
 	-- set the new scene as the current scene
-	editor.scene.handle = new_scene
-	SetScenePhysics(new_scene, false)
-	SetSceneRunScripts(new_scene, false)
-	SetScene(new_scene)
+	editor.scene.handle = newScene
+	SetScenePhysics(newScene, false)
+	SetSceneRunScripts(newScene, false)
+	SetScene(newScene)
 
 	-- initialize the editor camera
-	edi_init_scene_camera()
+	ediInitSceneCamera()
 
 	local ambient = GetSceneAmbientColor(editor.scene.handle)
-	SetTextFieldText(editor.gui.properties.menu.ambient_r_txf, tostring(ambient.r))
-	SetTextFieldText(editor.gui.properties.menu.ambient_g_txf, tostring(ambient.g))
-	SetTextFieldText(editor.gui.properties.menu.ambient_b_txf, tostring(ambient.b))
+	SetTextFieldText(editor.gui.properties.menu.ambientRTxf, tostring(ambient.r))
+	SetTextFieldText(editor.gui.properties.menu.ambientGTxf, tostring(ambient.g))
+	SetTextFieldText(editor.gui.properties.menu.ambientBTxf, tostring(ambient.b))
 
-	SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_r_txf, 0)
-	SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_g_txf, 0)
-	SetTextFieldCursorPosition(editor.gui.properties.menu.ambient_b_txf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.menu.ambientRTxf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.menu.ambientGTxf, 0)
+	SetTextFieldCursorPosition(editor.gui.properties.menu.ambientBTxf, 0)
 
 	return true
 end
 
-function edi_save_scene(path)
-	edi_remove_scene_camera()
+function ediSaveScene(path)
+	ediRemoveSceneCamera()
 
 	local result = SaveScene(editor.scene.handle, path)
 
-	edi_reload_scene_camera()
+	ediReloadSceneCamera()
 
 	return result
 end
 
-function edi_trace_scene_selection()
+function ediTraceSceneSelection()
 	-- don't allow picking through GUI
 	if GetGuiTrace(editor.gui.handle) ~= nil then return nil end
 
@@ -108,15 +108,15 @@ function edi_trace_scene_selection()
 	local raystart = GetActorPosition(editor.scene.camera.handle)
 
 	-- next we calculate the end position of the ray
-	local mouse_pos = GetMousePosition()
+	local mousePos = GetMousePosition()
 	local wwidth = GetWindowWidth()
 	local wheight = GetWindowHeight()
 	local clip = GetCameraClip(editor.scene.camera.handle)
 	local fpsize = GetCameraFarPlaneSize(editor.scene.camera.handle)
 
 	local rayend = CreateVec3f(0.0, 0.0, 0.0)
-	rayend.x = mouse_pos.x/wwidth*fpsize.x-fpsize.x/2
-	rayend.y = (wheight-mouse_pos.y)/wheight*fpsize.y-fpsize.y/2
+	rayend.x = mousePos.x/wwidth*fpsize.x-fpsize.x/2
+	rayend.y = (wheight-mousePos.y)/wheight*fpsize.y-fpsize.y/2
 	rayend.z = -clip.y
 
 	-- now we have the end position of the ray, but we still have to positon and orient it according to the camera
@@ -133,9 +133,9 @@ function edi_trace_scene_selection()
 	return nil
 end
 
-function edi_select_actor(act)
+function ediSelectActor(act)
 	-- get the object we clicked on
-	if act == nil then act = edi_trace_scene_selection() end
+	if act == nil then act = ediTraceSceneSelection() end
 	-- check if we got anything
 	if act ~= nil then
 		-- deselect previously selected
@@ -146,24 +146,24 @@ function edi_select_actor(act)
 		editor.scene.selection = act
 		SetActorSelected(editor.scene.selection, true)
 
-		edi_update_gui_selection()
+		ediUpdateGuiSelection()
 	end
 end
 
-function edi_update_scene()
-	if editor.gui.current_menu == EDI_PROPERTIES then
-		local move_speed = editor.scene.camera.move_speed
+function ediUpdateScene()
+	if editor.gui.currentMenu == EDI_PROPERTIES then
+		local moveSpeed = editor.scene.camera.moveSpeed
 
 		if GetKeyState(KEY_LSHIFT) ~= UP then
-			move_speed = move_speed * 3
+			moveSpeed = moveSpeed * 3
 		end
 
 		if GetGuiActiveTextField(editor.gui.handle) == nil then
 			-- move the camera around with WSAD
-			if GetKeyState(KEY_W) ~= UP then MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -move_speed) end
-			if GetKeyState(KEY_S) ~= UP then MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, move_speed) end
-			if GetKeyState(KEY_A) ~= UP then MoveActorLocal(editor.scene.camera.handle, -move_speed, 0.0, 0.0) end
-			if GetKeyState(KEY_D) ~= UP and GetKeyState(KEY_LCTRL) == UP then MoveActorLocal(editor.scene.camera.handle, move_speed, 0.0, 0.0) end
+			if GetKeyState(KEY_W) ~= UP then MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, -moveSpeed) end
+			if GetKeyState(KEY_S) ~= UP then MoveActorLocal(editor.scene.camera.handle, 0.0, 0.0, moveSpeed) end
+			if GetKeyState(KEY_A) ~= UP then MoveActorLocal(editor.scene.camera.handle, -moveSpeed, 0.0, 0.0) end
+			if GetKeyState(KEY_D) ~= UP and GetKeyState(KEY_LCTRL) == UP then MoveActorLocal(editor.scene.camera.handle, moveSpeed, 0.0, 0.0) end
 		end
 
 		-- if right mouse button is down, rotate the camera
@@ -186,7 +186,7 @@ function edi_update_scene()
 			if GetGuiTrace(editor.gui.handle) == nil and
 				editor.gui.action.move == false and
 				editor.gui.action.rotate == false then
-				edi_select_actor(nil)
+				ediSelectActor(nil)
 			end
 
 			if editor.gui.action.move == true then
@@ -200,17 +200,17 @@ function edi_update_scene()
 		if GetMouseButtonState(BUTTON_RIGHT) == PRESSED then
 			if editor.gui.action.move == true then
 				SetActorPosition(editor.scene.selection,
-					editor.gui.action.move_orig_pos.x,
-					editor.gui.action.move_orig_pos.y,
-					editor.gui.action.move_orig_pos.z)
-				edi_update_edit_selection()
+					editor.gui.action.moveOrigPos.x,
+					editor.gui.action.moveOrigPos.y,
+					editor.gui.action.moveOrigPos.z)
+				ediUpdateEditSelection()
 				editor.gui.action.move = false
 			elseif editor.gui.action.rotate == true then
 				SetActorRotation(editor.scene.selection,
-					editor.gui.action.rotate_orig_rot.x,
-					editor.gui.action.rotate_orig_rot.y,
-					editor.gui.action.rotate_orig_rot.z)
-				edi_update_edit_selection()
+					editor.gui.action.rotateOrigRot.x,
+					editor.gui.action.rotateOrigRot.y,
+					editor.gui.action.rotateOrigRot.z)
+				ediUpdateEditSelection()
 				editor.gui.action.rotate = false
 			end
 		end
@@ -219,10 +219,10 @@ function edi_update_scene()
 		if editor.scene.selection ~= nil then
 			if GetGuiActiveTextField(editor.gui.handle) == nil then
 				if GetKeyState(KEY_G) == PRESSED then
-					editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
+					editor.gui.action.moveOrigPos = GetActorPosition(editor.scene.selection)
 					editor.gui.action.move = true
 				elseif GetKeyState(KEY_R) == PRESSED then
-					editor.gui.action.rotate_orig_rot = GetActorRotation(editor.scene.selection)
+					editor.gui.action.rotateOrigRot = GetActorRotation(editor.scene.selection)
 					editor.gui.action.rotate = true
 				end
 			end
@@ -230,41 +230,41 @@ function edi_update_scene()
 			if GetMouseButtonState(BUTTON_RIGHT) == UP then
 				if editor.gui.action.move == true then
 					local pos = GetActorPosition(editor.scene.selection)
-					local cam_orient = GetActorOrientation(editor.scene.camera.handle)
-					local cam_pos = GetActorPosition(editor.scene.camera.handle)
+					local camOrient = GetActorOrientation(editor.scene.camera.handle)
+					local camPos = GetActorPosition(editor.scene.camera.handle)
 
-					local speed = GetVec3fLength(SubVec3fVec3f(pos, cam_pos))*0.001
+					local speed = GetVec3fLength(SubVec3fVec3f(pos, camPos))*0.001
 
 					local mf = GetMouseForce()
 					local offset = CreateVec3f(mf.x*speed, -mf.y*speed, 0.0)
 
-					offset = MulQuaVec3f(cam_orient, offset)
-					local new_pos = AddVec3fVec3f(pos, offset)
+					offset = MulQuaVec3f(camOrient, offset)
+					local newPos = AddVec3fVec3f(pos, offset)
 
-					SetActorPosition(editor.scene.selection, new_pos.x, new_pos.y, new_pos.z)
-					edi_update_edit_selection()
+					SetActorPosition(editor.scene.selection, newPos.x, newPos.y, newPos.z)
+					ediUpdateEditSelection()
 				elseif editor.gui.action.rotate == true then
 					local orient = GetActorOrientation(editor.scene.selection)
-					local inv_orient = GetQuaInverted(orient)
-					local cam_orient = GetActorOrientation(editor.scene.camera.handle)
+					local invOrient = GetQuaInverted(orient)
+					local camOrient = GetActorOrientation(editor.scene.camera.handle)
 
 					local axis = CreateVec3f(0.0, 0.0, -1.0)
-					local axis = MulQuaVec3f(cam_orient, axis)
-					local axis = MulQuaVec3f(inv_orient, axis)
+					local axis = MulQuaVec3f(camOrient, axis)
+					local axis = MulQuaVec3f(invOrient, axis)
 					local mf = GetMouseForce()
 
 					local offset = CreateQuaFromAngleAxis(mf.y, axis.x, axis.y, axis.z)
-					local new_orient = MulQuaQua(orient, offset)
+					local newOrient = MulQuaQua(orient, offset)
 
-					SetActorOrientation(editor.scene.selection, new_orient.x, new_orient.y, new_orient.z, new_orient.w)
-					edi_update_edit_selection()
+					SetActorOrientation(editor.scene.selection, newOrient.x, newOrient.y, newOrient.z, newOrient.w)
+					ediUpdateEditSelection()
 				end
 			end
 
 			if GetKeyState(KEY_DEL) == PRESSED and GetGuiActiveTextField(editor.gui.handle) == nil then
 				RemoveSceneActorByObject(editor.scene.handle, editor.scene.selection)
 				editor.scene.selection = nil
-				edi_update_gui_selection()	
+				ediUpdateGuiSelection()	
 			end
 
 			if GetKeyState(KEY_LCTRL) == DOWN and GetKeyState(KEY_D) == PRESSED then
@@ -284,9 +284,9 @@ function edi_update_scene()
 
 					local lengths = GetActorBoundingLengths(editor.scene.selection)
 					local offset = GetActorBoundingOffset(editor.scene.selection)
-					local anis_fric = GetActorAnisotropicFriction(editor.scene.selection)
-					local lin_factor = GetActorLinearFactor(editor.scene.selection)
-					local ang_factor = GetActorAngularFactor(editor.scene.selection)
+					local anisFric = GetActorAnisotropicFriction(editor.scene.selection)
+					local linFactor = GetActorLinearFactor(editor.scene.selection)
+					local angFactor = GetActorAngularFactor(editor.scene.selection)
 
 					SetActorBoundingLengths(act, lengths.x, lengths.y, lengths.z)
 					SetActorBoundingOffset(act, offset.x, offset.y, offset.z)
@@ -295,9 +295,9 @@ function edi_update_scene()
 					SetActorSleepThresholds(act, GetActorLinearSleepThreshold(editor.scene.selection),
 						GetActorAngularSleepThreshold(editor.scene.selection))
 					SetActorRestitution(act, GetActorRestitution(editor.scene.selection))
-					SetActorAnisotropicFriction(act, anis_fric.x, anis_fric.y, anis_fric.z)
-					SetActorLinearFactor(act, ang_factor.x, ang_factor.y, ang_factor.z)
-					SetActorAngularFactor(act, ang_factor.x, ang_factor.y, ang_factor.z)
+					SetActorAnisotropicFriction(act, anisFric.x, anisFric.y, anisFric.z)
+					SetActorLinearFactor(act, angFactor.x, angFactor.y, angFactor.z)
+					SetActorAngularFactor(act, angFactor.x, angFactor.y, angFactor.z)
 
 					local physics = IsActorPhysics(editor.scene.selection)
 					if GetActorShape(editor.scene.selection) > 0 then
@@ -315,9 +315,9 @@ function edi_update_scene()
 					SetActorPosition(act, pos.x, pos.y, pos.z)
 					SetActorRotation(act, rot.x, rot.y, rot.z)
 
-					edi_select_actor(act)
+					ediSelectActor(act)
 
-					editor.gui.action.move_orig_pos = GetActorPosition(editor.scene.selection)
+					editor.gui.action.moveOrigPos = GetActorPosition(editor.scene.selection)
 					editor.gui.action.move = true
 				end
 			end
