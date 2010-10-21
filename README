@@ -13,7 +13,7 @@ INSTRUCTIONS
 
 - Moving Camera -
 WSAD to move the camera and HOLD RMB + MOUSE to rotate it.
-HOLD SHIFT to move faster.
+HOLD SHIFT to move faster and ALT to move slower.
 
 - Deleting Objects -
 The DELETE button deletes an object.
@@ -22,13 +22,10 @@ The DELETE button deletes an object.
 CTRL + D duplicates the selected object if duplication for it
 is supported.
 
-- Changing Resolution -
-You can change the resolution from config.txt by modifying
-the window_size field.
-
 - Hiding Menus -
 HOLD SPACE to hide the menus for taking screenshots and
-previewing the scene.
+previewing the scene. You can also hide the sidebars with
+the long vertical buttons in the sides of the screen.
 
 - Taking Screen Shots -
 F5 saves a screenshot to the editor folder as "screenshot.png".
@@ -39,4 +36,6 @@ functionality can be found in the property sidebar on the
 right. It contains various submenus which enable you to
 open and import scenes and files, edit various actor
 types and preview the scene with post processing effects.
+You can also drag objects to the scene from the left
+sidebars file listing.
 

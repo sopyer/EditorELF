@@ -1,12 +1,31 @@
 
 function ediInit()
 	editor = {}
-	editor.scene = {}
 
-	SetTitle("EditorELF 0.9 Beta 2")
+	SetTitle("EditorELF 0.9 Beta 4")
 
 	dofile("scripts/gui.lua")
 	dofile("scripts/scene.lua")
+	dofile("scripts/camera.lua")
+
+	dofile("scripts/wintoolbox.lua")
+	dofile("scripts/widfiles.lua")
+	dofile("scripts/widtree.lua")
+
+	dofile("scripts/winproperties.lua")
+	dofile("scripts/widfile.lua")
+	dofile("scripts/widoptions.lua")
+	dofile("scripts/widcreate.lua")
+	dofile("scripts/widactor.lua")
+	dofile("scripts/widphysics.lua")
+	dofile("scripts/widlight.lua")
+	dofile("scripts/widshaft.lua")
+	dofile("scripts/widcamera.lua")
+	dofile("scripts/widentity.lua")
+	dofile("scripts/widmaterials.lua")
+
+	dofile("scripts/winfiledialog.lua")
+
 	dofile("scripts/util.lua")
 
 	ediInitGui()
@@ -14,8 +33,6 @@ function ediInit()
 end
 
 function ediRun()
-	ediOpenProperties()
-
 	while Run() == true do
 		if GetKeyState(KEY_ESC) == PRESSED then Quit() end
 
@@ -26,12 +43,12 @@ function ediRun()
 			end
 		end
 
-		-- hide debug draw and menu when space is pressed (for screen shots ;)
+		-- hide debug draw and menu when space is pressed (for screen shots ;))
 		SetDebugDraw(true)
-		SetGuiObjectVisible(editor.gui.handle, true)
+		SetGuiObjectVisible(editor.gui.object, true)
 		if GetKeyState(KEY_SPACE) ~= UP then
 			SetDebugDraw(false)
-			SetGuiObjectVisible(editor.gui.handle, false)
+			SetGuiObjectVisible(editor.gui.object, false)
 		end
 
 		ediUpdateScene()
