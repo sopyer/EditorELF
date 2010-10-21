@@ -112,7 +112,11 @@ function ediImportScene(path)
 			spr = GetSceneSpritesByIndex(scn, 0)
 			AddSceneSprites(editor.scene.object, spr)
 		end
+
+		return true
 	end
+
+	return false
 end
 
 function ediUpdateScene()

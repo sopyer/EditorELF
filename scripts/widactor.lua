@@ -159,7 +159,7 @@ function ediUpdateWidActor()
 			local scr = CreateScriptFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if scr ~= nil then
 				SetActorScript(sel, scr)
-				ediUpdateWidActorSelection()
+				SetTextFieldText(widActor.scriptTxf, GetScriptName(scr))
 			end
 		end
 	end

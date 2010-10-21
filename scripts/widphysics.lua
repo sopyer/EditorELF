@@ -5,7 +5,7 @@ function ediInitWidPhysics()
 
 	widPhysics.prevMouseWheel = 0
 
-	widPhysics.object = CreateScreen(editor.gui.properties.object, "WidPhysics", 0, 25, 248, 311)
+	widPhysics.object = CreateScreen(editor.gui.properties.object, "WidPhysics", 0, 25, 248, 313)
 
 	widPhysics.enabledLab = CreateLabel(widPhysics.object, "EnabledLab", 4, 26, "Enabled")
 	widPhysics.lengthsLab = CreateLabel(widPhysics.object, "LengthsLab", 4, 46, "Lengths")
@@ -60,7 +60,7 @@ function ediInitWidPhysics()
 	widPhysics.angFactorY = CreateTextField(widPhysics.object, "AngFactorY", 135, 242, 53, "")
 	widPhysics.angFactorZ = CreateTextField(widPhysics.object, "AngFactorZ", 190, 242, 54, "")
 
-	widPhysics.shapeTxl = CreateTextList(widPhysics.object, "Shape", 80, 262, 3, 154)
+	widPhysics.shapeTxl = CreateTextList(widPhysics.object, "Shape", 80, 264, 3, 154)
 	AddTextListItem(widPhysics.shapeTxl, " Box")
 	AddTextListItem(widPhysics.shapeTxl, " Sphere")
 	AddTextListItem(widPhysics.shapeTxl, " Mesh")
@@ -148,7 +148,7 @@ function ediUpdateWidPhysics()
 		if GetGuiObjectSize(widPhysics.object).y > 16 then
 			SetScreenSize(widPhysics.object, 248, 16)
 		else
-			SetScreenSize(widPhysics.object, 248, 311)
+			SetScreenSize(widPhysics.object, 248, 313)
 		end
 		ediPackScreensVer(editor.gui.properties, 25)
 	end
@@ -343,7 +343,7 @@ function ediUpdateWidPhysics()
 			end
 		end
 	else
-		SetSliderValue(widFiles.scrollBar, 1.0)
+		SetSliderValue(widPhysics.shapeScrollBar, 1.0)
 	end
 
 	widPhysics.prevMouseWheel = GetMouseWheel()
