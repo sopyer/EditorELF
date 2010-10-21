@@ -26,6 +26,7 @@ function ediInitProperties()
 	ediInitWidCamera()
 	ediInitWidEntity()
 	ediInitWidMaterials()
+	ediInitWidParticles()
 
 	ediSetPropertiesTab(EDI_MENU)
 
@@ -56,6 +57,7 @@ function ediSetPropertiesTab(tab)
 			SetGuiObjectVisible(properties.widLight.object, true)
 			SetGuiObjectVisible(properties.widShaft.object, true)
 		elseif GetObjectType(sel) == PARTICLES then
+			SetGuiObjectVisible(properties.widParticles.object, true)
 		elseif GetObjectType(sel) == SPRITE then
 		end
 	end
@@ -78,6 +80,7 @@ function ediUpdatePropertiesSelection()
 		ediUpdateWidLightSelection()
 		ediUpdateWidShaftSelection()
 	elseif GetObjectType(sel) == PARTICLES then
+		ediUpdateWidParticlesSelection()
 	elseif GetObjectType(sel) == SPRITE then
 	end
 
@@ -105,6 +108,7 @@ function ediUpdatePropertiesTab()
 			ediUpdateWidLight()
 			ediUpdateWidShaft()
 		elseif GetObjectType(editor.scene.selection) == PARTICLES then
+			ediUpdateWidParticles()
 		elseif GetObjectType(editor.scene.selection) == SPRITE then
 		end
 	end
