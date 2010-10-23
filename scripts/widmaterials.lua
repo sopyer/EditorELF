@@ -253,7 +253,11 @@ function ediUpdateWidMaterials()
 	if GetGuiObjectEvent(widMaterials.removeMaterialBut) == CLICKED then
 		RemoveEntityMaterial(sel, widMaterials.material)
 		RemoveTextListItem(widMaterials.materialsTxl, widMaterials.material)
-		if GetEntityMaterialCount(sel) == 0 then return end
+		if GetEntityMaterialCount(sel) == 0 then
+			widMaterials.material = nil
+			ediClearWidMaterialsSpecs()
+			return
+		end
 
 		if widMaterials.material <= GetEntityMaterialCount(sel)-1 then
 			ediSetWidMaterialsMaterial(widMaterials.material)
