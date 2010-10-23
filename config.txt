@@ -1,2 +1,2 @@
-window_size 1024 720
+windowSize 1024 720
 

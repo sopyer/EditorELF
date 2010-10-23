@@ -23,6 +23,7 @@ function ediInit()
 	dofile("scripts/widcamera.lua")
 	dofile("scripts/widentity.lua")
 	dofile("scripts/widmaterials.lua")
+	dofile("scripts/widparticles.lua")
 
 	dofile("scripts/winfiledialog.lua")
 

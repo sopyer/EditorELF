@@ -74,6 +74,8 @@ function ediOpenScene(path)
 	if scn ~= nil then
 		ediSetSelection(nil)
 		editor.scene.object = scn
+		SetScenePhysics(editor.scene.object, false)
+		SetSceneRunScripts(editor.scene.object, false)
 		SetScene(editor.scene.object)
 		ediAddCamera()
 		ediResetCamera()
