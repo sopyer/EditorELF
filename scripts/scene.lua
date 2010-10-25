@@ -209,23 +209,19 @@ function ediUpdateScene()
 				local linFactor = GetActorLinearFactor(scene.selection)
 				local angFactor = GetActorAngularFactor(scene.selection)
 
+				SetActorShape(act, GetActorShape(act))
 				SetActorBoundingLengths(act, lengths.x, lengths.y, lengths.z)
 				SetActorBoundingOffset(act, offset.x, offset.y, offset.z)
 				SetActorDamping(act, GetActorLinearDamping(scene.selection),
 					GetActorAngularDamping(scene.selection))
-				SetActorSleepThresholds(act, GetActorLinearSleepThreshold(scene.selection),
-					GetActorAngularSleepThreshold(scene.selection))
+				SetActorMass(act, GetActorMass(act))
+				SetActorSleep(act, GetActorLinearSleep(scene.selection),
+					GetActorAngularSleep(scene.selection))
 				SetActorRestitution(act, GetActorRestitution(scene.selection))
 				SetActorAnisotropicFriction(act, anisFric.x, anisFric.y, anisFric.z)
 				SetActorLinearFactor(act, angFactor.x, angFactor.y, angFactor.z)
 				SetActorAngularFactor(act, angFactor.x, angFactor.y, angFactor.z)
-
-				local physics = IsActorPhysics(scene.selection)
-				if GetActorShape(scene.selection) > 0 then
-					SetActorPhysics(act, GetActorShape(scene.selection),
-						GetActorMass(scene.selection))
-				end
-				if physics == false then DisableActorPhysics(act) end
+				SetActorPhysics(act, GetActorPhysics(scene.selection))
 
 				AddSceneEntity(scene.object, act)
 			end

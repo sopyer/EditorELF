@@ -8,6 +8,8 @@ function ediInit()
 	dofile("scripts/scene.lua")
 	dofile("scripts/camera.lua")
 
+	dofile("scripts/attribute.lua")
+
 	dofile("scripts/wintoolbox.lua")
 	dofile("scripts/widfiles.lua")
 	dofile("scripts/widtree.lua")

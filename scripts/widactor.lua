@@ -6,22 +6,16 @@ function ediInitWidActor()
 	widActor.object = CreateScreen(editor.gui.properties.object, "WidActor", 0, 25, 248, 105)
 
 	widActor.nameLab = CreateLabel(widActor.object, "nameLab", 4, 26, "Name")
-	widActor.positionLab = CreateLabel(widActor.object, "positionLab", 4, 46, "Position")
-	widActor.rotationLab = CreateLabel(widActor.object, "rotationLab", 4, 66, "Rotation")
+
+	widActor.positionAttr = ediCreateFloatGroupAttribute(widActor.object, "Position", 4, 42, nil, nil, "", 3, "SetActorPosition")
+	widActor.rotationAttr = ediCreateFloatGroupAttribute(widActor.object, "Rotation", 4, 62, nil, nil, "", 3, "SetActorRotation")
+
 	widActor.scriptLab = CreateLabel(widActor.object, "scriptLab", 4, 86, "Script")
 
 	SetGuiObjectColor(widActor.nameLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widActor.positionLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widActor.rotationLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widActor.scriptLab, 1.0, 1.0, 1.0, 0.6)
 
 	widActor.nameTxf = CreateTextField(widActor.object, "NameTxf", 80, 22, 164, "")
-	widActor.positionX = CreateTextField(widActor.object, "PositionX", 80, 42, 53, "")
-	widActor.positionY = CreateTextField(widActor.object, "PositionY", 135, 42, 53, "")
-	widActor.positionZ = CreateTextField(widActor.object, "PositionZ", 190, 42, 54, "")
-	widActor.rotationX = CreateTextField(widActor.object, "RotationX", 80, 62, 53, "")
-	widActor.rotationY = CreateTextField(widActor.object, "RotationY", 135, 62, 53, "")
-	widActor.rotationZ = CreateTextField(widActor.object, "RotationZ", 190, 62, 54, "")
 	widActor.scriptTxf = CreateTextField(widActor.object, "ScriptTxf", 80, 82, 144, "")
 	widActor.openScript = CreateButton(widActor.object, "Script", 226, 82, 18, 18, "..")
 
@@ -37,22 +31,14 @@ function ediUpdateWidActorSelection()
 	local script = GetActorScript(sel)
 
 	SetTextFieldText(widActor.nameTxf, GetActorName(sel))
-	SetTextFieldText(widActor.positionX, tostring(pos.x))
-	SetTextFieldText(widActor.positionY, tostring(pos.y))
-	SetTextFieldText(widActor.positionZ, tostring(pos.z))
-	SetTextFieldText(widActor.rotationX, tostring(rot.x))
-	SetTextFieldText(widActor.rotationY, tostring(rot.y))
-	SetTextFieldText(widActor.rotationZ, tostring(rot.z))
+
+	ediSetFloatGroupAttributeValues(widActor.positionAttr, {pos.x, pos.y, pos.z})
+	ediSetFloatGroupAttributeValues(widActor.rotationAttr, {rot.x, rot.y, rot.z})
+
 	if script ~= nil then SetTextFieldText(widActor.scriptTxf, GetScriptName(script))
 	else SetTextFieldText(widActor.scriptTxf, "") end
 
 	SetTextFieldCursorPosition(widActor.nameTxf, 0)
-	SetTextFieldCursorPosition(widActor.positionX, 0)
-	SetTextFieldCursorPosition(widActor.positionY, 0)
-	SetTextFieldCursorPosition(widActor.positionZ, 0)
-	SetTextFieldCursorPosition(widActor.rotationX, 0)
-	SetTextFieldCursorPosition(widActor.rotationY, 0)
-	SetTextFieldCursorPosition(widActor.rotationZ, 0)
 	SetTextFieldCursorPosition(widActor.scriptTxf, 0)
 end
 
@@ -91,47 +77,8 @@ function ediUpdateWidActor()
 		end
 	end
 
-	if GetGuiObjectEvent(widActor.positionX) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widActor.positionX, nil, nil)
-		SetActorPosition(sel, tonumber(GetTextFieldText(widActor.positionX)),
-			tonumber(GetTextFieldText(widActor.positionY)),
-			tonumber(GetTextFieldText(widActor.positionZ)))
-	end
-
-	if GetGuiObjectEvent(widActor.positionY) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widActor.positionY, nil, nil)
-		SetActorPosition(sel, tonumber(GetTextFieldText(widActor.positionX)),
-			tonumber(GetTextFieldText(widActor.positionY)),
-			tonumber(GetTextFieldText(widActor.positionZ)))
-	end
-
-	if GetGuiObjectEvent(widActor.positionZ) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widActor.positionY, nil, nil)
-		SetActorPosition(sel, tonumber(GetTextFieldText(widActor.positionX)),
-			tonumber(GetTextFieldText(widActor.positionY)),
-			tonumber(GetTextFieldText(widActor.positionZ)))
-	end
-
-	if GetGuiObjectEvent(widActor.rotationX) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widActor.rotationX, nil, nil)
-		SetActorRotation(sel, tonumber(GetTextFieldText(widActor.rotationX)),
-			tonumber(GetTextFieldText(widActor.rotationY)),
-			tonumber(GetTextFieldText(widActor.rotationZ)))
-	end
-
-	if GetGuiObjectEvent(widActor.rotationY) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widActor.rotationY, nil, nil)
-		SetActorRotation(sel, tonumber(GetTextFieldText(widActor.rotationX)),
-			tonumber(GetTextFieldText(widActor.rotationY)),
-			tonumber(GetTextFieldText(widActor.rotationZ)))
-	end
-
-	if GetGuiObjectEvent(widActor.rotationZ) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widActor.rotationY, nil, nil)
-		SetActorRotation(sel, tonumber(GetTextFieldText(widActor.rotationX)),
-			tonumber(GetTextFieldText(widActor.rotationY)),
-			tonumber(GetTextFieldText(widActor.rotationZ)))
-	end
+	ediUpdateAttribute(widActor.positionAttr, sel)
+	ediUpdateAttribute(widActor.rotationAttr, sel)
 
 	if GetGuiObjectEvent(widActor.scriptTxf) == LOSE_FOCUS then
 		if GetActorScript(sel) ~= nil then

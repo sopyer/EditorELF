@@ -14,61 +14,40 @@ function ediInitWidMaterials()
 	widMaterials.materialsScrollBar = CreateSlider(widMaterials.object, "ScrollBar", 232, 68, 0, 52, 1.0)
 
 	widMaterials.nameLab = CreateLabel(widMaterials.object, "NameLab", 4, 132, "Name")
-	widMaterials.diffuseLab = CreateLabel(widMaterials.object, "DiffuseLab", 4, 152, "Diffuse")
-	widMaterials.specularLab = CreateLabel(widMaterials.object, "SpecularLab", 4, 172, "Specular")
-	widMaterials.ambientLab = CreateLabel(widMaterials.object, "AmbientLab", 4, 192, "Ambient")
-	widMaterials.specPowerLab = CreateLabel(widMaterials.object, "specPowerLab", 4, 212, "Spec Power")
+
+	widMaterials.diffuseAttr = ediCreateFloatGroupAttribute(widMaterials.object, "Diffuse", 4, 148, 0, nil, "", 4, "SetMaterialDiffuseColor")
+	widMaterials.specularAttr = ediCreateFloatGroupAttribute(widMaterials.object, "Specular", 4, 168, 0, nil, "", 4, "SetMaterialSpecularColor")
+	widMaterials.ambientAttr = ediCreateFloatGroupAttribute(widMaterials.object, "Ambient", 4, 188, 0, nil, "", 4, "SetMaterialAmbientColor")
+	widMaterials.specPowerAttr = ediCreateFloatGroupAttribute(widMaterials.object, "Spec pow", 4, 208, 0, nil, "", 1, "SetMaterialSpecularPower")
+	widMaterials.alphaThrsAttr = ediCreateFloatGroupAttribute(widMaterials.object, "Alpha thrs", 4, 268, 0, nil, "", 1, "SetMaterialAlphaThreshold")
+	widMaterials.prlxScaleAttr = ediCreateFloatGroupAttribute(widMaterials.object, "Prlx Scale", 4, 348, 0, nil, "", 1, "SetMaterialParallaxScale")
+
 	widMaterials.lightingLab = CreateLabel(widMaterials.object, "LightingLab", 4, 232, "Lighting")
 	widMaterials.alphaTestLab = CreateLabel(widMaterials.object, "AlphaTestLab", 4, 252, "Alpha test")
-	widMaterials.alphaThrsLab = CreateLabel(widMaterials.object, "AlphaThrsLab", 4, 272, "Alpha thrs.")
 	widMaterials.diffuseMapLab = CreateLabel(widMaterials.object, "DiffuseMapLab", 4, 292, "Diff Map")
 	widMaterials.normalMapLab = CreateLabel(widMaterials.object, "NormalMapLab", 4, 312, "Norm Map")
 	widMaterials.heightMapLab = CreateLabel(widMaterials.object, "HeightMapLab", 4, 332, "Heig Map")
-	widMaterials.prlxScaleLab = CreateLabel(widMaterials.object, "PrlxScaleLab", 4, 352, "Prlx Scale")
 	widMaterials.specularMapLab = CreateLabel(widMaterials.object, "SpecularMapLab", 4, 372, "Spec Map")
 	widMaterials.lightMapLab = CreateLabel(widMaterials.object, "LightMapLab", 4, 392, "LightMap")
 
 	SetGuiObjectColor(widMaterials.nameLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widMaterials.diffuseLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widMaterials.specularLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widMaterials.ambientLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widMaterials.specPowerLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.lightingLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.alphaTestLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widMaterials.alphaThrsLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.diffuseMapLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.normalMapLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.heightMapLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widMaterials.prlxScaleLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.specularMapLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widMaterials.lightMapLab, 1.0, 1.0, 1.0, 0.6)
 
 	widMaterials.nameTxf = CreateTextField(widMaterials.object, "NameTxf", 80, 128, 164, "")
 
-	widMaterials.diffuseRTxf = CreateTextField(widMaterials.object, "DiffuseRTxf", 80, 148, 40, "")
-	widMaterials.diffuseGTxf = CreateTextField(widMaterials.object, "DiffuseGTxf", 122, 148, 40, "")
-	widMaterials.diffuseBTxf = CreateTextField(widMaterials.object, "DiffuseBTxf", 164, 148, 40, "")
-	widMaterials.diffuseATxf = CreateTextField(widMaterials.object, "DiffuseATxf", 206, 148, 38, "")
-
-	widMaterials.specularRTxf = CreateTextField(widMaterials.object, "SpecularRTxf", 80, 168, 53, "")
-	widMaterials.specularGTxf = CreateTextField(widMaterials.object, "SpecularRTxf", 135, 168, 53, "")
-	widMaterials.specularBTxf = CreateTextField(widMaterials.object, "SpecularRTxf", 190, 168, 54, "")
-
-	widMaterials.ambientRTxf = CreateTextField(widMaterials.object, "AmbientRTxf", 80, 188, 53, "")
-	widMaterials.ambientGTxf = CreateTextField(widMaterials.object, "AmbientRTxf", 135, 188, 53, "")
-	widMaterials.ambientBTxf = CreateTextField(widMaterials.object, "AmbientRTxf", 190, 188, 54, "")
-
-	widMaterials.specPowerTxf = CreateTextField(widMaterials.object, "specPowerTxf", 80, 208, 164, "")
-
 	widMaterials.lightingCbx = CreateCheckBox(widMaterials.object, "LightingCbx", 80, 231, false)
 
 	widMaterials.alphaTestCbx = CreateCheckBox(widMaterials.object, "AlphaTestCbx", 80, 251, false)
-	widMaterials.alphaThrsTxf = CreateTextField(widMaterials.object, "AlphaThrsTxf", 80, 268, 164, "")
 
 	widMaterials.diffuseMapTxf = CreateTextField(widMaterials.object, "DiffuseMapTxf", 80, 288, 144, "")
 	widMaterials.normalMapTxf = CreateTextField(widMaterials.object, "NormalMapTxf", 80, 308, 144, "")
 	widMaterials.heightMapTxf = CreateTextField(widMaterials.object, "HeightMapTxf", 80, 328, 144, "")
-	widMaterials.prlxScaleTxf = CreateTextField(widMaterials.object, "PrlxScaleTxf", 80, 348, 164, "")
 	widMaterials.specularMapTxf = CreateTextField(widMaterials.object, "SpecularMapTxf", 80, 368, 144, "")
 	widMaterials.lightMapTxf = CreateTextField(widMaterials.object, "LightMapTxf", 80, 388, 144, "")
 
@@ -87,24 +66,19 @@ function ediClearWidMaterialsSpecs()
 	local widMaterials = editor.gui.properties.widMaterials
 
 	SetTextFieldText(widMaterials.nameTxf, "")
-	SetTextFieldText(widMaterials.diffuseRTxf, "")
-	SetTextFieldText(widMaterials.diffuseGTxf, "")
-	SetTextFieldText(widMaterials.diffuseBTxf, "")
-	SetTextFieldText(widMaterials.diffuseATxf, "")
-	SetTextFieldText(widMaterials.specularRTxf, "")
-	SetTextFieldText(widMaterials.specularGTxf, "")
-	SetTextFieldText(widMaterials.specularBTxf, "")
-	SetTextFieldText(widMaterials.ambientRTxf, "")
-	SetTextFieldText(widMaterials.ambientGTxf, "")
-	SetTextFieldText(widMaterials.ambientBTxf, "")
-	SetTextFieldText(widMaterials.specPowerTxf, "")
+
+	ediClearFloatGroupAttribute(widMaterials.diffuseAttr)
+	ediClearFloatGroupAttribute(widMaterials.specularAttr)
+	ediClearFloatGroupAttribute(widMaterials.ambientAttr)
+	ediClearFloatGroupAttribute(widMaterials.specPowerAttr)
+	ediClearFloatGroupAttribute(widMaterials.alphaThrsAttr)
+	ediClearFloatGroupAttribute(widMaterials.prlxScaleAttr)
+
 	SetCheckBoxState(widMaterials.lightingCbx, false)
 	SetCheckBoxState(widMaterials.alphaTestCbx, false)
-	SetTextFieldText(widMaterials.alphaThrsTxf, "")
 	SetTextFieldText(widMaterials.diffuseMapTxf, "")
 	SetTextFieldText(widMaterials.normalMapTxf, "")
 	SetTextFieldText(widMaterials.heightMapTxf, "")
-	SetTextFieldText(widMaterials.prlxScaleTxf, "")
 	SetTextFieldText(widMaterials.specularMapTxf, "")
 	SetTextFieldText(widMaterials.lightMapTxf, "")
 
@@ -128,21 +102,16 @@ function ediSetWidMaterialsMaterial(idx)
 	local ambient = GetMaterialAmbientColor(mat)
 
 	SetTextFieldText(widMaterials.nameTxf, GetMaterialName(mat))
-	SetTextFieldText(widMaterials.diffuseRTxf, diffuse.r)
-	SetTextFieldText(widMaterials.diffuseGTxf, diffuse.g)
-	SetTextFieldText(widMaterials.diffuseBTxf, diffuse.b)
-	SetTextFieldText(widMaterials.diffuseATxf, diffuse.a)
-	SetTextFieldText(widMaterials.specularRTxf, specular.r)
-	SetTextFieldText(widMaterials.specularGTxf, specular.g)
-	SetTextFieldText(widMaterials.specularBTxf, specular.b)
-	SetTextFieldText(widMaterials.ambientRTxf, ambient.r)
-	SetTextFieldText(widMaterials.ambientGTxf, ambient.g)
-	SetTextFieldText(widMaterials.ambientBTxf, ambient.b)
-	SetTextFieldText(widMaterials.specPowerTxf, GetMaterialSpecularPower(mat))
+
+	ediSetFloatGroupAttributeValues(widMaterials.diffuseAttr, {diffuse.r, diffuse.g, diffuse.b, diffuse.a})
+	ediSetFloatGroupAttributeValues(widMaterials.specularAttr, {specular.r, specular.g, specular.b, specular.a})
+	ediSetFloatGroupAttributeValues(widMaterials.ambientAttr, {ambient.r, ambient.g, ambient.b, ambient.a})
+	ediSetFloatGroupAttributeValues(widMaterials.specPowerAttr, {GetMaterialSpecularPower(mat)})
+	ediSetFloatGroupAttributeValues(widMaterials.alphaThrsAttr, {GetMaterialAlphaThreshold(mat)})
+	ediSetFloatGroupAttributeValues(widMaterials.prlxScaleAttr, {GetMaterialParallaxScale(mat)})
+
 	SetCheckBoxState(widMaterials.lightingCbx, GetMaterialLighting(mat))
 	SetCheckBoxState(widMaterials.alphaTestCbx, GetMaterialAlphaTest(mat))
-	SetTextFieldText(widMaterials.alphaThrsTxf, GetMaterialAlphaThreshold(mat))
-	SetTextFieldText(widMaterials.prlxScaleTxf, GetMaterialParallaxScale(mat))
 
 	local map = GetMaterialDiffuseMap(mat)
 	if map ~= nil then SetTextFieldText(widMaterials.diffuseMapTxf, GetTextureName(map))
@@ -161,22 +130,9 @@ function ediSetWidMaterialsMaterial(idx)
 	else SetTextFieldText(widMaterials.lightMapTxf, "") end
 
 	SetTextFieldCursorPosition(widMaterials.nameTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.diffuseRTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.diffuseGTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.diffuseBTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.diffuseATxf, 0)
-	SetTextFieldCursorPosition(widMaterials.specularRTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.specularGTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.specularBTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.ambientRTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.ambientGTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.ambientBTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.specPowerTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.alphaThrsTxf, 0)
 	SetTextFieldCursorPosition(widMaterials.diffuseMapTxf, 0)
 	SetTextFieldCursorPosition(widMaterials.normalMapTxf, 0)
 	SetTextFieldCursorPosition(widMaterials.heightMapTxf, 0)
-	SetTextFieldCursorPosition(widMaterials.prlxScaleTxf, 0)
 	SetTextFieldCursorPosition(widMaterials.specularMapTxf, 0)
 	SetTextFieldCursorPosition(widMaterials.lightMapTxf, 0)
 
@@ -290,84 +246,12 @@ function ediUpdateWidMaterials()
 		end
 	end
 
-	if GetGuiObjectEvent(widMaterials.diffuseRTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.diffuseRTxf, 0, nil)
-		SetMaterialDiffuseColor(mat, tonumber(GetTextFieldText(widMaterials.diffuseRTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseGTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseBTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseATxf)))
-	end
-
-	if GetGuiObjectEvent(widMaterials.diffuseGTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.diffuseGTxf, 0, nil)
-		SetMaterialDiffuseColor(mat, tonumber(GetTextFieldText(widMaterials.diffuseRTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseGTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseBTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseATxf)))
-	end
-
-	if GetGuiObjectEvent(widMaterials.diffuseBTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.diffuseBTxf, 0, nil)
-		SetMaterialDiffuseColor(mat, tonumber(GetTextFieldText(widMaterials.diffuseRTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseGTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseBTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseATxf)))
-	end
-
-	if GetGuiObjectEvent(widMaterials.diffuseATxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.diffuseATxf, 0, nil)
-		SetMaterialDiffuseColor(mat, tonumber(GetTextFieldText(widMaterials.diffuseRTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseGTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseBTxf)),
-			tonumber(GetTextFieldText(widMaterials.diffuseATxf)))
-	end
-
-	if GetGuiObjectEvent(widMaterials.specularRTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.specularRTxf, 0, nil)
-		SetMaterialSpecularColor(mat, tonumber(GetTextFieldText(widMaterials.specularRTxf)),
-			tonumber(GetTextFieldText(widMaterials.specularGTxf)),
-			tonumber(GetTextFieldText(widMaterials.specularBTxf)), 1.0)
-	end
-
-	if GetGuiObjectEvent(widMaterials.specularGTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.specularGTxf, 0, nil)
-		SetMaterialSpecularColor(mat, tonumber(GetTextFieldText(widMaterials.specularRTxf)),
-			tonumber(GetTextFieldText(widMaterials.specularGTxf)),
-			tonumber(GetTextFieldText(widMaterials.specularBTxf)), 1.0)
-	end
-
-	if GetGuiObjectEvent(widMaterials.specularBTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.specularBTxf, 0, nil)
-		SetMaterialSpecularColor(mat, tonumber(GetTextFieldText(widMaterials.specularRTxf)),
-			tonumber(GetTextFieldText(widMaterials.specularGTxf)),
-			tonumber(GetTextFieldText(widMaterials.specularBTxf)), 1.0)
-	end
-
-	if GetGuiObjectEvent(widMaterials.ambientRTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.ambientRTxf, 0, nil)
-		SetMaterialAmbientColor(mat, tonumber(GetTextFieldText(widMaterials.ambientRTxf)),
-			tonumber(GetTextFieldText(widMaterials.ambientGTxf)),
-			tonumber(GetTextFieldText(widMaterials.ambientBTxf)), 1.0)
-	end
-
-	if GetGuiObjectEvent(widMaterials.ambientGTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.ambientGTxf, 0, nil)
-		SetMaterialAmbientColor(mat, tonumber(GetTextFieldText(widMaterials.ambientRTxf)),
-			tonumber(GetTextFieldText(widMaterials.ambientGTxf)),
-			tonumber(GetTextFieldText(widMaterials.ambientBTxf)), 1.0)
-	end
-
-	if GetGuiObjectEvent(widMaterials.ambientBTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.ambientBTxf, 0, nil)
-		SetMaterialAmbientColor(mat, tonumber(GetTextFieldText(widMaterials.ambientRTxf)),
-			tonumber(GetTextFieldText(widMaterials.ambientGTxf)),
-			tonumber(GetTextFieldText(widMaterials.ambientBTxf)), 1.0)
-	end
-
-	if GetGuiObjectEvent(widMaterials.specPowerTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.specPowerTxf, 0, nil)
-		SetMaterialSpecularPower(mat, tonumber(GetTextFieldText(widMaterials.specPowerTxf)))
-	end
+	ediUpdateAttribute(widMaterials.diffuseAttr, mat)
+	ediUpdateAttribute(widMaterials.specularAttr, mat)
+	ediUpdateAttribute(widMaterials.ambientAttr, mat)
+	ediUpdateAttribute(widMaterials.specPowerAttr, mat)
+	ediUpdateAttribute(widMaterials.alphaThrsAttr, mat)
+	ediUpdateAttribute(widMaterials.prlxScaleAttr, mat)
 
 	if GetGuiObjectEvent(widMaterials.lightingCbx) == STATE_CHANGED then
 		SetMaterialLighting(mat, GetCheckBoxState(widMaterials.lightingCbx))
@@ -375,16 +259,6 @@ function ediUpdateWidMaterials()
 
 	if GetGuiObjectEvent(widMaterials.alphaTestCbx) == STATE_CHANGED then
 		SetMaterialAlphaTest(mat, GetCheckBoxState(widMaterials.alphaTestCbx))
-	end
-
-	if GetGuiObjectEvent(widMaterials.alphaThrsTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.alphaThrsTxf, 0, nil)
-		SetMaterialAlphaThreshold(mat, tonumber(GetTextFieldText(widMaterials.alphaThrsTxf)))
-	end
-
-	if GetGuiObjectEvent(widMaterials.prlxScaleTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widMaterials.prlxScaleTxf, 0, nil)
-		SetMaterialParallaxScale(mat, tonumber(GetTextFieldText(widMaterials.prlxScaleTxf)))
 	end
 
 	if GetGuiObjectEvent(widMaterials.diffuseMapTxf) == LOSE_FOCUS then
