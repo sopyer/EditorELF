@@ -4,19 +4,14 @@ function ediInitWidEntity()
 
 	widEntity.object = CreateScreen(editor.gui.properties.object, "WidEntity", 0, 25, 248, 84)
 
+	widEntity.scaleAttr = ediCreateFloatGroupAttribute(widEntity.object, "Scale", 4, 42, 0, nil, "", 3, "SetEntityScale")
+	widEntity.occluderAttr = ediCreateBooleanAttribute(widEntity.object, "Occluder", 4, 62, false, "SetEntityOccluder")
+
 	widEntity.modelLab = CreateLabel(widEntity.object, "ModelLab", 4, 26, "Model")
-	widEntity.scaleLab = CreateLabel(widEntity.object, "ScaleLab", 4, 46, "Scale")
-	widEntity.occluderLab = CreateLabel(widEntity.object, "OccluderLab", 4, 66, "Occluder")
 
 	SetGuiObjectColor(widEntity.modelLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widEntity.scaleLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widEntity.occluderLab, 1.0, 1.0, 1.0, 0.6)
 
 	widEntity.modelTxf = CreateTextField(widEntity.object, "ModelTxf", 80, 22, 164, "")
-	widEntity.scaleXTxf = CreateTextField(widEntity.object, "ScaleXTxf", 80, 42, 53, "")
-	widEntity.scaleYTxf = CreateTextField(widEntity.object, "ScaleYTxf", 135, 42, 53, "")
-	widEntity.scaleZTxf = CreateTextField(widEntity.object, "ScaleZTxf", 190, 42, 54, "")
-	widEntity.occluderCbx = CreateCheckBox(widEntity.object, "OccluderCbx", 80, 65, false)
 
 	widEntity.minimize = CreateButton(widEntity.object, "Entity", 1, 1, 246, 14, "Entity")
 
@@ -35,16 +30,10 @@ function ediUpdateWidEntitySelection()
 	end
 
 	local scale = GetEntityScale(sel)
-	SetTextFieldText(widEntity.scaleXTxf, tostring(scale.x))
-	SetTextFieldText(widEntity.scaleYTxf, tostring(scale.y))
-	SetTextFieldText(widEntity.scaleZTxf, tostring(scale.z))
-
-	SetCheckBoxState(widEntity.occluderCbx, IsEntityOccluder(sel))
+	ediSetFloatGroupAttributeValues(widEntity.scaleAttr, {scale.x, scale.y, scale.z})
+	ediSetBooleanAttributeValue(widEntity.occluderAttr, GetEntityOccluder(sel))
 
 	SetTextFieldCursorPosition(widEntity.modelTxf, 0)
-	SetTextFieldCursorPosition(widEntity.scaleXTxf, 0)
-	SetTextFieldCursorPosition(widEntity.scaleYTxf, 0)
-	SetTextFieldCursorPosition(widEntity.scaleZTxf, 0)
 end
 
 function ediUpdateWidEntity()
@@ -82,29 +71,7 @@ function ediUpdateWidEntity()
 		end
 	end
 
-	if GetGuiObjectEvent(widEntity.scaleXTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widEntity.scaleXTxf, 0, nil)
-		SetEntityScale(sel, tonumber(GetTextFieldText(widEntity.scaleXTxf)),
-			tonumber(GetTextFieldText(widEntity.scaleYTxf)),
-			tonumber(GetTextFieldText(widEntity.scaleZTxf)))
-	end
-
-	if GetGuiObjectEvent(widEntity.scaleYTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widEntity.scaleYTxf, 0, nil)
-		SetEntityScale(sel, tonumber(GetTextFieldText(widEntity.scaleXTxf)),
-			tonumber(GetTextFieldText(widEntity.scaleYTxf)),
-			tonumber(GetTextFieldText(widEntity.scaleZTxf)))
-	end
-
-	if GetGuiObjectEvent(widEntity.scaleZTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widEntity.scaleZTxf, 0, nil)
-		SetEntityScale(sel, tonumber(GetTextFieldText(widEntity.scaleXTxf)),
-			tonumber(GetTextFieldText(widEntity.scaleYTxf)),
-			tonumber(GetTextFieldText(widEntity.scaleZTxf)))
-	end
-
-	if GetGuiObjectEvent(widEntity.occluderCbx) == STATE_CHANGED then
-		SetEntityOccluder(sel, GetCheckBoxState(widEntity.occluderCbx))
-	end
+	ediUpdateAttribute(widEntity.scaleAttr, sel)
+	ediUpdateAttribute(widEntity.occluderAttr, sel)
 end
 

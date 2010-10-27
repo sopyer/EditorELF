@@ -9,17 +9,15 @@ function ediInitWidLight()
 	widLight.distanceAttr = ediCreateFloatGroupAttribute(widLight.object, "Distance", 4, 62, 0, nil, "", 1, "SetLightDistance")
 	widLight.fadeSpeedAttr = ediCreateFloatGroupAttribute(widLight.object, "Fade Spd", 4, 82, 0, nil, "", 1, "SetLightFadeSpeed")
 	widLight.spotConeAttr = ediCreateFloatGroupAttribute(widLight.object, "Cone", 4, 102, 0, nil, "", 2, "SetLightCone")
+	widLight.shadowsAttr = ediCreateBooleanAttribute(widLight.object, "Shadows", 4, 122, false, "SetLightShadows")
 
 	widLight.typeLab = CreateLabel(widLight.object, "TypeLab", 4, 26, "Type")
-	widLight.shadowsLab = CreateLabel(widLight.object, "ShadowsLab", 4, 126, "Shadows")
 
 	SetGuiObjectColor(widLight.typeLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widLight.shadowsLab, 1.0, 1.0, 1.0, 0.6)
 
 	widLight.typePoint = CreateButton(widLight.object, "TypePoint", 80, 22, 54, 18, "Point")
 	widLight.typeSun = CreateButton(widLight.object, "TypeSun", 134, 22, 55, 18, "Sun")
 	widLight.typeSpot = CreateButton(widLight.object, "TypeSpot", 189, 22, 55, 18, "Spot")
-	widLight.shadowsCbx = CreateCheckBox(widLight.object, "ShadowsCbx", 80, 124, false)
 
 	widLight.minimize = CreateButton(widLight.object, "Light", 1, 1, 246, 14, "Light")
 
@@ -36,8 +34,7 @@ function ediUpdateWidLightSelection()
 	ediSetFloatGroupAttributeValues(widLight.distanceAttr, {GetLightDistance(sel)})
 	ediSetFloatGroupAttributeValues(widLight.fadeSpeedAttr, {GetLightFadeSpeed(sel)})
 	ediSetFloatGroupAttributeValues(widLight.spotConeAttr, {cone.x, cone.y})
-
-	SetCheckBoxState(widLight.shadowsCbx, GetLightShadows(sel))
+	ediSetBooleanAttributeValue(widLight.shadowsAttr, GetLightShadows(sel))
 end
 
 function ediUpdateWidLight()
@@ -61,9 +58,6 @@ function ediUpdateWidLight()
 	ediUpdateAttribute(widLight.distanceAttr, sel)
 	ediUpdateAttribute(widLight.fadeSpeedAttr, sel)
 	ediUpdateAttribute(widLight.spotConeAttr, sel)
-
-	if GetGuiObjectEvent(widLight.shadowsCbx) == STATE_CHANGED then
-		SetLightShadows(sel, GetCheckBoxState(widLight.shadowsCbx))
-	end
+	ediUpdateAttribute(widLight.shadowsAttr, sel)
 end
 

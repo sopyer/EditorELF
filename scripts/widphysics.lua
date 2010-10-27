@@ -7,9 +7,7 @@ function ediInitWidPhysics()
 
 	widPhysics.object = CreateScreen(editor.gui.properties.object, "WidPhysics", 0, 25, 248, 277)
 
-
-	widPhysics.enabledLab = CreateLabel(widPhysics.object, "EnabledLab", 4, 26, "Enabled")
-
+	widPhysics.enabledAttr = ediCreateBooleanAttribute(widPhysics.object, "Enabled", 4, 22, false, "SetActorPhysics")
 	widPhysics.lengthsAttr = ediCreateFloatGroupAttribute(widPhysics.object, "Lengths", 4, 42, 0, nil, "", 3, "SetActorBoundingLengths")
 	widPhysics.offsetAttr = ediCreateFloatGroupAttribute(widPhysics.object, "Offset", 4, 62, 0, nil, "", 3, "SetActorBoundingOffset")
 	widPhysics.massAttr = ediCreateFloatGroupAttribute(widPhysics.object, "Mass", 4, 82, 0, nil, "", 1, "SetActorMass")
@@ -21,11 +19,7 @@ function ediInitWidPhysics()
 	widPhysics.anFactorAttr = ediCreateFloatGroupAttribute(widPhysics.object, "AnFactor", 4, 202, 0, nil, "", 3, "SetActorAngularFactor")
 
 	widPhysics.shapeLab = CreateLabel(widPhysics.object, "ShapeLab", 4, 226, "Shape")
-
-	SetGuiObjectColor(widPhysics.enabledLab, 1.0, 1.0, 1.0, 0.6)
 	SetGuiObjectColor(widPhysics.shapeLab, 1.0, 1.0, 1.0, 0.6)
-
-	widPhysics.enabledCbx = CreateCheckBox(widPhysics.object, "EnabledCbx", 80, 24, false)
 
 	widPhysics.shapeTxl = CreateTextList(widPhysics.object, "Shape", 80, 224, 3, 154)
 	AddTextListItem(widPhysics.shapeTxl, " Box")
@@ -55,8 +49,7 @@ function ediUpdateWidPhysicsSelection()
 	local liFactor = GetActorLinearFactor(sel)
 	local anFactor = GetActorAngularFactor(sel)
 
-	SetCheckBoxState(widPhysics.enabledCbx, GetActorPhysics(sel))
-
+	ediSetBooleanAttributeValue(widPhysics.enabledAttr, GetActorPhysics(sel))
 	ediSetFloatGroupAttributeValues(widPhysics.lengthsAttr, {lengths.x, lengths.y, lengths.z})
 	ediSetFloatGroupAttributeValues(widPhysics.offsetAttr, {offset.x, offset.y, offset.z})
 	ediSetFloatGroupAttributeValues(widPhysics.massAttr, {GetActorMass(sel)})
@@ -83,10 +76,7 @@ function ediUpdateWidPhysics()
 		ediPackScreensVer(editor.gui.properties, 25)
 	end
 
-	if GetGuiObjectEvent(widPhysics.enabledCbx) == STATE_CHANGED then
-		SetActorPhysics(sel, GetCheckBoxState(widPhysics.enabledCbx))
-	end
-
+	ediUpdateAttribute(widPhysics.enabledAttr, sel)
 	ediUpdateAttribute(widPhysics.lengthsAttr, sel)
 	ediUpdateAttribute(widPhysics.offsetAttr, sel)
 	ediUpdateAttribute(widPhysics.massAttr, sel)

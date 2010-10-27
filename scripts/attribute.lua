@@ -35,6 +35,44 @@ function ediGetStringAttributeValue(att)
 	return GetTextFieldText(att.textField)
 end
 
+function ediCreateIntGroupAttribute(parent, name, x, y, min, max, default, count, callback)
+	local att = {}
+
+	ediInitAtt(att, EDI_ATTR_INT_GROUP, x, y)
+
+	att.min = min
+	att.max = max
+	att.count = count
+
+	att.label = CreateLabel(parent, name, x, y+4, name)
+	SetGuiObjectColor(att.label, 1.0, 1.0, 1.0, 0.6)
+
+	offset = 76
+	width = math.floor((164-2*(count-1))/count)
+	step = width + 2
+	att.textFields = {}
+
+	for i=0, count-1 do
+		att.textFields[i] = CreateTextField(parent, name, x+offset, y, width, default)
+		offset = offset + step
+	end
+
+	att.callback = callback
+
+	return att
+end
+
+function ediClearInitGroupAttribute(att)
+	for i=0, att.count-1 do SetTextFieldText(att.textFields[i], "") end
+end
+
+function ediSetIntGroupAttributeValues(att, vals)
+	for i=0, att.count-1 do
+		SetTextFieldText(att.textFields[i], tostring(vals[i+1]))
+		SetTextFieldCursorPosition(att.textFields[i], 0)
+	end
+end
+
 function ediCreateFloatGroupAttribute(parent, name, x, y, min, max, default, count, callback)
 	local att = {}
 
@@ -73,10 +111,10 @@ function ediSetFloatGroupAttributeValues(att, vals)
 	end
 end
 
-function ediCreateIntGroupAttribute(parent, name, x, y, min, max, default, count, callback)
+function ediCreateBooleanAttribute(parent, name, x, y, default, callback)
 	local att = {}
 
-	ediInitAtt(att, EDI_ATTR_INT_GROUP, x, y)
+	ediInitAtt(att, EDI_ATTR_BOOLEAN, x, y)
 
 	att.min = min
 	att.max = max
@@ -85,30 +123,19 @@ function ediCreateIntGroupAttribute(parent, name, x, y, min, max, default, count
 	att.label = CreateLabel(parent, name, x, y+4, name)
 	SetGuiObjectColor(att.label, 1.0, 1.0, 1.0, 0.6)
 
-	offset = 76
-	width = math.floor((164-2*(count-1))/count)
-	step = width + 2
-	att.textFields = {}
-
-	for i=0, count-1 do
-		att.textFields[i] = CreateTextField(parent, name, x+offset, y, width, default)
-		offset = offset + step
-	end
+	att.checkBox = CreateCheckBox(parent, name, x+76, y+2, default)
 
 	att.callback = callback
 
 	return att
 end
 
-function ediClearInitGroupAttribute(att)
-	for i=0, att.count-1 do SetTextFieldText(att.textFields[i], "") end
+function ediClearBooleanAttribute(att)
+	SetCheckBoxState(att.checkBox, false)
 end
 
-function ediSetIntGroupAttributeValues(att, vals)
-	for i=0, att.count-1 do
-		SetTextFieldText(att.textFields[i], tostring(vals[i+1]))
-		SetTextFieldCursorPosition(att.textFields[i], 0)
-	end
+function ediSetBooleanAttributeValue(att, val)
+	SetCheckBoxState(att.checkBox, val)
 end
 
 function ediUpdateAttribute(att, obj)
@@ -169,6 +196,15 @@ function ediUpdateAttribute(att, obj)
 			end
 		end
 	elseif att.type == EDI_ATTR_BOOLEAN then
+		if GetGuiObjectEvent(att.checkBox) == STATE_CHANGED then
+			if type(att.callback) == "string" then
+				gobj = obj
+				RunString(att.callback .. "(gobj, " .. tostring(GetCheckBoxState(att.checkBox)) .. ")")
+				gobj = nil
+			elseif type(att.callback) == "function" then
+				att.callback(att, obj)
+			end
+		end
 	end
 end
 
