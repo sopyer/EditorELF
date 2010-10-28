@@ -30,9 +30,13 @@ function ediResetCamera()
 		local clip = GetCameraClip(cam)
 		SetActorPosition(camera.object, pos.x, pos.y, pos.z)
 		SetActorRotation(camera.object, rot.x, rot.y, rot.z)
-		SetCameraPerspective(camera.object, fov, aspect, clip.x, clip.y)
+		SetCameraFov(camera.object, fov)
+		SetCameraAspect(camera.object, aspect)
+		SetCameraClip(camera.object, clip.x, clip.y)
 	else
-		SetCameraPerspective(camera.object, 35.0, GetWindowWidth()/GetWindowHeight(), 1.0, 250.0)
+		SetCameraFov(camera.object, 35.0)
+		SetCameraAspect(camera.object, -1.0)
+		SetCameraClip(camera.object, 1.0, 250.0)
 	end
 
 end

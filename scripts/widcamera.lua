@@ -5,15 +5,8 @@ function ediInitWidCamera()
 
 	widCamera.object = CreateScreen(editor.gui.properties.object, "WidCamera", 0, 25, 248, 86)
 
-	widCamera.fovLab = CreateLabel(widCamera.object, "FovLab", 4, 26, "Fov")
-	widCamera.clipLab = CreateLabel(widCamera.object, "ClipLab", 4, 46, "Clip")
-
-	SetGuiObjectColor(widCamera.fovLab, 1.0, 1.0, 1.0, 0.6)
-	SetGuiObjectColor(widCamera.clipLab, 1.0, 1.0, 1.0, 0.6)
-
-	widCamera.fovTxf = CreateTextField(widCamera.object, "FovTxf", 80, 22, 164, "")
-	widCamera.clipNearTxf = CreateTextField(widCamera.object, "ClipFarTxf", 80, 42, 81, "")
-	widCamera.clipFarTxf = CreateTextField(widCamera.object, "ClipFarTxf", 163, 42, 81, "")
+	widCamera.fovAttr = ediCreateFloatGroupAttribute(widCamera.object, "Fov", 4, 22, 0, 179, "", 1, "SetCameraFov")
+	widCamera.clipAttr = ediCreateFloatGroupAttribute(widCamera.object, "Clip", 4, 42, 0, nil, "", 2, "SetCameraClip")
 
 	widCamera.copyToViewBut = CreateButton(widCamera.object, "CopyToViewBut", 10, 64, 228, 18, "Copy To View")
 
@@ -28,13 +21,8 @@ function ediUpdateWidCameraSelection()
 
 	local clip = GetCameraClip(sel)
 
-	SetTextFieldText(widCamera.fovTxf, tostring(GetCameraFov(sel)))
-	SetTextFieldText(widCamera.clipNearTxf, tostring(clip.x))
-	SetTextFieldText(widCamera.clipFarTxf, tostring(clip.y))
-
-	SetTextFieldCursorPosition(widCamera.fovTxf, 0)
-	SetTextFieldCursorPosition(widCamera.clipNearTxf, 0)
-	SetTextFieldCursorPosition(widCamera.clipFarTxf, 0)
+	ediSetFloatGroupAttributeValues(widCamera.fovAttr, {GetCameraFov(sel)})
+	ediSetFloatGroupAttributeValues(widCamera.clipAttr, {clip.x, clip.y})
 end
 
 function ediUpdateWidCamera()
@@ -50,29 +38,8 @@ function ediUpdateWidCamera()
 		ediPackScreensVer(editor.gui.properties, 25)
 	end
 
-	if GetGuiObjectEvent(widCamera.fovTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widCamera.fovTxf, 0, nil)
-		local clip = GetCameraClip(sel)
-		SetCameraPerspective(sel, tonumber(GetTextFieldText(widCamera.fovTxf)),
-			GetCameraAspect(sel), clip.x, clip.y)
-	end
-
-	if GetGuiObjectEvent(widCamera.clipNearTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widCamera.clipNearTxf, 0, nil)
-		local clip = GetCameraClip(sel)
-		SetCameraPerspective(sel, GetCameraFov(sel), GetCameraAspect(sel), 
-			tonumber(GetTextFieldText(widCamera.clipNearTxf)), clip.y)
-	end
-
-	if GetGuiObjectEvent(widCamera.clipFarTxf) == LOSE_FOCUS then
-		ediCheckTextFieldFloat(widCamera.clipFarTxf, 0, nil)
-		local clip = GetCameraClip(sel)
-		clip.y = tonumber(GetTextFieldText(widCamera.clipFarTxf))
-		if clip.y < clip.x then clip.y = clip.x end
-		SetTextFieldText(widCamera.clipFarTxf, tostring(clip.y))
-		SetTextFieldCursorPosition(widCamera.clipFarTxf, 0)
-		SetCameraPerspective(sel, GetCameraFov(sel), GetCameraAspect(sel),  clip.x, clip.y)
-	end
+	ediUpdateAttribute(widCamera.fovAttr, sel)
+	ediUpdateAttribute(widCamera.clipAttr, sel)
 
 	if GetGuiObjectEvent(widCamera.copyToViewBut) == CLICKED then
 		local clip = GetCameraClip(sel)
@@ -80,7 +47,9 @@ function ediUpdateWidCamera()
 		local rot = GetActorRotation(sel)
 		SetActorPosition(editor.scene.camera.object, pos.x, pos.y, pos.z)
 		SetActorRotation(editor.scene.camera.object, rot.x, rot.y, rot.z)
-		SetCameraPerspective(editor.scene.camera.object, GetCameraFov(sel), GetCameraAspect(sel), clip.x, clip.y)
+		SetCameraFov(editor.scene.camera.object, GetCameraFov(sel))
+		SetCameraAspect(editor.scene.camera.object, GetCameraAspect(sel))
+		SetCameraClip(editor.scene.camera.object, clip.x, clip.y)
 	end
 end
 
