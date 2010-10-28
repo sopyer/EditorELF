@@ -48,8 +48,8 @@ function ediCreateIntGroupAttribute(parent, name, x, y, min, max, default, count
 	SetGuiObjectColor(att.label, 1.0, 1.0, 1.0, 0.6)
 
 	offset = 76
-	width = math.floor((164-2*(count-1))/count)
-	step = width + 2
+	width = math.floor((164-3*(count-1))/count)
+	step = width + 3
 	att.textFields = {}
 
 	for i=0, count-1 do
@@ -86,11 +86,12 @@ function ediCreateFloatGroupAttribute(parent, name, x, y, min, max, default, cou
 	SetGuiObjectColor(att.label, 1.0, 1.0, 1.0, 0.6)
 
 	offset = 76
-	width = math.floor((164-2*(count-1))/count)
-	step = width + 2
+	width = math.floor((164-3*(count-1))/count)
+	step = width + 3
 	att.textFields = {}
 
 	for i=0, count-1 do
+		if i == count-1 then width = 248-8-offset end
 		att.textFields[i] = CreateTextField(parent, name, x+offset, y, width, default)
 		offset = offset + step
 	end
