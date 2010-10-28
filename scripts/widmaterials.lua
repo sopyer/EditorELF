@@ -261,7 +261,6 @@ function ediUpdateWidMaterials()
 			local tex = BeginList(textures)
 			local found = false
 			while tex ~= nil do
-				print(GetTextureName(tex))
 				if GetTextureName(tex) == GetTextFieldText(widMaterials.diffuseMapTxf) then
 					SetMaterialDiffuseMap(mat, tex)
 					found = true
