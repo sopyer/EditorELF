@@ -47,10 +47,10 @@ function ediRun()
 		end
 
 		-- hide debug draw and menu when space is pressed (for screen shots ;))
-		SetDebugDraw(true)
+		SetSceneDebugDraw(editor.scene.object, true)
 		SetGuiObjectVisible(editor.gui.object, true)
 		if GetKeyState(KEY_SPACE) ~= UP then
-			SetDebugDraw(false)
+			SetSceneDebugDraw(editor.scene.object, false)
 			SetGuiObjectVisible(editor.gui.object, false)
 		end
 
