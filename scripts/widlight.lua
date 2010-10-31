@@ -6,7 +6,7 @@ function ediInitWidLight()
 	widLight.object = CreateScreen(editor.gui.properties.object, "WidLight", 0, 25, 248, 121)
 
 	widLight.colorAttr = ediCreateFloatGroupAttribute(widLight.object, "Color", 4, 42, 0, nil, "", 4, "SetLightColor")
-	widLight.distanceAttr = ediCreateFloatGroupAttribute(widLight.object, "Range", 4, 62, 0, nil, "", 1, "SetLightRange")
+	widLight.distanceAttr = ediCreateFloatGroupAttribute(widLight.object, "Range", 4, 62, 0, 0.001, "", 2, "SetLightRange")
 	widLight.spotConeAttr = ediCreateFloatGroupAttribute(widLight.object, "Cone", 4, 82, 0, nil, "", 2, "SetLightCone")
 	widLight.shadowsAttr = ediCreateBooleanAttribute(widLight.object, "Shadows", 4, 102, false, "SetLightShadows")
 
@@ -27,11 +27,10 @@ function ediUpdateWidLightSelection()
 	local widLight = editor.gui.properties.widLight
 	local sel = ediGetSelection()
 	local col = GetLightColor(sel)
-	local cone = GetLightCone(sel)
 
 	ediSetFloatGroupAttributeValues(widLight.colorAttr, {col.r, col.g, col.b, col.a})
-	ediSetFloatGroupAttributeValues(widLight.distanceAttr, {GetLightRange(sel)})
-	ediSetFloatGroupAttributeValues(widLight.spotConeAttr, {cone.x, cone.y})
+	ediSetFloatGroupAttributeValues(widLight.distanceAttr, {GetLightRange(sel), GetLightFadeRange(sel)})
+	ediSetFloatGroupAttributeValues(widLight.spotConeAttr, {GetLightInnerCone(sel), GetLightOuterCone(sel)})
 	ediSetBooleanAttributeValue(widLight.shadowsAttr, GetLightShadows(sel))
 end
 
