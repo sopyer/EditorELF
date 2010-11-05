@@ -66,14 +66,16 @@ function ediUpdateWidFiles()
 	end
 
 	if GetGuiObjectEvent(widFiles.fileList) == SELECTION_CHANGED then
-		local item = GetDirectoryItem(widFiles.dir, GetTextListSelectionIndex(widFiles.fileList))
-		if GetDirectoryItemType(item) == DIR then
-			if GetDirectoryItemName(item) == "." then
-				ediSetWidFilesDirectory(widFiles.path)
-			elseif GetDirectoryItemName(item) == ".." then
-				ediSetWidFilesDirectory(ediGetParentDirectory(widFiles.path))
-			else
-				ediSetWidFilesDirectory(ediMakeDirectoryPath(widFiles.path .. GetDirectoryItemName(item)))
+		if GetTextListSelectionIndex(widFiles.fileList) ~= -1 then
+			local item = GetDirectoryItem(widFiles.dir, GetTextListSelectionIndex(widFiles.fileList))
+			if GetDirectoryItemType(item) == DIR then
+				if GetDirectoryItemName(item) == "." then
+					ediSetWidFilesDirectory(widFiles.path)
+				elseif GetDirectoryItemName(item) == ".." then
+					ediSetWidFilesDirectory(ediGetParentDirectory(widFiles.path))
+				else
+					ediSetWidFilesDirectory(ediMakeDirectoryPath(widFiles.path .. GetDirectoryItemName(item)))
+				end
 			end
 		end
 	end
