@@ -45,7 +45,7 @@ function ediUpdateWidCreate()
 	end
 
 	if GetGuiObjectEvent(widCreate.particles) == CLICKED then
-		par = CreateParticles("Particles", 300)
+		par = CreateParticles("Particles", 150)
 		AddSceneParticles(editor.scene.object, par)
 		ediSetSelection(par)
 	end
