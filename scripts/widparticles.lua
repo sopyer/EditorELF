@@ -87,6 +87,14 @@ function ediUpdateWidParticles()
 		ediPackScreensVer(editor.gui.properties, 25)
 	end
 
+	if GetGuiObjectEvent(widParticles.transBut) == CLICKED then
+		SetParticlesDrawMode(sel, TRANSPARENT)
+	end
+
+	if GetGuiObjectEvent(widParticles.addBut) == CLICKED then
+		SetParticlesDrawMode(sel, ADD)
+	end
+
 	ediUpdateAttribute(widParticles.maxCountAttr, sel)
 	ediUpdateAttribute(widParticles.spawnAttr, sel)
 	ediUpdateAttribute(widParticles.spawnSecAttr, sel)
