@@ -32,6 +32,14 @@ function ediUpdateWidLightSelection()
 	ediSetFloatGroupAttributeValues(widLight.distanceAttr, {GetLightRange(sel), GetLightFadeRange(sel)})
 	ediSetFloatGroupAttributeValues(widLight.spotConeAttr, {GetLightInnerCone(sel), GetLightOuterCone(sel)})
 	ediSetBooleanAttributeValue(widLight.shadowsAttr, GetLightShadows(sel))
+
+	SetGuiObjectActive(widLight.typePoint, true)
+	SetGuiObjectActive(widLight.typeSun, true)
+	SetGuiObjectActive(widLight.typeSpot, true)
+
+	if GetLightType(sel) == POINT_LIGHT then SetGuiObjectActive(widLight.typePoint, false)
+	elseif GetLightType(sel) == SUN_LIGHT then SetGuiObjectActive(widLight.typeSun, false)
+	elseif GetLightType(sel) == SPOT_LIGHT then SetGuiObjectActive(widLight.typeSpot, false) end
 end
 
 function ediUpdateWidLight()
@@ -47,9 +55,24 @@ function ediUpdateWidLight()
 		ediPackScreensVer(editor.gui.properties, 25)
 	end
 
-	if GetGuiObjectEvent(widLight.typePoint) == CLICKED then SetLightType(sel, POINT_LIGHT) end
-	if GetGuiObjectEvent(widLight.typeSun) == CLICKED then SetLightType(sel, SUN_LIGHT) end
-	if GetGuiObjectEvent(widLight.typeSpot) == CLICKED then SetLightType(sel, SPOT_LIGHT) end
+	if GetGuiObjectEvent(widLight.typePoint) == CLICKED then
+		SetLightType(sel, POINT_LIGHT)
+		SetGuiObjectActive(widLight.typePoint, false)
+		SetGuiObjectActive(widLight.typeSun, true)
+		SetGuiObjectActive(widLight.typeSpot, true)
+	end
+	if GetGuiObjectEvent(widLight.typeSun) == CLICKED then
+		SetLightType(sel, SUN_LIGHT)
+		SetGuiObjectActive(widLight.typePoint, true)
+		SetGuiObjectActive(widLight.typeSun, false)
+		SetGuiObjectActive(widLight.typeSpot, true)
+	end
+	if GetGuiObjectEvent(widLight.typeSpot) == CLICKED then
+		SetLightType(sel, SPOT_LIGHT)
+		SetGuiObjectActive(widLight.typePoint, true)
+		SetGuiObjectActive(widLight.typeSun, true)
+		SetGuiObjectActive(widLight.typeSpot, false)
+	end
 
 	ediUpdateAttribute(widLight.colorAttr, sel)
 	ediUpdateAttribute(widLight.distanceAttr, sel)

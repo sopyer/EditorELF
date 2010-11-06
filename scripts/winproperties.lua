@@ -41,11 +41,15 @@ function ediSetPropertiesTab(tab)
 	ediHidePropertiesWidgets()
 
 	if properties.tab == EDI_MENU then
+		SetGuiObjectActive(properties.menu, false)
+		SetGuiObjectActive(properties.edit, true)
 		SetGuiObjectVisible(properties.widFile.object, true)
 		SetGuiObjectVisible(properties.widOptions.object, true)
 		SetGuiObjectVisible(properties.widCreate.object, true)
 	elseif properties.tab == EDI_EDIT then
 		local sel = ediGetSelection()
+		SetGuiObjectActive(properties.menu, true)
+		SetGuiObjectActive(properties.edit, false)
 		SetGuiObjectVisible(properties.widActor.object, true)
 		SetGuiObjectVisible(properties.widPhysics.object, true)
 		if GetObjectType(sel) == CAMERA then

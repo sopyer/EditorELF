@@ -72,6 +72,12 @@ function ediUpdateWidParticlesSelection()
 	ediSetFloatGroupAttributeValues(widParticles.velMaxAttr, {velMax.x, velMax.y, velMax.z})
 	ediSetFloatGroupAttributeValues(widParticles.colorMinAttr, {colorMin.r, colorMin.g, colorMin.b, colorMin.a})
 	ediSetFloatGroupAttributeValues(widParticles.colorMaxAttr, {colorMax.r, colorMax.g, colorMax.b, colorMax.a})
+
+	SetGuiObjectActive(widParticles.transBut, true)
+	SetGuiObjectActive(widParticles.addBut, true)
+
+	if GetParticlesDrawMode(sel) == TRANSPARENT then SetGuiObjectActive(widParticles.transBut, false)
+	elseif GetParticlesDrawMode(sel) == ADD then SetGuiObjectActive(widParticles.addBut, false) end
 end
 
 function ediUpdateWidParticles()
@@ -89,10 +95,13 @@ function ediUpdateWidParticles()
 
 	if GetGuiObjectEvent(widParticles.transBut) == CLICKED then
 		SetParticlesDrawMode(sel, TRANSPARENT)
+		SetGuiObjectActive(widParticles.transBut, false)
+		SetGuiObjectActive(widParticles.addBut, true)
 	end
-
 	if GetGuiObjectEvent(widParticles.addBut) == CLICKED then
 		SetParticlesDrawMode(sel, ADD)
+		SetGuiObjectActive(widParticles.transBut, true)
+		SetGuiObjectActive(widParticles.addBut, false)
 	end
 
 	ediUpdateAttribute(widParticles.maxCountAttr, sel)
