@@ -70,7 +70,7 @@ function ediGetSelection()
 end
 
 function ediOpenScene(path)
-	local scn = CreateSceneFromFile(path)
+	local scn = CreateSceneFromFile("", path)
 	if scn ~= nil then
 		ediSetSelection(nil)
 		editor.scene.object = scn
@@ -92,7 +92,7 @@ function ediSaveScene(path)
 end
 
 function ediImportScene(path)
-	local scn = CreateSceneFromFile(path)
+	local scn = CreateSceneFromFile("", path)
 	if scn ~= nil then
 		while GetSceneCameraCount(scn) > 0 do
 			cam = GetSceneCameraByIndex(scn, 0)

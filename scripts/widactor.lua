@@ -45,7 +45,7 @@ end
 function ediWidActorOpenScript(path)
 	if path == "" then return true end
 
-	scr = CreateScriptFromFile(path)
+	scr = CreateScriptFromFile(GetFileFromPath(path), path)
 
 	if scr ~= nil then
 		SetActorScript(ediGetSelection(), scr)
@@ -103,7 +103,8 @@ function ediUpdateWidActor()
 		end
 	elseif GetGuiObjectEvent(widActor.scriptTxf) == DROP then
 		if GetGuiObjectName(editor.gui.toolbox.widFiles.fileList) == GetGuiObjectName(GetGuiDragObject(editor.gui.object)) then
-			local scr = CreateScriptFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
+			local scr = CreateScriptFromFile(string.sub(GetGuiDragContent(editor.gui.object), 2),
+				ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if scr ~= nil then
 				SetActorScript(sel, scr)
 				SetTextFieldText(widActor.scriptTxf, GetScriptName(scr))

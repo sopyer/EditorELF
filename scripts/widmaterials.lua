@@ -272,7 +272,8 @@ function ediUpdateWidMaterials()
 		end
 	elseif GetGuiObjectEvent(widMaterials.diffuseMapTxf) == DROP then
 		if GetGuiObjectName(editor.gui.toolbox.widFiles.fileList) == GetGuiObjectName(GetGuiDragObject(editor.gui.object)) then
-			local tex = CreateTextureFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
+			local tex = CreateTextureFromFile(string.sub(GetGuiDragContent(editor.gui.object), 2),
+					ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if tex ~= nil then
 				SetMaterialDiffuseMap(mat, tex)
 				SetTextFieldText(widMaterials.diffuseMapTxf, GetTextureName(tex))
@@ -305,7 +306,8 @@ function ediUpdateWidMaterials()
 		end
 	elseif GetGuiObjectEvent(widMaterials.normalMapTxf) == DROP then
 		if GetGuiObjectName(editor.gui.toolbox.widFiles.fileList) == GetGuiObjectName(GetGuiDragObject(editor.gui.object)) then
-			local tex = CreateTextureFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
+			local tex = CreateTextureFromFile(string.sub(GetGuiDragContent(editor.gui.object), 2),
+					ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if tex ~= nil then
 				SetMaterialNormalMap(mat, tex)
 				GenerateEntityTangents(sel)
@@ -339,7 +341,8 @@ function ediUpdateWidMaterials()
 		end
 	elseif GetGuiObjectEvent(widMaterials.heightMapTxf) == DROP then
 		if GetGuiObjectName(editor.gui.toolbox.widFiles.fileList) == GetGuiObjectName(GetGuiDragObject(editor.gui.object)) then
-			local tex = CreateTextureFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
+			local tex = CreateTextureFromFile(string.sub(GetGuiDragContent(editor.gui.object), 2),
+					ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if tex ~= nil then
 				SetMaterialHeightMap(mat, tex)
 				GenerateEntityTangents(sel)
@@ -372,7 +375,8 @@ function ediUpdateWidMaterials()
 		end
 	elseif GetGuiObjectEvent(widMaterials.specularMapTxf) == DROP then
 		if GetGuiObjectName(editor.gui.toolbox.widFiles.fileList) == GetGuiObjectName(GetGuiDragObject(editor.gui.object)) then
-			local tex = CreateTextureFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
+			local tex = CreateTextureFromFile(string.sub(GetGuiDragContent(editor.gui.object), 2),
+					ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if tex ~= nil then
 				SetMaterialSpecularMap(mat, tex)
 				SetTextFieldText(widMaterials.specularMapTxf, GetTextureName(tex))
@@ -404,7 +408,8 @@ function ediUpdateWidMaterials()
 		end
 	elseif GetGuiObjectEvent(widMaterials.lightMapTxf) == DROP then
 		if GetGuiObjectName(editor.gui.toolbox.widFiles.fileList) == GetGuiObjectName(GetGuiDragObject(editor.gui.object)) then
-			local tex = CreateTextureFromFile(ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
+			local tex = CreateTextureFromFile(string.sub(GetGuiDragContent(editor.gui.object), 2),
+					ediGetWidFilesDirectory() .. string.sub(GetGuiDragContent(editor.gui.object), 2))
 			if tex ~= nil then
 				SetMaterialLightMap(mat, tex)
 				SetTextFieldText(widMaterials.lightMapTxf, GetTextureName(tex))
